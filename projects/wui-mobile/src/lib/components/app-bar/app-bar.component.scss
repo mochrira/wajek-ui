@@ -1,0 +1,42 @@
+:host{
+    height:3.5rem;
+    box-sizing: border-box;
+    width:100%;
+    flex: 0 0 auto;
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    padding:0 1rem;
+    z-index:99;
+    background-color:white;
+    overflow:hidden;
+    border-bottom:1px solid #EFEFEF;
+    overflow:hidden;
+}
+
+.navIcon{
+    display:inline-flex;
+    margin-right:1.5rem;
+
+    i.material-icons{
+        font-size:1.5rem;
+    }
+}
+
+.title{
+    font-size:1.25rem;
+    flex: 1 1 auto;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/deep/ wui-app-bar-item{
+    display:inline-flex;
+    padding:0 .75rem;
+    align-items:center;
+
+    &:last-child{
+        padding-right:0;
+    }
+}

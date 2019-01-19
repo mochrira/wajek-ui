@@ -133,6 +133,126 @@
           }
         }
       }
+    },
+    "wui-mobile": {
+      "root": "projects/wui-mobile",
+      "sourceRoot": "projects/wui-mobile/src",
+      "projectType": "library",
+      "prefix": "wui",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wui-mobile/tsconfig.lib.json",
+            "project": "projects/wui-mobile/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wui-mobile/src/test.ts",
+            "tsConfig": "projects/wui-mobile/tsconfig.spec.json",
+            "karmaConfig": "projects/wui-mobile/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wui-mobile/tsconfig.lib.json",
+              "projects/wui-mobile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wui-desktop": {
+      "root": "projects/wui-desktop",
+      "sourceRoot": "projects/wui-desktop/src",
+      "projectType": "library",
+      "prefix": "wui",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wui-desktop/tsconfig.lib.json",
+            "project": "projects/wui-desktop/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wui-desktop/src/test.ts",
+            "tsConfig": "projects/wui-desktop/tsconfig.spec.json",
+            "karmaConfig": "projects/wui-desktop/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wui-desktop/tsconfig.lib.json",
+              "projects/wui-desktop/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wui": {
+      "root": "projects/wui",
+      "sourceRoot": "projects/wui/src",
+      "projectType": "library",
+      "prefix": "wui",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wui/tsconfig.lib.json",
+            "project": "projects/wui/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wui/src/test.ts",
+            "tsConfig": "projects/wui/tsconfig.spec.json",
+            "karmaConfig": "projects/wui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wui/tsconfig.lib.json",
+              "projects/wui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "wajek-ui"

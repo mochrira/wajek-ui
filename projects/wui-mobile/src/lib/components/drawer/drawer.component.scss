@@ -1,0 +1,108 @@
+:host{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    z-index:-1;
+    display:flex;
+    opacity:0;
+
+    > .outer{
+        flex: 1 1 auto;
+        position:relative;
+        display:block;
+
+        > .backdrop{
+            background-color:rgba(0,0,0,0.25);
+            width:100%;
+            height:100%;
+            top:0;left:0;
+            opacity:0;
+            transition:opacity .3s ease;
+        }
+
+        > .inner{
+            width:calc(100% - 3.5rem);
+            height:100%;
+            position:absolute;
+            top:0;left:0;
+            background-color:white;
+            max-width:16rem;
+            opacity:0;
+            transform:translateX(-100%);
+            transition:transform .3s ease, opacity .3s ease;
+            overflow-y:auto;
+            padding:1rem 0;
+        }
+    }
+
+    /deep/ {
+
+        wui-drawer-item{
+            display:flex;
+            height:2.25rem;
+            align-items:center;
+            padding:0 1.5rem;
+            font-size:.875rem;
+            cursor:pointer;
+        
+            i.material-icons{
+                margin-right:1.5rem;
+            }
+        
+            &:hover{
+                background-color:rgba(0,0,0,0.05);
+            }
+        }
+    
+        div.wui-divider{
+            border-bottom:1px solid rgba(0,0,0,0.12);
+            display:block;
+            margin-top:.5rem;
+            margin-bottom:.5rem;
+        }
+    
+        div.wui-subheader{
+            font-size:.875rem;
+            padding:.5rem 1.5rem .5rem;
+        }
+
+        div.wui-drawer-header{
+            width:100%;
+            padding:1.5rem 1.5rem 1rem;
+            margin-bottom:.5rem;
+            box-sizing:border-box;
+            border-bottom:1px solid rgba(0,0,0,0.12);
+            
+            > *{
+                overflow:hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            h1,h2,h3,h4,h5,h6{
+                font-weight:normal;
+                margin-bottom:0;
+            }
+        }
+    
+    }
+
+    &.show{
+        z-index:99;
+        opacity:1;
+
+        >.outer{
+
+            > .backdrop{
+                opacity:1;
+            }
+
+            >.inner{
+                opacity:1;
+                transform:translateX(0);
+            }
+
+        }
+    }
+
+}
