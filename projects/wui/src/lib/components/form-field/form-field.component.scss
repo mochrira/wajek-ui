@@ -1,0 +1,118 @@
+:host{
+    width:100%;
+    display:block;
+    position:relative;
+    /* height:3.5rem; */
+    border-bottom:1px solid #EFEFEF;
+    margin-bottom:1rem;
+
+    i.material-icons{
+        position:absolute;
+        left:0;
+        top:.5625rem;
+    }
+
+    .border{
+        border:none !important;
+        width:0;
+        height:2px !important;
+        background-color:#333;
+        opacity:0;
+        position:absolute;
+        left:50%;bottom:-1px;
+        transform:translateX(-50%);
+        display:block;
+        transition:width ease .4s;
+    }
+
+    label{
+        position:absolute;
+        top:1.2rem;
+        left:1rem;
+        transition:all ease .3s;
+        z-index:0;
+    }
+
+    svg{
+        position:absolute;
+        right:1rem;
+        top:1rem;
+        display:none;
+        fill:#555;
+    }
+
+    /deep/ {
+        input, select, textarea{
+            -webkit-appearance: none;
+            border:none;
+            display:block;
+            width:100%;
+            height:100%;
+            box-sizing:border-box;
+            outline:none;
+            font-family:'Roboto', sans-serif;
+            padding:1.5rem 1rem .5rem;
+            background:transparent; 
+            position:relative;
+            z-index:1;
+            font-size:1rem;
+            color:#333;
+            opacity:0;
+        }
+
+        i.material-icons ~ input{
+            padding-left:2.5rem;
+        }
+
+        i.material-icons ~ label{
+            left:2.5rem;
+        }
+    
+        select ~ svg.arrow-down{
+            display:block !important;
+        }
+
+        input[type=date]::-webkit-inner-spin-button,
+        input[type=date]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        }
+
+        input[type="date"] ~ svg.date{
+            display:block !important;
+        }
+    }
+
+    &.has-content{
+        label{
+            font-size:.75rem;
+            top:.625rem;
+        }
+
+        /deep/ {
+            input, select, textarea{
+                opacity:1 !important;
+            }
+        }
+    }
+
+    &:focus-within{
+
+        .border{
+            width:100%;
+            transform:translateX(-50%);
+            opacity:1;
+        }
+
+        label{
+            font-size:.75rem;
+            top:.625rem;
+        }
+
+        /deep/ {
+            input, select, textarea{
+                opacity:1 !important;
+            }
+        }
+    }
+
+}

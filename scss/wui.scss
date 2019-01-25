@@ -1,8 +1,124 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+$theme: (
+    "50" : #F3E5F5,
+    "100" : #E1BEE7,
+    "200" : #CE93D8,
+    "300" : #BA68C8,
+    "400" : #AB47BC,
+    "500" : #9C27B0,
+    "600" : #8E24AA,
+    "700" : #7B1FA2,
+    "800" : #6A1B9A,
+    "900" : #4A148C
+);
 
 html,body{
+    font-family:'Roboto', sans-serif;
     width:100%;
     height:100%;
     margin:0;
     padding:0;
+    font-size:16px;
+    color:#444;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+/*wui-loading*/
+
+wui-loading{
+    background-color: #E1BEE7 !important;
+
+    .indeterminate {
+
+        &:before {
+            background-color: #9C27B0 !important;
+        }
+        
+        &:after {
+            background-color: #BA68C8 !important;
+        }
+
+    }
+
+    .linear{
+        .pos{
+            background-color: #9C27B0 !important;
+        }
+    }
+
+    .circular{
+        .path{
+            stroke: #9C27B0 !important;
+        }
+    }
+
+}
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$theme-colors: map-merge(
+    $theme-colors,
+    (
+        "primary": map-get($theme, "500")
+    )
+);
+
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/utilities';
+
+.btn{
+    font-family:'Roboto', sans-serif;
+    display:inline-flex;
+    align-items:center;
+    padding-top:0;
+    padding-bottom:0;
+    min-height:2.375rem;
+
+    span.mdi{
+        margin-right:.5rem;
+        height:2.375rem;
+    }
+
+    &-circle{
+        width:38px;
+        height:38px;
+        border-radius:50%;
+        position:relative;
+        
+        span.mdi{
+            margin-left:-.375rem;
+            margin-right:0;
+        }
+    }
+}
+
+wui-form-field{
+    background-color:#FAFAFA;
+    border-top-left-radius:.25rem;
+    border-top-right-radius:.25rem;
+
+    .border{
+        background-color:map-get($theme-colors, "primary") !important;
+    }
+
+    &:focus-within{
+        background-color:#F7F7F7;
+        label{
+            color:map-get($theme-colors, "primary") !important;
+        }
+    }
+
+}
+
+wui-page{
+    background-color:white;
+}
+
+h1,h2,h3,h4,h5{
+    font-weight:normal;
 }

@@ -1,0 +1,59 @@
+:host{
+    height:3.5rem;
+    box-sizing: border-box;
+    width:100%;
+    flex: 0 0 auto;
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    z-index:99;
+    background-color:white;    
+    border-bottom:1px solid #EFEFEF;
+    overflow:hidden;
+
+    /deep/ {
+        .navIcon{
+            display:inline-flex;
+            margin-right:2rem;
+            cursor:pointer;
+        }
+    
+        .wuiTitle{
+            flex: 1 1 auto;
+            font-size:1.25rem;
+            padding:0 1rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow:hidden;
+        }
+    
+        wui-top-bar-item{
+            display:inline-flex;
+            margin:0 .75rem;
+            align-items:center;
+            cursor:pointer;
+            
+            &:first-child{
+                margin-left:1rem !important;
+            }
+        }
+    
+        input{
+            font-size:1.25rem;
+            font-family:'Roboto', sans-serif;
+            -webkit-appearance: none;
+            min-width:0;
+            border:none;
+            outline:none;
+            flex: 1 1 auto;
+            background-color:#EFEFEF;
+            padding:.5rem 1rem;
+            border-radius:.25rem;
+            margin-right:1rem;
+    
+            & ~ wui-top-bar-item{
+                margin-left:0 !important;
+            }
+        }
+    }
+}

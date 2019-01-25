@@ -17,26 +17,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "wui-mobile": [
-        "dist/wui-mobile"
-      ],
-      "wui-mobile/*": [
-        "dist/wui-mobile/*"
-      ],
-      "wui-desktop": [
-        "dist/wui-desktop"
-      ],
-      "wui-desktop/*": [
-        "dist/wui-desktop/*"
-      ],
-      "wui": [
-        "dist/wui"
-      ],
-      "wui/*": [
-        "dist/wui/*"
-      ]
-    }
+    ]
   }
 }

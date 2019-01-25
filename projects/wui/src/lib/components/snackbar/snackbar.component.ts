@@ -1,15 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
+import { MessageService } from '../../services/message.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'lib-snackbar',
+  selector: 'wui-snackbar',
   templateUrl: './snackbar.component.html',
-  styleUrls: ['./snackbar.component.css']
+  styleUrls: ['./snackbar.component.scss']
 })
-export class SnackbarComponent implements OnInit {
+export class SnackbarComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  actionItems: Array<any> = [];
+  label: String = '';
+  @HostBinding('class.show') show: Boolean = false;
+  @HostBinding('class.backdrop') backdrop: Boolean = true;
+  private autoclose: any;
+  private unsub: Subject<any> = new Subject();
+
+  constructor(
+    private messageService: MessageService
+  ) { }
+
+  open(label, autoclose, backdrop, actionItems = []) {
+    this.label = label;
+    this.actionItems = actionItems;
+    this.backdrop = backdrop;
+    if (this.show) {
+      clearTimeout(this.autoclose);
+      this.close();
+      setTimeout(() => {
+        this.show = true;
+      }, 150);
+    } else {
+      clearTimeout(this.autoclose);
+      this.show = true;
+    }
+    if (autoclose) {
+      this.autoclose = setTimeout(() => {
+        this.close();
+      }, 3000);
+    }
+  }
+
+  close() {
+    this.show = false;
+  }
 
   ngOnInit() {
+    this.messageService.get('wui:snackbar').pipe(takeUntil(this.unsub)).subscribe(data => {
+      if (data.label === 'close') {
+        this.close();
+      } else {
+        this.open(data.label, data.autoclose, data.backdrop, data.actionItems);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.unsub.next();
   }
 
 }

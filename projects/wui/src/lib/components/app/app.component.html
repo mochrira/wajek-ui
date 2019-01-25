@@ -1,0 +1,16 @@
+<ng-content select="wui-drawer"></ng-content>
+<div class="outer">
+    <ng-content></ng-content>
+</div>
+
+<wui-snackbar></wui-snackbar>
+<wui-modal size="md" modalTitle="{{dialogParams.title}}" #dialog>
+    <div class="mb-3">
+        {{dialogParams.message}}
+    </div>
+    <div class="d-flex justify-content-end buttons">
+        <button class="btn btn-secondary" *ngFor="let btn of dialogParams.buttons" (click)="btn.click()">
+            {{btn.label}}
+        </button>
+    </div>
+</wui-modal>
