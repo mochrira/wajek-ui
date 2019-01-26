@@ -18,6 +18,10 @@ import { ContextMenuComponent, ContextMenuItemComponent } from './components/con
 import { ContextMenuDirective } from './directives/context-menu.directive';
 import { GridComponent, GridColumnComponent } from './components/grid/grid.component';
 import { FormsModule } from '@angular/forms';
+import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
+import { NavComponent } from './components/nav/nav.component';
+import { NavService } from './services/nav.service';
+import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,12 @@ import { FormsModule } from '@angular/forms';
     ContextMenuItemComponent,
     ContextMenuDirective,
     GridComponent,
-    GridColumnComponent
+    GridColumnComponent,
+    ToggleDrawerDirective,
+    NavComponent,
+    NavPopDirective,
+    NavRootDirective,
+    NavPushDirective
   ],
   imports: [
     CommonModule,
@@ -59,17 +68,29 @@ import { FormsModule } from '@angular/forms';
     ContextMenuItemComponent,
     ContextMenuDirective,
     GridComponent,
-    GridColumnComponent
+    GridColumnComponent,
+    NavComponent,
+    ToggleDrawerDirective,
+    NavPopDirective,
+    NavRootDirective,
+    NavPushDirective
   ]
 })
 export class WuiModule {
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(
+    predefinedNavs?: any
+  ): ModuleWithProviders {
     return {
       ngModule: WuiModule,
       providers: [
         MessageService,
-        WuiService
+        WuiService,
+        NavService,
+        {
+          provide: 'predefinedNavs',
+          useValue: predefinedNavs
+        }
       ]
     };
   }
