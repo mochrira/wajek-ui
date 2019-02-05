@@ -3,26 +3,35 @@
     display:block;
     position:relative;
     /* height:3.5rem; */
-    border-bottom:1px solid #EFEFEF;
-    margin-bottom:1rem;
+    margin-bottom:2rem;
 
-    i.material-icons{
+    span.mdi{
         position:absolute;
-        left:0;
-        top:.5625rem;
+        left:.75rem;
+        top:.875rem;
     }
 
     .border{
+        overflow:visible;
         border:none !important;
-        width:0;
-        height:2px !important;
-        background-color:#333;
-        opacity:0;
+        width:100%;
+        height:1px;
         position:absolute;
         left:50%;bottom:-1px;
         transform:translateX(-50%);
         display:block;
-        transition:width ease .4s;
+        position:relative;
+
+        &:after{
+            content:"";
+            display:block;
+            width:0;
+            height:2px;
+            transition:all ease .4s;
+            bottom:0;
+            left:50%;
+            position:absolute;
+        }
     }
 
     label{
@@ -37,21 +46,20 @@
         position:absolute;
         right:1rem;
         top:1rem;
-        display:none;
         fill:#555;
     }
 
     /deep/ {
         input, select, textarea{
             -webkit-appearance: none;
+            box-sizing: border-box;
             border:none;
             display:block;
             width:100%;
             height:100%;
-            box-sizing:border-box;
             outline:none;
             font-family:'Roboto', sans-serif;
-            padding:1.5rem 1rem .5rem;
+            padding:1.75rem 1rem .5rem;
             background:transparent; 
             position:relative;
             z-index:1;
@@ -60,25 +68,65 @@
             opacity:0;
         }
 
-        i.material-icons ~ input{
-            padding-left:2.5rem;
+        span.mdi ~ input{
+            padding-left:3rem;
         }
 
-        i.material-icons ~ label{
-            left:2.5rem;
+        span.mdi ~ label{
+            left:3rem;
         }
     
         select ~ svg.arrow-down{
             display:block !important;
         }
 
-        input[type=date]::-webkit-inner-spin-button,
-        input[type=date]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
+        input, select, textarea{
+            ~ div.border {
+                background-color:#DDD;
+
+                &:after{
+                    background-color:#DDD;
+                }
+            }
+
+            ~ div.error {
+                color: #C62828;
+                position: absolute;
+                bottom: -1.25rem;
+                left: 1rem;
+                display: none;
+                font-size:.875rem;
+            }
         }
 
-        input[type="date"] ~ svg.date{
-            display:block !important;
+        input.ng-invalid, select.ng-invalid, textarea.ng-invalid{
+            &.ng-touched{
+                ~ div.border{
+                    background-color:#C62828;
+
+                    &:after{
+                        background-color:#C62828;
+                    }
+                }
+
+                ~ div.error{
+                    display:block;
+                }
+
+                ~ label {
+                    color: #C62828;
+                }
+            }
+        }
+
+        input, select, textarea{
+            &:disabled{
+                opacity:.5 !important;
+
+                ~ div.border, ~ div.error, ~ label {
+                    opacity:.5;
+                }
+            } 
         }
     }
 
@@ -90,7 +138,7 @@
 
         /deep/ {
             input, select, textarea{
-                opacity:1 !important;
+                opacity:1;
             }
         }
     }
@@ -98,9 +146,10 @@
     &:focus-within{
 
         .border{
-            width:100%;
-            transform:translateX(-50%);
-            opacity:1;
+            &:after{
+                width:100%;
+                left:0;
+            }
         }
 
         label{

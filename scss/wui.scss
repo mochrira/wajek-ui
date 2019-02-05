@@ -23,12 +23,23 @@ html,body{
 
 *{
     box-sizing:border-box;
+
+    &:not(input,textarea){
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
 }
 
 /*wui-loading*/
 
 wui-loading{
-    background-color: #E1BEE7 !important;
+    display:inline-block;
+    margin:1rem auto;
 
     .indeterminate {
 
@@ -68,57 +79,90 @@ $theme-colors: map-merge(
 );
 
 @import '~bootstrap/scss/buttons';
-@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/grid'; 
 @import '~bootstrap/scss/utilities';
 
-.btn{
-    font-family:'Roboto', sans-serif;
-    display:inline-flex;
-    align-items:center;
-    padding-top:0;
-    padding-bottom:0;
-    min-height:2.375rem;
-
-    span.mdi{
-        margin-right:.5rem;
-        height:2.375rem;
-    }
-
-    &-circle{
-        width:38px;
-        height:38px;
-        border-radius:50%;
-        position:relative;
-        
-        span.mdi{
-            margin-left:-.375rem;
-            margin-right:0;
-        }
-    }
-}
 
 wui-form-field{
-    background-color:#FAFAFA;
+    background-color:#F7F7F7;
     border-top-left-radius:.25rem;
     border-top-right-radius:.25rem;
 
-    .border{
-        background-color:map-get($theme-colors, "primary") !important;
+    input, textarea, select {
+        &:not(.ng-invalid):not(.ng-pristine), &.ng-untouched, &.ng-valid {
+            &:focus {
+                ~ .border{
+                    &:after{
+                        background-color:map-get($theme-colors, "primary") !important;
+                    }
+                }
+            }
+        }
     }
 
     &:focus-within{
-        background-color:#F7F7F7;
-        label{
-            color:map-get($theme-colors, "primary") !important;
+        background-color:#F2F2F2;
+
+        span.mdi, label{
+            color:map-get($theme-colors, "primary");
         }
     }
 
 }
 
 wui-page{
-    background-color:white;
+    background-color:#FFF;
 }
 
 h1,h2,h3,h4,h5{
     font-weight:normal;
+}
+
+.btn{
+    display:inline-flex;
+    white-space: nowrap !important;
+
+    span.mdi{
+        width:1.5rem;
+        height:1.5rem;
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 !important;
+        margin-right:1rem !important;
+    }
+    
+    span.mdi:last-child{
+        margin-right:0 !important;
+    }
+
+    &.fab{
+        position:fixed;
+        bottom:1rem;
+        right:1rem;
+        display:inline-flex;
+        padding:1rem;
+        justify-content:center;
+        align-items:center;
+        z-index:3;
+        border-radius:50%;
+    }
+}
+
+
+div.wuiRipple{
+    width:0;
+    height:0;
+    background-color:rgba(0,0,0,0.12);
+    position:absolute;
+    top:50%;left:50%;
+    z-index:-1;
+    border-radius:50%;
+    transition:all ease .5s;
+}
+
+wui-drawer-item {
+    &.active{
+        color:map-get($theme-colors, "primary");
+    }
 }

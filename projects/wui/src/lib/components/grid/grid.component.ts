@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ContentChildren, EventEmitter, HostListener, Output } from '@angular/core';
 import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
+import { ContextMenuComponent } from '../context-menu/context-menu.component';
 
 @Component({
   selector: 'wui-grid-column',
@@ -12,6 +13,7 @@ export class GridColumnComponent implements OnInit {
   @Input() template: any;
   @Input() align = 'left';
   @Input() width = 0;
+  @Input() customClass = '';
 
   constructor() { }
 
@@ -28,6 +30,7 @@ export class GridComponent implements OnInit {
 
   constructor() { }
 
+  @Input() rowContextMenu: ContextMenuComponent;
   @Input() headerTitle = '';
   @Input() actionItems: Array<any> = [];
   @Input() data: Array<any> = [];
@@ -40,7 +43,7 @@ export class GridComponent implements OnInit {
   @ContentChildren(GridColumnComponent) columns: Array<GridColumnComponent> = [];
   @HostListener('scroll', ['$event']) onScrollEnd(e) {
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
-      this.scrollEnd.next(e);
+      this.scrollEnd.emit(e);
     }
   }
 
@@ -54,6 +57,10 @@ export class GridComponent implements OnInit {
 
   selectRow(i) {
     this.selectedRow = i;
+  }
+
+  getSelectedRow() {
+    return this.data[this.selectedRow];
   }
 
   ngOnInit() {

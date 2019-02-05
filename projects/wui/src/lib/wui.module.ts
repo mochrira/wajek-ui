@@ -12,7 +12,7 @@ import { PageComponent } from './components/page/page.component';
 import { DrawerComponent, DrawerItemComponent } from './components/drawer/drawer.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent, ListItemComponent } from './components/list/list.component';
 import { WuiService } from './services/wui.service';
 import { ContextMenuComponent, ContextMenuItemComponent } from './components/context-menu/context-menu.component';
 import { ContextMenuDirective } from './directives/context-menu.directive';
@@ -22,6 +22,7 @@ import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
 import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
+import { RippleDirective } from './directives/ripple.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
     DatepickerComponent,
     ModalComponent,
     ListComponent,
+    ListItemComponent,
     ContextMenuComponent,
     ContextMenuItemComponent,
     ContextMenuDirective,
@@ -47,7 +49,8 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
     NavComponent,
     NavPopDirective,
     NavRootDirective,
-    NavPushDirective
+    NavPushDirective,
+    RippleDirective
   ],
   imports: [
     CommonModule,
@@ -73,7 +76,11 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
     ToggleDrawerDirective,
     NavPopDirective,
     NavRootDirective,
-    NavPushDirective
+    NavPushDirective,
+    ListComponent,
+    ListItemComponent,
+    RippleDirective,
+    DatepickerComponent
   ]
 })
 export class WuiModule {

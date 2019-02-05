@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'wui-top-bar-item',
@@ -16,6 +16,12 @@ export class TopBarItemComponent implements OnInit {
 
   @Input() icon: String = '';
   @Input() caption: String = '';
+  @Output() wuiClick: EventEmitter<any> = new EventEmitter();
+  @HostListener('click', ['$event']) onclick(e) {
+    setTimeout(() => {
+      this.wuiClick.emit(e);
+    }, 200);
+  }
 
   constructor() { }
 

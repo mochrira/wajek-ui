@@ -35,4 +35,12 @@ export class WuiService {
     this.messageService.set('wui:toggleDrawer', null);
   }
 
+  openLoading() {
+    this.messageService.set('wui:loading', true);
+  }
+
+  closeLoading() {
+    this.messageService.set('wui:loading', false);
+  }
+
 }

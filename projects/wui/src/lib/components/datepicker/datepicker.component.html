@@ -1,3 +1,40 @@
-<p>
-  datepicker works!
-</p>
+<div>
+    <ng-container *ngIf="mode=='date'">
+        <div class="d-flex">
+            <a (click)="prev()">
+                <span class="mdi mdi-chevron-left"></span>
+            </a>
+            <div class="col p-0 text-center">
+                {{months[month]}} {{year}}
+            </div>
+            <a (click)="next()">
+                <span class="mdi mdi-chevron-right"></span>
+            </a>
+        </div>
+        <div class="dates">
+            <a *ngFor="let d of dates" (click)="selectDate(d)">
+                <span>{{getDate(d)}}</span>
+            </a>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="mode=='month'">
+        <div class="text-center">
+            {{year}}
+        </div>
+        <div class="months">
+            <a *ngFor="let m of months">
+                <span>{{shortMonth(m)}}</span>
+            </a>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="mode=='year'">
+        <div class="text-center">
+            {{decadeStart()}} - {{decadeEnd()}}
+        </div>
+        <div class="years">
+            <a *ngFor="let y of years">
+                <span>{{y}}</span>
+            </a>
+        </div>
+    </ng-container>
+</div>

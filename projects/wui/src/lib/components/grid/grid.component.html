@@ -2,12 +2,11 @@
   <thead>
     <tr>
       <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="col.width>0?col.width+'px':'auto'">{{col.label}}</th>
-      <th [style.width]="'48px'"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let d of data; let i=index" (click)="selectRow(i);" class="{{i==selectedRow?'selected':''}}">
-      <td *ngFor="let col of columns" class="text-{{col.align}}">
+      <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="col.width>0?col.width+'px':'auto'">
         <ng-container>
           <ng-template *ngIf="col.template" [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
         </ng-container>
@@ -15,7 +14,6 @@
           {{d[col.field]}}
         </ng-container>
       </td>
-      <td class="action"><span class="mdi mdi-dots-vertical"></span></td>
     </tr>
   </tbody>
 </table>

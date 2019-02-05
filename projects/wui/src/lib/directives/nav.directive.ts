@@ -8,7 +8,9 @@ export class NavRootDirective {
 
   @Input('wuiNavRoot') component: String = '';
   @HostListener('click', ['$event']) onclick(e) {
-    this.navService.setRoot(this.component);
+    setTimeout(() => {
+      this.navService.setRoot(this.component);
+    }, 200);
   }
 
   constructor(
@@ -24,7 +26,9 @@ export class NavPushDirective {
 
   @Input('wuiNavPush') component: String = '';
   @HostListener('click', ['$event']) onclick(e) {
-    this.navService.push(this.component);
+    setTimeout(() => {
+      this.navService.push(this.component);
+    }, 200);
   }
 
   constructor(
@@ -39,7 +43,9 @@ export class NavPushDirective {
 export class NavPopDirective {
 
   @HostListener('click', ['$event']) onclick(e) {
-    this.navService.pop();
+    setTimeout(() => {
+      this.navService.pop();
+    }, 200);
   }
 
   constructor(

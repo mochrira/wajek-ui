@@ -9,6 +9,7 @@
     table{
         width:100%;
         border-spacing: 0;
+        table-layout: fixed;
 
         tbody tr{
             &:last-child{
@@ -18,6 +19,10 @@
             }
             &:hover{
                 background-color:#F9F9F9;
+            }
+
+            &.selected{
+                background-color:#EFEFEF;
             }
         }
 
@@ -29,7 +34,7 @@
             overflow:hidden;
             text-overflow:ellipsis;
             white-space: nowrap;
-            max-width:0;
+            min-width:0;
             font-size:.875rem;
             
             i.material-icons{
@@ -108,9 +113,9 @@
             &.action{
                 padding:0;
                 position:relative;
-                text-align:center;
+                text-align:center !important;
 
-                i{
+                span{
                     position:absolute;
                     top:0;left:0;bottom:0;right:0;
                     display:inline-flex;
@@ -131,4 +136,10 @@
 
 wui-loading{
     margin:1.5rem 0;
+}
+
+/deep/ {
+    .row_more{
+        cursor:pointer;
+    }
 }

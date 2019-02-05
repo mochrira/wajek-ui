@@ -7,7 +7,9 @@ import { MessageService } from '../services/message.service';
 export class ToggleDrawerDirective {
 
   @HostListener('click', ['$event']) onclick(e) {
-    this.messageService.set('wui:toggleDrawer', null);
+    setTimeout(() => {
+      this.messageService.set('wui:toggleDrawer', null);
+    }, 200);
   }
 
   constructor(

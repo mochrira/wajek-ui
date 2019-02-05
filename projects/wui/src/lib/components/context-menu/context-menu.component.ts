@@ -39,7 +39,9 @@ export class ContextMenuItemComponent implements OnInit {
 })
 export class ContextMenuComponent implements OnInit, AfterViewInit {
 
+  @Input() parentEl: any;
   @ContentChildren(ContextMenuItemComponent) menus: Array < ContextMenuItemComponent > ;
+  scrollUnsub: any;
   private unsub: Subject<any> = new Subject();
   @HostBinding('class.init') init: Boolean = false;
   @HostBinding('class.show') show: Boolean = false;
@@ -65,23 +67,31 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   open(eRect) {
-    this.init = true;
     setTimeout(() => {
-      const cRect = this.el.nativeElement.getBoundingClientRect();
-      if (window.innerWidth < (eRect.left + cRect.width)) {
-        this.renderer.setStyle(this.el.nativeElement, 'right', (window.innerWidth - (eRect.left + eRect.width)) + 'px');
-      } else {
-        this.renderer.setStyle(this.el.nativeElement, 'left', eRect.x + 'px');
-      }
-      if (window.innerHeight < (eRect.top + cRect.height)) {
-        this.renderer.addClass(this.el.nativeElement, 'slide-up');
-        this.renderer.setStyle(this.el.nativeElement, 'bottom', (window.innerHeight - (eRect.top + eRect.height)) + 'px');
-      } else {
-        this.renderer.addClass(this.el.nativeElement, 'slide-bottom');
-        this.renderer.setStyle(this.el.nativeElement, 'top', eRect.y + 'px');
-      }
-      this.show = true;
-    }, 50);
+      this.init = true;
+      setTimeout(() => {
+        const cRect = this.el.nativeElement.getBoundingClientRect();
+        if (window.innerWidth < (eRect.left + cRect.width)) {
+          this.renderer.setStyle(this.el.nativeElement, 'right', (window.innerWidth - (eRect.left + eRect.width)) + 'px');
+        } else {
+          this.renderer.setStyle(this.el.nativeElement, 'left', eRect.x + 'px');
+        }
+        if (window.innerHeight < (eRect.top + cRect.height)) {
+          this.renderer.setStyle(this.el.nativeElement, 'bottom', (window.innerHeight - (eRect.top + eRect.height)) + 'px');
+        } else {
+          this.renderer.setStyle(this.el.nativeElement, 'top', eRect.y + 'px');
+        }
+        this.scrollUnsub = this.renderer.listen(
+          document, 'mousewheel', (e) => {
+          this.close();
+        });
+        this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
+        setTimeout(() => {
+          this.show = true;
+          this.renderer.setStyle(this.el.nativeElement, 'height', cRect.height + 'px');
+        }, 100);
+      }, 50);
+    }, 100);
   }
 
   reset() {
@@ -94,11 +104,14 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
   }
 
   close() {
-    setTimeout(() => {
-      this.reset();
-      this.init = false;
-      this.show = false;
-    }, 50);
+    if (this.show === true) {
+      setTimeout(() => {
+        this.scrollUnsub();
+        this.reset();
+        this.init = false;
+        this.show = false;
+      }, 50);
+    }
   }
 
 }

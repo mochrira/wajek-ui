@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
     buttons: []
   };
 
+  showLoading = false;
+
   constructor(
     private messageService: MessageService
   ) { }
@@ -28,6 +30,9 @@ export class AppComponent implements OnInit {
         this.dialogParams = Object.assign(this.dialogParams, res);
         this.dialog.open();
       }
+    });
+    this.messageService.get('wui:loading').subscribe(showLoading => {
+      this.showLoading = showLoading;
     });
   }
 
