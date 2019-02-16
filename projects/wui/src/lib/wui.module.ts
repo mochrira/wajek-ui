@@ -23,6 +23,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
 import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
 import { RippleDirective } from './directives/ripple.directive';
+import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { RippleDirective } from './directives/ripple.directive';
     NavPopDirective,
     NavRootDirective,
     NavPushDirective,
-    RippleDirective
+    RippleDirective,
+    ActionSheetComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

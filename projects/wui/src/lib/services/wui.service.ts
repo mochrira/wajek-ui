@@ -10,25 +10,12 @@ export class WuiService {
     private messageService: MessageService
   ) { }
 
-  dialog(title: String, message: String = '', buttons: Array<any> = []) {
-    if (title === 'close') {
-      this.messageService.set('wui:dialog', 'close');
-      return;
-    }
-    this.messageService.set('wui:dialog', {
-      title: title,
-      message: message,
-      buttons: buttons
-    });
+  dialog(params) {
+    this.messageService.set('wui:dialog', params);
   }
 
-  snackbar(label: string, autoclose: Boolean = true, backdrop: Boolean = false, actionItems: any = []) {
-    this.messageService.set('wui:snackbar', {
-      label : label,
-      autoclose : autoclose,
-      backdrop : backdrop,
-      actionItems : actionItems
-    });
+  snackbar(params) {
+    this.messageService.set('wui:snackbar', params);
   }
 
   toggleDrawer() {
@@ -41,6 +28,10 @@ export class WuiService {
 
   closeLoading() {
     this.messageService.set('wui:loading', false);
+  }
+
+  actionSheet(params) {
+    this.messageService.set('wui:action-sheet', params);
   }
 
 }

@@ -1,6 +1,8 @@
-import { Component, HostBinding, HostListener, ElementRef, Renderer2, Input } from '@angular/core';
+import { Component, HostBinding, ElementRef, Renderer2,
+  Input, Output, EventEmitter, ViewChild, HostListener, OnDestroy } from '@angular/core';
 import * as moment_import from 'moment';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 const moment = moment_import;
 
@@ -9,25 +11,28 @@ const moment = moment_import;
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent {
+export class DatepickerComponent implements OnDestroy {
 
   @Input() outputFormat = 'DD/MM/YYYY';
+  @HostBinding('class.show') show = false;
+  @Output() wuiDateSet: EventEmitter<any> = new EventEmitter();
+  @Output() wuiDateSelect: EventEmitter<any> = new EventEmitter();
+  @ViewChild('inner') inner: ElementRef;
+
   date = new Date();
   month = this.date.getMonth();
   year = this.date.getFullYear();
   decade = Math.floor(this.year / 10);
 
+  dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   dates = [];
   months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
   years = [];
 
   mode = 'date';
-  @HostBinding('class.show') show = false;
-  focused = false;
-  unlistenDocumentClick: any;
 
-  dateSelect: Subject<any> = new Subject();
+  private unsub: Subject<any> = new Subject();
 
   constructor(
     private el: ElementRef,
@@ -37,31 +42,42 @@ export class DatepickerComponent {
     this.generateDates();
   }
 
-  @HostListener('click', ['$event']) onfocus(e) {
-    this.focused = true;
-  }
-
-  open() {
-    this.show = true;
-    this.unlistenDocumentClick = this.renderer.listen(document, 'click', (e) => {
-      this.handleOutsideClick(e);
-    });
-  }
-
-  handleOutsideClick(e) {
-    if (!this.el.nativeElement.contains(e.target)) {
-      if ((this.show === true) && (this.focused === true)) {
-        this.close();
-      }
-    } else {
-      this.focused = true;
+  @HostListener('click', ['$event']) detectOutsideClick(e) {
+    if (!this.inner.nativeElement.contains(e.target)) {
+      this.close();
     }
+  }
+
+  isSelected(v) {
+    if (this.mode === 'date') {
+      if (moment(this.date).format('YYYYMMDD') === moment(v).format('YYYYMMDD')) {
+        return true;
+      }
+    } else if (this.mode === 'month') {
+      if (moment(this.date).format('YYYYMM') === moment([this.year, v, 1]).format('YYYYMM')) {
+        return true;
+      }
+    } else if (this.mode === 'year') {
+      if (moment(this.date).format('YYYY') === moment([v, 0, 1]).format('YYYY')) {
+        return true;
+      }
+    }
+  }
+
+  open(date?): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.date = moment(date).toDate();
+      this.show = true;
+      this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res);
+        this.close();
+      });
+    });
   }
 
   close() {
     this.show = false;
-    this.focused = false;
-    this.unlistenDocumentClick();
+    this.unsub.next();
   }
 
   getDate(d) {
@@ -73,7 +89,14 @@ export class DatepickerComponent {
   }
 
   changeMode(mode) {
-
+    setTimeout(() => {
+      this.mode = mode;
+      if (mode === 'date') {
+        this.generateDates();
+      } else if (mode === 'year') {
+        this.generateYears();
+      }
+    }, 200);
   }
 
   decadeStart() {
@@ -110,27 +133,39 @@ export class DatepickerComponent {
   }
 
   selectDate(d) {
-    this.dateSelect.next(moment(d).format(this.outputFormat));
+    this.date = d;
+    this.wuiDateSelect.next(moment(d).format(this.outputFormat));
   }
 
   selectMonth(m) {
-
+    this.month = m;
+    this.changeMode('date');
   }
 
   selectYear(y) {
-
+    this.year = y;
+    this.changeMode('month');
   }
 
   next() {
     switch (this.mode) {
       case 'date' : {
-        if (this.month === 12) {
+        if (this.month === 11) {
           this.year++;
           this.month = 0;
         } else {
           this.month++;
         }
         this.generateDates();
+        break;
+      }
+      case 'month' : {
+        this.year++;
+        break;
+      }
+      case 'year' : {
+        this.decade++;
+        this.generateYears();
         break;
       }
     }
@@ -141,14 +176,37 @@ export class DatepickerComponent {
       case 'date' : {
         if (this.month === 0) {
           this.year--;
-          this.month = 12;
+          this.month = 11;
         } else {
           this.month--;
         }
         this.generateDates();
         break;
       }
+      case 'month' : {
+        this.year--;
+        break;
+      }
+      case 'year' : {
+        this.decade--;
+        this.generateYears();
+        break;
+      }
     }
+  }
+
+  setToday() {
+    this.date = new Date();
+    this.year = this.date.getFullYear();
+    this.month = this.date.getMonth();
+    this.generateDates();
+  }
+
+  submit() {
+    this.wuiDateSet.next(moment(this.date).format(this.outputFormat));
+  }
+
+  ngOnDestroy() {
   }
 
 }

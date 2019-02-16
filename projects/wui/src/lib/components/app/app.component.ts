@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MessageService } from '../../services/message.service';
-import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'wui-app',
@@ -9,30 +8,17 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('dialog') dialog: ModalComponent;
-  dialogParams: any = {
-    title: '',
-    message: '',
-    buttons: []
-  };
-
   showLoading = false;
 
   constructor(
-    private messageService: MessageService
+    private messageService: MessageService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.messageService.get('wui:dialog').subscribe(res => {
-      if (res === 'close') {
-        this.dialog.close();
-      } else {
-        this.dialogParams = Object.assign(this.dialogParams, res);
-        this.dialog.open();
-      }
-    });
     this.messageService.get('wui:loading').subscribe(showLoading => {
       this.showLoading = showLoading;
+      this.cd.detectChanges();
     });
   }
 

@@ -2,7 +2,6 @@
     position:fixed;
     top:0;left:0;
     width:100%;height:100%;
-    z-index:-1;
     display:flex;
     opacity:0;
 
@@ -12,7 +11,7 @@
         display:block;
 
         > .backdrop{
-            background-color:rgba(0,0,0,0.25);
+            background-color:rgba(0,0,0,0.5);
             width:100%;
             height:100%;
             top:0;left:0;
@@ -29,6 +28,9 @@
             opacity:0;
             transform:translateX(-100%);
             transition:transform .3s ease, opacity .3s ease;
+            overflow-y:auto;
+            padding-top:1rem;
+            padding-bottom:1rem;
         }
     }
 
@@ -42,6 +44,7 @@
             font-size:.875rem;
             cursor:pointer;
             outline: none;
+            font-weight:500;
         
             span.mdi{
                 margin-right:1.5rem;
@@ -59,7 +62,8 @@
         div.wui-subheader{
             font-size:.875rem;
             padding:.75rem 1.5rem .5rem;
-            opacity:.7;
+            opacity:.8;
+            font-weight:500;
         }
 
         div.wui-drawer-header{
@@ -106,23 +110,29 @@
 @media screen and (min-width:768px){
     :host{
         position:relative;
-        top:none;left:none;
+        top:auto;left:auto;
         max-width:14rem;
         opacity:1;
         border-right:1px solid #EFEFEF;
         flex: 0 0 auto;
 
         > .outer{
-            >.inner{
+            > .inner{
                 opacity:1;
                 transform:none;
                 width:100%;
+                max-width:14rem;
             }
         }
 
         /deep/ {
             wui-drawer-item{
                 height:2.5rem;
+                font-weight:normal;
+            }
+
+            div.wui-subheader{
+                font-weight:normal;
             }
         }
     }

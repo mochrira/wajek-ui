@@ -1,8 +1,9 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild,
+  ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { isString } from 'util';
+import { NavService } from '../../services/nav.service';
 
 @Component({
   selector: 'wui-nav',
@@ -12,11 +13,10 @@ import { isString } from 'util';
 export class NavComponent implements OnInit, OnDestroy {
 
   @ViewChild('navHost', {read: ViewContainerRef}) viewContainer: ViewContainerRef;
-  private components: Array<any> = [];
-  private rootComponent: any;
   private unsub: Subject<any> = new Subject();
 
   constructor(
+    private navService: NavService,
     private messageService: MessageService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private changeDetector: ChangeDetectorRef,
@@ -24,45 +24,51 @@ export class NavComponent implements OnInit, OnDestroy {
   ) { }
 
   pop() {
-    const componentIndex = this.components.length;
-    this.viewContainer.remove(componentIndex);
-    this.components.splice(componentIndex, 1);
+    if (this.navService.components.length > 1) {
+      const componentIndex = this.navService.components.length;
+      this.viewContainer.remove(componentIndex);
+      this.navService.components.splice(componentIndex - 1, 1);
+    }
   }
 
-  push(component: string | any) {
-    if (typeof component === 'string') {
-      component = this.predefinedNavs[component];
-    }
+  push(name: string) {
+    const component = this.predefinedNavs[name];
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.viewContainer.createComponent(componentFactory);
-    this.components.push(componentRef);
+    this.navService.components.push({name: name, componentRef: componentRef});
   }
 
-  setRoot(component: string | any) {
-    if (typeof component === 'string') {
-      component = this.predefinedNavs[component];
-    }
-    if ((!this.rootComponent) || !(this.rootComponent.instance instanceof component)) {
+  setRoot(name: string) {
+    const component = this.predefinedNavs[name];
+    if ((this.navService.components.length === 0) || !(this.navService.components[0].componentRef.instance instanceof component)) {
       this.viewContainer.clear();
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-      this.rootComponent = this.viewContainer.createComponent(componentFactory);
+      const componentRef = this.viewContainer.createComponent(componentFactory);
+      this.navService.components.splice(0, this.navService.components.length);
+      this.navService.components.push({
+        name: name,
+        componentRef: componentRef
+      });
       this.changeDetector.detectChanges();
     }
   }
 
   ngOnInit() {
-    this.messageService.get('wui:nav:pop')
-      .pipe(takeUntil(this.unsub)).subscribe(res => {
+    this.navService.navigation.subscribe(res => {
+      let name = res.name;
+      if (res.state === 'push') {
+        this.push(res.name);
+      } else if (res.state === 'pop') {
         this.pop();
+        name = this.navService.components[this.navService.components.length - 1].name;
+      } else if (res.state === 'root') {
+        this.setRoot(res.name);
+      }
+      this.navService.navParams.next({
+        name: name,
+        params: res.params
       });
-    this.messageService.get('wui:nav:push')
-      .pipe(takeUntil(this.unsub)).subscribe(component => {
-        this.push(component);
-      });
-    this.messageService.get('wui:nav:root')
-      .pipe(takeUntil(this.unsub)).subscribe(component => {
-        this.setRoot(component);
-      });
+    });
   }
 
   ngOnDestroy() {

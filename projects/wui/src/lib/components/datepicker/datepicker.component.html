@@ -1,40 +1,71 @@
-<div>
-    <ng-container *ngIf="mode=='date'">
-        <div class="d-flex">
-            <a (click)="prev()">
-                <span class="mdi mdi-chevron-left"></span>
-            </a>
-            <div class="col p-0 text-center">
-                {{months[month]}} {{year}}
-            </div>
-            <a (click)="next()">
-                <span class="mdi mdi-chevron-right"></span>
-            </a>
+<div class="outer">
+    <div class="inner" #inner>
+        <div class="currentDate">
+            <div class="day">{{date | date: 'EEEE'}}</div>
+            <div class="date">{{date | date: 'dd MMMM yyyy'}}</div>
         </div>
-        <div class="dates">
-            <a *ngFor="let d of dates" (click)="selectDate(d)">
-                <span>{{getDate(d)}}</span>
-            </a>
+        <div class="display">
+            <ng-container *ngIf="mode=='date'">
+                <div class="d-flex">
+                    <a (click)="prev()" class="prev">
+                        <span class="mdi mdi-chevron-left"></span>
+                    </a>
+                    <div class="col p-0 d-flex justify-content-center align-items-center" (click)="changeMode('month')">
+                        {{shortMonth(months[month]) | uppercase}} {{year}}
+                    </div>
+                    <a (click)="next()" class="next">
+                        <span class="mdi mdi-chevron-right"></span>
+                    </a>
+                </div>
+                <div class="dates">
+                    <div *ngFor="let d of dayLabels" class="days">
+                        <span>{{d}}</span>
+                    </div>
+                    <a *ngFor="let d of dates" (click)="selectDate(d)" class="{{(isSelected(d)?'selected':'')}}">
+                        <span>{{getDate(d)}}</span>
+                    </a>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button class="btn btn-light" (click)="setToday()">Today</button>
+                    <button class="btn btn-light" (click)="submit()">Set</button>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="mode=='month'">
+                <div class="d-flex">
+                    <a (click)="prev()" class="prev">
+                        <span class="mdi mdi-chevron-left"></span>
+                    </a>
+                    <div (click)="changeMode('year')" class="col p-0 d-flex justify-content-center align-items-center">
+                        {{year}}
+                    </div>
+                    <a (click)="next()" class="next">
+                        <span class="mdi mdi-chevron-right"></span>
+                    </a>
+                </div>
+                <div class="months">
+                    <a *ngFor="let m of months; let i = index" (click)="selectMonth(i)" class="{{(isSelected(i)?'selected':'')}}">
+                        <span>{{shortMonth(m)}}</span>
+                    </a>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="mode=='year'">
+                <div class="d-flex">
+                    <a (click)="prev()" class="prev">
+                        <span class="mdi mdi-chevron-left"></span>
+                    </a>
+                    <div class="col p-0 d-flex justify-content-center align-items-center">
+                        {{decadeStart()}} - {{decadeEnd()}}
+                    </div>
+                    <a (click)="next()" class="next">
+                        <span class="mdi mdi-chevron-right"></span>
+                    </a>
+                </div>
+                <div class="years">
+                    <a *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
+                        <span>{{y}}</span>
+                    </a>
+                </div>
+            </ng-container>
         </div>
-    </ng-container>
-    <ng-container *ngIf="mode=='month'">
-        <div class="text-center">
-            {{year}}
-        </div>
-        <div class="months">
-            <a *ngFor="let m of months">
-                <span>{{shortMonth(m)}}</span>
-            </a>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="mode=='year'">
-        <div class="text-center">
-            {{decadeStart()}} - {{decadeEnd()}}
-        </div>
-        <div class="years">
-            <a *ngFor="let y of years">
-                <span>{{y}}</span>
-            </a>
-        </div>
-    </ng-container>
+    </div>
 </div>

@@ -51,7 +51,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
       if (data.label === 'close') {
         this.close();
       } else {
-        this.open(data.label, data.autoclose, data.backdrop, data.actionItems);
+        this.open(data.label, data.autoclose || true, data.backdrop, data.actionItems);
       }
     });
   }

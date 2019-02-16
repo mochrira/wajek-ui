@@ -42,7 +42,7 @@ export class WuiFirebaseAuthGuardService implements CanActivate {
   constructor(
     private authService: WuiFirebaseAuthService,
     private router: Router,
-    @Inject('loginRoute') private loginRoute: string
+    @Inject('wuiFirebaseOptions') private wuiFirebaseOptions: any
   ) { }
 
   canActivate(
@@ -55,7 +55,7 @@ export class WuiFirebaseAuthGuardService implements CanActivate {
 
     return this.authService.isLoggedIn.pipe(take(1), tap(isLoggedIn => {
       if (!isLoggedIn) {
-        this.router.navigate([this.loginRoute]);
+        this.router.navigate([this.wuiFirebaseOptions.loginRoute]);
       }
     }));
   }

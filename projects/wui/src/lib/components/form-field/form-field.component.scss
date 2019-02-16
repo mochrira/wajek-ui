@@ -3,7 +3,11 @@
     display:block;
     position:relative;
     /* height:3.5rem; */
-    margin-bottom:2rem;
+    margin-bottom:1.325rem;
+
+    &.transparent{
+        background-color:transparent !important;
+    }
 
     span.mdi{
         position:absolute;
@@ -68,10 +72,6 @@
             opacity:0;
         }
 
-        span.mdi ~ input{
-            padding-left:3rem;
-        }
-
         span.mdi ~ label{
             left:3rem;
         }
@@ -92,10 +92,10 @@
             ~ div.error {
                 color: #C62828;
                 position: absolute;
-                bottom: -1.25rem;
+                bottom: -1.125rem;
                 left: 1rem;
                 display: none;
-                font-size:.875rem;
+                font-size:.75rem;
             }
         }
 
@@ -116,6 +116,10 @@
                 ~ label {
                     color: #C62828;
                 }
+
+                ~ .mdi {
+                    color: #C62828;
+                }
             }
         }
 
@@ -127,6 +131,14 @@
                     opacity:.5;
                 }
             } 
+        }
+    }
+
+    &.with-icon{
+        /deep/ {
+            input, select, textarea {
+                padding-left: 3rem;
+            }
         }
     }
 

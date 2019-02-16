@@ -1,0 +1,14 @@
+<div class="backdrop" (click)="close()"></div>
+<div class="inner">
+  <div class="asTitle">
+   {{title}}
+  </div>
+  <wui-list>
+    <wui-list-item wuiRipple *ngFor="let item of items" (wuiClick)="itemClick(item)">
+      <span class="mdi mdi-{{item.icon}}"></span>
+      <div>
+        <div class="title">{{item.caption}}</div>
+      </div>
+    </wui-list-item>
+  </wui-list>
+</div>

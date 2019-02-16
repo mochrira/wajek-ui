@@ -7,7 +7,7 @@ import { WuiModule } from 'wui';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule,

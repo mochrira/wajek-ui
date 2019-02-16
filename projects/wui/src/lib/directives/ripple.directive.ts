@@ -42,12 +42,12 @@ export class RippleDirective {
       this.rippleTag.style.left = '50%';
       this.el.nativeElement.removeChild(this.rippleTag);
       this.wuiClick.emit(e);
-    }, 500);
+    }, 200);
   }
 
   constructor(
     private el: ElementRef
-  ) { 
+  ) {
     this.el.nativeElement.style.position = 'relative';
     this.el.nativeElement.style.overflow = 'hidden';
   }

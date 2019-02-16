@@ -7,7 +7,7 @@ import { Component, OnInit, Output, HostListener, EventEmitter } from '@angular/
     :host{
       display:block;
       border-bottom:1px solid #EFEFEF;
-      padding: .5rem 1rem;
+      padding: 1rem;
     }
   `]
 })

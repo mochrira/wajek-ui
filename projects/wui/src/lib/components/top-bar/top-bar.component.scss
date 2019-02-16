@@ -1,13 +1,14 @@
 :host{
     height:3.75rem;
-    box-sizing: border-box;
     width:100%;
     flex: 0 0 auto;
+    top:0;left:0;
+    box-sizing: border-box;
     display:flex;
     align-items:center;
     flex-direction:row;
     z-index:99;
-    background-color:white;    
+    background-color:white;
     border-bottom:1px solid #EFEFEF;
     overflow:hidden;
 
@@ -38,7 +39,7 @@
                 width:calc(100% + 1rem);
                 height:calc(100% + 1rem);
                 position:absolute;
-                background-color:rgba(0,0,0,.25);
+                background-color:rgba(0,0,0,.15);
                 top:-.5rem;left:-.5rem;
                 content:" ";
                 display:block;

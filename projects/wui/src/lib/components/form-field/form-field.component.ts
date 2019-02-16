@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, Renderer, Renderer2,
-  ContentChild, AfterContentInit, HostBinding, HostListener } from '@angular/core';
+  ContentChild, AfterContentInit, HostBinding } from '@angular/core';
 import { FormControlName } from '@angular/forms';
-import { DatepickerComponent } from '../datepicker/datepicker.component';
 
 @Component({
   selector: 'wui-form-field',
@@ -16,9 +15,14 @@ export class FormFieldComponent implements AfterContentInit {
 
   @Input() label: String = '';
   @Input() @HostBinding('class.boxed') boxed: Boolean = false;
-  @Input() icon: String = '';
-  @Input() wuiDatepicker: DatepickerComponent;
-  wuiDatePickerSub: any;
+  @HostBinding('class.with-icon') withIcon = false;
+  _icon = '';
+  @Input('icon') set setIcon(val) {
+    if (val) {
+      this.withIcon = true;
+      this._icon = val;
+    }
+  }
 
   constructor(
     private el: ElementRef,
@@ -51,30 +55,6 @@ export class FormFieldComponent implements AfterContentInit {
       });
       this.detectFloat(this.inputElement.value);
     }
-    this.renderer.listen(this.inputElement, 'focus', (e) => {
-      if (typeof this.wuiDatepicker !== 'undefined') {
-        setTimeout(() => {
-          this.wuiDatepicker.open();
-          this.wuiDatePickerSub = this.wuiDatepicker.dateSelect.subscribe(res => {
-            if (typeof this.formControl !== 'undefined') {
-              this.formControl.control.setValue(res);
-            } else {
-              this.inputElement.value = res;
-            }
-          });
-        }, 200);
-      }
-    });
-    this.renderer.listen(this.inputElement, 'focusout', (e) => {
-      if (typeof this.wuiDatepicker !== 'undefined') {
-          setTimeout(() => {
-            if (this.wuiDatepicker.focused === false) {
-              this.wuiDatePickerSub.unsubscribe();
-              this.wuiDatepicker.close();
-            }
-          }, 200);
-      }
-    });
   }
 
 }

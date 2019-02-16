@@ -1,25 +1,64 @@
-import { Injectable } from '@angular/core';
-import { MessageService } from './message.service';
+import { Injectable, NgZone } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import * as isWebView_import from 'is-webview';
+
+const isWebView = isWebView_import;
+declare var document: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavService {
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  components = [];
+  navigation: BehaviorSubject<any> = new BehaviorSubject({});
+  navParams: BehaviorSubject<any> = new BehaviorSubject({});
 
-  setRoot(component: string | any) {
-    this.messageService.set('wui:nav:root', component);
+  constructor(
+    private ngZone: NgZone
+  ) {
+    this.ngZone.runOutsideAngular(() => {
+      document.addEventListener('deviceready', () => {
+        document.addEventListener('backbutton', () => {
+          this.ngZone.run(() => {
+            this.pop();
+          });
+        }, false);
+      }, false);
+    });
   }
 
-  push(component: string | any) {
-    this.messageService.set('wui:nav:push', component);
+  getRootComponent() {
+    return this.components[0];
+  }
+
+  setRoot(name: string, params = {}) {
+    localStorage.setItem('lastRoot', name);
+    this.navigation.next({
+      state: 'root',
+      name: name,
+      params: params
+    });
+  }
+
+  push(name: string, params = {}) {
+    this.navigation.next({
+      state: 'push',
+      name: name,
+      params: params
+    });
   }
 
   pop(params = {}) {
-    this.messageService.set('wui:nav:pop', null);
+    this.navigation.next({
+      state: 'pop',
+      params: params
+    });
+  }
+
+  params(name) {
+    return this.navParams.pipe(filter(v => v.name === name), map(v => v.params));
   }
 
 }

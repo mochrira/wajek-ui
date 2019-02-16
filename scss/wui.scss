@@ -21,6 +21,10 @@ html,body{
     color:#444;
 }
 
+app-root{
+    display:block;
+}
+
 *{
     box-sizing:border-box;
 
@@ -79,7 +83,7 @@ $theme-colors: map-merge(
 );
 
 @import '~bootstrap/scss/buttons';
-@import '~bootstrap/scss/grid'; 
+@import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/utilities';
 
 
@@ -118,9 +122,23 @@ h1,h2,h3,h4,h5{
     font-weight:normal;
 }
 
+.btn-group{
+    .btn{
+        margin-right:.5rem;
+
+        &:last-child{
+            margin-right:0;
+        }
+    }
+}
+
 .btn{
     display:inline-flex;
     white-space: nowrap !important;
+    outline:none;
+    box-shadow:none !important;
+    justify-content:center;
+    font-family:'Roboto', sans-serif;
 
     span.mdi{
         width:1.5rem;
@@ -161,8 +179,45 @@ div.wuiRipple{
     transition:all ease .5s;
 }
 
-wui-drawer-item {
-    &.active{
-        color:map-get($theme-colors, "primary");
+wui-drawer {
+    .profile {
+        padding:.5rem 1.5rem 1.5rem;
+    
+        .avatar {
+            width:4rem;
+            height:4rem;
+            border-radius:50%;
+            background-color:#EFEFEF;
+            position:relative;
+            overflow:hidden;
+            margin-bottom:1rem;
+    
+            img{
+                position:absolute;
+                width:100%;
+                height:100%;
+                top:0;left:0;
+            }
+        }
+    
+        h3{
+            margin:0;
+            font-size:1.25rem;
+        }
+    
+        .akses{
+            font-size:0.875rem;
+        }
     }
+
+    wui-drawer-item {        
+        &.active{
+            color:map-get($theme-colors, "primary");
+        }
+    }
+
+}
+
+.btn-rounded{
+    border-radius:1.5rem;
 }
