@@ -41,10 +41,8 @@
             height:3rem;
             align-items:center;
             padding:0 1.5rem;
-            font-size:.875rem;
             cursor:pointer;
             outline: none;
-            font-weight:500;
         
             span.mdi{
                 margin-right:1.5rem;
@@ -53,17 +51,11 @@
             &:hover{
                 background-color:rgba(0,0,0,0.05);
             }
-
-            &.active{
-                font-weight:500;
-            }
         }
     
         div.wui-subheader{
-            font-size:.875rem;
             padding:.75rem 1.5rem .5rem;
             opacity:.8;
-            font-weight:500;
         }
 
         div.wui-drawer-header{

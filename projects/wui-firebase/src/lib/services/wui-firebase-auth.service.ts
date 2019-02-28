@@ -28,6 +28,10 @@ export class WuiFirebaseAuthService {
     }
   }
 
+  getFirebaseAuthInstance() {
+    return firebase.auth();
+  }
+
   init() {
     this.ngZone.runOutsideAngular(() => {
       firebase.initializeApp(this.firebaseConfig);
@@ -37,7 +41,7 @@ export class WuiFirebaseAuthService {
             this.isInit = true;
           }
           if (currentUser) {
-            this.currentUser = Object.assign({}, currentUser);
+            this.currentUser = currentUser;
             this.isLoggedIn.next(true);
           } else {
             this.currentUser = null;

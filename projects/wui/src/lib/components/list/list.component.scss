@@ -7,8 +7,6 @@
             padding:1rem;
             display:flex;
             align-items:center;
-            font-size:.875rem;
-            line-height:1.125rem;
             background-color:transparent;
             transition: background-color ease .5s;
 
@@ -41,20 +39,6 @@
                 &:last-child{
                     margin-left:1rem;
                 }
-            }
-
-            div.title{
-                font-size:1rem;
-                line-height:1.25rem;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                white-space: nowrap;
-                width:100%;
-            }
-
-            div.subTitle{
-                opacity:.8;
-                font-size:.875rem;
             }
 
             &:last-child{
