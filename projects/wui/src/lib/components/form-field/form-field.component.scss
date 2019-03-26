@@ -1,6 +1,6 @@
 :host{
     width:100%;
-    display:block;
+    display:flex;
     position:relative;
     /* height:3.5rem; */
     margin-bottom:1.325rem;
@@ -24,7 +24,8 @@
         left:50%;bottom:-1px;
         transform:translateX(-50%);
         display:block;
-        position:relative;
+        width:100%;
+        bottom:0;
 
         &:after{
             content:"";
@@ -55,6 +56,7 @@
 
     /deep/ {
         input, select, textarea{
+            flex: 1 1 auto;
             -webkit-appearance: none;
             box-sizing: border-box;
             border:none;
@@ -70,6 +72,7 @@
             font-size:1rem;
             color:#333;
             opacity:0;
+            order: 1;
         }
 
         span.mdi ~ label{
@@ -96,6 +99,18 @@
                 left: 1rem;
                 display: none;
                 font-size:.75rem;
+            }
+
+            ~ div.prefix{
+                padding:1.75rem 0 .5rem 1rem;
+                opacity: 0;
+                order: 0;
+            }
+
+            ~ div.suffix{
+                padding:1.75rem 1rem .5rem 0;
+                opacity: 0;
+                order: 2;
             }
         }
 
@@ -135,11 +150,7 @@
     }
 
     &.with-icon{
-        /deep/ {
-            input, select, textarea {
-                padding-left: 3rem;
-            }
-        }
+        padding-left: 2rem;
     }
 
     &.has-content{
@@ -151,6 +162,10 @@
         /deep/ {
             input, select, textarea{
                 opacity:1;
+
+                ~ .prefix, ~ .suffix{
+                    opacity:1;
+                }
             }
         }
     }
@@ -172,6 +187,10 @@
         /deep/ {
             input, select, textarea{
                 opacity:1 !important;
+
+                ~ .prefix, ~ .suffix{
+                    opacity:1 !important;
+                }
             }
         }
     }

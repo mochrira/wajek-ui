@@ -1,8 +1,13 @@
 <div class="outer">
     <div class="inner" #inner>
         <div class="currentDate">
-            <div class="day">{{date | date: 'EEEE'}}</div>
-            <div class="date">{{date | date: 'dd MMMM yyyy'}}</div>
+            <div>
+                <div class="day">{{date | date: 'EEEE'}}</div>
+                <div class="date">{{date | date: 'dd MMMM yyyy'}}</div>
+            </div>
+            <a (click)="close()">
+                <span class="mdi mdi-close"></span>
+            </a>
         </div>
         <div class="display">
             <ng-container *ngIf="mode=='date'">
@@ -26,8 +31,8 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                    <button class="btn btn-light" (click)="setToday()">Today</button>
-                    <button class="btn btn-light" (click)="submit()">Set</button>
+                    <button class="btn btn-light" type="button" (click)="setToday()">Today</button>
+                    <button class="btn btn-light" type="button" (click)="submit()">Set</button>
                 </div>
             </ng-container>
             <ng-container *ngIf="mode=='month'">

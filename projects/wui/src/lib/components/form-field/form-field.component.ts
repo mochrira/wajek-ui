@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, Renderer, Renderer2,
   ContentChild, AfterContentInit, HostBinding } from '@angular/core';
-import { FormControlName } from '@angular/forms';
+import { FormControlName, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'wui-form-field',
@@ -10,10 +10,13 @@ import { FormControlName } from '@angular/forms';
 export class FormFieldComponent implements AfterContentInit {
 
   @ContentChild(FormControlName) formControl: FormControlName;
+  @ContentChild(NgModel) ngModel: NgModel;
   private inputElement: any;
   type = '';
 
   @Input() label: String = '';
+  @Input() prefix: String = '';
+  @Input() suffix: String = '';
   @Input() @HostBinding('class.boxed') boxed: Boolean = false;
   @HostBinding('class.with-icon') withIcon = false;
   _icon = '';
@@ -46,7 +49,12 @@ export class FormFieldComponent implements AfterContentInit {
       this.formControl.valueChanges.subscribe(val => {
         this.detectFloat(val);
       });
-    } else {
+    } else if (this.ngModel) {
+      this.detectFloat(this.ngModel.value);
+      this.ngModel.valueChanges.subscribe(val => {
+        this.detectFloat(val);
+      });
+    }else {
       this.renderer.listen(this.inputElement, 'keyup', (e) => {
         this.detectFloat(e.target.value);
       });

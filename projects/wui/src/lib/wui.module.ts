@@ -25,6 +25,8 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
 import { RippleDirective } from './directives/ripple.directive';
 import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { StarComponent } from './components/star/star.component';
+import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NavPushDirective,
     RippleDirective,
     ActionSheetComponent,
-    DialogComponent
+    DialogComponent,
+    StarComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -84,7 +88,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
     ListComponent,
     ListItemComponent,
     RippleDirective,
-    DatepickerComponent
+    DatepickerComponent,
+    StarComponent,
+    RatingComponent
   ]
 })
 export class WuiModule {

@@ -81,6 +81,7 @@ $theme-colors: map-merge(
     )
 );
 
+@import '~bootstrap/scss/alert';
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/utilities';
@@ -219,4 +220,20 @@ wui-drawer {
 
 .btn-rounded{
     border-radius:1.5rem;
+}
+
+a {
+    color: #AB47BC;
+    text-decoration: none;
+
+    &:hover{
+        color: #8E24AA;
+        text-decoration: underline;
+    }
+
+    &:visited{
+        color: #7B1FA2;
+        text-decoration: none;
+    }
+
 }
