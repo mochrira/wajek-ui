@@ -6,7 +6,9 @@ import {
   OnDestroy,
   HostListener,
   ContentChildren,
-  AfterViewInit
+  AfterViewInit,
+  AfterContentChecked,
+  ElementRef
 } from '@angular/core';
 import {
   MessageService
@@ -24,13 +26,8 @@ import {
 })
 export class DrawerItemComponent implements OnInit {
 
-  clicked: Subject < any > = new Subject();
   @Input() icon: String = '';
   @Input() label: String = '';
-
-  @HostListener('click', ['$event']) onHostClick(e) {
-    this.clicked.next(e);
-  }
 
   constructor() {}
 
@@ -43,13 +40,21 @@ export class DrawerItemComponent implements OnInit {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss']
 })
-export class DrawerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DrawerComponent implements OnInit {
 
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
   @HostBinding('class.show') show: Boolean = false;
-  private unsub: Subject < any > = new Subject();
+
+  @HostListener('click', ['$event']) onClick(e) {
+    if(e.path.findIndex(p => p.tagName==="WUI-DRAWER-ITEM") > -1){
+      if(this.elementRef.nativeElement.contains(e.target)){
+        this.close();
+      }
+    }
+  }
 
   constructor(
+    private elementRef: ElementRef,
     private messageService: MessageService
   ) {}
 
@@ -69,18 +74,6 @@ export class DrawerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.messageService.get('wui:toggleDrawer').subscribe(res => {
       this.toggle();
     });
-  }
-
-  ngAfterViewInit() {
-    this.items.map(item => {
-      item.clicked.subscribe(res => {
-        this.close();
-      });
-    });
-  }
-
-  ngOnDestroy() {
-    this.unsub.next();
   }
 
 }
