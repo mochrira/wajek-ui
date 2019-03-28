@@ -141,4 +141,20 @@
     .display{
         padding:1rem;
     }
+
+    .time-selector{
+        text-align: center;
+        input{
+            font-size: 1.25rem;
+            border:none;
+            background:none;
+            margin-top:1rem;
+            margin-bottom:1rem;
+        }
+
+        .mdi{
+            font-size:1.5rem;
+        }
+    }
+    
 }

@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RatingComponent implements OnInit {
 
   @Input('stars') set setStars(val) {
-    for(let i=1; i<=val; i++){
+    for(let i=1; i<=val; i++){   
       if(i==val){
         this.points.push(100);
       }else{

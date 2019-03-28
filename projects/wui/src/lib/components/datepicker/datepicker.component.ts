@@ -22,6 +22,9 @@ export class DatepickerComponent implements OnDestroy {
   date = new Date();
   month = this.date.getMonth();
   year = this.date.getFullYear();
+  hour: number = this.date.getHours();
+  minute: number = this.date.getMinutes();
+  second: number = this.date.getSeconds();
   decade = Math.floor(this.year / 10);
 
   dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -48,6 +51,50 @@ export class DatepickerComponent implements OnDestroy {
     }
   }
 
+  incTime(mode) {
+    if(mode=='hour'){
+      if(this.hour < 23){
+        this.hour++;
+      }else{
+        this.hour = 0;
+      }
+    }else if(mode=='min'){
+      if(this.minute < 59){
+        this.minute++;
+      }else{
+        this.minute = 0;
+      }
+    }else if(mode=='sec'){
+      if(this.second < 59){
+        this.second++;
+      }else{
+        this.second = 0;
+      }
+    }
+  }
+
+  decTime(mode) {
+    if(mode=='hour'){
+      if(this.hour > 0){
+        this.hour--;
+      }else{
+        this.hour = 23;
+      }
+    }else if(mode=='min'){
+      if(this.minute > 0){
+        this.minute--;
+      }else{
+        this.minute = 59;
+      }
+    }else if(mode=='sec'){
+      if(this.second > 0){
+        this.second--;
+      }else{
+        this.second = 59;
+      }
+    }
+  }
+
   isSelected(v) {
     if (this.mode === 'date') {
       if (moment(this.date).format('YYYYMMDD') === moment(v).format('YYYYMMDD')) {
@@ -67,6 +114,8 @@ export class DatepickerComponent implements OnDestroy {
   open(date?): Promise<any> {
     return new Promise((resolve, reject) => {
       this.date = moment(date).toDate();
+      this.year = this.date.getFullYear();
+      this.month = this.date.getMonth();
       this.show = true;
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res);
@@ -95,8 +144,17 @@ export class DatepickerComponent implements OnDestroy {
         this.generateDates();
       } else if (mode === 'year') {
         this.generateYears();
+      } else if (mode === 'time') {
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+        this.second = this.date.getSeconds();
       }
     }, 200);
+  }
+
+  setTime() {
+    this.date = moment(this.date).hour(this.hour).minute(this.minute).second(this.second).toDate();
+    this.changeMode('date');
   }
 
   decadeStart() {
@@ -133,8 +191,8 @@ export class DatepickerComponent implements OnDestroy {
   }
 
   selectDate(d) {
-    this.date = d;
-    this.wuiDateSelect.next(moment(d).format(this.outputFormat));
+    this.date = moment(d).hour(this.hour).minute(this.minute).second(this.second).toDate();
+    this.wuiDateSelect.next(moment(this.date).format(this.outputFormat));
   }
 
   selectMonth(m) {

@@ -3,7 +3,7 @@
         <div class="currentDate">
             <div>
                 <div class="day">{{date | date: 'EEEE'}}</div>
-                <div class="date">{{date | date: 'dd MMMM yyyy'}}</div>
+                <div class="date">{{date | date: 'dd MMM yyyy'}} <span>{{date | date: 'hh:mm:ss'}}</span></div>
             </div>
             <a (click)="close()">
                 <span class="mdi mdi-close"></span>
@@ -31,6 +31,7 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
+                    <button class="btn btn-light" type="button" (click)="changeMode('time')">Time</button>
                     <button class="btn btn-light" type="button" (click)="setToday()">Today</button>
                     <button class="btn btn-light" type="button" (click)="submit()">Set</button>
                 </div>
@@ -69,6 +70,41 @@
                     <a *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
                         <span>{{y}}</span>
                     </a>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="mode=='time'">
+                <div class="d-flex time-selector">
+                    <div class="d-flex flex-column col-4">
+                        <a (click)="incTime('hour')">
+                            <span class="mdi mdi-chevron-up"></span>
+                        </a>
+                        <input type="number" class="form-control text-center" [(ngModel)]="hour">
+                        <a (click)="decTime('hour')">
+                            <span class="mdi mdi-chevron-down"></span>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column col-4">
+                        <a (click)="incTime('min')">
+                            <span class="mdi mdi-chevron-up"></span>
+                        </a>
+                        <input type="number" class="form-control text-center" [(ngModel)]="minute">
+                        <a (click)="decTime('min')">
+                            <span class="mdi mdi-chevron-down"></span>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column col-4">
+                        <a (click)="incTime('sec')">
+                            <span class="mdi mdi-chevron-up"></span>
+                        </a>
+                        <input type="number" class="form-control text-center" [(ngModel)]="second">
+                        <a (click)="decTime('sec')">
+                            <span class="mdi mdi-chevron-down"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button class="btn btn-light" type="button" (click)="changeMode('date')">Back</button>
+                    <button class="btn btn-light" type="button" (click)="setTime()">OK</button>
                 </div>
             </ng-container>
         </div>
