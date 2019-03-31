@@ -164,6 +164,64 @@ export class WuiFirebaseAuthService {
     });
   }
 
+  linkwithFacebook(): Promise<any> {
+    return new Promise((resolve,reject) => {
+      if(isWebView(navigator.userAgent)){
+        firebase.auth().currentUser.linkWithRedirect(
+          new firebase.auth.FacebookAuthProvider()
+        ).then(res => {
+          return firebase.auth().getRedirectResult();
+        }).then(res => {
+          resolve(res);
+        }).catch(rej => {
+          reject(rej);
+        });
+      }else{
+        firebase.auth().currentUser.linkWithPopup(
+          new firebase.auth.FacebookAuthProvider()
+        ).then(res => {
+          resolve(res);
+        }).catch(rej => {
+          reject(rej);
+        });
+      }
+    });
+  }
+
+  linkWithGoogle(): Promise<any> {
+    return new Promise((resolve,reject) => {
+      if(isWebView(navigator.userAgent)){
+        firebase.auth().currentUser.linkWithRedirect(
+          new firebase.auth.GoogleAuthProvider()
+        ).then(res => {
+          return firebase.auth().getRedirectResult();
+        }).then(res => {
+          resolve(res);
+        }).catch(rej => {
+          reject(rej);
+        });
+      }else{
+        firebase.auth().currentUser.linkWithPopup(
+          new firebase.auth.GoogleAuthProvider()
+        ).then(res => {
+          resolve(res);
+        }).catch(rej => {
+          reject(rej);
+        });
+      }
+    });
+  }
+
+  unlink(providerId): Promise<any> {
+    return new Promise((resolve,reject) => {
+      firebase.auth().currentUser.unlink(providerId).then(res => {
+        resolve(res);
+      }).catch(rej => {
+        reject(rej);
+      });
+    })
+  }
+
   signOut(): Promise<any> {
     return new Promise((resolve, reject) => {
       firebase.auth().signOut().then(res => {
