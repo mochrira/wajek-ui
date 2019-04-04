@@ -166,23 +166,31 @@ export class WuiFirebaseAuthService {
 
   linkwithFacebook(): Promise<any> {
     return new Promise((resolve,reject) => {
-      if(isWebView(navigator.userAgent)){
-        firebase.auth().currentUser.linkWithRedirect(
-          new firebase.auth.FacebookAuthProvider()
-        ).then(res => {
-          return firebase.auth().getRedirectResult();
-        }).then(res => {
-          resolve(res);
-        }).catch(rej => {
-          reject(rej);
-        });
+      let isPasswordSet = (firebase.auth().currentUser.providerData.findIndex(p => p.providerId === 'password') > -1);
+      if(isPasswordSet){
+        if(isWebView(navigator.userAgent)){
+          firebase.auth().currentUser.linkWithRedirect(
+            new firebase.auth.FacebookAuthProvider()
+          ).then(res => {
+            return firebase.auth().getRedirectResult();
+          }).then(res => {
+            resolve(res);
+          }).catch(rej => {
+            reject(rej);
+          });
+        }else{
+          firebase.auth().currentUser.linkWithPopup(
+            new firebase.auth.FacebookAuthProvider()
+          ).then(res => {
+            resolve(res);
+          }).catch(rej => {
+            reject(rej);
+          });
+        }
       }else{
-        firebase.auth().currentUser.linkWithPopup(
-          new firebase.auth.FacebookAuthProvider()
-        ).then(res => {
-          resolve(res);
-        }).catch(rej => {
-          reject(rej);
+        reject({
+          code: 'auth/password-not-set',
+          msg: 'Atur password anda terlebih dahulu'
         });
       }
     });
@@ -210,6 +218,75 @@ export class WuiFirebaseAuthService {
         });
       }
     });
+  }
+
+  linkWithEmailAndPassword(email, password): Promise<any> {
+    return new Promise((resolve,reject) => {
+      firebase.auth().currentUser.linkWithCredential(
+        firebase.auth.EmailAuthProvider.credential(email, password)
+      ).then(res => {
+        resolve(res);
+      }).catch(rej => {
+        reject(rej);
+      })
+    })
+  }
+
+  getPrimaryProviderId() {
+    if(this.getFirebaseAuthInstance().currentUser.providerData.length ==0){
+      return false;
+    }
+    return this.getFirebaseAuthInstance().currentUser.providerData[0].providerId;
+  }
+
+  reauth(providerId, params: any = {}): Promise<any> {
+    return new Promise((resolve,reject) => {
+      this.ngZone.runOutsideAngular(() => {
+        let provider: any;
+        if(providerId === 'google.com'){
+          provider = new firebase.auth.GoogleAuthProvider();
+        }else if(providerId === 'facebook.com'){
+          provider = new firebase.auth.FacebookAuthProvider();
+        }else if(providerId === 'password'){
+          provider = firebase.auth.EmailAuthProvider.credential(params.email, params.password);
+        }
+        if(providerId == 'password'){
+          firebase.auth().currentUser.reauthenticateWithCredential(provider).then(res => {
+            this.ngZone.run(() => {
+              resolve(res);
+            })
+          }).catch(rej => {
+            this.ngZone.run(() => {
+              reject(rej);
+            });
+          });
+        }else{
+          if(isWebView(navigator.userAgent)){
+            firebase.auth().currentUser.reauthenticateWithRedirect(provider).then(res => {
+              return firebase.auth().getRedirectResult();
+            }).then(res => {
+              this.ngZone.run(() => {
+                resolve(res);
+              })
+            }).catch(rej => {
+              this.ngZone.run(() => {
+                reject(rej);
+              })
+            })
+          }else{
+            firebase.auth().currentUser.reauthenticateWithPopup(provider).then(res => {
+              this.ngZone.run(() => {
+                resolve(res);
+              })
+            }).catch(rej => {
+              this.ngZone.run(() => {
+                reject(rej);
+              })
+            })
+          }
+        }
+      });
+    })
   }
 
   unlink(providerId): Promise<any> {
