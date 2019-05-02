@@ -1,11 +1,16 @@
 <table>
   <thead>
     <tr>
+      <th class="no-grow selection" *ngIf="selection"></th>
       <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="col.width>0?col.width+'px':'auto'">{{col.label}}</th>
+      <th *ngIf="rowContextMenu" class="col-context"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let d of data; let i=index" (click)="selectRow(i);" class="{{i==selectedRow?'selected':''}}">
+      <td *ngIf="selection" class="no-grow selection">
+        <wui-checkbox></wui-checkbox>
+      </td>
       <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="col.width>0?col.width+'px':'auto'">
         <ng-container>
           <ng-template *ngIf="col.template" [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
@@ -13,6 +18,9 @@
         <ng-container *ngIf="!col.template">
           {{d[col.field]}}
         </ng-container>
+      </td>
+      <td *ngIf="rowContextMenu" class="col-context">
+        <span class="mdi mdi-dots-horizontal" (click)="contextMenuClick($event)"></span>
       </td>
     </tr>
   </tbody>

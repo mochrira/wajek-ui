@@ -27,6 +27,9 @@ import { ActionSheetComponent } from './components/action-sheet/action-sheet.com
 import { DialogComponent } from './components/dialog/dialog.component';
 import { StarComponent } from './components/star/star.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { HttpService } from './services/http.service';
+import { DatefieldDirective } from './directives/datefield.directive';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { RatingComponent } from './components/rating/rating.component';
     ActionSheetComponent,
     DialogComponent,
     StarComponent,
-    RatingComponent
+    RatingComponent,
+    DatefieldDirective,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +95,9 @@ import { RatingComponent } from './components/rating/rating.component';
     RippleDirective,
     DatepickerComponent,
     StarComponent,
-    RatingComponent
+    RatingComponent,
+    DatefieldDirective,
+    CheckboxComponent
   ]
 })
 export class WuiModule {
@@ -104,6 +111,7 @@ export class WuiModule {
         MessageService,
         WuiService,
         NavService,
+        HttpService,
         {
           provide: 'predefinedNavs',
           useValue: predefinedNavs

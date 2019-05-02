@@ -7,12 +7,60 @@
 
     &.transparent{
         background-color:transparent !important;
+        label{
+            left:0 !important;
+        }
+
+        /deep/ {
+            input, select, textarea {
+                padding-left:0 !important;
+                padding-right:0 !important;
+
+                ~ div.error{
+                    left:0 !important;
+                }
+
+                ~ div.prefix{
+                    padding-left: 0 !important;
+                    padding-right:1rem !important;
+                }
+            }
+            
+        }
+    }
+
+    &.no-margin{
+        margin:0 !important;
     }
 
     span.mdi{
         position:absolute;
         left:.75rem;
         top:.875rem;
+    }
+
+    &.datefield{
+        position:relative;
+
+        /deep/ {
+            span.mdi.mdi-calendar-range{
+                position:absolute;
+                right:.75rem;
+                top:.75rem;
+                width:2rem;
+                height:2rem;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                cursor:pointer;
+                border-radius:50%;
+                z-index: 9999;
+                
+                &:hover{
+                    background-color:rgba(0,0,0,0.05);
+                }
+            }
+        }
     }
 
     .border{
@@ -45,12 +93,11 @@
         left:1rem;
         transition:all ease .3s;
         z-index:0;
+        color:rgba(0,0,0,0.65);
     }
 
     svg{
         position:absolute;
-        right:1rem;
-        top:1rem;
         fill:#555;
     }
 
@@ -73,14 +120,16 @@
             color:#333;
             opacity:0;
             order: 1;
+
+            ~ svg.arrow-down{
+                display:block !important;
+                right:1rem;
+                top:1rem;
+            }
         }
 
         span.mdi ~ label{
             left:3rem;
-        }
-    
-        select ~ svg.arrow-down{
-            display:block !important;
         }
 
         input, select, textarea{
@@ -192,6 +241,24 @@
                     opacity:1 !important;
                 }
             }
+        }
+    }
+
+    &.no-label{
+        /deep/ {
+            input, select, textarea{
+                padding-top:.5rem !important;
+                opacity:1;
+                
+                ~ svg.arrow-down{
+                    top:.5rem !important;
+                    right:.5rem !important;
+                }
+            }
+        }
+
+        span.mdi{
+            top:.15rem !important;
         }
     }
 

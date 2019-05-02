@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ContentChildren, EventEmitter, HostListener, Output } from '@angular/core';
-import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 
 @Component({
@@ -30,6 +29,7 @@ export class GridComponent implements OnInit {
 
   constructor() { }
 
+  @Input() selection: boolean;
   @Input() rowContextMenu: ContextMenuComponent;
   @Input() headerTitle = '';
   @Input() actionItems: Array<any> = [];
@@ -61,6 +61,10 @@ export class GridComponent implements OnInit {
 
   getSelectedRow() {
     return this.data[this.selectedRow];
+  }
+
+  contextMenuClick(e){
+    this.rowContextMenu.open(e.target.getBoundingClientRect());
   }
 
   ngOnInit() {

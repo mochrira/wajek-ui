@@ -1,0 +1,10 @@
+:host{
+    display:inline-flex;
+    align-items:center;
+    white-space: nowrap;
+    cursor:pointer;
+
+    svg{
+        margin-right:.5rem;
+    }
+}

@@ -113,9 +113,11 @@ export class DatepickerComponent implements OnDestroy {
 
   open(date?): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.date = moment(date).toDate();
-      this.year = this.date.getFullYear();
-      this.month = this.date.getMonth();
+      if(date){
+        this.date = moment(date).toDate();
+        this.year = this.date.getFullYear();
+        this.month = this.date.getMonth();
+      }
       this.show = true;
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res);

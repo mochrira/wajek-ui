@@ -43,6 +43,14 @@
         &-md{
             max-width:24rem;
         }
+
+        &-sm{
+            max-width:16rem;
+        }
+
+        &-lg{
+            max-width:80%;
+        }
     }
 
     &.show{
@@ -75,6 +83,17 @@
         .backdrop{
             z-index:9999;
             opacity:1;
+        }
+    }
+
+
+    &.flex-modal{
+        .outer{
+            .inner{
+                .content{
+                    display:flex;
+                }
+            }
         }
     }
 }

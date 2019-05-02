@@ -26,6 +26,7 @@ app-root{
 
 *{
     box-sizing:border-box;
+    outline:none;
 
     &:not(input,textarea){
         -webkit-touch-callout: none;
@@ -132,6 +133,11 @@ h1,h2,h3,h4,h5{
     }
 }
 
+.btn-container{
+    margin-left:-.5rem;
+    margin-right:-.5rem;
+}
+
 .btn{
     display:inline-flex;
     white-space: nowrap !important;
@@ -139,6 +145,57 @@ h1,h2,h3,h4,h5{
     box-shadow:none !important;
     justify-content:center;
     font-family:'Roboto', sans-serif;
+    background-color:transparent;
+    border:none;
+    font-weight:500;
+    color:#666;
+
+    &:hover{
+        background-color: rgba(0,0,0,0.05);
+        color:#444 !important;
+    }
+
+    &:active{
+        background-color: rgba(0,0,0,0.15);
+        color:#333 !important;
+    }
+
+    &:disabled{
+        background-color:rgba(0,0,0,0.15) !important;
+        color:#333 !important;
+    }
+
+    &-primary{
+        color:map-get($theme, "500") !important;
+
+        &:hover{
+            &:not(:disabled){
+                background-color:map-get($theme, "600") !important;
+                color:rgba(255,255,255,.8) !important;
+            }
+        }
+
+        &:active{
+            &:not(:disabled){
+                color:rgba(255,255,255,1) !important;
+                background-color:map-get($theme, "700") !important;
+            }
+        }
+    }
+
+    &-danger{
+        color:#F44336 !important;
+
+        &:hover{
+            color:rgba(255,255,255,.8) !important;
+            background-color:#E53935 !important;
+        }
+
+        &:active{
+            color:rgba(255,255,255,1) !important;
+            background-color:#D32F2F !important;
+        }
+    }
 
     span.mdi{
         width:1.5rem;
@@ -147,12 +204,9 @@ h1,h2,h3,h4,h5{
         justify-content:center;
         align-items:center;
         margin:0 !important;
-        margin-right:1rem !important;
+        margin-right:.5rem !important;
     }
-    
-    span.mdi:last-child{
-        margin-right:0 !important;
-    }
+
 
     &.fab{
         position:fixed;
@@ -236,4 +290,60 @@ a {
         text-decoration: none;
     }
 
+}
+
+div.wuiBanner{
+    padding:3rem 1rem;
+    margin-bottom: 1.5rem;
+    text-align:center;
+
+    h1{
+        padding:0;
+        margin:0;
+        text-align:center;
+        font-family:'Product Sans';
+    }
+}
+
+wui-list{
+    &.compact{
+        wui-list-item{
+            padding:0 1rem;
+            min-height:2.5rem;
+        }
+    }
+}
+
+.loading{
+    opacity:1;
+    
+    &-center{
+        position:absolute;
+        top:0;left:0;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    &-hide{
+        opacity:0;
+    }
+}
+
+wui-top-bar-item{
+    &.down{
+        color:white !important;
+
+        &:last-child{
+            margin-right:1.25rem;
+        }
+
+        &:after{
+            background-color: map-get($theme-colors, "primary") !important;
+            transform: scale(2) !important;
+            opacity:1 !important;
+        }
+    }
 }

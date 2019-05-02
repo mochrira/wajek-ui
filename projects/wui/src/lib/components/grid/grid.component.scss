@@ -22,7 +22,7 @@
             }
 
             &.selected{
-                background-color:#EFEFEF;
+                background-color:#F9F9F9;
             }
         }
 
@@ -36,6 +36,27 @@
             white-space: nowrap;
             min-width:0;
             font-size:.875rem;
+
+            &.no-grow{
+                width:1px;
+                white-space: nowrap;
+            }
+
+            &.selection{
+                padding:.5rem 0;
+                width:3.25rem;
+                text-align:center;
+            }
+
+            &.col-context{
+                width:3.5rem;
+                border-left:none;
+                padding:0 1rem;
+
+                span.mdi{
+                    cursor:pointer;
+                }
+            }
             
             i.material-icons{
                 line-height:1rem;

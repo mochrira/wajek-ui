@@ -11,7 +11,7 @@ export class FormFieldComponent implements AfterContentInit {
 
   @ContentChild(FormControlName) formControl: FormControlName;
   @ContentChild(NgModel) ngModel: NgModel;
-  private inputElement: any;
+  inputElement: any;
   type = '';
 
   @Input() label: String = '';
@@ -38,6 +38,16 @@ export class FormFieldComponent implements AfterContentInit {
       this.renderer2.addClass(this.el.nativeElement, 'has-content');
     } else {
       this.renderer2.removeClass(this.el.nativeElement, 'has-content');
+    }
+  }
+
+  getValue() {
+    if(this.formControl){
+      return this.formControl.control.value;
+    }else if(this.ngModel){
+      return this.ngModel.control.value;
+    }else {
+      return this.inputElement.value;
     }
   }
 

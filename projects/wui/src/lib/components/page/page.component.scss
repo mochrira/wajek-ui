@@ -9,16 +9,25 @@
     overflow-x:hidden;
     overflow-y:auto;
 
-    .content{
-        flex: 1 1 auto;
-        overflow-y:auto;
+    .outer{
         position:relative;
+        display:flex;
+        flex-direction:column;
+        flex: 1 1 auto;
+
+        .content{
+            flex: 1 1 auto;
+            overflow-y:auto;
+            position:relative;
+        }
     }
 
     &.flex-page{
-
-        .content{
-            display:flex;
+    
+        .outer{
+            .content{
+                display:flex;
+            }
         }
 
         &.middle-center{
@@ -30,6 +39,29 @@
 
         &.column{
             flex-direction: column;
+        }
+    }
+
+    &.modal-page{
+        &.sm{
+            position:fixed;
+            top:0;left:0;
+            width:100%;
+            height:100%;
+            background-color:rgba(0,0,0,0.5);
+            display:flex;
+            justify-content:flex-end;
+            flex-direction: row;
+            
+            .outer{
+                background-color:white;
+                width:80%;
+                max-width:24rem;
+
+                .content{
+                    flex: 1 1 auto;
+                }
+            }
         }
     }
 }

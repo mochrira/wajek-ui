@@ -9,6 +9,14 @@ export class ModalComponent implements OnInit {
 
   @Input() size: String = 'md';
   @Input() modalTitle: String = '';
+  _width = '';
+  _height = '';
+  @Input('width') set width(val) {
+    this._width = val + 'px';
+  }
+  @Input('height') set height(val) {
+    this._height = val + 'px'
+  }
   @HostBinding('class.show') show: Boolean = false;
 
   constructor() { }

@@ -2,10 +2,12 @@
   <wui-top-bar>
     <div class="wuiTitle">{{title}}</div>
   </wui-top-bar>
-  <div class="p-3">
-    {{message}}
-  </div>
-  <div class="px-3 pb-3 d-flex justify-content-end btn-group">
-    <button class="btn btn-{{button.class}}" *ngFor="let button of buttons" wuiRipple (wuiClick)="button.click($event)">{{button.caption}}</button>
+  <div class="px-4 pb-3">
+    <p>
+      {{message}}
+    </p>
+    <div class="d-flex justify-content-end btn-container">
+      <button class="btn btn-{{button.class}}" *ngFor="let button of buttons" wuiRipple (wuiClick)="button.click($event)">{{button.caption}}</button>
+    </div>
   </div>
 </wui-modal>
