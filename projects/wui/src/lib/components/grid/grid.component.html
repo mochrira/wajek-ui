@@ -12,8 +12,8 @@
         <wui-checkbox></wui-checkbox>
       </td>
       <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="col.width>0?col.width+'px':'auto'">
-        <ng-container>
-          <ng-template *ngIf="col.template" [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
+        <ng-container *ngIf="col.template" >
+          <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
         </ng-container>
         <ng-container *ngIf="!col.template">
           {{d[col.field]}}
@@ -24,6 +24,13 @@
       </td>
     </tr>
   </tbody>
+  <tfoot *ngIf="footerTemplate">
+    <tr>
+      <td colSpan="{{columns.length + (rowContextMenu?1:0) + (selection?1:0)}}">
+        <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+      </td>
+    </tr>
+  </tfoot>
 </table>
 
 <wui-loading mode="circular" *ngIf="showLoading"></wui-loading>

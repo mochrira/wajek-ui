@@ -8,7 +8,8 @@ import {
   ContentChildren,
   AfterViewInit,
   AfterContentChecked,
-  ElementRef
+  ElementRef,
+  ViewChild
 } from '@angular/core';
 import {
   MessageService
@@ -16,6 +17,7 @@ import {
 import {
   Subject
 } from 'rxjs';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-drawer-item',
@@ -40,7 +42,7 @@ export class DrawerItemComponent implements OnInit {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss']
 })
-export class DrawerComponent implements OnInit {
+export class DrawerComponent implements OnInit, AfterViewInit {
 
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
   @HostBinding('class.show') show: Boolean = false;
@@ -52,6 +54,8 @@ export class DrawerComponent implements OnInit {
       }
     }
   }
+
+  @ViewChild('inner') inner: any;
 
   constructor(
     private elementRef: ElementRef,
@@ -73,6 +77,13 @@ export class DrawerComponent implements OnInit {
   ngOnInit() {
     this.messageService.get('wui:toggleDrawer').subscribe(res => {
       this.toggle();
+    });
+  }
+
+  ngAfterViewInit() {
+    const container = this.inner.nativeElement;
+    const ps = new PerfectScrollbar(container, {
+      wheelSpeed: .5
     });
   }
 

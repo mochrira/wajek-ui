@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, HostListener, Output, AfterViewInit, ElementRef } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-grid-column',
@@ -25,9 +26,11 @@ export class GridColumnComponent implements OnInit {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(
+    private el: ElementRef
+  ) { }
 
   @Input() selection: boolean;
   @Input() rowContextMenu: ContextMenuComponent;
@@ -36,6 +39,7 @@ export class GridComponent implements OnInit {
   @Input() data: Array<any> = [];
   selectedRow = -1;
   @Input() toolbarTemplate: any;
+  @Input() footerTemplate: any;
 
   showLoading: Boolean = false;
   @Output() scrollEnd: EventEmitter<any> = new EventEmitter();
@@ -67,8 +71,15 @@ export class GridComponent implements OnInit {
     this.rowContextMenu.open(e.target.getBoundingClientRect());
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    const container = this.el.nativeElement;
+    const ps = new PerfectScrollbar(container, {
+      wheelSpeed: .5
+    });
+  }
 
+  ngOnInit() {
+    
   }
 
 }

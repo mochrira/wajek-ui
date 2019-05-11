@@ -1,0 +1,25 @@
+:host{
+    display:flex;
+    
+    /deep/ {
+        wui-tab-item{
+            flex: 0 1 auto;
+            padding:1rem;
+            font-weight: 500;
+            color: #777;
+
+            &:hover{
+                border-bottom:3px solid #CCC;
+                padding-bottom: calc(1rem - 3px) !important;
+                color: #333;
+                cursor:pointer;
+            }
+
+            &.active{
+                border-bottom:3px solid #8E24AA;
+                padding-bottom: calc(1rem - 3px) !important;
+                color: #333;
+            }
+        }
+    }
+}

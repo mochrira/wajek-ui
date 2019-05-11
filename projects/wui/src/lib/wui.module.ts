@@ -30,6 +30,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { HttpService } from './services/http.service';
 import { DatefieldDirective } from './directives/datefield.directive';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { TabComponent, TabItemComponent } from './components/tab/tab.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,9 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     StarComponent,
     RatingComponent,
     DatefieldDirective,
-    CheckboxComponent
+    CheckboxComponent,
+    TabComponent,
+    TabItemComponent
   ],
   imports: [
     CommonModule,
@@ -97,7 +100,9 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     StarComponent,
     RatingComponent,
     DatefieldDirective,
-    CheckboxComponent
+    CheckboxComponent,
+    TabComponent,
+    TabItemComponent
   ]
 })
 export class WuiModule {

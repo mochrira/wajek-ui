@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 
 @Component({
