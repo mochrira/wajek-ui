@@ -8,12 +8,14 @@
     z-index:3;
     overflow-x:hidden;
     overflow-y:auto;
+    background-color:#FFF;
 
     .outer{
         position:relative;
         display:flex;
         flex-direction:column;
         flex: 1 1 auto;
+        overflow:hidden;
 
         .content{
             flex: 1 1 auto;
@@ -31,14 +33,20 @@
         }
 
         &.middle-center{
-            .content{
-                align-items:center;
-                justify-content: center;
+            .outer{
+                .content{
+                    align-items:center;
+                    justify-content: center;
+                }
             }
         }
 
         &.column{
-            flex-direction: column;
+            .outer{
+                .content{
+                    flex-direction: column;
+                }
+            }
         }
     }
 

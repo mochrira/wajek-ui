@@ -9,7 +9,7 @@ import { MessageService } from '../../services/message.service';
 })
 export class DialogComponent implements OnInit {
 
-  @ViewChild('modal') modal: ModalComponent;
+  @ViewChild('modal', { static: true }) modal: ModalComponent;
   title = '';
   message = '';
   buttons = [];

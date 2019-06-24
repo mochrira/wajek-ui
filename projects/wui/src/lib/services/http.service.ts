@@ -21,7 +21,10 @@ export class HttpService {
           });
         }
       }
-      this.httpClient.get(url, options).subscribe(res => {
+      this.httpClient.get(url, options).subscribe((res:any) => {
+        if(res.next_token){
+          localStorage.setItem('token', res.next_token);
+        }
         resolve(res);
       }, rej => {
         reject(rej);
@@ -40,7 +43,10 @@ export class HttpService {
           });
         }
       }
-      this.httpClient.post(url, data, options).subscribe(res => {
+      this.httpClient.post(url, data, options).subscribe((res:any) => {
+        if(res.next_token){
+          localStorage.setItem('token', res.next_token);
+        }
         resolve(res);
       }, rej => {
         reject(rej);
@@ -59,7 +65,10 @@ export class HttpService {
           });
         }
       }
-      this.httpClient.patch(url, data, options).subscribe(res => {
+      this.httpClient.patch(url, data, options).subscribe((res:any) => {
+        if(res.next_token){
+          localStorage.setItem('token', res.next_token);
+        }
         resolve(res);
       }, rej => {
         reject(rej);
@@ -78,7 +87,10 @@ export class HttpService {
           });
         }
       }
-      this.httpClient.delete(url, options).subscribe(res => {
+      this.httpClient.delete(url, options).subscribe((res:any) => {
+        if(res.next_token){
+          localStorage.setItem('token', res.next_token);
+        }
         resolve(res);
       }, rej => {
         reject(rej);

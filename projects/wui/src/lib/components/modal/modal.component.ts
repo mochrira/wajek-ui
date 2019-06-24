@@ -15,7 +15,7 @@ export class ModalComponent implements OnInit {
     this._width = val + 'px';
   }
   @Input('height') set height(val) {
-    this._height = val + 'px'
+    this._height = val + 'px';
   }
   @HostBinding('class.show') show: Boolean = false;
 

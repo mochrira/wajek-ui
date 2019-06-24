@@ -1,3 +1,5 @@
+@import '../../../../../../scss/variables/colors.scss';
+
 :host{
     display:block;
 
@@ -18,7 +20,7 @@
                 content: '';
                 position: absolute;
                 height: 100%;
-                background-color: #03A9F4;
+                background-color: map-get($theme, "500");
                 animation: indeterminate_first 1.5s infinite ease-out;
             }
             
@@ -26,7 +28,7 @@
                 content: '';
                 position: absolute;
                 height: 100%;
-                background-color: #4FC3F7;
+                background-color: map-get($theme, "300");
                 animation: indeterminate_second 1.5s infinite ease-in;
             }
         }
@@ -58,7 +60,7 @@
         overflow: hidden;
         width: 100%;
         height: .25rem;
-        background-color: #B3E5FC;
+        background-color: map-get($theme, "50");
         display:block;
         position:relative;
 
@@ -72,7 +74,7 @@
                 display:block;
                 height:100%;
                 top:0;left:0;
-                background-color: #03A9F4;
+                background-color: map-get($theme, "500");
             }
         }
     }
@@ -105,7 +107,7 @@
           .path {
             stroke-dasharray: 1, 200;
             stroke-dashoffset: 0;
-            stroke: #03A9F4;
+            stroke: map-get($theme, "500");
             animation: dash 1.5s ease-in-out infinite;
             stroke-linecap: round;
           }

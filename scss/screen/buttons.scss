@@ -1,0 +1,123 @@
+@import "../variables/colors.scss";
+
+.btn{
+    display:inline-flex;
+    white-space: nowrap !important;
+    outline:none;
+    box-shadow:none !important;
+    justify-content:center;
+    font-family:'Roboto', sans-serif;
+    background-color:transparent;
+    border:none;
+    font-weight:500;
+    color:#666;
+
+    &-circle{
+        padding-left:.375rem !important;
+        padding-right:.375rem !important;
+        border-radius:50%;
+    }
+
+    &-down{
+        &.btn{
+            &-primary{
+                background-color:map-get($theme, "600");
+                color:rgba(255,255,255,0.8) !important;
+            }
+
+            &-default{
+                background-color:rgba(0,0,0,0.07);
+                color:#555;
+            }
+        }
+    }
+
+    &.fill{
+        background-color:rgba(0,0,0,0.035);
+    }
+
+    &:hover{
+        background-color: rgba(0,0,0,0.05);
+        color:#444 !important;
+        cursor:pointer;
+    }
+
+    &:active{
+        background-color: rgba(0,0,0,0.15);
+        color:#333 !important;
+    }
+
+    &:disabled{
+        background-color:rgba(0,0,0,0.15) !important;
+        color:#333 !important;
+    }
+
+    &-primary{
+        color:map-get($theme, "500") !important;
+
+        &:hover{
+            &:not(:disabled){
+                background-color:map-get($theme, "600") !important;
+                color:rgba(255,255,255,.8) !important;
+            }
+        }
+
+        &:active{
+            &:not(:disabled){
+                color:rgba(255,255,255,1) !important;
+                background-color:map-get($theme, "700") !important;
+            }
+        }
+    }
+
+    &-danger{
+        color:#F44336 !important;
+
+        &:hover{
+            color:rgba(255,255,255,.8) !important;
+            background-color:#E53935 !important;
+        }
+
+        &:active{
+            color:rgba(255,255,255,1) !important;
+            background-color:#D32F2F !important;
+        }
+    }
+
+    &-fill-primary{
+        background-color:map-get($theme, "500");
+        color:rgba(255,255,255,.8) !important;
+
+        &:hover{
+            background-color:map-get($theme, "600");
+            color:white !important;
+        }
+    }
+
+    span.mdi{
+        width:1.5rem;
+        height:1.5rem;
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 !important;
+        margin-right:.5rem !important;
+
+        &:last-child{
+            margin-right: 0 !important;
+        }
+    }
+
+
+    &.fab{
+        position:fixed;
+        bottom:1rem;
+        right:1rem;
+        display:inline-flex;
+        padding:1rem;
+        justify-content:center;
+        align-items:center;
+        z-index:3;
+        border-radius:50%;
+    }
+}

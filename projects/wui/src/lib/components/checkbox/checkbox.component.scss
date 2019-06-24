@@ -4,7 +4,17 @@
     white-space: nowrap;
     cursor:pointer;
 
-    svg{
-        margin-right:.5rem;
+    &.disabled{
+        opacity:.5;
+    }
+
+    .mdi{
+        color: #999;
+    }
+
+    &.checked{
+        .mdi{
+            color: #9C27B0;
+        }
     }
 }

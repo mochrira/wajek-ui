@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewContainerRef, ViewChild } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { MessageService } from '../../services/message.service';
 export class AppComponent implements OnInit {
 
   showLoading = false;
+  @ViewChild('reportContainer', { static: true }) reportContainer: any;
 
   constructor(
     private messageService: MessageService,
@@ -19,6 +20,13 @@ export class AppComponent implements OnInit {
     this.messageService.get('wui:loading').subscribe(showLoading => {
       this.showLoading = showLoading;
       this.cd.detectChanges();
+    });
+    this.messageService.get('wui:report').subscribe(reportContent => {
+      if(typeof reportContent == 'string' && reportContent=='close'){
+        this.reportContainer.nativeElement.innerHTML = '';
+      }else{
+        this.reportContainer.nativeElement.innerHTML = reportContent.nativeElement.innerHTML;
+      }
     });
   }
 

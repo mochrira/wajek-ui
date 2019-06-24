@@ -45,17 +45,20 @@ export class DrawerItemComponent implements OnInit {
 export class DrawerComponent implements OnInit, AfterViewInit {
 
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
-  @HostBinding('class.show') show: Boolean = false;
+  @Input() @HostBinding('class.expand') expand: Boolean = false;
+  @Input() autoCollapse = true;
 
   @HostListener('click', ['$event']) onClick(e) {
-    if(e.path.findIndex(p => p.tagName==="WUI-DRAWER-ITEM") > -1){
-      if(this.elementRef.nativeElement.contains(e.target)){
-        this.close();
+    if(this.autoCollapse){
+      if(e.path.findIndex(p => p.tagName==="WUI-DRAWER-ITEM") > -1){
+        if(this.elementRef.nativeElement.contains(e.target)){
+          this.close();
+        }
       }
     }
   }
 
-  @ViewChild('inner') inner: any;
+  @ViewChild('inner', { static: true }) inner: any;
 
   constructor(
     private elementRef: ElementRef,
@@ -63,15 +66,15 @@ export class DrawerComponent implements OnInit, AfterViewInit {
   ) {}
 
   toggle() {
-    this.show = !this.show;
+    this.expand = !this.expand;
   }
 
   open() {
-    this.show = true;
+    this.expand = true;
   }
 
   close() {
-    this.show = false;
+    this.expand = false;
   }
 
   ngOnInit() {

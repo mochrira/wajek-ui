@@ -1,0 +1,9 @@
+<div class="outer" *ngIf="show">
+  <ng-content select="wui-top-bar"></ng-content>
+
+  <div class="inner" #reportInner>
+    <div id="wuiReport" #reportContent [style.width.mm]="pageSizeCollection[pageSize][0]">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

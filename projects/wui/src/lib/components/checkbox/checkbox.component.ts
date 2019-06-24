@@ -1,20 +1,35 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, OnInit, HostListener, HostBinding, Output, EventEmitter, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'wui-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+  styleUrls: ['./checkbox.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CheckboxComponent),
+    multi: true
+  }]
 })
 export class CheckboxComponent implements OnInit, ControlValueAccessor {
 
-  value = false;
+  @Input() @HostBinding('class.checked') value = false;
+  @Input() @HostBinding('class.disabled') disabled = false;
   propagateChange = (_:any) => {};
 
   @HostListener('click', ['$event']) toggle(e) {
-    this.value = !this.value;
-    this.propagateChange(this.value);
+    if(!this.disabled){
+      let oldValue = this.value;
+      this.value = !this.value;
+      this.propagateChange(this.value);
+      this.change.emit({
+        oldValue: oldValue,
+        newValue: this.value
+      });
+    }
   }
+
+  @Output() change: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -22,7 +37,6 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
     if(value !== undefined){
       this.value = value;
     }
-    console.log(value);
   }
 
   registerOnChange(fn: any) {

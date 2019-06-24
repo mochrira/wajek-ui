@@ -1,33 +1,13 @@
+@import '../../../../../../scss/variables/colors.scss';
+
 :host{
     width:100%;
     display:flex;
     position:relative;
-    /* height:3.5rem; */
     margin-bottom:1.325rem;
-
-    &.transparent{
-        background-color:transparent !important;
-        label{
-            left:0 !important;
-        }
-
-        /deep/ {
-            input, select, textarea {
-                padding-left:0 !important;
-                padding-right:0 !important;
-
-                ~ div.error{
-                    left:0 !important;
-                }
-
-                ~ div.prefix{
-                    padding-left: 0 !important;
-                    padding-right:1rem !important;
-                }
-            }
-            
-        }
-    }
+    background-color:#F7F7F7;
+    border-top-left-radius:.25rem;
+    border-top-right-radius:.25rem;
 
     &.no-margin{
         margin:0 !important;
@@ -42,8 +22,8 @@
     &.datefield{
         position:relative;
 
-        /deep/ {
-            span.mdi.mdi-calendar-range{
+        >>> {
+            span.mdi.mdi-calendar-range-outline{
                 position:absolute;
                 right:.75rem;
                 top:.75rem;
@@ -101,7 +81,7 @@
         fill:#555;
     }
 
-    /deep/ {
+    >>> {
         input, select, textarea{
             flex: 1 1 auto;
             -webkit-appearance: none;
@@ -112,7 +92,7 @@
             height:100%;
             outline:none;
             font-family:'Roboto', sans-serif;
-            padding:1.75rem 1rem .5rem;
+            padding:1.75rem 1rem .5rem 0rem;
             background:transparent; 
             position:relative;
             z-index:1;
@@ -126,13 +106,7 @@
                 right:1rem;
                 top:1rem;
             }
-        }
 
-        span.mdi ~ label{
-            left:3rem;
-        }
-
-        input, select, textarea{
             ~ div.border {
                 background-color:#DDD;
 
@@ -161,33 +135,41 @@
                 opacity: 0;
                 order: 2;
             }
-        }
 
-        input.ng-invalid, select.ng-invalid, textarea.ng-invalid{
-            &.ng-touched{
-                ~ div.border{
-                    background-color:#C62828;
-
-                    &:after{
+            &.ng-invalid{
+                &.ng-touched{
+                    ~ div.border{
                         background-color:#C62828;
+    
+                        &:after{
+                            background-color:#C62828;
+                        }
+                    }
+    
+                    ~ div.error{
+                        display:block;
+                    }
+    
+                    ~ label {
+                        color: #C62828;
+                    }
+    
+                    ~ .mdi {
+                        color: #C62828;
                     }
                 }
+            }
 
-                ~ div.error{
-                    display:block;
-                }
-
-                ~ label {
-                    color: #C62828;
-                }
-
-                ~ .mdi {
-                    color: #C62828;
+            &:not(.ng-invalid):not(.ng-pristine), &.ng-untouched, &.ng-valid {
+                &:focus {
+                    ~ .border{
+                        &:after{
+                            background-color:map-get($theme, "500") !important;
+                        }
+                    }
                 }
             }
-        }
 
-        input, select, textarea{
             &:disabled{
                 opacity:.5 !important;
 
@@ -196,10 +178,43 @@
                 }
             } 
         }
+
+        span.mdi ~ label{
+            left:3rem;
+        }
+    }
+
+    &.transparent{
+        background-color:transparent !important;
+
+        label{
+            left: 0;
+        }
+
+        >>> {
+            input, select, textarea {
+                padding-left:0 !important;
+                padding-right:0 !important;
+
+                ~ div.error{
+                    left:0 !important;
+                }
+
+                ~ div.prefix{
+                    padding-left: 0 !important;
+                    padding-right:1rem !important;
+                }
+            }
+            
+        }
     }
 
     &.with-icon{
-        padding-left: 2rem;
+        padding-left: 3rem;
+
+        label{
+            left: 3rem;
+        }
     }
 
     &.has-content{
@@ -208,7 +223,7 @@
             top:.625rem;
         }
 
-        /deep/ {
+        >>> {
             input, select, textarea{
                 opacity:1;
 
@@ -220,6 +235,7 @@
     }
 
     &:focus-within{
+        background-color:#F2F2F2;
 
         .border{
             &:after{
@@ -228,12 +244,16 @@
             }
         }
 
+        span.mdi, label{
+            color:map-get($theme, "500");
+        }
+
         label{
             font-size:.75rem;
             top:.625rem;
         }
 
-        /deep/ {
+        >>> {
             input, select, textarea{
                 opacity:1 !important;
 
@@ -245,7 +265,7 @@
     }
 
     &.no-label{
-        /deep/ {
+        >>> {
             input, select, textarea{
                 padding-top:.5rem !important;
                 opacity:1;

@@ -17,7 +17,12 @@ export class DatepickerComponent implements OnDestroy {
   @HostBinding('class.show') show = false;
   @Output() wuiDateSet: EventEmitter<any> = new EventEmitter();
   @Output() wuiDateSelect: EventEmitter<any> = new EventEmitter();
-  @ViewChild('inner') inner: ElementRef;
+  @ViewChild('inner', { static: true }) inner: ElementRef;
+  @Input() yearSelector = true;
+  @Input() timeSelector = true;
+
+  @Input() datePreviewFormat = 'DD MMM YYYY';
+  @Input() dayPreview = true;
 
   date = new Date();
   month = this.date.getMonth();
@@ -49,6 +54,10 @@ export class DatepickerComponent implements OnDestroy {
     if (!this.inner.nativeElement.contains(e.target)) {
       this.close();
     }
+  }
+
+  momentFormat(d, f) {
+    return moment(d).format(f);
   }
 
   incTime(mode) {

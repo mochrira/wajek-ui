@@ -31,6 +31,8 @@ import { HttpService } from './services/http.service';
 import { DatefieldDirective } from './directives/datefield.directive';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { TabComponent, TabItemComponent } from './components/tab/tab.component';
+import { ReportComponent } from './components/report/report.component';
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -66,11 +68,13 @@ import { TabComponent, TabItemComponent } from './components/tab/tab.component';
     DatefieldDirective,
     CheckboxComponent,
     TabComponent,
-    TabItemComponent
+    TabItemComponent,
+    ReportComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DndModule.forRoot()
   ],
   exports: [
     WuiComponent,
@@ -102,7 +106,8 @@ import { TabComponent, TabItemComponent } from './components/tab/tab.component';
     DatefieldDirective,
     CheckboxComponent,
     TabComponent,
-    TabItemComponent
+    TabItemComponent,
+    ReportComponent
   ]
 })
 export class WuiModule {

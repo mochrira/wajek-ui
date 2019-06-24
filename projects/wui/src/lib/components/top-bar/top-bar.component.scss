@@ -1,3 +1,5 @@
+@import "../../../../../../scss/variables/colors.scss";
+
 :host{
     height:3.75rem;
     width:100%;
@@ -12,7 +14,7 @@
     border-bottom:1px solid #EFEFEF;
     overflow:hidden;
 
-    /deep/ {
+    >>> {
         .navIcon{
             display:inline-flex;
             margin-right:2rem;
@@ -26,6 +28,15 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow:hidden;
+        }
+
+        wui-tab{
+            height:calc(3.75rem - 1px);
+
+            wui-tab-item{
+                display:inline-flex;
+                align-items:center;
+            }
         }
     
         wui-top-bar-item{
@@ -66,6 +77,20 @@
 
             &:first-child, &:last-child{
                 margin-left:1rem !important;
+            }
+
+            &.down{
+                color:white !important;
+        
+                &:last-child{
+                    margin-right:1.25rem;
+                }
+        
+                &:after{
+                    background-color: map-get($theme, "500") !important;
+                    transform: scale(2) !important;
+                    opacity:1 !important;
+                }
             }
             
         }
@@ -111,7 +136,7 @@
 
     :host{
 
-        /deep/ {
+        >>> {
             wui-top-bar-item:not([caption]){
                 &:after{
                     background-color:rgba(0,0,0,.12);

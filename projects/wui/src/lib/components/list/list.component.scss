@@ -1,7 +1,21 @@
 :host{
     display:block;
 
-    /deep/ {
+    &.compact{
+        >>> {
+            wui-list-item{
+                padding:0 1rem;
+                min-height:2.5rem;
+            }
+        }
+    }
+
+    >>> {
+        div.wui-list-subheader {
+            padding:2rem 1rem 1rem;
+            color:#777;
+        }
+
         wui-list-item{
             min-height:3rem;
             padding:1rem;
@@ -61,7 +75,7 @@
     }
 
     &.thin{
-        /deep/ {
+        >>> {
             wui-list-item{
                 padding:.75rem 1rem;
             }

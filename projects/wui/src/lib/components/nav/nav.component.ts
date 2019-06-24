@@ -12,7 +12,7 @@ import { NavService } from '../../services/nav.service';
 })
 export class NavComponent implements OnInit, OnDestroy {
 
-  @ViewChild('navHost', {read: ViewContainerRef}) viewContainer: ViewContainerRef;
+  @ViewChild('navHost', { read: ViewContainerRef, static: true }) viewContainer: ViewContainerRef;
   private unsub: Subject<any> = new Subject();
 
   constructor(

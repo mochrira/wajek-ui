@@ -7,8 +7,8 @@ import { Component, OnInit, ElementRef, ViewChild, Renderer2, Input } from '@ang
 })
 export class StarComponent implements OnInit {
 
-  @ViewChild('gradient') gradient: ElementRef;
-  @ViewChild('polygon') polygon: ElementRef;
+  @ViewChild('gradient', { static: true }) gradient: ElementRef;
+  @ViewChild('polygon', { static: true }) polygon: ElementRef;
   @Input('value') set setValue(val){
     this._value = val;
     this.refresh();

@@ -1,6 +1,4 @@
-<div class="outer">
-  <div class="backdrop" (click)="close()"></div>
-  <div class="inner" #inner>
-      <ng-content></ng-content>
-  </div>
+<div class="inner" #inner>
+    <ng-content></ng-content>
 </div>
+<div class="backdrop" (click)="close()"></div>

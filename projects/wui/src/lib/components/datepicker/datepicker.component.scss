@@ -45,7 +45,6 @@
     .dates, .months, .years{
         display:grid;
         grid-template-columns: repeat(7, 1fr);
-        margin-top:1rem;
 
         .days{
             font-size:.75rem;
@@ -95,12 +94,6 @@
                 border-radius:50%;
             }
 
-            &:hover, &.selected{
-                &:after{
-                    background-color:#EFEFEF;
-                }
-            }
-
             span {
                 position:absolute;
                 top:50%;
@@ -117,20 +110,12 @@
 
     .currentDate {
         padding:1rem;
-        border-bottom:1px solid #EFEFEF;
-        background-color:#EFEFEF;
         display: flex;
+        align-items:center;
 
         > div {
             flex: 1 1 auto;
             padding-left:.5rem;
-        }
-
-        > a {
-            flex: 0 1 auto;
-            display:flex;
-            justify-content:center;
-            align-items:center;
         }
 
         .day{
@@ -144,12 +129,18 @@
 
     .time-selector{
         text-align: center;
-        input{
+        input[type=number]{
+            &::-webkit-inner-spin-button, 
+            &::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
             font-size: 1.25rem;
             border:none;
             background:none;
             margin-top:1rem;
             margin-bottom:1rem;
+
         }
 
         .mdi{

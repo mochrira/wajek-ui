@@ -1,12 +1,12 @@
 :host{
     display:flex;
     
-    /deep/ {
+    >>> {
         wui-tab-item{
             flex: 0 1 auto;
             padding:1rem;
             font-weight: 500;
-            color: #777;
+            color: #AAA;
 
             &:hover{
                 border-bottom:3px solid #CCC;

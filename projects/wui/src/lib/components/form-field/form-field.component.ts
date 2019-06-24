@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, Renderer, Renderer2,
-  ContentChild, AfterContentInit, HostBinding } from '@angular/core';
+  ContentChild, AfterContentInit, HostBinding, AfterContentChecked } from '@angular/core';
 import { FormControlName, NgModel } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,10 @@ import { FormControlName, NgModel } from '@angular/forms';
   templateUrl: './form-field.component.html',
   styleUrls: ['./form-field.component.scss']
 })
-export class FormFieldComponent implements AfterContentInit {
+export class FormFieldComponent implements AfterContentInit, AfterContentChecked {
 
-  @ContentChild(FormControlName) formControl: FormControlName;
-  @ContentChild(NgModel) ngModel: NgModel;
+  @ContentChild(FormControlName, {static: true}) formControl: FormControlName;
+  @ContentChild(NgModel, {static: true}) ngModel: NgModel;
   inputElement: any;
   type = '';
 
@@ -33,8 +33,8 @@ export class FormFieldComponent implements AfterContentInit {
     private renderer2: Renderer2
   ) {}
 
-  detectFloat(val) {
-    if ((val !== '') && (val !== null)) {
+  detectFloat() {
+    if ((this.getValue() !== '') && (this.getValue() !== null)) {
       this.renderer2.addClass(this.el.nativeElement, 'has-content');
     } else {
       this.renderer2.removeClass(this.el.nativeElement, 'has-content');
@@ -51,27 +51,33 @@ export class FormFieldComponent implements AfterContentInit {
     }
   }
 
+  ngAfterContentChecked() {
+    if(this.inputElement){
+      this.detectFloat();
+    }
+  }
+
   ngAfterContentInit() {
     this.inputElement = this.el.nativeElement.querySelector('input, select, textarea');
     this.type = this.inputElement.tagName.toLowerCase();
     if (this.formControl) {
-      this.detectFloat(this.formControl.value);
+      this.detectFloat();
       this.formControl.valueChanges.subscribe(val => {
-        this.detectFloat(val);
+        this.detectFloat();
       });
     } else if (this.ngModel) {
-      this.detectFloat(this.ngModel.value);
+      this.detectFloat();
       this.ngModel.valueChanges.subscribe(val => {
-        this.detectFloat(val);
+        this.detectFloat();
       });
     }else {
       this.renderer.listen(this.inputElement, 'keyup', (e) => {
-        this.detectFloat(e.target.value);
+        this.detectFloat();
       });
       this.renderer.listen(this.inputElement, 'change', (e) => {
-        this.detectFloat(e.target.value);
+        this.detectFloat();
       });
-      this.detectFloat(this.inputElement.value);
+      this.detectFloat();
     }
   }
 

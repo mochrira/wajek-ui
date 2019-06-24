@@ -39,13 +39,13 @@
         background-color:white;
         opacity:0;
         transition:opacity ease .2s;
-    
-        &-md{
-            max-width:24rem;
-        }
 
         &-sm{
             max-width:16rem;
+        }
+
+        &-md{
+            max-width:24rem;
         }
 
         &-lg{
@@ -92,6 +92,16 @@
             .inner{
                 .content{
                     display:flex;
+                }
+            }
+        }
+
+        &.column{
+            .outer{
+                .inner{
+                    .content{
+                        flex-direction: column;
+                    }
                 }
             }
         }
