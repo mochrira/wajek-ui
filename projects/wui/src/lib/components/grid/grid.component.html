@@ -1,42 +1,36 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="getWidth(col)">
+        {{col.label}}
+      </th>
+      <th *ngIf="rowContextMenu" class="col-context"></th>
+    </tr>
+  </thead>
+</table>
 <div class="table-container" #tableContainer>
   <table>
-    <thead #tableHeader>
-      <tr>
-        <th *ngIf="_enableOrder" class="selection"></th>
-        <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="col.width>0?col.width+'px':'auto'">{{col.label}}</th>
-        <th *ngIf="rowContextMenu" class="col-context"></th>
+    <tbody #tableBody>
+      <tr *ngFor="let d of data; let i=index" (click)="selectRow(i);" class="{{i==selectedRow?'selected':''}}" (dblclick)="rowDblClick.emit(d)">
+        <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="(i>0?'auto':getWidth(col))">
+          <ng-container *ngIf="col.template" >
+            <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
+          </ng-container>
+          <ng-container *ngIf="!col.template">
+            {{d[col.field]}}
+          </ng-container>
+        </td>
+        <td *ngIf="rowContextMenu" class="col-context">
+          <span class="mdi mdi-dots-horizontal" (click)="contextMenuClick($event)"></span>
+        </td>
       </tr>
-    </thead>
-    <tbody dnd-sortable-container [sortableData]="tmpOrderData">
-        <tr *ngFor="let d of (_enableOrder?tmpOrderData:data); let i=index" dnd-sortable  [sortableIndex]="i" [dragEnabled]="_enableOrder" (click)="selectRow(i);" class="{{i==selectedRow?'selected':''}}" (dblclick)="rowDblClick.emit(d)">
-          <td *ngIf="_enableOrder" class="selection text-center">
-            <span class="mdi mdi-drag-horizontal" dnd-sortable-handle></span>
-          </td>
-          <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="col.width>0?col.width+'px':'auto'">
-            <ng-container *ngIf="col.template" >
-              <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
-            </ng-container>
-            <ng-container *ngIf="!col.template">
-              {{d[col.field]}}
-            </ng-container>
-          </td>
-          <td *ngIf="rowContextMenu" class="col-context">
-            <span class="mdi mdi-dots-horizontal" (click)="contextMenuClick($event)"></span>
-          </td>
-        </tr>
     </tbody>
   </table>
   <wui-loading mode="circular" *ngIf="showLoading"></wui-loading>
-</div>
-
-<div *ngIf="hasFooter()" class="footer" #footer>
-  <table>
-    <tr>
-      <td *ngFor="let col of columns; let i = index" class="text-{{col.align}}" [style.width.px]="getFooterColumnWidth(i)">
-        <div *ngIf="col.footerTemplate">
-          <ng-container [ngTemplateOutlet]="col.footerTemplate"></ng-container>
-        </div>
-      </td>
-    </tr>
-  </table>
+  <div class="empty" *ngIf="!showLoading && data.length==0">
+    <span>
+      <span class="mdi mdi-grid-off"></span>
+      No Data
+    </span>
+  </div>
 </div>

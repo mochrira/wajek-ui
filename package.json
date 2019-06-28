@@ -24,7 +24,6 @@
     "core-js": "^2.5.4",
     "firebase": "^5.8.2",
     "is-webview": "^1.0.1",
-    "moment": "^2.24.0",
     "ng2-dnd": "^5.0.2",
     "perfect-scrollbar": "^1.4.0",
     "roboto-fontface": "^0.10.0",

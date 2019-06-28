@@ -5,7 +5,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { MessageService } from '../lib/services/message.service';
 import { FormFieldComponent } from './components/form-field/form-field.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AppComponent } from './components/app/app.component';
 import { TopBarComponent, TopBarItemComponent } from './components/top-bar/top-bar.component';
 import { PageComponent } from './components/page/page.component';
@@ -107,7 +107,11 @@ import { DndModule } from 'ng2-dnd';
     CheckboxComponent,
     TabComponent,
     TabItemComponent,
-    ReportComponent
+    ReportComponent,
+    DndModule
+  ], 
+  providers: [
+    DatePipe
   ]
 })
 export class WuiModule {

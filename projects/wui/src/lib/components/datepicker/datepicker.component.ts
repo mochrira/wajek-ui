@@ -1,10 +1,8 @@
 import { Component, HostBinding, ElementRef, Renderer2,
-  Input, Output, EventEmitter, ViewChild, HostListener, OnDestroy } from '@angular/core';
-import * as moment_import from 'moment';
+  Input, Output, EventEmitter, ViewChild, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-const moment = moment_import;
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'wui-datepicker',
@@ -21,7 +19,7 @@ export class DatepickerComponent implements OnDestroy {
   @Input() yearSelector = true;
   @Input() timeSelector = true;
 
-  @Input() datePreviewFormat = 'DD MMM YYYY';
+  @Input() datePreviewFormat = 'dd MMM yyyy';
   @Input() dayPreview = true;
 
   date = new Date();
@@ -43,8 +41,8 @@ export class DatepickerComponent implements OnDestroy {
   private unsub: Subject<any> = new Subject();
 
   constructor(
-    private el: ElementRef,
-    private renderer: Renderer2
+    private datePipe: DatePipe,
+    private cd: ChangeDetectorRef
   ) {
     this.generateYears();
     this.generateDates();
@@ -54,10 +52,6 @@ export class DatepickerComponent implements OnDestroy {
     if (!this.inner.nativeElement.contains(e.target)) {
       this.close();
     }
-  }
-
-  momentFormat(d, f) {
-    return moment(d).format(f);
   }
 
   incTime(mode) {
@@ -106,15 +100,15 @@ export class DatepickerComponent implements OnDestroy {
 
   isSelected(v) {
     if (this.mode === 'date') {
-      if (moment(this.date).format('YYYYMMDD') === moment(v).format('YYYYMMDD')) {
+      if (this.datePipe.transform(this.date, 'yyyyMMdd') === this.datePipe.transform(v, 'yyyyMMdd')) {
         return true;
       }
     } else if (this.mode === 'month') {
-      if (moment(this.date).format('YYYYMM') === moment([this.year, v, 1]).format('YYYYMM')) {
+      if (this.datePipe.transform(this.date, 'yyyyMM') === this.datePipe.transform(new Date(this.year, v, 1), 'yyyyMM')) {
         return true;
       }
     } else if (this.mode === 'year') {
-      if (moment(this.date).format('YYYY') === moment([v, 0, 1]).format('YYYY')) {
+      if (this.datePipe.transform(this.date, 'yyyy') === this.datePipe.transform(new Date(v, 0, 1),'yyyy')) {
         return true;
       }
     }
@@ -123,9 +117,20 @@ export class DatepickerComponent implements OnDestroy {
   open(date?): Promise<any> {
     return new Promise((resolve, reject) => {
       if(date){
-        this.date = moment(date).toDate();
+        if(typeof date == 'string'){
+          this.date = new Date(date);
+        }else{
+          if(this.timeSelector){
+            this.date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())
+          }else{
+            this.date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+          }
+        }
         this.year = this.date.getFullYear();
         this.month = this.date.getMonth();
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+        this.second = this.date.getSeconds();
       }
       this.show = true;
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
@@ -155,16 +160,14 @@ export class DatepickerComponent implements OnDestroy {
         this.generateDates();
       } else if (mode === 'year') {
         this.generateYears();
-      } else if (mode === 'time') {
-        this.hour = this.date.getHours();
-        this.minute = this.date.getMinutes();
-        this.second = this.date.getSeconds();
       }
     }, 200);
   }
 
   setTime() {
-    this.date = moment(this.date).hour(this.hour).minute(this.minute).second(this.second).toDate();
+    this.date = new Date(
+      this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), this.hour, this.minute, this.second
+    )
     this.changeMode('date');
   }
 
@@ -183,27 +186,35 @@ export class DatepickerComponent implements OnDestroy {
   }
 
   generateDates() {
-    const firstDate = moment([this.year, this.month, 1]).startOf('month').toDate();
-    const lastDate = moment(firstDate).endOf('month').toDate();
-    const currentMonthDates = Array(lastDate.getDate()).fill(0).map((x, i) => moment(firstDate).add(i, 'days').toDate());
+    const firstDate = new Date(this.year, this.month, 1);
+    const lastDate = new Date((this.month<11?this.year:this.year+1), (this.month<11?this.month+1:0), 0);
+    const currentMonthDates = Array(lastDate.getDate()).fill(0).map((x, i) => { 
+      return new Date(this.year, this.month, i+1);
+    });
 
     const prevMonthCount = 7 - (7 - firstDate.getDay());
-    const lastDatePrevMonth = moment(firstDate).subtract(1, 'months').endOf('month').toDate();
-    const prevMonthDates = Array(prevMonthCount).fill(0).map((x, i) =>
-      moment(lastDatePrevMonth).subtract((prevMonthCount - 1) - i, 'days').toDate()
-    );
+    const lastDatePrevMonth = new Date((this.month>-1?this.year:this.year-1), (this.month>-1?this.month:11), 0);
+    const prevMonthDates = Array(prevMonthCount).fill(0).map((x, i) => {
+      return new Date(lastDatePrevMonth.getFullYear(), lastDatePrevMonth.getMonth(), lastDatePrevMonth.getDate() - ((prevMonthCount-1) - i));
+    });
 
     const nextMonthCount = 7 - lastDate.getDay();
-    const firstDateNextMonth = moment(lastDate).add(1, 'months').startOf('month').toDate();
-    const nextMonthDates = Array(nextMonthCount - 1).fill(0).map((x, i) => moment(firstDateNextMonth).add(i, 'days').toDate());
+    const firstDateNextMonth = new Date((this.month<11?this.year:this.year+1), (this.month<11?this.month+1:0), 1);
+    const nextMonthDates = Array(nextMonthCount - 1).fill(0).map((x, i) => {
+      return new Date(firstDateNextMonth.getFullYear(), firstDateNextMonth.getMonth(), firstDateNextMonth.getDate() + i)
+    });
 
     this.dates = [];
     this.dates = this.dates.concat(prevMonthDates.concat(currentMonthDates).concat(nextMonthDates));
   }
 
   selectDate(d) {
-    this.date = moment(d).hour(this.hour).minute(this.minute).second(this.second).toDate();
-    this.wuiDateSelect.next(moment(this.date).format(this.outputFormat));
+    if(this.timeSelector){
+      this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.hour, this.minute, this.second);
+    }else{
+      this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+    }
+    this.wuiDateSelect.next(this.date);
   }
 
   selectMonth(m) {
@@ -272,7 +283,7 @@ export class DatepickerComponent implements OnDestroy {
   }
 
   submit() {
-    this.wuiDateSet.next(moment(this.date).format(this.outputFormat));
+    this.wuiDateSet.next(this.datePipe.transform(this.date, this.outputFormat));
   }
 
   ngOnDestroy() {

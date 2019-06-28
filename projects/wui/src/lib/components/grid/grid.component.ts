@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, HostListener, Output, ElementRef, OnChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import PerfectScrollbar from 'perfect-scrollbar';
 
@@ -14,6 +14,8 @@ export class GridColumnComponent implements OnInit {
   @Input() align = 'left';
   @Input() width = 0;
   @Input() customClass = '';
+  percentageWidth = 0;
+  actualWidth = 'auto';
 
   @Input() footerTemplate: any;
   @Input() footerColSpan = 1;
@@ -29,47 +31,31 @@ export class GridColumnComponent implements OnInit {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit, OnChanges {
+export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
 
-  ps:any;
-
+  ps:PerfectScrollbar;
   selectedRow = -1;
   showLoading: Boolean = false;
 
-  @HostListener('window:resize', ['$event']) updateView(e) {
+  @HostListener('window:resize', ['$event']) onWindowResize(e) {
     this.cd.detectChanges();
   }
 
+  @ViewChild('tableBody', {static: true}) tableBody: any;
   @ViewChild('tableContainer', { static: true }) tableContainer: any;
-  @ViewChild('tableHeader', { static: true }) tableHeader: any;
+  @ContentChildren(GridColumnComponent) columns: QueryList<GridColumnComponent>;
 
-  @Input() checkboxes: boolean;
   @Input() rowContextMenu: ContextMenuComponent;
-  @Input() headerTitle = '';
-  @Input() actionItems: Array<any> = [];
   @Input() data: Array<any> = [];
-  @Input() toolbarTemplate: any;
-  @Input() footerTemplate: any;
-  @Input('enableOrder') set setEnableOrder(val) {
-    this.tmpOrderData = [...this.data];
-    this._enableOrder = val;
-  }
-  _enableOrder = false;
-  tmpOrderData = [];
 
   @Output() scrollEnd: EventEmitter<any> = new EventEmitter();
   @Output() rowDblClick: EventEmitter<any> = new EventEmitter();
-  
-  @ContentChildren(GridColumnComponent) columns: Array<GridColumnComponent> = [];
+
+  @HostBinding('class.ready') ready = false;
 
   constructor(
-    private el: ElementRef,
     private cd: ChangeDetectorRef
   ) { }
-
-  getOrderedData() {
-    return this.tmpOrderData;
-  }
 
   openLoading() {
     this.showLoading = true;
@@ -93,20 +79,6 @@ export class GridComponent implements OnInit, OnChanges {
     this.rowContextMenu.open(e.target.getBoundingClientRect());
   }
 
-  getFooterColumnWidth(index) {
-    if(this.tableHeader){
-      let row = this.tableHeader.nativeElement.getElementsByTagName('tr')[0];
-      if(row){
-        let cols = row.getElementsByTagName('th');
-        return cols[index].offsetWidth;
-      }else{
-        return 0;
-      }
-    }else{
-      return 0;
-    }
-  }
-
   hasFooter() {
     let footerColumns = this.columns.filter(col => (col.footerTemplate?true:false));
     if(footerColumns.length > 0){
@@ -123,11 +95,86 @@ export class GridComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.ps = new PerfectScrollbar(this.tableContainer.nativeElement, {
-      wheelSpeed: .5
+      wheelSpeed: 1
     });
     this.tableContainer.nativeElement.addEventListener('ps-y-reach-end', () => {
       this.scrollEnd.emit();
     });
+  }
+
+  getWidth(col) {
+    if(this.ready){
+      if(this.data.length==0){
+        return (col.width>0?col.width + 'px':'auto');
+      }
+      const tableWidth = this.tableBody.nativeElement.offsetWidth;
+      if(col.percentageWidth > 0){
+        let actualWidth = col.percentageWidth/100*tableWidth;
+        if(col.width>0){
+          if(actualWidth>col.width){
+            return col.width + 'px';
+          }else{
+            return col.percentageWidth + '%';
+          }
+        }else{
+          return 'auto';
+        }
+      }else{
+        return 'auto';
+      }
+    }else{
+      return (col.width>0?col.width + 'px':'auto');
+    }
+  }
+
+  getMaxWidth(col) {
+    const tableWidth = this.tableBody.nativeElement.offsetWidth;
+    if(col.percentageWidth > 0){
+      let actualWidth = col.percentageWidth/100*tableWidth;
+      if(col.width>0){
+        if(actualWidth>col.width){
+          return col.width + 'px';
+        }else{
+          return col.percentageWidth + '%';
+        }
+      }else{
+        return 'auto';
+      }
+    }else{
+      if(col.width>0){
+        return col.width;
+      }else{
+        return 'auto';
+      }
+    }
+  }
+
+  ngAfterViewChecked() {
+    const cols = this.columns.toArray();
+    if(cols.findIndex(c => c.percentageWidth == 0) > -1){
+      setTimeout(() => {
+        const rows = this.tableBody.nativeElement.querySelectorAll('tr')[0];
+        const tableWidth = this.tableBody.nativeElement.offsetWidth;
+        if(rows){
+          Array.from(rows.children).map((el:any,i) => {
+            if(cols[i]){
+              if(cols[i].percentageWidth==0){
+                cols[i].percentageWidth = (el.offsetWidth/tableWidth*100);
+              }
+              if(i==cols.length-1){
+                this.ready = true;
+                this.cd.detectChanges();
+              }
+            }
+          })
+        }else{
+          if(this.ready==false){
+            this.ready = true;
+            this.cd.detectChanges();
+          }
+        }
+      }, 100);
+    }
   }
 
 }

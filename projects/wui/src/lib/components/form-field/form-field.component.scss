@@ -92,7 +92,7 @@
             height:100%;
             outline:none;
             font-family:'Roboto', sans-serif;
-            padding:1.75rem 1rem .5rem 0rem;
+            padding:1.75rem 1rem .5rem;
             background:transparent; 
             position:relative;
             z-index:1;
@@ -214,6 +214,12 @@
 
         label{
             left: 3rem;
+        }
+
+        >>>{
+            input, select, textarea{
+                padding-left: 0 !important;
+            }
         }
     }
 
