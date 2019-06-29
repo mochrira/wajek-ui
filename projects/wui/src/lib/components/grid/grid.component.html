@@ -21,7 +21,7 @@
           </ng-container>
         </td>
         <td *ngIf="rowContextMenu" class="col-context">
-          <span class="mdi mdi-dots-horizontal" (click)="contextMenuClick($event)"></span>
+          <span class="mdi mdi-dots-horizontal" (click)="rowContextMenu.open($event.target.getBoundingClientRect())"></span>
         </td>
       </tr>
     </tbody>

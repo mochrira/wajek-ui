@@ -15,7 +15,8 @@ export class ReportComponent implements OnInit {
   @Input() pageSize = 'A4';
   pageSizeCollection = {
     'A4': [210, 297]
-  }
+  };
+  ps: PerfectScrollbar;
 
   @ViewChild('reportContent', { static: false }) reportContent: any;
   @ViewChild('reportInner', { static: false }) reportInner: any;
@@ -28,7 +29,7 @@ export class ReportComponent implements OnInit {
   open() {
     this.show = true;
     this.cd.detectChanges();
-    let ps = new PerfectScrollbar(this.reportInner.nativeElement, {
+    this.ps = new PerfectScrollbar(this.reportInner.nativeElement, {
       wheelSpeed: .5
     });
   }

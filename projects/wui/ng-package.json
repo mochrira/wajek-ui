@@ -4,7 +4,12 @@
   "lib": {
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
-      "ng2-dnd": "ng2-dnd"
+      "perfect-scrollbar": "PerfectScrollbar",
+      "ng2-dnd": "ng2Dnd"
     }
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "perfect-scrollbar"
+  ]
 }

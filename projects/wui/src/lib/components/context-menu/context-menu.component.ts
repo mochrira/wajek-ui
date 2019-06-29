@@ -4,15 +4,11 @@ import {
   HostBinding,
   ElementRef,
   Renderer2,
-  HostListener,
-  Output,
-  EventEmitter,
   ContentChildren,
   AfterViewInit,
   Input
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'wui-context-menu-item',
@@ -21,10 +17,6 @@ import { takeUntil } from 'rxjs/operators';
 export class ContextMenuItemComponent implements OnInit {
 
   @Input() icon: String = '';
-  @Output() clicked: EventEmitter < any > = new EventEmitter();
-  @HostListener('click', ['$event']) onclick(e) {
-    this.clicked.next(e);
-  }
 
   constructor() {}
 
@@ -39,17 +31,13 @@ export class ContextMenuItemComponent implements OnInit {
 })
 export class ContextMenuComponent implements OnInit, AfterViewInit {
 
-  @Input() parentEl: any;
   @ContentChildren(ContextMenuItemComponent) menus: Array < ContextMenuItemComponent > ;
   scrollUnsub: any;
-  private unsub: Subject<any> = new Subject();
-  @HostBinding('class.init') init: Boolean = false;
   @HostBinding('class.show') show: Boolean = false;
-  @HostListener('document:click', ['$event']) clickOutside(e) {
-    if (!this.el.nativeElement.contains(e.target) && this.show) {
-      this.close();
-    }
-  }
+  clickListener: any;
+  childClickListener: any;
+
+  private unsub: Subject<any> = new Subject();
 
   constructor(
     private el: ElementRef,
@@ -57,40 +45,29 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.menus.map(instance => {
-      instance.clicked.pipe(takeUntil(this.unsub)).subscribe(e => {
-        this.close();
-      });
-    });
+    
   }
 
   ngOnInit() {}
 
   open(eRect) {
+    this.close();
     setTimeout(() => {
-      this.init = true;
-      setTimeout(() => {
-        const cRect = this.el.nativeElement.getBoundingClientRect();
-        if (window.innerWidth < (eRect.left + cRect.width)) {
-          this.renderer.setStyle(this.el.nativeElement, 'right', (window.innerWidth - (eRect.left + eRect.width)) + 'px');
-        } else {
-          this.renderer.setStyle(this.el.nativeElement, 'left', eRect.x + 'px');
-        }
-        if (window.innerHeight < (eRect.top + cRect.height)) {
-          this.renderer.setStyle(this.el.nativeElement, 'bottom', (window.innerHeight - (eRect.top + eRect.height)) + 'px');
-        } else {
-          this.renderer.setStyle(this.el.nativeElement, 'top', eRect.y + 'px');
-        }
-        this.scrollUnsub = this.renderer.listen(
-          document, 'mousewheel', (e) => {
-          this.close();
-        });
-        this.renderer.setStyle(this.el.nativeElement, 'height', '0px');
-        setTimeout(() => {
-          this.show = true;
-          this.renderer.setStyle(this.el.nativeElement, 'height', cRect.height + 'px');
-        }, 100);
-      }, 50);
+      const cRect = this.el.nativeElement.getBoundingClientRect();
+      if (window.innerWidth < (eRect.left + cRect.width)) {
+        this.renderer.setStyle(this.el.nativeElement, 'right', (window.innerWidth - (eRect.left + eRect.width)) + 'px');
+      } else {
+        this.renderer.setStyle(this.el.nativeElement, 'left', eRect.x + 'px');
+      }
+      if (window.innerHeight < (eRect.top + cRect.height)) {
+        this.renderer.setStyle(this.el.nativeElement, 'bottom', (window.innerHeight - (eRect.top + eRect.height)) + 'px');
+      } else {
+        this.renderer.setStyle(this.el.nativeElement, 'top', eRect.y + 'px');
+      }
+      this.show = true;
+      this.clickListener = this.renderer.listen(document, 'click', (e) => {
+        this.close();
+      });
     }, 100);
   }
 
@@ -104,14 +81,14 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
   }
 
   close() {
-    if (this.show === true) {
-      setTimeout(() => {
-        this.scrollUnsub();
-        this.reset();
-        this.init = false;
-        this.show = false;
-      }, 50);
+    if (this.show) {
+      this.show = false;
+      this.clickListener();
     }
+  }
+
+  ngOnDestroy() {
+    this.unsub.next();
   }
 
 }

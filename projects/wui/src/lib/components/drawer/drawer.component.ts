@@ -3,20 +3,16 @@ import {
   OnInit,
   Input,
   HostBinding,
-  OnDestroy,
   HostListener,
   ContentChildren,
   AfterViewInit,
-  AfterContentChecked,
   ElementRef,
-  ViewChild
+  ViewChild,
+  OnChanges
 } from '@angular/core';
 import {
   MessageService
 } from '../../services/message.service';
-import {
-  Subject
-} from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
@@ -42,8 +38,9 @@ export class DrawerItemComponent implements OnInit {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss']
 })
-export class DrawerComponent implements OnInit, AfterViewInit {
+export class DrawerComponent implements OnInit, AfterViewInit, OnChanges {
 
+  ps: PerfectScrollbar;
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
   @Input() @HostBinding('class.expand') expand: Boolean = false;
   @Input() autoCollapse = true;
@@ -83,9 +80,15 @@ export class DrawerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnChanges() {
+    if(this.ps) {
+      this.ps.update();
+    }
+  }
+
   ngAfterViewInit() {
     const container = this.inner.nativeElement;
-    const ps = new PerfectScrollbar(container, {
+    this.ps = new PerfectScrollbar(container, {
       wheelSpeed: .5
     });
   }

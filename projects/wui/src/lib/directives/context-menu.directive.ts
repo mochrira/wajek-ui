@@ -14,6 +14,8 @@ export class ContextMenuDirective {
 
   constructor(
     private el: ElementRef
-  ) { }
+  ) { 
+    this.el.nativeElement.classList.add('contextMenuDirective');
+  }
 
 }

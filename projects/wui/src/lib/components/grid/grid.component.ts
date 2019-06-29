@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'wui-grid-column',
@@ -31,11 +32,11 @@ export class GridColumnComponent implements OnInit {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
+export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
 
-  ps:PerfectScrollbar;
+  ps : PerfectScrollbar | null = null;
   selectedRow = -1;
-  showLoading: Boolean = false;
+  showLoading = false;
 
   @HostListener('window:resize', ['$event']) onWindowResize(e) {
     this.cd.detectChanges();
@@ -43,7 +44,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
 
   @ViewChild('tableBody', {static: true}) tableBody: any;
   @ViewChild('tableContainer', { static: true }) tableContainer: any;
-  @ContentChildren(GridColumnComponent) columns: QueryList<GridColumnComponent>;
+  @ContentChildren(GridColumnComponent) columns: any;
 
   @Input() rowContextMenu: ContextMenuComponent;
   @Input() data: Array<any> = [];
@@ -52,6 +53,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
   @Output() rowDblClick: EventEmitter<any> = new EventEmitter();
 
   @HostBinding('class.ready') ready = false;
+  timeoutReady: any;
 
   constructor(
     private cd: ChangeDetectorRef
@@ -89,6 +91,13 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
 
   ngOnChanges(changes) {
     if(changes.data && this.ps){
+      if(changes.data.previousValue.length==0){
+        if(this.timeoutReady){
+          clearTimeout(this.timeoutReady);
+        }
+        this.ready = false;
+        this.calculateWidth();
+      }
       this.ps.update();
     }
   }
@@ -149,10 +158,10 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
-  ngAfterViewChecked() {
+  calculateWidth() {
     const cols = this.columns.toArray();
-    if(cols.findIndex(c => c.percentageWidth == 0) > -1){
-      setTimeout(() => {
+    if(cols.findIndex(c => c.percentageWidth == 0) > -1 && !this.ready){
+      this.timeoutReady = setTimeout(() => {
         const rows = this.tableBody.nativeElement.querySelectorAll('tr')[0];
         const tableWidth = this.tableBody.nativeElement.offsetWidth;
         if(rows){
@@ -164,17 +173,33 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked {
               if(i==cols.length-1){
                 this.ready = true;
                 this.cd.detectChanges();
+                clearTimeout(this.timeoutReady);
               }
             }
           })
         }else{
-          if(this.ready==false){
+          if(!this.ready){
             this.ready = true;
             this.cd.detectChanges();
+            clearTimeout(this.timeoutReady);
           }
         }
       }, 100);
+    }else{
+      this.ready = true;
+      this.cd.detectChanges();
+      if(this.timeoutReady){
+        clearTimeout(this.timeoutReady);
+      }
     }
+  }
+
+  ngAfterViewChecked() {
+   this.calculateWidth();
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timeoutReady);
   }
 
 }
