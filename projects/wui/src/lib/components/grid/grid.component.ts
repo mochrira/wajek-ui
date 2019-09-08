@@ -36,7 +36,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy, AfterContent
 
   ps : PerfectScrollbar | null = null;
   selectedRow = -1;
-  showLoading = false;
+  @HostBinding('class.loading') showLoading = false;
 
   @HostListener('window:resize', ['$event']) onWindowResize(e) {
     this.cd.detectChanges();

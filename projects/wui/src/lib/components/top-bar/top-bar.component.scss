@@ -13,6 +13,7 @@
     background-color:white;
     border-bottom:1px solid #EFEFEF;
     overflow:hidden;
+    padding: 0 .5rem;
 
     >>> {
         .navIcon{
@@ -28,6 +29,8 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow:hidden;
+            display: flex;
+            align-items: center;
         }
 
         wui-tab{
@@ -133,8 +136,6 @@
 @media screen and (min-width:768px){
 
     :host{
-        padding-left:.75rem;
-        padding-right:.75rem;
 
         >>> {
             wui-top-bar-item:not(.has-caption){
