@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'wui-loading',

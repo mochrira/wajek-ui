@@ -75,9 +75,7 @@
                 z-index:1;
             }
 
-            &:first-child, &:last-child{
-                margin-left:1rem !important;
-            }
+            
 
             &.down{
                 color:white !important;
@@ -95,7 +93,7 @@
             
         }
 
-        wui-top-bar-item:not([caption]){
+        wui-top-bar-item:not(.has-caption){
             width:1.5rem;
             height:1.5rem;
 
@@ -103,7 +101,7 @@
                 width:100%;
                 height:100%;
                 top:0;left:0;
-                transform:scale(3);
+                transform:scale(2);
                 border-radius:50%;
             }
         }
@@ -135,9 +133,11 @@
 @media screen and (min-width:768px){
 
     :host{
+        padding-left:.75rem;
+        padding-right:.75rem;
 
         >>> {
-            wui-top-bar-item:not([caption]){
+            wui-top-bar-item:not(.has-caption){
                 &:after{
                     background-color:rgba(0,0,0,.12);
                     transform:scale(2);

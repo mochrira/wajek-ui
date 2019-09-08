@@ -65,11 +65,11 @@
         .outer{
             z-index:9999;
             opacity:1;
-            padding:0 1.5rem;
+            padding:0 2rem;
 
             .inner{
                 opacity:1;
-                max-height:80%;
+                max-height:calc(100% - 4rem);
                 display:flex;
                 flex-direction:column;
 

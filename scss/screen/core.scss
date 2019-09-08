@@ -7,7 +7,7 @@
         height:100%;
         margin:0;
         padding:0;
-        color:#444;
+        color:#263238;
     }
     
     *{
@@ -51,5 +51,6 @@
 
     @import "scrollbar.scss";
     @import "buttons.scss";
+    @import "box.scss";
 
 }

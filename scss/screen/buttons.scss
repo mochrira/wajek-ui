@@ -84,13 +84,25 @@
         }
     }
 
-    &-fill-primary{
-        background-color:map-get($theme, "500");
-        color:rgba(255,255,255,.8) !important;
+    &-fill{
+        &-primary {
+            background-color:map-get($theme, "500");
+            color:rgba(255,255,255,.8) !important;
 
-        &:hover{
-            background-color:map-get($theme, "600");
-            color:white !important;
+            &:hover{
+                background-color:map-get($theme, "600");
+                color:white !important;
+            }
+        }
+
+        &-danger {
+            background-color:#F44336 !important;
+            color:rgba(255,255,255,.8) !important;
+
+            &:hover{
+                background-color:#E53935 !important;
+                color:white !important;
+            }
         }
     }
 

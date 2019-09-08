@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-page',
@@ -7,7 +8,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class PageComponent implements OnInit {
 
+  ps: any;
   @Output() scrollEnd: EventEmitter<any> = new EventEmitter();
+  @ViewChild('content', {static: true}) content: any;
 
   constructor() { }
 
@@ -18,6 +21,7 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ps = new PerfectScrollbar(this.content.nativeElement);
   }
 
 }

@@ -80,17 +80,22 @@
                 white-space: nowrap;
             }
 
-            &.active{
+            &:hover, &.active{
+                position: relative;
                 color:map-get($theme, "500") !important;
-                background-color:rgba(map-get($theme, "50"), .5) !important;
+
+                &:before {
+                    position: absolute;
+                    content: "";
+                    width: .375rem;
+                    height: 100%;
+                    left: 0; top: 0;
+                    background-color: map-get($theme, "500") !important;
+                }
             }
         
             span.mdi{
                 margin-right:1.5rem;
-            }
-        
-            &:hover{
-                background-color:rgba(0,0,0,0.05);
             }
         }
     }

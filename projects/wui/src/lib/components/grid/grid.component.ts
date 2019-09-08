@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy, AfterContentInit } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'wui-grid-column',
@@ -32,7 +32,7 @@ export class GridColumnComponent implements OnInit {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDestroy {
+export class GridComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit {
 
   ps : PerfectScrollbar | null = null;
   selectedRow = -1;
@@ -44,7 +44,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
 
   @ViewChild('tableBody', {static: true}) tableBody: any;
   @ViewChild('tableContainer', { static: true }) tableContainer: any;
-  @ContentChildren(GridColumnComponent) columns: any;
+  @ContentChildren(GridColumnComponent) columns!: QueryList<GridColumnComponent>;
 
   @Input() rowContextMenu: ContextMenuComponent;
   @Input() data: Array<any> = [];
@@ -54,6 +54,10 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
 
   @HostBinding('class.ready') ready = false;
   timeoutReady: any;
+  colLength = 0;
+
+  @Input() showHeader = true;
+  @Input() showFooter = false;
 
   constructor(
     private cd: ChangeDetectorRef
@@ -99,6 +103,8 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
         this.calculateWidth();
       }
       this.ps.update();
+    }else if(changes.columns) {
+      this.reCalculateWidth();
     }
   }
 
@@ -158,6 +164,18 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
     }
   }
 
+  reCalculateWidth() {
+    this.ready = false;
+    this.columns.map((col: any, index) => {
+      col.percentageWidth = 0;
+      if(index==this.columns.length-1){
+        setTimeout(() => {
+          this.calculateWidth();
+        }, 50);
+      }
+    });
+  }
+
   calculateWidth() {
     const cols = this.columns.toArray();
     if(cols.findIndex(c => c.percentageWidth == 0) > -1 && !this.ready){
@@ -171,6 +189,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
                 cols[i].percentageWidth = (el.offsetWidth/tableWidth*100);
               }
               if(i==cols.length-1){
+                this.colLength = cols.length;
                 this.ready = true;
                 this.cd.detectChanges();
                 clearTimeout(this.timeoutReady);
@@ -179,6 +198,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
           })
         }else{
           if(!this.ready){
+            this.colLength = cols.length;
             this.ready = true;
             this.cd.detectChanges();
             clearTimeout(this.timeoutReady);
@@ -186,6 +206,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
         }
       }, 100);
     }else{
+      this.colLength = cols.length;
       this.ready = true;
       this.cd.detectChanges();
       if(this.timeoutReady){
@@ -194,12 +215,14 @@ export class GridComponent implements OnInit, OnChanges, AfterViewChecked, OnDes
     }
   }
 
-  ngAfterViewChecked() {
-   this.calculateWidth();
-  }
-
   ngOnDestroy() {
     clearTimeout(this.timeoutReady);
+  }
+
+  ngAfterContentInit() {
+    this.columns.changes.pipe(startWith(this.columns)).subscribe(res => {
+      this.reCalculateWidth();
+    });
   }
 
 }

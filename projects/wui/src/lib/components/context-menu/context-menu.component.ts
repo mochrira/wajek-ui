@@ -76,12 +76,11 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
     this.renderer.setStyle(this.el.nativeElement, 'left', 'auto');
     this.renderer.setStyle(this.el.nativeElement, 'bottom', 'auto');
     this.renderer.setStyle(this.el.nativeElement, 'right', 'auto');
-    this.renderer.removeClass(this.el.nativeElement, 'slide-up');
-    this.renderer.removeClass(this.el.nativeElement, 'slide-down');
   }
 
   close() {
     if (this.show) {
+      this.reset();
       this.show = false;
       this.clickListener();
     }

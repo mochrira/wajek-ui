@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 })
 export class DatepickerComponent implements OnDestroy {
 
-  @Input() outputFormat = 'DD/MM/YYYY';
+  @Input() outputFormat = 'yyyy-MM-dd';
   @HostBinding('class.show') show = false;
   @Output() wuiDateSet: EventEmitter<any> = new EventEmitter();
   @Output() wuiDateSelect: EventEmitter<any> = new EventEmitter();

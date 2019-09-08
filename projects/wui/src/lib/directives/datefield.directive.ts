@@ -1,6 +1,7 @@
 import { Directive, ElementRef, AfterViewInit, Input, ContentChild, Renderer } from '@angular/core';
 import { DatepickerComponent } from '../components/datepicker/datepicker.component';
 import { FormFieldComponent } from '../components/form-field/form-field.component';
+import { DatePipe } from '@angular/common';
 
 @Directive({
   selector: '[wuiDatefield]'
@@ -8,10 +9,12 @@ import { FormFieldComponent } from '../components/form-field/form-field.componen
 export class DatefieldDirective implements AfterViewInit{
 
   @Input() datepicker: DatepickerComponent;
+  @Input() format: string = 'yyyy-MM-dd';
 
   constructor(
     private el: ElementRef,
-    private host: FormFieldComponent
+    private host: FormFieldComponent,
+    private datePipe: DatePipe
   ) { }
 
   ngAfterViewInit() {
@@ -20,11 +23,12 @@ export class DatefieldDirective implements AfterViewInit{
     node.addEventListener('click', (e) => {
       let val = this.host.getValue();
       this.datepicker.open((val?val:'')).then(date => {
+        console.log(date);
         if (this.host.formControl) {
-          this.host.formControl.control.setValue(date);
+          this.host.formControl.control.setValue(this.datePipe.transform(date, this.format));
           this.host.detectFloat();
         } else if (this.host.ngModel) {
-          this.host.ngModel.control.setValue(date);
+          this.host.ngModel.control.setValue(this.datePipe.transform(date, this.format));
           this.host.detectFloat();
         }else {
           this.host.inputElement.value = date;

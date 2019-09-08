@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter, HostListener, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'wui-top-bar-item',
   template: `
-    <span class="mdi mdi-{{icon}} {{(caption.length>0?'has-caption':'')}}" *ngIf="icon.length>0"></span>
-    <ng-container *ngIf="caption.length>0">{{caption}}</ng-container>
+    <span class="mdi mdi-{{icon}} {{(_caption.length>0?'has-caption':'')}}" *ngIf="icon.length>0"></span>
+    <ng-container *ngIf="_caption.length>0">{{_caption}}</ng-container>
   `,
   styles: [`
     span.mdi.has-caption{
@@ -14,8 +14,13 @@ import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter, Host
 })
 export class TopBarItemComponent implements OnInit {
 
+  _caption = '';
   @Input() icon: String = '';
-  @Input() caption: String = '';
+  @Input('caption') set setCaption(caption) {
+    this._caption = caption;
+    this.hasCaption = true;
+  }
+  @HostBinding('class.has-caption') hasCaption = false;
   @Output() wuiClick: EventEmitter<any> = new EventEmitter();
   @HostListener('click', ['$event']) onclick(e) {
     setTimeout(() => {

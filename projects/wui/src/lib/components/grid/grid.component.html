@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="showHeader">
   <thead>
     <tr>
       <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="getWidth(col)">
@@ -11,10 +11,14 @@
 <div class="table-container" #tableContainer>
   <table>
     <tbody #tableBody>
-      <tr *ngFor="let d of data; let i=index" (click)="selectRow(i);" class="{{i==selectedRow?'selected':''}}" (dblclick)="rowDblClick.emit(d)">
-        <td *ngFor="let col of columns" class="text-{{col.align}} {{col.customClass}}" [style.width]="(i>0?'auto':getWidth(col))">
-          <ng-container *ngIf="col.template" >
-            <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{$implicit: d}"></ng-template>
+      <tr *ngFor="let d of data; let rowIndex=index" (click)="selectRow(rowIndex);" class="{{rowIndex==selectedRow?'selected':''}}" (dblclick)="rowDblClick.emit(d)">
+        <td *ngFor="let col of columns; let colIndex=index" class="text-{{col.align}} {{col.customClass}}" [style.width]="(rowIndex>0?'auto':getWidth(col))">
+          <ng-container *ngIf="col.template">
+            <ng-container *ngTemplateOutlet="col.template; context: {$implicit: {
+              rowIndex: rowIndex,
+              colIndex: colIndex,
+              data: d
+            }}"></ng-container>
           </ng-container>
           <ng-container *ngIf="!col.template">
             {{d[col.field]}}
@@ -29,8 +33,19 @@
   <wui-loading mode="circular" *ngIf="showLoading"></wui-loading>
   <div class="empty" *ngIf="!showLoading && data.length==0">
     <span>
-      <span class="mdi mdi-grid-off"></span>
       No Data
     </span>
   </div>
 </div>
+<table *ngIf="showFooter">
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="getWidth(col)">
+        <ng-container *ngIf="col.footerTemplate">
+          <ng-container *ngTemplateOutlet="col.footerTemplate"></ng-container>
+        </ng-container>
+      </th>
+      <th *ngIf="rowContextMenu" class="col-context"></th>
+    </tr>
+  </thead>
+</table>

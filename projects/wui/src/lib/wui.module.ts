@@ -32,7 +32,7 @@ import { DatefieldDirective } from './directives/datefield.directive';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { TabComponent, TabItemComponent } from './components/tab/tab.component';
 import { ReportComponent } from './components/report/report.component';
-import { DndModule } from 'ng2-dnd';
+import { AppTitleComponent } from './components/app-title/app-title.component';
 
 @NgModule({
   declarations: [
@@ -69,12 +69,12 @@ import { DndModule } from 'ng2-dnd';
     CheckboxComponent,
     TabComponent,
     TabItemComponent,
-    ReportComponent
+    ReportComponent,
+    AppTitleComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    DndModule.forRoot()
+    FormsModule
   ],
   exports: [
     WuiComponent,
@@ -108,7 +108,7 @@ import { DndModule } from 'ng2-dnd';
     TabComponent,
     TabItemComponent,
     ReportComponent,
-    DndModule
+    AppTitleComponent
   ], 
   providers: [
     DatePipe

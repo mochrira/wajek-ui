@@ -89,7 +89,7 @@ export class DrawerComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     const container = this.inner.nativeElement;
     this.ps = new PerfectScrollbar(container, {
-      wheelSpeed: .5
+      wheelSpeed: 1
     });
   }
 
