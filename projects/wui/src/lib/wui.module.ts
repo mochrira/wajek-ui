@@ -33,6 +33,9 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { TabComponent, TabItemComponent } from './components/tab/tab.component';
 import { ReportComponent } from './components/report/report.component';
 import { AppTitleComponent } from './components/app-title/app-title.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { TrapFocusDirective } from './directives/trap-focus.directive';
+import { TabOrderDirective } from './directives/tab-order.directive';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
     TabComponent,
     TabItemComponent,
     ReportComponent,
-    AppTitleComponent
+    AppTitleComponent,
+    AutofocusDirective,
+    TrapFocusDirective,
+    TabOrderDirective
   ],
   imports: [
     CommonModule,
@@ -108,7 +114,10 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
     TabComponent,
     TabItemComponent,
     ReportComponent,
-    AppTitleComponent
+    AppTitleComponent,
+    AutofocusDirective,
+    TrapFocusDirective,
+    TabOrderDirective
   ], 
   providers: [
     DatePipe

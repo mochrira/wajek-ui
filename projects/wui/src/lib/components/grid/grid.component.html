@@ -1,7 +1,7 @@
 <table *ngIf="showHeader">
   <thead>
     <tr>
-      <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="getWidth(col)">
+      <th *ngFor="let col of columns" class="text-{{col.align}}"  [style.width]="col.actualWidth">
         {{col.label}}
       </th>
       <th *ngIf="rowContextMenu" class="col-context"></th>
@@ -9,10 +9,10 @@
   </thead>
 </table>
 <div class="table-container" #tableContainer>
-  <table>
-    <tbody #tableBody>
+  <table #tableBody>
+    <tbody>
       <tr *ngFor="let d of data; let rowIndex=index" (click)="selectRow(rowIndex);" class="{{rowIndex==selectedRow?'selected':''}}" (dblclick)="rowDblClick.emit(d)">
-        <td *ngFor="let col of columns; let colIndex=index" class="text-{{col.align}} {{col.customClass}}" [style.width]="(rowIndex>0?'auto':getWidth(col))">
+        <td *ngFor="let col of columns; let colIndex=index" class="text-{{col.align}} {{col.customClass}}"  [style.width]="col.actualWidth">
           <ng-container *ngIf="col.template">
             <ng-container *ngTemplateOutlet="col.template; context: {$implicit: {
               rowIndex: rowIndex,
@@ -40,7 +40,7 @@
 <table *ngIf="showFooter">
   <thead>
     <tr>
-      <th *ngFor="let col of columns" class="text-{{col.align}}" [style.width]="getWidth(col)">
+      <th *ngFor="let col of columns" class="text-{{col.align}}">
         <ng-container *ngIf="col.footerTemplate">
           <ng-container *ngTemplateOutlet="col.footerTemplate"></ng-container>
         </ng-container>

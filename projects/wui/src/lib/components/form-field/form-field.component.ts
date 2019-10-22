@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, Renderer, Renderer2,
-  ContentChild, AfterContentInit, HostBinding, AfterContentChecked } from '@angular/core';
+  ContentChild, AfterContentInit, HostBinding, OnInit, AfterContentChecked } from '@angular/core';
 import { FormControlName, NgModel } from '@angular/forms';
 
 @Component({

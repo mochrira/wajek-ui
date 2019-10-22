@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WuiService } from 'wui';
 import { siswa } from './siswa';
 
@@ -7,7 +7,7 @@ import { siswa } from './siswa';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   datasiswa = siswa;
 
@@ -37,5 +37,7 @@ export class AppComponent {
       }
     }]);
   }
+
+  ngOnInit() {}
 
 }

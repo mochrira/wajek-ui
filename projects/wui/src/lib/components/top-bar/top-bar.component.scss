@@ -15,6 +15,10 @@
     overflow:hidden;
     padding: 0 .5rem;
 
+    &.compact{
+        height: 3rem;
+    }
+
     >>> {
         .navIcon{
             display:inline-flex;

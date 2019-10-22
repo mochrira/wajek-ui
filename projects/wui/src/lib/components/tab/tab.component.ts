@@ -1,16 +1,26 @@
-import { Component, OnInit, Input, ContentChildren, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, QueryList, AfterContentInit, ElementRef, AfterContentChecked, ChangeDetectorRef, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 
 @Component({
   selector: 'wui-tab-item',
-  template: `<ng-content></ng-content>`,
+  template: `<div [hidden]="!active"><div #tabContent></div><ng-content></ng-content></div>`,
   styles: ['']
 })
 export class TabItemComponent implements OnInit {
 
   @Input() caption = 'Tab Item';
-  @Input() @HostBinding('class.active') active = false;
+  @Input() active = false;
+  @ViewChild('tabContent', {read: ViewContainerRef, static: true}) tabContent: ViewContainerRef;
 
-  constructor() { }
+  ref: any;
+  @Input('component') set setComponent(c) {
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(c.component);
+    this.ref = this.tabContent.createComponent(componentFactory);
+    this.ref.instance.params = c.params;
+  }
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) { }
 
   ngOnInit() {
   }
@@ -22,9 +32,27 @@ export class TabItemComponent implements OnInit {
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss']
 })
-export class TabComponent implements OnInit {
+export class TabComponent implements OnInit, AfterContentInit {
 
-  constructor() { }
+  @Input('flex') flex = false;
+  @ContentChildren(TabItemComponent) tabs: QueryList<TabItemComponent>;
+
+  constructor(
+    private cd: ChangeDetectorRef
+  ) { }
+
+  ngAfterContentInit() {
+    let activeTab = this.tabs.toArray().findIndex(tab => tab.active);
+    if(activeTab === -1 && this.tabs.length>0) {
+      this.setActive(0);
+      this.cd.detectChanges();
+    }
+  }
+
+  setActive(index) {
+    this.tabs.map(item => { item.active = false; });
+    this.tabs.toArray()[index].active = true;
+  }
 
   ngOnInit() {
   }

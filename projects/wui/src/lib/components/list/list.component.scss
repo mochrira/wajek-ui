@@ -37,16 +37,6 @@
                     min-height:4rem;
                 }
             }
-            
-            span.mdi{
-                width:1rem;
-                height:1rem;
-                margin:0 !important;
-
-                &:before{
-                    font-size:1.25rem;
-                }
-            }
 
             > span.mdi{
                 width:2rem;
@@ -54,10 +44,6 @@
                 display:flex;
                 justify-content:center;
                 align-items:center;
-
-                &:before{
-                    font-size:2rem;
-                }
 
                 &:first-child{
                     margin-right:1.125rem !important;

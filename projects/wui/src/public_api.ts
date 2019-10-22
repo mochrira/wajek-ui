@@ -13,3 +13,4 @@ export * from './lib/components/grid/grid.component';
 export * from './lib/components/datepicker/datepicker.component';
 export * from './lib/components/checkbox/checkbox.component';
 export * from './lib/components/report/report.component';
+export * from './lib/components/tab/tab.component';

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy, AfterContentInit, ElementRef } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { startWith } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'wui-grid-column',
@@ -11,13 +11,14 @@ export class GridColumnComponent implements OnInit {
 
   @Input() label = '';
   @Input() field = '';
-  @Input() template: any;
+
   @Input() align = 'left';
-  @Input() width = 0;
   @Input() customClass = '';
-  percentageWidth = 0;
+
+  @Input() width = 0;
   actualWidth = 'auto';
 
+  @Input() template: any;
   @Input() footerTemplate: any;
   @Input() footerColSpan = 1;
 
@@ -32,14 +33,40 @@ export class GridColumnComponent implements OnInit {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit {
+export class GridComponent implements OnInit, OnDestroy, OnChanges {
 
   ps : PerfectScrollbar | null = null;
   selectedRow = -1;
+  
   @HostBinding('class.loading') showLoading = false;
+  @HostListener('keydown', ['$event']) onKeyDown(e) {
+    if(e.keyCode==38 || e.keyCode==40) {
+      if(e.keyCode==38) {
+        if(this.selectedRow > 0) {
+          this.selectedRow--;
+        }
+      }
 
-  @HostListener('window:resize', ['$event']) onWindowResize(e) {
-    this.cd.detectChanges();
+      if(e.keyCode==40) {
+        if(this.selectedRow < this.data.length) {
+          this.selectedRow++;
+        }
+      }
+
+      setTimeout(() => {
+        let atas = this.tableContainer.nativeElement.scrollTop;
+        let bawah = atas + this.tableContainer.nativeElement.offsetHeight;
+        let selRow = this.tableContainer.nativeElement.querySelector('table tbody tr.selected');
+        if(selRow) {
+          if(selRow.offsetTop < atas) {
+            this.tableContainer.nativeElement.scrollTo(0, selRow.offsetTop);
+          }
+          if((selRow.offsetTop + selRow.offsetHeight) > bawah){
+            this.tableContainer.nativeElement.scrollTo(0, selRow.offsetTop + selRow.offsetHeight - this.tableContainer.nativeElement.offsetHeight);
+          }
+        }
+      }, 50);
+    }
   }
 
   @ViewChild('tableBody', {static: true}) tableBody: any;
@@ -53,13 +80,12 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy, AfterContent
   @Output() rowDblClick: EventEmitter<any> = new EventEmitter();
 
   @HostBinding('class.ready') ready = false;
-  timeoutReady: any;
-  colLength = 0;
 
   @Input() showHeader = true;
   @Input() showFooter = false;
 
   constructor(
+    private el: ElementRef,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -93,136 +119,56 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy, AfterContent
     return false;
   }
 
+  scrollToTop() {
+    this.tableContainer.nativeElement.scrollTo(0,0);
+  }
+
   ngOnChanges(changes) {
-    if(changes.data && this.ps){
-      if(changes.data.previousValue.length==0){
-        if(this.timeoutReady){
-          clearTimeout(this.timeoutReady);
-        }
+    if(changes.data) {
+      setTimeout(() => {
         this.ready = false;
-        this.calculateWidth();
-      }
-      this.ps.update();
-    }else if(changes.columns) {
-      this.reCalculateWidth();
+        let body = this.tableBody.nativeElement.querySelector('tbody');
+        let rows = body.querySelectorAll('tr');
+        if(rows.length == this.data.length) {
+          let row: any = Array.from(rows)[0];
+          if(row) {
+            let cols: any = Array.from(row.querySelectorAll('td'));
+            if(cols.length>0) {
+              let bodyWidth = this.tableBody.nativeElement.offsetWidth;
+              this.columns.forEach((col,index) => {
+                if(col.width>0) {
+                  col.actualWidth = col.width + 'px';
+                }else{
+                  col.actualWidth = 'auto';
+                }
+              });
+              this.ready = true;
+              this.ps.update();
+              this.el.nativeElement.querySelectorAll('[tabindex]').tabIndex = -1;
+              this.cd.detectChanges();
+            }
+          }else{
+            this.ready = true;
+            this.ps.update();
+            this.el.nativeElement.querySelectorAll('[tabindex]').tabIndex = -1;
+            this.cd.detectChanges();
+          }
+        }
+      }, 200);
     }
   }
 
   ngOnInit() {
     this.ps = new PerfectScrollbar(this.tableContainer.nativeElement, {
-      wheelSpeed: 1
+      handlers: ['click-rail','drag-thumb','wheel','touch'],
+      wheelSpeed: 1,
+      suppressScrollX: true
     });
     this.tableContainer.nativeElement.addEventListener('ps-y-reach-end', () => {
       this.scrollEnd.emit();
     });
   }
 
-  getWidth(col) {
-    if(this.ready){
-      if(this.data.length==0){
-        return (col.width>0?col.width + 'px':'auto');
-      }
-      const tableWidth = this.tableBody.nativeElement.offsetWidth;
-      if(col.percentageWidth > 0){
-        let actualWidth = col.percentageWidth/100*tableWidth;
-        if(col.width>0){
-          if(actualWidth>col.width){
-            return col.width + 'px';
-          }else{
-            return col.percentageWidth + '%';
-          }
-        }else{
-          return 'auto';
-        }
-      }else{
-        return 'auto';
-      }
-    }else{
-      return (col.width>0?col.width + 'px':'auto');
-    }
-  }
-
-  getMaxWidth(col) {
-    const tableWidth = this.tableBody.nativeElement.offsetWidth;
-    if(col.percentageWidth > 0){
-      let actualWidth = col.percentageWidth/100*tableWidth;
-      if(col.width>0){
-        if(actualWidth>col.width){
-          return col.width + 'px';
-        }else{
-          return col.percentageWidth + '%';
-        }
-      }else{
-        return 'auto';
-      }
-    }else{
-      if(col.width>0){
-        return col.width;
-      }else{
-        return 'auto';
-      }
-    }
-  }
-
-  reCalculateWidth() {
-    this.ready = false;
-    this.columns.map((col: any, index) => {
-      col.percentageWidth = 0;
-      if(index==this.columns.length-1){
-        setTimeout(() => {
-          this.calculateWidth();
-        }, 50);
-      }
-    });
-  }
-
-  calculateWidth() {
-    const cols = this.columns.toArray();
-    if(cols.findIndex(c => c.percentageWidth == 0) > -1 && !this.ready){
-      this.timeoutReady = setTimeout(() => {
-        const rows = this.tableBody.nativeElement.querySelectorAll('tr')[0];
-        const tableWidth = this.tableBody.nativeElement.offsetWidth;
-        if(rows){
-          Array.from(rows.children).map((el:any,i) => {
-            if(cols[i]){
-              if(cols[i].percentageWidth==0){
-                cols[i].percentageWidth = (el.offsetWidth/tableWidth*100);
-              }
-              if(i==cols.length-1){
-                this.colLength = cols.length;
-                this.ready = true;
-                this.cd.detectChanges();
-                clearTimeout(this.timeoutReady);
-              }
-            }
-          })
-        }else{
-          if(!this.ready){
-            this.colLength = cols.length;
-            this.ready = true;
-            this.cd.detectChanges();
-            clearTimeout(this.timeoutReady);
-          }
-        }
-      }, 100);
-    }else{
-      this.colLength = cols.length;
-      this.ready = true;
-      this.cd.detectChanges();
-      if(this.timeoutReady){
-        clearTimeout(this.timeoutReady);
-      }
-    }
-  }
-
-  ngOnDestroy() {
-    clearTimeout(this.timeoutReady);
-  }
-
-  ngAfterContentInit() {
-    this.columns.changes.pipe(startWith(this.columns)).subscribe(res => {
-      this.reCalculateWidth();
-    });
-  }
+  ngOnDestroy() { }
 
 }

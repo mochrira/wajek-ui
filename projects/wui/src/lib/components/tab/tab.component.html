@@ -1,1 +1,8 @@
-<ng-content></ng-content>
+<div class="tabs {{flex?'d-flex':''}}">
+    <a class="tab {{tab.active==true?'active':''}} {{flex?'flex-grow-1 text-center':''}}" *ngFor="let tab of tabs; let i = index" (click)="setActive(i)">
+        {{tab.caption}}
+    </a>
+</div>
+<div class="tab-content" #content>
+    <ng-content></ng-content>
+</div>

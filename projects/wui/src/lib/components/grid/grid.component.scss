@@ -1,3 +1,4 @@
+@import "../../../../../../scss/variables/colors.scss";
 :host{
     flex: 1 1 auto;
     display:flex;
@@ -47,32 +48,21 @@
     }
 
     table{
+        opacity: 0;
         width:100%;
         border-spacing: 0;
-        opacity:0;
 
         tbody tr{
             background-color:#FFF;
             cursor:pointer;
 
-            &:hover{
-                background-color:#F7F7F7 !important;
+            &:hover:not(.selected){
+                background-color:#FCFCFC !important;
             }
-        }
 
-        thead tr, tbody tr {
-            td, th {
-                font-size: .875rem;
-                height: 2.5rem;
-                border-bottom: 1px solid #EFEFEF;
-
-                &:first-child {
-                    padding-left: 1.5rem;
-                }
-
-                &:last-child {
-                    padding-right: 1.5rem;
-                }
+            &.selected {
+                background-color: map-get($theme, "600");
+                color: white;
             }
         }
 
@@ -81,7 +71,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 0 1rem;
+            font-size: .875rem;
+            border-bottom: 1px solid #EFEFEF;
+            padding: .25rem;
+
+            &:first-child {
+                padding-left: 1.5rem;
+            }
+
+            &:last-child {
+                padding-right: 1.5rem;
+            }
 
             &.no-grow{
                 width:1px;
@@ -182,12 +182,10 @@
         }
 
         thead tr th{
-            font-weight:400;
             text-align:left;
             background-color:white;
-            padding:0 1rem;
-            background-color:white;
             font-weight: 500;
+            padding: .5rem .25rem;
             
             &:after{
                 width:100%;
@@ -218,17 +216,28 @@
         }
     }
 
-    &.ready {
-
-        table{
-            table-layout: fixed;
-            opacity:1;
-        }
-
-    }
-
     wui-loading{
         margin:1.5rem 0;
+    }
+
+    &.ready {
+        table {
+            table-layout: fixed;
+            opacity: 1;
+        }
+    }
+
+    &:focus, &:focus-within {
+        table {
+            tbody tr {
+                &.selected {
+                    background-color: #F2F2F2;
+                    td {
+                        color: map-get($theme, "500");
+                    }                   
+                }
+            }
+        }
     }
 
 }

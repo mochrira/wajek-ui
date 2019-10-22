@@ -2,9 +2,8 @@
 
 .btn{
     display:inline-flex;
-    white-space: nowrap !important;
+    white-space: nowrap ;
     outline:none;
-    box-shadow:none !important;
     justify-content:center;
     font-family:'Roboto', sans-serif;
     background-color:transparent;
@@ -13,8 +12,8 @@
     color:#666;
 
     &-circle{
-        padding-left:.375rem !important;
-        padding-right:.375rem !important;
+        padding-left:.375rem ;
+        padding-right:.375rem ;
         border-radius:50%;
     }
 
@@ -22,7 +21,7 @@
         &.btn{
             &-primary{
                 background-color:map-get($theme, "600");
-                color:rgba(255,255,255,0.8) !important;
+                color:rgba(255,255,255,0.8) ;
             }
 
             &-default{
@@ -38,70 +37,103 @@
 
     &:hover{
         background-color: rgba(0,0,0,0.05);
-        color:#444 !important;
+        color:#444 ;
         cursor:pointer;
     }
 
     &:active{
         background-color: rgba(0,0,0,0.15);
-        color:#333 !important;
+        color:#333 ;
     }
 
     &:disabled{
-        background-color:rgba(0,0,0,0.15) !important;
-        color:#333 !important;
+        background-color:rgba(0,0,0,0.15) ;
+        color:#333 ;
+    }
+
+
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(rgba(0,0,0), 0.35);
     }
 
     &-primary{
-        color:map-get($theme, "500") !important;
+        color:map-get($theme, "500") ;
 
         &:hover{
             &:not(:disabled){
-                background-color:map-get($theme, "600") !important;
-                color:rgba(255,255,255,.8) !important;
+                background-color:map-get($theme, "600");
+                color:rgba(255,255,255,.8);
             }
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(map-get($theme, "600"), 0.25);
         }
 
         &:active{
             &:not(:disabled){
-                color:rgba(255,255,255,1) !important;
-                background-color:map-get($theme, "700") !important;
+                color:rgba(255,255,255,1);
+                background-color:map-get($theme, "700");
             }
         }
     }
 
     &-danger{
-        color:#F44336 !important;
+        color:#F44336 ;
 
         &:hover{
-            color:rgba(255,255,255,.8) !important;
-            background-color:#E53935 !important;
+            color:rgba(255,255,255,.8) ;
+            background-color:#E53935 ;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(#F44336, 0.25);
         }
 
         &:active{
-            color:rgba(255,255,255,1) !important;
-            background-color:#D32F2F !important;
+            color:rgba(255,255,255,1) ;
+            background-color:#D32F2F ;
         }
     }
 
     &-fill{
+        &-default {
+            background-color: rgba(0,0,0,0.035);
+            color:#777 ;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(rgba(0,0,0), 0.35);
+        }
+
+        &-secondary {
+            background-color: map-get($theme, "secondary");
+            color: white;
+
+            &:hover, &:active {
+                background-color: darken(map-get($theme, "secondary"), 50%);
+                opacity: 1;
+                color: white;
+            }
+        }
+        
         &-primary {
             background-color:map-get($theme, "500");
-            color:rgba(255,255,255,.8) !important;
+            color:rgba(255,255,255,.8);
 
             &:hover{
                 background-color:map-get($theme, "600");
-                color:white !important;
+                color:white ;
             }
         }
 
         &-danger {
-            background-color:#F44336 !important;
-            color:rgba(255,255,255,.8) !important;
+            background-color:#F44336 ;
+            color:rgba(255,255,255,.8) ;
 
             &:hover{
-                background-color:#E53935 !important;
-                color:white !important;
+                background-color:#E53935 ;
+                color:white ;
             }
         }
     }
@@ -112,11 +144,11 @@
         display:inline-flex;
         justify-content:center;
         align-items:center;
-        margin:0 !important;
-        margin-right:.5rem !important;
+        margin:0 ;
+        margin-right:.5rem ;
 
         &:last-child{
-            margin-right: 0 !important;
+            margin-right: 0 ;
         }
     }
 

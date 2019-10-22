@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'wui-modal',
@@ -12,14 +12,16 @@ export class ModalComponent implements OnInit {
   _width = '';
   _height = '';
   @Input('width') set width(val) {
-    this._width = val + 'px';
+    this._width = val;
   }
   @Input('height') set height(val) {
-    this._height = val + 'px';
+    this._height = val;
   }
   @HostBinding('class.show') show: Boolean = false;
 
-  constructor() { }
+  constructor(
+    private el: ElementRef
+  ) { }
 
   open() {
     this.show = true;

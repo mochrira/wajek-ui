@@ -1,6 +1,6 @@
 <div class="backdrop"></div>
 <div class="outer">
-  <div class="inner inner-{{_width.length==0?size:''}}" [ngStyle]="{'width': _width, 'height': _height}">
+  <div #inner class="inner inner-{{_width.length==0?size:''}}" [ngStyle]="{'width': _width, 'height': _height}">
     <ng-content select="wui-top-bar"></ng-content>
     <div class="content">
       <ng-content></ng-content>

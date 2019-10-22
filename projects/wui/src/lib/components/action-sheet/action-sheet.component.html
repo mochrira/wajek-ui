@@ -4,7 +4,7 @@
    {{title}}
   </div>
   <wui-list>
-    <wui-list-item wuiRipple *ngFor="let item of items" (wuiClick)="itemClick(item)">
+    <wui-list-item *ngFor="let item of items" (click)="itemClick(item)">
       <span class="mdi mdi-{{item.icon}}"></span>
       <div>
         <div class="title">{{item.caption}}</div>
