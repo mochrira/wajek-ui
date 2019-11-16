@@ -24,18 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   openDialog() {
-    this.wuiService.dialog('Konfirmasi', 'Apakah anda yakin menghapus ini ?', [{
-      label: 'Ya',
-      click: () => {
-        this.wuiService.snackbar('Berhasil dihapus !');
-        this.wuiService.dialog('close');
-      }
-    }, {
-      label: 'Tidak',
-      click: () => {
-        this.wuiService.dialog('close');
-      }
-    }]);
+    
   }
 
   ngOnInit() {}

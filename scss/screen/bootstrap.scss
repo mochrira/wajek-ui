@@ -6,7 +6,8 @@
 $theme-colors: map-merge(
     $theme-colors,
     (
-        "primary": map-get($theme, "500")
+        "primary": map-get($theme, "500"),
+        "secondary": map-get($theme, "secondary")
     )
 );
 
@@ -14,3 +15,4 @@ $theme-colors: map-merge(
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/forms';

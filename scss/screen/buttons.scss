@@ -1,167 +1,147 @@
 @import "../variables/colors.scss";
 
-.btn{
-    display:inline-flex;
-    white-space: nowrap ;
-    outline:none;
-    justify-content:center;
-    font-family:'Roboto', sans-serif;
-    background-color:transparent;
-    border:none;
-    font-weight:500;
-    color:#666;
+.btn {
+    padding: .375rem 1rem;
+    border-radius: .25rem;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 500 !important;
+    letter-spacing: 0.0125rem;
 
-    &-circle{
-        padding-left:.375rem ;
-        padding-right:.375rem ;
-        border-radius:50%;
-    }
+    &-default {
+        color: #424242;
+        background-color: #E0E0E0;
 
-    &-down{
-        &.btn{
-            &-primary{
-                background-color:map-get($theme, "600");
-                color:rgba(255,255,255,0.8) ;
-            }
-
-            &-default{
-                background-color:rgba(0,0,0,0.07);
-                color:#555;
-            }
-        }
-    }
-
-    &.fill{
-        background-color:rgba(0,0,0,0.035);
-    }
-
-    &:hover{
-        background-color: rgba(0,0,0,0.05);
-        color:#444 ;
-        cursor:pointer;
-    }
-
-    &:active{
-        background-color: rgba(0,0,0,0.15);
-        color:#333 ;
-    }
-
-    &:disabled{
-        background-color:rgba(0,0,0,0.15) ;
-        color:#333 ;
-    }
-
-
-    &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(rgba(0,0,0), 0.35);
-    }
-
-    &-primary{
-        color:map-get($theme, "500") ;
-
-        &:hover{
-            &:not(:disabled){
-                background-color:map-get($theme, "600");
-                color:rgba(255,255,255,.8);
-            }
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 0.2rem rgba(map-get($theme, "600"), 0.25);
-        }
-
-        &:active{
-            &:not(:disabled){
-                color:rgba(255,255,255,1);
-                background-color:map-get($theme, "700");
-            }
-        }
-    }
-
-    &-danger{
-        color:#F44336 ;
-
-        &:hover{
-            color:rgba(255,255,255,.8) ;
-            background-color:#E53935 ;
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 0.2rem rgba(#F44336, 0.25);
-        }
-
-        &:active{
-            color:rgba(255,255,255,1) ;
-            background-color:#D32F2F ;
-        }
-    }
-
-    &-fill{
-        &-default {
-            background-color: rgba(0,0,0,0.035);
-            color:#777 ;
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 0.2rem rgba(rgba(0,0,0), 0.35);
-        }
-
-        &-secondary {
-            background-color: map-get($theme, "secondary");
-            color: white;
-
-            &:hover, &:active {
-                background-color: darken(map-get($theme, "secondary"), 50%);
-                opacity: 1;
-                color: white;
-            }
-        }
-        
-        &-primary {
-            background-color:map-get($theme, "500");
-            color:rgba(255,255,255,.8);
-
-            &:hover{
-                background-color:map-get($theme, "600");
-                color:white ;
-            }
-        }
-
-        &-danger {
-            background-color:#F44336 ;
-            color:rgba(255,255,255,.8) ;
-
-            &:hover{
-                background-color:#E53935 ;
-                color:white ;
-            }
+        &:hover {
+            color: darken(#424242, 5%);
+            background-color: darken(#E0E0E0, 5%);
         }
     }
 
     span.mdi{
-        width:1.5rem;
-        height:1.5rem;
-        display:inline-flex;
-        justify-content:center;
-        align-items:center;
-        margin:0 ;
-        margin-right:.5rem ;
+        vertical-align: middle;
+        line-height: .875rem;
+
+        &:before {
+            line-height: .875rem;
+        }
+
+        &:first-child {
+            margin-left: -.5rem;
+        }
 
         &:last-child{
-            margin-right: 0 ;
+            margin-right: -.5rem;
         }
     }
 
+    &-smooth {
+        background: transparent;
 
-    &.fab{
-        position:fixed;
-        bottom:1rem;
-        right:1rem;
-        display:inline-flex;
-        padding:1rem;
-        justify-content:center;
-        align-items:center;
-        z-index:3;
-        border-radius:50%;
+        &.btn-default {
+            color: #424242;
+
+            &:hover {
+                color: darken(#424242, 5%);
+                background-color: #E0E0E0;
+            }
+        }
+
+        &.btn-primary {
+            color: map-get($theme, "400");
+
+            &:hover {
+                background-color: rgba(map-get($theme, "100"), 0.5);
+                color: map-get($theme, "600");
+            }
+        }
+
+        &.btn-secondary {
+            color: #222;
+
+            &:hover {
+                background-color: rgba(0,0,0,0.15);
+            }
+        }
+    }
+
+    &-rounded {
+        border-radius: 1.5rem;
+    }
+
+    &-fab {
+        padding: 0 !important;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        display: inline-flex;
+
+        span.mdi {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+
+            &:before {
+                width: 1.5rem;
+                height: 1.5rem;
+                line-height: 1.5rem;
+            }
+        }
+
+        &-sm {
+            width: 2.5rem;
+            height: 2.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    + .btn {
+        margin-left: .25rem;
+    }
+}
+
+.btn-group {
+    display: flex;
+    
+    .btn  {
+        border-radius: 0;
+
+        &:first-child{
+            border-top-left-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        &:last-child{
+            border-top-right-radius: .25rem;
+            border-bottom-right-radius: .25rem;
+        }
+
+        &-outline {
+            &-primary, &-secondary, &-success, &-danger, &-info, &-warning {
+                border-left-width: 0px !important;
+
+                &:first-child {
+                    border-left-width: 1px !important;
+                }
+
+                &:last-child {
+                    border-right-width: 1px !important;
+                }
+            }
+        }
+
+        + .btn {
+            margin-left: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn {
+        font-size: .875rem;       
     }
 }

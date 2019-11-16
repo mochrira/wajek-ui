@@ -13,7 +13,6 @@ import {
 import {
   MessageService
 } from '../../services/message.service';
-import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-drawer-item',
@@ -38,9 +37,9 @@ export class DrawerItemComponent implements OnInit {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss']
 })
-export class DrawerComponent implements OnInit, AfterViewInit, OnChanges {
+export class DrawerComponent implements OnInit, AfterViewInit {
 
-  ps: PerfectScrollbar;
+  swiper: any;
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
   @Input() @HostBinding('class.expand') expand: Boolean = false;
   @Input() autoCollapse = true;
@@ -80,17 +79,8 @@ export class DrawerComponent implements OnInit, AfterViewInit, OnChanges {
     });
   }
 
-  ngOnChanges() {
-    if(this.ps) {
-      this.ps.update();
-    }
-  }
-
   ngAfterViewInit() {
-    const container = this.inner.nativeElement;
-    this.ps = new PerfectScrollbar(container, {
-      wheelSpeed: 1
-    });
+    
   }
 
 }

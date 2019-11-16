@@ -36,6 +36,7 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { TrapFocusDirective } from './directives/trap-focus.directive';
 import { TabOrderDirective } from './directives/tab-order.directive';
+import { DateselectComponent } from './components/dateselect/dateselect.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { TabOrderDirective } from './directives/tab-order.directive';
     AppTitleComponent,
     AutofocusDirective,
     TrapFocusDirective,
-    TabOrderDirective
+    TabOrderDirective,
+    DateselectComponent
   ],
   imports: [
     CommonModule,
@@ -117,7 +119,8 @@ import { TabOrderDirective } from './directives/tab-order.directive';
     AppTitleComponent,
     AutofocusDirective,
     TrapFocusDirective,
-    TabOrderDirective
+    TabOrderDirective,
+    DateselectComponent
   ], 
   providers: [
     DatePipe

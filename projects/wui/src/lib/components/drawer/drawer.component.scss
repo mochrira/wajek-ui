@@ -13,7 +13,7 @@
     >.inner{
         width:100%;
         max-width:14rem;
-        background-color:white;
+        background-color:#FFF;
         flex: 1 1 auto;
         padding-top:1rem;
         padding-bottom:1rem;
@@ -21,6 +21,8 @@
         overflow-x:hidden;
         position:relative;
         border-right: 1px solid #EFEFEF;
+        transform: translateX(-100%);
+        transition: transform .15s ease;
     }
 
     >.backdrop{
@@ -29,6 +31,10 @@
 
     &.expand{
         z-index:999;
+
+        .inner {
+            transform: translateX(0);
+        }
     }
 
     >>> {
@@ -106,6 +112,10 @@
     :host{
         position:relative;
         max-width:4.5rem;
+
+        > .inner {
+            transform: translateX(0);
+        }
 
         >>> {
             .header{

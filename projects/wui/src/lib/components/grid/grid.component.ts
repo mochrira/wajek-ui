@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, AfterViewChecked, QueryList, HostBinding, HostListener, OnDestroy, AfterContentInit, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, EventEmitter, Output, OnChanges, ViewChild, ChangeDetectorRef, QueryList, HostBinding, HostListener, OnDestroy, ElementRef } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
-import PerfectScrollbar from 'perfect-scrollbar';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'wui-grid-column',
@@ -35,7 +33,7 @@ export class GridColumnComponent implements OnInit {
 })
 export class GridComponent implements OnInit, OnDestroy, OnChanges {
 
-  ps : PerfectScrollbar | null = null;
+  ps = null;
   selectedRow = -1;
   
   @HostBinding('class.loading') showLoading = false;
@@ -159,11 +157,6 @@ export class GridComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    this.ps = new PerfectScrollbar(this.tableContainer.nativeElement, {
-      handlers: ['click-rail','drag-thumb','wheel','touch'],
-      wheelSpeed: 1,
-      suppressScrollX: true
-    });
     this.tableContainer.nativeElement.addEventListener('ps-y-reach-end', () => {
       this.scrollEnd.emit();
     });

@@ -1,4 +1,4 @@
-import { Directive, ContentChildren, QueryList, OnInit, AfterContentInit, HostListener, Input, ElementRef } from '@angular/core';
+import { Directive, ContentChildren, QueryList, AfterContentInit, ElementRef } from '@angular/core';
 import { TabOrderDirective } from './tab-order.directive';
 
 @Directive({

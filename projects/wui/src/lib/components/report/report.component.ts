@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MessageService } from '../../services/message.service';
-import PerfectScrollbar from 'perfect-scrollbar';
 
 declare var window: any;
 
@@ -16,7 +15,6 @@ export class ReportComponent implements OnInit {
   pageSizeCollection = {
     'A4': [210, 297]
   };
-  ps: PerfectScrollbar;
 
   @ViewChild('reportContent', { static: false }) reportContent: any;
   @ViewChild('reportInner', { static: false }) reportInner: any;
@@ -29,9 +27,6 @@ export class ReportComponent implements OnInit {
   open() {
     this.show = true;
     this.cd.detectChanges();
-    this.ps = new PerfectScrollbar(this.reportInner.nativeElement, {
-      wheelSpeed: .5
-    });
   }
 
   close() {

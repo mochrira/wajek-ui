@@ -5,7 +5,10 @@
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
       "perfect-scrollbar": "PerfectScrollbar",
-      "ng2-dnd": "ng2Dnd"
+      "ng2-dnd": "ng2Dnd",
+      "swiper": "swiper",
+      "swiper/js/swiper.esm.js": "swiper",
+      "is-webview": "isWebView"
     }
   },
   "whitelistedNonPeerDependencies": [

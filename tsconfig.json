@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "wui": [
+        "dist/wui"
+      ],
       "wui-firebase": [
         "dist/wui-firebase"
       ],
