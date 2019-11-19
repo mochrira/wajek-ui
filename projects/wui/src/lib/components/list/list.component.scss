@@ -27,7 +27,7 @@
             transition: background-color ease .5s;
 
             &:hover{
-                background-color:map-get($theme, "50");
+                background-color:#F5F5F5;
             }
 
             > div{

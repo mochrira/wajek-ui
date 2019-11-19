@@ -14,6 +14,10 @@ export class PageComponent implements OnInit {
 
   constructor() { }
 
+  scrollTo(pos) {
+    this.content.nativeElement.scrollTop = pos;
+  }
+
   onPageScroll(e) {
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
       this.scrollEnd.next(e);

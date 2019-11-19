@@ -7,8 +7,9 @@
     cursor: pointer;
     box-sizing: border-box;
     font-size: 1rem;
-    font-weight: 500 !important;
+    font-weight: bold;
     letter-spacing: 0.0125rem;
+    font-family: 'Roboto Condensed';
 
     &-default {
         color: #424242;
@@ -39,6 +40,7 @@
 
     &-smooth {
         background: transparent;
+        border-color: transparent !important;
 
         &.btn-default {
             color: #424242;
@@ -69,6 +71,8 @@
 
     &-rounded {
         border-radius: 1.5rem;
+        padding-left: .75rem;
+        padding-right: .75rem;
     }
 
     &-fab {

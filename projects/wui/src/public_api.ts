@@ -15,3 +15,4 @@ export * from './lib/components/checkbox/checkbox.component';
 export * from './lib/components/report/report.component';
 export * from './lib/components/tab/tab.component';
 export * from './lib/components/dateselect/dateselect.component';
+export * from './lib/components/page/page.component';
