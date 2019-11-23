@@ -11,8 +11,8 @@
     transition:all ease .5s;
 
     >.inner{
-        width:100%;
-        max-width:14rem;
+        width:calc(100% - 2rem);
+        max-width:16rem;
         background-color:#FFF;
         flex: 1 1 auto;
         padding-top:1rem;

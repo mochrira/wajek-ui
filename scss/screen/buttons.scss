@@ -103,6 +103,17 @@
         }
     }
 
+    &-lg {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        font-size: 1.125rem !important;
+        font-weight: 300 !important;
+        
+        &.btn-rounded {
+            border-radius: 1.5rem;
+        }
+    }
+
     + .btn {
         margin-left: .25rem;
     }

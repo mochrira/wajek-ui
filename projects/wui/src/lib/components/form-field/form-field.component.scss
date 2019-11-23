@@ -204,6 +204,10 @@
             left: 0;
         }
 
+        span.mdi {
+            left: 0;
+        }
+
         >>> {
             input, select, textarea {
                 padding-left:0 !important;
@@ -223,10 +227,10 @@
     }
 
     &.with-icon{
-        padding-left: 3rem;
+        padding-left: 2.5rem;
 
         label{
-            left: 3rem;
+            left: 2.5rem;
         }
 
         >>>{
