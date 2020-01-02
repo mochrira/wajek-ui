@@ -26,6 +26,7 @@
     "is-webview": "^1.0.1",
     "mysql2": "^2.1.0",
     "ng2-dnd": "^5.0.2",
+    "perfect-scrollbar": "^1.4.0",
     "roboto-fontface": "^0.10.0",
     "rxjs": "~6.5.4",
     "swiper": "^5.2.0",
