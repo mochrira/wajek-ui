@@ -1,3 +1,4 @@
+@import "../../../../../../scss/variables/colors.scss";
 :host{
     display:none;
 
@@ -28,16 +29,32 @@
         border-radius:.25rem;
         overflow:hidden;
 
-        .next, .prev{
+        .next, .prev, .close{
             display:inline-flex;
             justify-content:center;
             align-items:center;
             width:2rem;
             height:2rem;
             border-radius:50%;
+            color: #555;
+            cursor: pointer;
 
             &:hover{
                 background-color:#EFEFEF;
+                color: #333;
+            }
+        }
+
+        .current {
+            padding: .5rem 1rem;
+            cursor: pointer;
+            border-radius: .25rem;
+            color: #555;
+            text-decoration: none;
+
+            &:hover {
+                background-color: #EFEFEF;
+                color: #333;
             }
         }
     }
@@ -74,24 +91,27 @@
             position:relative;
             cursor:pointer;
             font-size:.875rem;
+            color: #999;
+            border-radius: 50%;
 
-            &:before{
-                content:"";
-                display:block;
-                width:100%;
-                padding-top:100%;
+            &.in-month {
+                color: #333;
             }
 
-            &:after{
-                content:"";
-                position:absolute;
-                top:0;left:0;
-                background-color:transparent;
-                display:block;
-                width:100%;
-                padding-top:100%;
-                z-index:0;
-                border-radius:50%;
+            &.selected {
+                background-color: map-get($theme, "700");
+                color: white;
+            }
+
+            &:before {
+                content: "";
+                display: block;
+                width: 100%;
+                padding-top: 100%;
+            }
+
+            &:hover:not(.selected) {
+                background-color: rgba(100,100,100, .1);
             }
 
             span {
@@ -148,4 +168,8 @@
         }
     }
     
+}
+
+.btn-circle {
+    border-radius: 50%;
 }

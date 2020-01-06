@@ -5,21 +5,21 @@
                 <div class="day" *ngIf="dayPreview">{{date | date: 'EEEE'}}</div>
                 <div class="date">{{date | date: 'dd MMMM yyyy'}} <span *ngIf="timeSelector">{{date | date: 'HH:mm:ss'}}</span></div>
             </div>
-            <a class="btn btn-circle btn-default" (click)="close()">
+            <a class="close" (click)="close()">
                 <span class="mdi mdi-close"></span>
             </a>
         </div>
         <div class="display">
             <ng-container *ngIf="mode=='date'">
                 <div class="d-flex justify-content-{{(yearSelector || datePreviewFormat=='none')?'between':'center'}} align-items-center mb-3">
-                    <a (click)="prev()" class="btn btn-circle btn-default" *ngIf="yearSelector">
+                    <a (click)="prev()" class="prev" *ngIf="yearSelector">
                         <span class="mdi mdi-chevron-left"></span>
                     </a>
-                    <button class="btn btn-default" (click)="changeMode('month')">
+                    <a class="current" (click)="changeMode('month')">
                         <span *ngIf="yearSelector">{{shortMonth(months[month]) | uppercase}}</span>&nbsp;<span *ngIf="yearSelector">{{year}}</span>
                         <span *ngIf="!yearSelector">{{months[month] | uppercase}}</span>
-                    </button>
-                    <a (click)="next()" class="btn btn-circle btn-default" *ngIf="yearSelector">
+                    </a>
+                    <a (click)="next()" class="next" *ngIf="yearSelector">
                         <span class="mdi mdi-chevron-right"></span>
                     </a>
                     <a class="btn btn-circle btn-default" (click)="close()" *ngIf="datePreviewFormat=='none'">
@@ -30,7 +30,7 @@
                     <div *ngFor="let d of dayLabels" class="days">
                         <span>{{d}}</span>
                     </div>
-                    <a *ngFor="let d of dates" (click)="selectDate(d)" class="btn btn-{{((d | date:'M') !== ((month+1)+''))?'default':'primary'}} btn-circle {{(isSelected(d)?'btn-fill-primary':'')}}">
+                    <a *ngFor="let d of dates" (click)="selectDate(d)" class="{{((d | date:'M') !== ((month+1)+''))?'':'in-month'}} {{(isSelected(d)?'selected':'')}}">
                         <span>{{getDate(d)}}</span>
                     </a>
                 </div>
@@ -42,36 +42,36 @@
             </ng-container>
             <ng-container *ngIf="mode=='month'">
                 <div class="d-flex justify-content-between mb-3" *ngIf="yearSelector">
-                    <a (click)="prev()" class="btn btn-circle btn-default">
+                    <a (click)="prev()" class="prev">
                         <span class="mdi mdi-chevron-left"></span>
                     </a>
-                    <button (click)="changeMode('year')" class="btn btn-default">
+                    <a (click)="changeMode('year')" class="current">
                         {{year}}
-                    </button>
-                    <a (click)="next()" class="btn btn-circle btn-default">
+                    </a>
+                    <a (click)="next()" class="next">
                         <span class="mdi mdi-chevron-right"></span>
                     </a>
                 </div>
                 <div class="months">
-                    <a *ngFor="let m of months; let i = index" (click)="selectMonth(i)" class="btn btn-primary {{(isSelected(i)?'btn-fill-primary':'')}}">
+                    <a *ngFor="let m of months; let i = index" (click)="selectMonth(i)" class="{{(isSelected(i)?'selected':'')}}">
                         <span>{{shortMonth(m)}}</span>
                     </a>
                 </div>
             </ng-container>
             <ng-container *ngIf="mode=='year'">
                 <div class="d-flex justify-content-between mb-3">
-                    <a (click)="prev()" class="btn btn-default btn-circle">
+                    <a (click)="prev()" class="prev">
                         <span class="mdi mdi-chevron-left"></span>
                     </a>
-                    <button class="btn btn-default">
+                    <a class="current">
                         {{decadeStart()}} - {{decadeEnd()}}
-                    </button>
-                    <a (click)="next()" class="btn btn-default btn-circle">
+                    </a>
+                    <a (click)="next()" class="next">
                         <span class="mdi mdi-chevron-right"></span>
                     </a>
                 </div>
                 <div class="years">
-                    <a *ngFor="let y of years" (click)="selectYear(y)" class="btn btn-primary {{(isSelected(y)?'btn-fill-primary':'')}}">
+                    <a *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
                         <span>{{y}}</span>
                     </a>
                 </div>

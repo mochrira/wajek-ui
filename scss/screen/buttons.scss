@@ -9,7 +9,8 @@
     font-size: 1rem;
     font-weight: bold;
     letter-spacing: 0.0125rem;
-    font-family: 'Roboto Condensed';
+    font-family: inherit;
+    font-weight: normal;
 
     &-default {
         color: #424242;
