@@ -19,6 +19,9 @@ export class ModalComponent implements OnInit {
   }
   @HostBinding('class.show') show: Boolean = false;
 
+  @Input() draggable = false;
+  @Input() dragHandle;
+
   constructor(
     private el: ElementRef
   ) { }

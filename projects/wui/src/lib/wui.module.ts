@@ -37,6 +37,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { TrapFocusDirective } from './directives/trap-focus.directive';
 import { TabOrderDirective } from './directives/tab-order.directive';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
+import { AngularDraggableModule  } from 'angular2-draggable';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { DateselectComponent } from './components/dateselect/dateselect.componen
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AngularDraggableModule
   ],
   exports: [
     WuiComponent,
