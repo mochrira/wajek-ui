@@ -71,7 +71,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             border-bottom: 1px solid #EFEFEF;
-            padding: .25rem;
+            padding: .5rem;
 
             &:first-child {
                 padding-left: 1rem;
@@ -183,7 +183,8 @@
             text-align:left;
             background-color:white;
             font-weight: 500;
-            padding: .5rem .25rem;
+            padding: .5rem;
+            font-weight: bold;
             
             &:after{
                 width:100%;

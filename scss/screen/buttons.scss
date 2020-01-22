@@ -1,24 +1,28 @@
 @import "../variables/colors.scss";
 
 .btn {
-    padding: .375rem 1rem;
+    padding: 0 1rem;
+    height: 2.5rem;
     border-radius: .25rem;
     text-align: center;
     cursor: pointer;
     box-sizing: border-box;
     font-size: 1rem;
     font-weight: bold;
-    letter-spacing: 0.0125rem;
     font-family: inherit;
     font-weight: normal;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &-default {
         color: #424242;
-        background-color: #E0E0E0;
+        background-color: #EEEEEE;
 
         &:hover {
             color: darken(#424242, 5%);
-            background-color: darken(#E0E0E0, 5%);
+            background-color: darken(#EEEEEE, 5%);
         }
     }
 
