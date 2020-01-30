@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ElementRef, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'wui-modal',
@@ -22,9 +22,17 @@ export class ModalComponent implements OnInit {
   @Input() draggable = false;
   @Input() dragHandle;
 
+  @Output() scrollEnd: EventEmitter<any> = new EventEmitter();
+
   constructor(
     private el: ElementRef
   ) { }
+
+  onContentScroll(e) {
+    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
+      this.scrollEnd.next(e);
+    }
+  }
 
   open() {
     this.show = true;
