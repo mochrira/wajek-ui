@@ -38,6 +38,7 @@ import { TrapFocusDirective } from './directives/trap-focus.directive';
 import { TabOrderDirective } from './directives/tab-order.directive';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { AngularDraggableModule  } from 'angular2-draggable';
+import { WindowTitleComponent } from './components/window-title/window-title.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { AngularDraggableModule  } from 'angular2-draggable';
     AutofocusDirective,
     TrapFocusDirective,
     TabOrderDirective,
-    DateselectComponent
+    DateselectComponent,
+    WindowTitleComponent
   ],
   imports: [
     CommonModule,
