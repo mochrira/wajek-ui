@@ -124,7 +124,8 @@ import { WindowTitleComponent } from './components/window-title/window-title.com
     AutofocusDirective,
     TrapFocusDirective,
     TabOrderDirective,
-    DateselectComponent
+    DateselectComponent,
+    WindowTitleComponent
   ], 
   providers: [
     DatePipe

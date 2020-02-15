@@ -7,7 +7,7 @@ import { ContextMenuComponent } from '../components/context-menu/context-menu.co
 export class ContextMenuDirective {
 
   @Input() wuiContextMenu: ContextMenuComponent;
-  @HostListener('click', ['$event', '$this']) click(e) {
+  @HostListener('click', ['$event']) click(e) {
     const rect = this.el.nativeElement.getBoundingClientRect();
     this.wuiContextMenu.open(rect);
   }
