@@ -79,6 +79,12 @@ export class DrawerComponent implements OnInit, AfterViewInit {
     this.messageService.get('wui:toggleDrawer').subscribe(res => {
       this.toggle();
     });
+    this.messageService.get('wui:closeDrawer').subscribe(res => {
+      this.close();
+    });
+    this.messageService.get('wui:openDrawer').subscribe(res => {
+      this.open();
+    });
   }
 
   ngAfterViewInit() {
