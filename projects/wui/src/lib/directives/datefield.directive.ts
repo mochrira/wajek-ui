@@ -23,7 +23,6 @@ export class DatefieldDirective implements AfterViewInit{
     node.addEventListener('click', (e) => {
       let val = this.host.getValue();
       this.datepicker.open((val?val:'')).then(date => {
-        console.log(date);
         if (this.host.formControl) {
           this.host.formControl.control.setValue(this.datePipe.transform(date, this.format));
           this.host.detectFloat();

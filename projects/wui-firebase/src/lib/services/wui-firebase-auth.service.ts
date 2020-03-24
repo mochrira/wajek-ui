@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import * as firebase from 'firebase/app';
 import * as isWebView_import from 'is-webview';
 import 'firebase/auth';
+import 'firebase/messaging';
 
 const isWebView = isWebView_import;
 
@@ -30,6 +31,10 @@ export class WuiFirebaseAuthService {
 
   getFirebaseAuthInstance() {
     return firebase.auth();
+  }
+
+  getFirebaseMessagingInstance() {
+    return firebase.messaging();
   }
 
   init() {

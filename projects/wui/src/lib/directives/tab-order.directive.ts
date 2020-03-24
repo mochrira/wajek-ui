@@ -20,7 +20,6 @@ export class TabOrderDirective {
     if(e.shiftKey && e.keyCode==9) {
       if(this.prevEl) {
         e.preventDefault();
-        console.log(this.prevEl);
         this.prevEl.focus();
       }
     }
