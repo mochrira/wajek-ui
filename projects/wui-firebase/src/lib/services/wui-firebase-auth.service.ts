@@ -237,13 +237,6 @@ export class WuiFirebaseAuthService {
     })
   }
 
-  getPrimaryProviderId() {
-    if(this.getFirebaseAuthInstance().currentUser.providerData.length ==0){
-      return false;
-    }
-    return this.getFirebaseAuthInstance().currentUser.providerData[0].providerId;
-  }
-
   reauth(providerId, params: any = {}): Promise<any> {
     return new Promise((resolve,reject) => {
       this.ngZone.runOutsideAngular(() => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -11,84 +11,44 @@ export class WuiFirebaseHttpService {
     private httpClient: HttpClient
   ) { }
 
-  get(url, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const tokenPromise = (withToken ? firebase.auth().currentUser.getIdToken() : new Promise(res => res('')));
-      tokenPromise.then((idToken: any) => {
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', idToken);
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': idToken
-          });
-        }
-        this.httpClient.get(url, options).subscribe(res => {
-          resolve(res);
-        }, rej => {
-          reject(rej);
-        });
+  async get(url, options: any = {}, withToken = true) {
+    if(withToken) {
+      let idToken = await firebase.auth().currentUser.getIdToken();
+      options.headers = Object.assign(options.headers || {}, {
+        "Authorization": idToken
       });
-    });
+    }
+    return this.httpClient.get(url, options).toPromise();
   }
 
-  post(url, data = {}, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const tokenPromise = (withToken ? firebase.auth().currentUser.getIdToken() : new Promise(res => res('')));
-      tokenPromise.then((idToken: any) => {
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', idToken);
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': idToken
-          });
-        }
-        this.httpClient.post(url, data, options).subscribe(res => {
-          resolve(res);
-        }, rej => {
-          reject(rej);
-        });
+  async post(url, data = {}, options: any = {}, withToken = true) {
+    if(withToken) {
+      let idToken = await firebase.auth().currentUser.getIdToken();
+      options.headers = Object.assign(options.headers || {}, {
+        "Authorization": idToken
       });
-    });
+    }
+    return this.httpClient.post(url, data, options).toPromise();
   }
 
-  patch(url, data = {}, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const tokenPromise = (withToken ? firebase.auth().currentUser.getIdToken() : new Promise(res => res('')));
-      tokenPromise.then((idToken: any) => {
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', idToken);
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': idToken
-          });
-        }
-        this.httpClient.patch(url, data, options).subscribe(res => {
-          resolve(res);
-        }, rej => {
-          reject(rej);
-        });
+  async patch(url, data = {}, options: any = {}, withToken = true) {
+    if(withToken) {
+      let idToken = await firebase.auth().currentUser.getIdToken();
+      options.headers = Object.assign(options.headers || {}, {
+        "Authorization": idToken
       });
-    });
+    }
+    return this.httpClient.patch(url, data, options).toPromise();
   }
 
-  delete(url, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const tokenPromise = (withToken ? firebase.auth().currentUser.getIdToken() : new Promise(res => res('')));
-      tokenPromise.then((idToken: any) => {
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', idToken);
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': idToken
-          });
-        }
-        this.httpClient.delete(url, options).subscribe(res => {
-          resolve(res);
-        }, rej => {
-          reject(rej);
-        });
+  async delete(url, options: any = {}, withToken = true) {
+    if(withToken) {
+      let idToken = await firebase.auth().currentUser.getIdToken();
+      options.headers = Object.assign(options.headers || {}, {
+        "Authorization": idToken
       });
-    });
+    }
+    return this.httpClient.delete(url, options).toPromise();
   }
 
 }

@@ -16,8 +16,8 @@ export class ReportComponent implements OnInit {
     'A4': [210, 297]
   };
 
-  @ViewChild('reportContent', { static: false }) reportContent: any;
-  @ViewChild('reportInner', { static: false }) reportInner: any;
+  @ViewChild('reportContent') reportContent: any;
+  @ViewChild('reportInner') reportInner: any;
 
   constructor(
     private messageService: MessageService,

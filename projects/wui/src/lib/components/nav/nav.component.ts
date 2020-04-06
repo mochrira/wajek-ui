@@ -1,8 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild,
   ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject } from '@angular/core';
-import { MessageService } from '../../services/message.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { NavService } from '../../services/nav.service';
 
 @Component({
@@ -17,7 +15,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
   constructor(
     private navService: NavService,
-    private messageService: MessageService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private changeDetector: ChangeDetectorRef,
     @Inject('predefinedNavs') private predefinedNavs: any
@@ -25,9 +22,10 @@ export class NavComponent implements OnInit, OnDestroy {
 
   pop() {
     if (this.navService.components.length > 1) {
-      const componentIndex = this.navService.components.length;
+      const componentIndex = this.navService.components.length - 1;
       this.viewContainer.remove(componentIndex);
-      this.navService.components.splice(componentIndex - 1, 1);
+      this.navService.components.splice(componentIndex, 1);
+      this.changeDetector.detectChanges();
     }
   }
 
@@ -36,6 +34,7 @@ export class NavComponent implements OnInit, OnDestroy {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.viewContainer.createComponent(componentFactory);
     this.navService.components.push({name: name, componentRef: componentRef});
+    this.changeDetector.detectChanges();
   }
 
   setRoot(name: string) {

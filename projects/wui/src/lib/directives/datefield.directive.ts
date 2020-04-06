@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, Input, ContentChild, Renderer } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, Input, ContentChild, Renderer2 } from '@angular/core';
 import { DatepickerComponent } from '../components/datepicker/datepicker.component';
 import { FormFieldComponent } from '../components/form-field/form-field.component';
 import { DatePipe } from '@angular/common';

@@ -13,7 +13,6 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   actionItems: Array<any> = [];
   label: String = '';
   @HostBinding('class.show') show: Boolean = false;
-  @HostBinding('class.backdrop') backdrop: Boolean = true;
   private autoclose: any;
   private unsub: Subject<any> = new Subject();
 
@@ -24,7 +23,6 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   open(label, autoclose, backdrop, actionItems = []) {
     this.label = label;
     this.actionItems = actionItems;
-    this.backdrop = backdrop;
     if (this.show) {
       clearTimeout(this.autoclose);
       this.close();

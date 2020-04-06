@@ -1,5 +1,4 @@
-import { Component, ElementRef, Input, Renderer, Renderer2,
-  ContentChild, AfterContentInit, HostBinding, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ContentChild, AfterContentInit, HostBinding, OnInit, AfterContentChecked } from '@angular/core';
 import { FormControlName, NgModel } from '@angular/forms';
 
 @Component({
@@ -29,7 +28,6 @@ export class FormFieldComponent implements AfterContentInit, AfterContentChecked
 
   constructor(
     private el: ElementRef,
-    private renderer: Renderer,
     private renderer2: Renderer2
   ) {}
 
@@ -71,11 +69,11 @@ export class FormFieldComponent implements AfterContentInit, AfterContentChecked
         this.detectFloat();
       });
     }else {
-      this.renderer.listen(this.inputElement, 'keyup', (e) => {
-        this.detectFloat();
+      this.renderer2.listen(this.inputElement, 'keyup', (e) => {
+          this.detectFloat();
       });
-      this.renderer.listen(this.inputElement, 'change', (e) => {
-        this.detectFloat();
+      this.renderer2.listen(this.inputElement, 'change', (e) => {
+          this.detectFloat();
       });
       this.detectFloat();
     }

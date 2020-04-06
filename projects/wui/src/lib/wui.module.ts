@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { WuiComponent } from './wui.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { MessageService } from '../lib/services/message.service';
 import { FormFieldComponent } from './components/form-field/form-field.component';
-import { CommonModule, DatePipe } from '@angular/common';
 import { AppComponent } from './components/app/app.component';
 import { TopBarComponent, TopBarItemComponent } from './components/top-bar/top-bar.component';
 import { PageComponent } from './components/page/page.component';
@@ -17,7 +18,6 @@ import { WuiService } from './services/wui.service';
 import { ContextMenuComponent, ContextMenuItemComponent } from './components/context-menu/context-menu.component';
 import { ContextMenuDirective } from './directives/context-menu.directive';
 import { GridComponent, GridColumnComponent } from './components/grid/grid.component';
-import { FormsModule } from '@angular/forms';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
@@ -139,9 +139,7 @@ import { ScrollDirective } from './directives/scroll.directive';
 })
 export class WuiModule {
 
-  static forRoot(
-    predefinedNavs?: any
-  ): ModuleWithProviders {
+  static forRoot(predefinedNavs?: any): ModuleWithProviders {
     return {
       ngModule: WuiModule,
       providers: [
