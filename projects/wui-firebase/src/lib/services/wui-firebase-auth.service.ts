@@ -19,41 +19,25 @@ export class WuiFirebaseAuthService {
   constructor(
     private ngZone: NgZone,
     @Inject('wuiFirebaseConfig') private firebaseConfig: any
-  ) {
-    if (isWebView(navigator.userAgent)) {
-      document.addEventListener('deviceready', () => {
-        this.init();
-      });
-    } else {
-      this.init();
-    }
-  }
+  ) { }
 
   getFirebaseAuthInstance() {
     return firebase.auth();
   }
 
-  getFirebaseMessagingInstance() {
-    return firebase.messaging();
-  }
-
   init() {
-    this.ngZone.runOutsideAngular(() => {
-      firebase.initializeApp(this.firebaseConfig);
-      firebase.auth().onAuthStateChanged(currentUser => {
-        this.ngZone.run(() => {
-          if (!this.isInit) {
-            this.isInit = true;
-          }
-          if (currentUser) {
-            this.currentUser = currentUser;
-            this.isLoggedIn.next(true);
-          } else {
-            this.currentUser = null;
-            this.isLoggedIn.next(false);
-          }
-        });
-      });
+    firebase.initializeApp(this.firebaseConfig);
+    firebase.auth().onAuthStateChanged(currentUser => {
+      if (!this.isInit) {
+        this.isInit = true;
+      }
+      if (currentUser) {
+        this.currentUser = currentUser;
+        this.isLoggedIn.next(true);
+      } else {
+        this.currentUser = null;
+        this.isLoggedIn.next(false);
+      }
     });
   }
 
@@ -107,33 +91,17 @@ export class WuiFirebaseAuthService {
 
   signInWithGoogle(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (isWebView(navigator.userAgent)) {
-        this.ngZone.runOutsideAngular(() => {
-          firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then(res => {
-            return firebase.auth().getRedirectResult();
-          }).then(res => {
-            this.ngZone.run(() => {
-              resolve(res);
-            });
-          }).catch(rej => {
-            this.ngZone.run(() => {
-              reject(rej);
-            });
+      this.ngZone.runOutsideAngular(() => {
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
+          this.ngZone.run(() => {
+            resolve(res);
+          });
+        }).catch(rej => {
+          this.ngZone.run(() => {
+            reject(rej);
           });
         });
-      } else {
-        this.ngZone.runOutsideAngular(() => {
-          firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
-            this.ngZone.run(() => {
-              resolve(res);
-            });
-          }).catch(rej => {
-            this.ngZone.run(() => {
-              reject(rej);
-            });
-          });
-        });
-      }
+      });
     });
   }
 

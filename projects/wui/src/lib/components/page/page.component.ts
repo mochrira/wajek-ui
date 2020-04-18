@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/cor
 export class PageComponent implements OnInit {
 
   @Output() scrollEnd: EventEmitter<any> = new EventEmitter();
+  @Output() scroll: EventEmitter<any> = new EventEmitter();
   @ViewChild('content', {static: true}) content: any;
 
   touchYPos = 0;
@@ -19,6 +20,7 @@ export class PageComponent implements OnInit {
   }
 
   onPageScroll(e) {
+    this.scroll.next(e);
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
       this.scrollEnd.next(e);
     }
