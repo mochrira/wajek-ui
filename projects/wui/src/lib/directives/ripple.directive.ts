@@ -1,53 +1,74 @@
-import { Directive, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnInit, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[wuiRipple]'
 })
-export class RippleDirective {
+export class RippleDirective implements OnInit {
 
-  rippleTag: any;
-  @Output() wuiClick: EventEmitter<any> = new EventEmitter();
-
-  @HostListener('click', ['$event'])
-  calculateRipple(e) {
-    if (!this.rippleTag) {
-      this.rippleTag = document.createElement('div');
-      this.rippleTag.classList.add('wuiRipple');
-    }
-    this.el.nativeElement.appendChild(this.rippleTag);
-    const elRect = this.el.nativeElement.getBoundingClientRect();
-    let size = 0; let top = 0; let left = 0; let retention = 0;
-    if (elRect.width > elRect.height) {
-      retention = (elRect.width * 20 / 100);
-      size = elRect.width + retention;
-      left = 0 - (retention / 2);
-      top = 0 - ((size / 2) - (elRect.height / 2) - (retention / 2));
-    } else {
-      retention = (elRect.height * 20 / 100);
-      size = elRect.height + retention;
-      top = 0 - (retention / 2);
-      left = 0 - ((size / 2) - (elRect.width / 2) - (retention / 2));
-    }
-    this.rippleTag.style.width = size + 'px';
-    this.rippleTag.style.height = size + 'px';
-    this.rippleTag.style.top = top + 'px';
-    this.rippleTag.style.left = left + 'px';
-    this.rippleTag.style.opacity = 1;
-
-    setTimeout(() => {
-      this.rippleTag.style.opacity = 0;
-      this.rippleTag.style.width = '0px';
-      this.rippleTag.style.height = '0px';
-      this.rippleTag.style.top = '50%';
-      this.rippleTag.style.left = '50%';
-      this.el.nativeElement.removeChild(this.rippleTag);
-      this.wuiClick.emit(e);
-    }, 200);
-  }
+  rippleEl: any;
+  interval: any;
+  @Input('rippleTheme') theme = 'light';
 
   constructor(
     private el: ElementRef
-  ) {
+  ) { }
+
+  @HostListener('mousedown', ['$event']) onMouseDown(e) {
+    this.start(e.clientX, e.clientY);
+  }
+
+  @HostListener('touchstart', ['$event']) onTouchStart(e) {
+    this.start(e.touches[0].clientX, e.touches[0].clientY);
+  }
+
+  start(x, y) {
+    if(!this.rippleEl) {
+      this.rippleEl = document.createElement('div');
+      this.rippleEl.classList.add('wuiRipple__obj');
+      this.rippleEl.classList.add('wuiRipple__' + this.theme);
+      this.el.nativeElement.appendChild(this.rippleEl);
+    }
+    this.rippleEl.style.cssText = "";
+    if(this.interval) {
+      clearInterval(this.interval);
+    }
+    var elRect = this.el.nativeElement.getBoundingClientRect();
+    let top = (y - elRect.y);
+    let left = (x - elRect.x);
+    this.rippleEl.style.top = top + 'px';
+    this.rippleEl.style.left = left + 'px';
+    let matrix = (this.el.nativeElement.offsetWidth > this.el.nativeElement.offsetHeight ? 'width' : 'height');
+    let size = 0;
+    let durMatrix = 0;
+    if(matrix == 'width') {
+      size = ((this.el.nativeElement.offsetWidth - left) > left ? ((this.el.nativeElement.offsetWidth - left) * 2) : 
+        (left * 2));
+      durMatrix = document.body.clientWidth;
+    } else {
+      size = ((this.el.nativeElement.offsetHeight - top) > top ? ((this.el.nativeElement.offsetHeight - top) * 2) : 
+        (top * 2));
+      durMatrix = document.body.clientHeight;
+    }
+    this.animate(size, 200 + (200 * (size / durMatrix)));
+  }
+
+  animate(size, duration) {
+    let pos = 0;
+    this.interval = setInterval(() => {
+      let vsize = this.rippleEl.offsetHeight + (size / (duration / 10));
+      this.rippleEl.style.width = vsize + 'px';
+      this.rippleEl.style.height = vsize + 'px';
+      this.rippleEl.style.opacity = ((duration - pos) / duration);
+      if(pos < duration) {
+        pos += 10;
+      }else{
+        this.rippleEl.style.cssText = "";
+        clearInterval(this.interval);
+      }
+    }, 10);
+  }
+
+  ngOnInit() {
     this.el.nativeElement.style.position = 'relative';
     this.el.nativeElement.style.overflow = 'hidden';
   }

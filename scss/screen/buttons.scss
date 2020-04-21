@@ -2,7 +2,6 @@
 
 .btn {
     padding: 0 1rem;
-    height: 2.5rem;
     border-radius: .25rem;
     text-align: center;
     cursor: pointer;
@@ -12,9 +11,9 @@
     font-family: inherit;
     font-weight: normal;
     white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    box-shadow: 0 .25rem .25rem rgba(0,0,0,0.15);
+    border: none;
 
     &-default {
         color: #424242;
@@ -23,6 +22,13 @@
         &:hover {
             color: darken(#424242, 5%);
             background-color: darken(#EEEEEE, 5%);
+        }
+    }
+
+    &-primary {
+
+        &:active, &:focus {
+            background-color: lighten(map-get($theme, "500"), 10%) !important;
         }
     }
 
@@ -113,7 +119,6 @@
         padding-bottom: .5rem;
         font-size: 1.125rem !important;
         font-weight: 300 !important;
-        height: auto;
         
         &.btn-rounded {
             border-radius: 1.5rem;

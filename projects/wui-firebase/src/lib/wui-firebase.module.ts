@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { WuiFirebaseAuthService } from './services/wui-firebase-auth.service';
 import { WuiFirebaseHttpService } from './services/wui-firebase-http.service';
+import { WuiFirebaseService } from './services/wui-firebase.service';
 
 @NgModule()
 export class WuiFirebaseModule {
@@ -9,7 +9,7 @@ export class WuiFirebaseModule {
     return {
       ngModule: WuiFirebaseModule,
       providers: [
-        WuiFirebaseAuthService,
+        WuiFirebaseService,
         WuiFirebaseHttpService,
         {
           provide: 'wuiFirebaseConfig',
