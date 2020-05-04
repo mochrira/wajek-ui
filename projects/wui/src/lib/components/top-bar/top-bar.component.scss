@@ -14,9 +14,26 @@
     border-bottom:1px solid #EFEFEF;
     overflow:hidden;
     padding: 0 .5rem;
+    box-shadow: 0 .125rem .375rem rgba(0,0,0,0.125);
+    border-bottom: none !important;
 
     &.compact{
         height: 3rem;
+    }
+
+    &.reactiveTopBar {
+        >>> {
+            .wuiTitle {
+                transform: translateY(100%);
+                opacity: 0;
+                transition: all ease .2s;
+    
+                &.show {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
     }
 
     >>> {

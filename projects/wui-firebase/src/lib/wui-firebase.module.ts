@@ -10,15 +10,7 @@ export class WuiFirebaseModule {
       ngModule: WuiFirebaseModule,
       providers: [
         WuiFirebaseService,
-        WuiFirebaseHttpService,
-        {
-          provide: 'wuiFirebaseConfig',
-          useValue: wuiFirebaseConfig
-        },
-        {
-          provide: 'wuiFirebaseOptions',
-          useValue: options
-        }
+        WuiFirebaseHttpService
       ]
     };
   }

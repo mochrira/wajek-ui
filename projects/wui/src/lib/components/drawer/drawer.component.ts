@@ -7,8 +7,7 @@ import {
   ContentChildren,
   AfterViewInit,
   ElementRef,
-  ViewChild,
-  OnChanges
+  ViewChild
 } from '@angular/core';
 import {
   MessageService

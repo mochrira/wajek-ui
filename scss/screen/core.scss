@@ -100,6 +100,40 @@
     
     }
 
+    wui-window-title {
+        + wui-app {
+            wui-drawer {
+                margin-top: 2rem;
+            }
+        }
+    }
+
+    .font {
+        &-weight {
+            &-100 {
+                font-weight: 100;
+            }
+            &-200 {
+                font-weight: 200;
+            }
+            &-300 {
+                font-weight: 300;
+            }
+            &-400, &-normal {
+                font-weight: 400;
+            }
+            &-500 {
+                font-weight: 500;
+            }
+            &-600 {
+                font-weight: 600;
+            }
+            &-700, &-bold {
+                font-weight: 700;
+            }
+        }
+    }
+
     @import "scrollbar.scss";
     @import "buttons.scss";
     @import "box.scss";

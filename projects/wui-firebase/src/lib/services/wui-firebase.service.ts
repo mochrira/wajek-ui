@@ -1,7 +1,6 @@
 import { Injectable, NgZone, Inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import * as isWebView_import from 'is-webview';
-import { WuiService } from 'wui';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/messaging';
@@ -15,12 +14,11 @@ declare var FirebasePlugin: any;
 export class WuiFirebaseService {
 
   onMessageReceived: Subject<any> = new Subject();
-  isLoggedIn : BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isLoggedIn : BehaviorSubject<boolean> = new BehaviorSubject(null);
   isWebView : boolean = false;
 
   constructor(
     private ngZone: NgZone,
-    private wuiService: WuiService,
     @Inject('firebaseConfig') private firebaseConfig: any,
     @Inject('appClientId') private clientId: string
   ) { 
@@ -34,12 +32,6 @@ export class WuiFirebaseService {
           this.ngZone.run(() => {
             this.onMessageReceived.next(message);
           });
-        }, (err) => {
-          this.ngZone.run(() => {
-              this.wuiService.snackbar({
-                label: 'Message Received Error: ' + err
-              });
-          });
         });
         FirebasePlugin.registerAuthStateChangeListener((isSignedIn) => {
           this.ngZone.run(() => {
@@ -51,9 +43,6 @@ export class WuiFirebaseService {
           })
         }, err => {
           this.ngZone.run(() => {
-            this.wuiService.snackbar({
-              label: 'Error onAuthStateChanged, ' + err
-            });
             this.isLoggedIn.next(false);
           })
         });
@@ -74,14 +63,14 @@ export class WuiFirebaseService {
       });
       firebase.auth().onAuthStateChanged((user) => {
         if(user) {
-          this.isLoggedIn.next(true);
+          this.ngZone.run(() => {
+            this.isLoggedIn.next(true);
+          });
         }else{
-          this.isLoggedIn.next(false);
+          this.ngZone.run(() => {
+            this.isLoggedIn.next(false);
+          })
         }
-      }, err => {
-        this.wuiService.snackbar({
-          label: 'Error onAuthStateChanged, ' + err
-        });
       });
     }
   }
@@ -134,6 +123,40 @@ export class WuiFirebaseService {
       } else {
         try {
           await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider);
+          resolve(true);
+        } catch(e) {
+          reject(e);
+        }
+      }
+    })
+  }
+
+  linkWithGoogle(): Promise<any> {
+    return new Promise(async (resolve,reject) => {
+      if(this.isWebView) {
+        this.ngZone.runOutsideAngular(() => {
+          FirebasePlugin.authenticateUserWithGoogle(this.clientId, (credential) => {
+            FirebasePlugin.linkUserWithCredential(credential, () => {
+              this.ngZone.run(() => {
+                this.isLoggedIn.next(true);
+                resolve(true);
+              });
+            }, (err) => {
+              this.ngZone.run(() => {
+                this.isLoggedIn.next(false);
+                reject(err);
+              });
+            });
+          }, (err) => {
+            this.ngZone.run(() => {
+              this.isLoggedIn.next(false);
+              reject(err);
+            });
+          });
+        });
+      } else {
+        try {
+          await firebase.auth().currentUser.linkWithPopup(new firebase.auth.GoogleAuthProvider);
           resolve(true);
         } catch(e) {
           reject(e);
