@@ -41,3 +41,4 @@ export * from './lib/components/form-field/form-field.component';
 export * from './lib/components/snackbar/snackbar.component';
 export * from './lib/components/dialog/dialog.component';
 export * from './lib/components/action-sheet/action-sheet.component';
+export * from './lib/directives/page-header.directive';

@@ -41,6 +41,7 @@ import { AngularDraggableModule  } from 'angular2-draggable';
 import { WindowTitleComponent } from './components/window-title/window-title.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { ScrollDirective } from './directives/scroll.directive';
+import { PageHeaderDirective } from './directives/page-header.directive';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ScrollDirective } from './directives/scroll.directive';
     DateselectComponent,
     WindowTitleComponent,
     ScrollEndDirective,
-    ScrollDirective
+    ScrollDirective,
+    PageHeaderDirective
   ],
   imports: [
     CommonModule,
@@ -131,7 +133,8 @@ import { ScrollDirective } from './directives/scroll.directive';
     DateselectComponent,
     WindowTitleComponent,
     ScrollEndDirective,
-    ScrollDirective
+    ScrollDirective,
+    PageHeaderDirective
   ], 
   providers: [
     DatePipe
