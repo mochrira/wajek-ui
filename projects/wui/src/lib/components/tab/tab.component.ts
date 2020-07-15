@@ -2,13 +2,19 @@ import { Component, OnInit, Input, ContentChildren, QueryList, AfterContentInit,
 
 @Component({
   selector: 'wui-tab-item',
-  template: `<div [hidden]="!active"><div #tabContent></div><ng-content></ng-content></div>`,
+  template: `
+  <a wuiRipple rippleTheme="dark" 
+    class="tab {{active==true?'active':''}}">
+    <span class="mdi mdi-{{icon}}"></span>
+    <span class="caption" *ngIf="caption.length>0">{{caption}}</span>
+  </a>`,
   styles: ['']
 })
 export class TabItemComponent implements OnInit {
 
-  @Input() caption = 'Tab Item';
+  @Input() caption = '';
   @Input() active = false;
+  @Input() icon = '';
   @ViewChild('tabContent', {read: ViewContainerRef, static: true}) tabContent: ViewContainerRef;
 
   ref: any;

@@ -80,7 +80,6 @@ export class WuiFirebaseService {
       if(this.isWebView) {
         this.ngZone.runOutsideAngular(() => {
           FirebasePlugin.createUserWithEmailAndPassword(email, password, () => {
-            this.isLoggedIn.next(true);
             resolve(true);
           }, err => {
             reject(err);
@@ -88,7 +87,6 @@ export class WuiFirebaseService {
         })
       }else{
         firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
-          this.isLoggedIn.next(true);
           resolve(true);
         }).catch(e => {
           reject(e);

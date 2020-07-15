@@ -1,7 +1,7 @@
 @import '../variables/colors.scss';
 
 .wui-box {
-    padding:1rem;
+    padding: 1.5rem;
     box-sizing:border-box;
     background-color:white;
     display:block;
@@ -9,6 +9,6 @@
     transition:box-shadow ease .25s;
     position:relative;
     z-index:0;
-    margin-bottom:1rem;
+    margin-bottom:1.5rem;
     box-shadow: 0 0 .25rem rgba(0,0,0,.35);
 }

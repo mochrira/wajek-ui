@@ -84,6 +84,10 @@ export class DrawerComponent implements OnInit, AfterViewInit {
     this.messageService.get('wui:openDrawer').subscribe(res => {
       this.open();
     });
+    if(window.innerWidth > 768) {
+      this.expand = true;
+      this.autoCollapse = false;
+    }
   }
 
   ngAfterViewInit() {

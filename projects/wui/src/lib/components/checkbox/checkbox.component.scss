@@ -1,7 +1,6 @@
 :host{
     display:inline-flex;
     align-items:center;
-    white-space: nowrap;
     cursor:pointer;
 
     &.disabled{
@@ -10,11 +9,12 @@
 
     .mdi{
         color: #999;
+        margin-right: .5rem;
     }
 
     &.checked{
         .mdi{
-            color: #9C27B0;
+            color: #673AB7;
         }
     }
 }
