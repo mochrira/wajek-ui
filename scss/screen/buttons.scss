@@ -102,6 +102,15 @@
                 background-color: rgba(0,0,0,0.15);
             }
         }
+
+        &.btn-danger {
+            color: #C62828;
+
+            &:hover {
+                background-color: #C62828;
+                color: white;
+            }
+        }
     }
 
     &-rounded {
@@ -146,7 +155,9 @@
     }
 
     + .btn {
-        margin-left: .25rem;
+        &:not(.btn-smooth) {
+            margin-left: .25rem;
+        }
     }
 }
 

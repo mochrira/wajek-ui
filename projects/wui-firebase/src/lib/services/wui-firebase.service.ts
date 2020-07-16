@@ -58,9 +58,9 @@ export class WuiFirebaseService {
       });
     }else{
       firebase.initializeApp(this.firebaseConfig);
-      firebase.messaging().onMessage((message) => {
-        this.onMessageReceived.next(message);  
-      });
+      // firebase.messaging().onMessage((message) => {
+      //   this.onMessageReceived.next(message);  
+      // });
       firebase.auth().onAuthStateChanged((user) => {
         if(user) {
           this.ngZone.run(() => {
