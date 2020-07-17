@@ -142,7 +142,7 @@ import { PageHeaderDirective } from './directives/page-header.directive';
 })
 export class WuiModule {
 
-  static forRoot(predefinedNavs?: any): ModuleWithProviders {
+  static forRoot(predefinedNavs?: any): ModuleWithProviders<WuiModule> {
     return {
       ngModule: WuiModule,
       providers: [
