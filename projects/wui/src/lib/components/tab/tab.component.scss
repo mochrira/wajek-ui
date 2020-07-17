@@ -7,7 +7,7 @@
         display:flex;
         border-bottom: 1px solid #EFEFEF;
 
-        >>> {
+        ::ng-deep {
             wui-tab-item {
                 opacity: .8;
 

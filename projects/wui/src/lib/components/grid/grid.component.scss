@@ -28,7 +28,7 @@
             }
         }
 
-        >>> {
+        ::ng-deep {
             .ps__rail-x, .ps__rail-y{
                 z-index:99;
             }
@@ -86,7 +86,7 @@
                 white-space: nowrap;
             }
 
-            >>> {
+            ::ng-deep {
                 wui-checkbox{
                     line-height:.875rem;
                     display:inline-flex;

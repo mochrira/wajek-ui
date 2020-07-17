@@ -191,7 +191,7 @@
       "root": "projects/wui-firebase",
       "sourceRoot": "projects/wui-firebase/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "wui-firebase",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

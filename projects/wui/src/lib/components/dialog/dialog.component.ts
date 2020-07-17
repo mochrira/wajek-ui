@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from 'projects/wui/src/lib/services/message.service';
 
 @Component({
   selector: 'wui-dialog',

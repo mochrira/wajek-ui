@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {
   MessageService
-} from '../../services/message.service';
+} from 'projects/wui/src/lib/services/message.service';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({

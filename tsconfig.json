@@ -19,15 +19,8 @@
       "dom"
     ],
     "paths": {
-      "wui": [
-        "dist/wui"
-      ],
-      "wui-firebase": [
-        "dist/wui-firebase"
-      ],
-      "wui-firebase/*": [
-        "dist/wui-firebase/*"
-      ]
+      "wui": ["./projects/wui/src/public_api"],
+      "wui-firebase": ["./projects/wui-firebase/src/public_api"]
     }
   }
 }

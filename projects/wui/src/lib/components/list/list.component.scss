@@ -4,7 +4,7 @@
     display:block;
 
     &.compact{
-        >>> {
+        ::ng-deep {
             wui-list-item{
                 padding:0 1rem;
                 min-height:2.5rem;
@@ -12,7 +12,7 @@
         }
     }
 
-    >>> {
+    ::ng-deep {
         div.wui-list-subheader {
             padding:2rem 1rem 1rem;
             color:#777;
@@ -63,7 +63,7 @@
     }
 
     &.thin{
-        >>> {
+        ::ng-deep {
             wui-list-item{
                 padding:.75rem 1.5rem;
             }

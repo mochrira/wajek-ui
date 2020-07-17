@@ -24,7 +24,7 @@
     &.datefield{
         position:relative;
 
-        >>> {
+        ::ng-deep {
             span.mdi.mdi-calendar-range-outline{
                 position:absolute;
                 right:.75rem;
@@ -84,7 +84,7 @@
         fill:#555;
     }
 
-    >>> {
+    ::ng-deep {
         input, select, textarea{
             flex: 1 1 auto;
             -webkit-appearance: none;
@@ -208,7 +208,7 @@
             left: 0;
         }
 
-        >>> {
+        ::ng-deep {
             input, select, textarea {
                 padding-left:0 !important;
                 padding-right:0 !important;
@@ -233,7 +233,7 @@
             left: 2.5rem;
         }
 
-        >>>{
+        ::ng-deep{
             input, select, textarea{
                 padding-left: 0 !important;
             }
@@ -246,7 +246,7 @@
             bottom:1.75rem;
         }
 
-        >>> {
+        ::ng-deep {
             input, select, textarea{
                 opacity:1;
 
@@ -281,7 +281,7 @@
             bottom:1.75rem;
         }
 
-        >>> {
+        ::ng-deep {
             input, select, textarea{
                 opacity:1 !important;
 
@@ -298,7 +298,7 @@
     }
 
     &.no-label{
-        >>> {
+        ::ng-deep {
             input, select, textarea{
                 padding-top:.5rem !important;
                 opacity:1;

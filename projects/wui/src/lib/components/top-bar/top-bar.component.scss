@@ -22,7 +22,7 @@
     }
 
     &.reactiveTopBar {
-        >>> {
+        ::ng-deep {
             .wuiTitle {
                 transform: translateY(100%);
                 opacity: 0;
@@ -36,7 +36,7 @@
         }
     }
 
-    >>> {
+    ::ng-deep {
         .navIcon{
             display:inline-flex;
             margin-right:2rem;
@@ -141,7 +141,7 @@
 
     :host{
 
-        >>> {
+        ::ng-deep {
             input{
                 margin-left:.5rem;
             }

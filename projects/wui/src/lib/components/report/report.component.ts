@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from 'projects/wui/src/lib/services/message.service';
 
 declare var window: any;
 
