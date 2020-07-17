@@ -145,9 +145,10 @@
     }
 
     &-lg {
-        padding: .75rem 1.5rem;
-        font-size: 1.125rem !important;
-        font-weight: 300 !important;
+        padding: 0 2rem;
+        min-width: 8rem;
+        height: 3rem;
+        font-size: 1rem !important;
         
         &.btn-rounded {
             border-radius: 1.5rem;

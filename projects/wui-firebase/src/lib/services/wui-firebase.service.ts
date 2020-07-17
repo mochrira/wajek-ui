@@ -1,11 +1,9 @@
 import { Injectable, NgZone, Inject } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import * as isWebView_import from 'is-webview';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/messaging';
 
-const isWebView = isWebView_import;
 declare var FirebasePlugin: any;
 
 @Injectable({
@@ -22,7 +20,7 @@ export class WuiFirebaseService {
     @Inject('firebaseConfig') private firebaseConfig: any,
     @Inject('appClientId') private clientId: string
   ) { 
-    this.isWebView = isWebView(navigator.userAgent);
+    //this.isWebView = isWebView(navigator.userAgent);
   }
 
   init(){

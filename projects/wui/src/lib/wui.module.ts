@@ -37,7 +37,6 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { TrapFocusDirective } from './directives/trap-focus.directive';
 import { TabOrderDirective } from './directives/tab-order.directive';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
-import { AngularDraggableModule  } from 'angular2-draggable';
 import { WindowTitleComponent } from './components/window-title/window-title.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { ScrollDirective } from './directives/scroll.directive';
@@ -91,8 +90,7 @@ import { PageHeaderDirective } from './directives/page-header.directive';
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    AngularDraggableModule
+    FormsModule
   ],
   exports: [
     WuiComponent,

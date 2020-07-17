@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
     "module": "es2015",
@@ -11,11 +12,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
     "types": [],
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "paths": {
+      "wui": ["../wui/src/public_api"]
+    }
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
@@ -24,7 +29,7 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "enableIvy": false
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "src/test.ts",

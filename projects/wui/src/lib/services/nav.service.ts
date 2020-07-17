@@ -1,9 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import * as isWebView_import from 'is-webview';
 
-const isWebView = isWebView_import;
 declare var document: any;
 
 @Injectable({

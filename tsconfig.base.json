@@ -17,10 +17,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "wui": ["./projects/wui/src/public_api"],
-      "wui-firebase": ["./projects/wui-firebase/src/public_api"]
-    }
+    ]
   }
 }
