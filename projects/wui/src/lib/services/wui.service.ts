@@ -10,8 +10,14 @@ export class WuiService {
     private messageService: MessageService
   ) { }
 
-  dialog(params) {
+  dialog(params): Promise<any> {
     this.messageService.set('wui:dialog', params);
+    return new Promise((resolve) => {
+      let sub = this.messageService.get('wui:dialogResult').subscribe(res => {
+        resolve(res);
+        sub.unsubscribe();
+      });
+    });
   }
 
   snackbar(params) {

@@ -7,7 +7,7 @@
       {{message}}
     </p>
     <div class="d-flex justify-content-end btn-container">
-      <button class="btn btn-smooth btn-{{button.class}}" *ngFor="let button of buttons" (click)="button.click($event)">{{button.caption}}</button>
+      <button class="btn btn-smooth btn-{{button.class}}" *ngFor="let button of buttons" (click)="button.click()">{{button.caption}}</button>
     </div>
   </div>
 </wui-modal>

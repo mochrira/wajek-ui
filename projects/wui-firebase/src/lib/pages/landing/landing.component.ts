@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'wui-firebase-landing',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  isInit = true;
+  logo: string;
+  title: string;
+  description: string;
+  buttonText: string;
 
-  ngOnInit(): void {
+  constructor(
+    @Inject('wuiFirebaseDecoration') private decoration: any
+  ) { }
+
+  async ngOnInit() {
+    this.logo = this.decoration?.landingDecoration?.logo || '';
+    this.title = this.decoration?.landingDecoration?.title || 'Smart Application';
+    this.description = this.decoration?.landingDecoration?.description || 'Aplikasi berbasis kolaborasi yang efektif untuk usaha/lembaga anda';
+    this.buttonText = this.decoration?.landingDecoration?.buttonText || 'MULAI';
   }
 
 }

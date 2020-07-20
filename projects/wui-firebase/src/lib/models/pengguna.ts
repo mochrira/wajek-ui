@@ -1,4 +1,4 @@
-import { ObjectHelper } from '../helper/ObjectHelper';
+import { ObjectHelper } from '../helper/objectHelper';
 
 export class Pengguna {
 
@@ -6,21 +6,9 @@ export class Pengguna {
     email: string;
     displayName: string;
     photoUrl: string;
+    emailVerified: boolean;
 
-    private _emailVerified: boolean;
-    set emailVerified(value: any) { 
-        this._emailVerified = (value == 1) ? true : false; 
-    }
-    get emailVerified() { 
-        return this._emailVerified; 
-    }
-
-    static fromJson(json: any) {
-        return ObjectHelper.fromJson(new this(), json);
-    }
-
-    toJson() {
-        return ObjectHelper.toJson(this);
-    }
+    static fromJson = (json: any) => ObjectHelper.fromJson(new Pengguna(), json);
+    toJson = () => ObjectHelper.toJson(this);
 
 }

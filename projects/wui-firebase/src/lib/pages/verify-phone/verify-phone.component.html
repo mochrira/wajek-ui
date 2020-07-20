@@ -1,0 +1,16 @@
+<wui-page class="flex-page column middle-center">
+
+    <wui-top-bar>
+        <wui-top-bar-item icon="arrow-left" routerLink="../../"></wui-top-bar-item>
+    </wui-top-bar>
+
+    <div class="verify-outer">
+        <h1>{{title}}</h1>
+        <div class="desc">{{description}}</div>
+        <wui-form-field class="transparent" label="{{nomorInputDecoration?.labelText}}" icon="{{nomorInputDecoration?.icon}}" prefix="+62">
+            <input type="number">
+        </wui-form-field>
+        <button class="btn btn-primary btn-rounded btn-lg">{{buttonText}}</button>
+    </div>
+
+</wui-page>

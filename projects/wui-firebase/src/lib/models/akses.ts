@@ -1,4 +1,4 @@
-import { ObjectHelper } from '../helper/ObjectHelper';
+import { ObjectHelper } from '../helper/objectHelper';
 
 export class Akses {
 
@@ -9,12 +9,7 @@ export class Akses {
     idUndangan: number;
     isDefault: boolean;
 
-    static fromJson(json: any) : void {
-        return ObjectHelper.fromJson(new this(), json);
-    }
-
-    toJson() : Object {
-        return ObjectHelper.toJson(this);
-    }
+    static fromJson = (json: any) => ObjectHelper.fromJson(new Akses(), json);
+    toJson = () => ObjectHelper.toJson(this);
 
 }

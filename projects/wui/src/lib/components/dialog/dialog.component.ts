@@ -18,6 +18,10 @@ export class DialogComponent implements OnInit {
     private messageService: MessageService
   ) { }
 
+  buttonClick(index) {
+    this.buttons[index].click();
+  }
+
   ngOnInit() {
     this.messageService.get('wui:dialog').subscribe(res => {
       if (res === 'close') {
@@ -25,7 +29,18 @@ export class DialogComponent implements OnInit {
       } else {
         this.title = res.title;
         this.message = res.message;
-        this.buttons = res.buttons;
+        this.buttons = res.buttons.map((item, index) => {
+          if(typeof item == "string") {
+            return {
+              caption: item,
+              click: () => {
+                this.modal.close();
+                this.messageService.set('wui:dialogResult', index);
+              }
+            }
+          }
+          return item;
+        });
         this.modal.open();
       }
     });

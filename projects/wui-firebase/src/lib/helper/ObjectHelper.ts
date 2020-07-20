@@ -1,19 +1,20 @@
+export function dateFromString(value: string): Date {
+    let d = new Date();
+    d.setTime(Date.parse(value));
+    return d;
+}
+
 export class ObjectHelper {
     
     static fromJson(object: any, json: any) {
-        let keys = Object.keys(object);
-        Object.keys(json).forEach((key) => {
-            if(keys.indexOf(key) != -1) {
-                object[key] = json[key];
-            }
-        });
+        Object.assign(object, json);
         return object;
     }
 
-    static toJson(object: any) {
-        var json = {};
+    static toJson(object) {
+        let json = {};
         Object.keys(object).forEach(key => { 
-            if(object[key] != null) { json[key] = object[key]; } 
+            if(object[key] !== null) { json[key] = object[key]; } 
         });
         return json;
     }

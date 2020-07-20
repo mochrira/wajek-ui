@@ -1,4 +1,4 @@
-import { ObjectHelper } from '../helper/ObjectHelper';
+import { ObjectHelper, dateFromString } from '../helper/objectHelper';
 
 export class Lembaga {
 
@@ -9,18 +9,10 @@ export class Lembaga {
     photoUrl: string;
 
     private _tglRegistrasi: Date;
-    set tglRegistrasi(value: string) {
-        this._tglRegistrasi = new Date();
-        this._tglRegistrasi.setTime(Date.parse(value));
-    }
+    set tglRegistrasi(value: string) { this._tglRegistrasi = dateFromString(value); }
     get tglRegitrasi() { return this._tglRegistrasi; }
 
-    static fromJson(json: any) {
-        return ObjectHelper.fromJson(new this(), json);
-    }
-
-    toJson() {
-        return ObjectHelper.toJson(this);
-    }
+    static fromJson = (json: any) => ObjectHelper.fromJson(new Lembaga(), json);
+    toJson = () => ObjectHelper.toJson(this);
 
 }

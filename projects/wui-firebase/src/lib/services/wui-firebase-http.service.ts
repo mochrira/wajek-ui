@@ -19,7 +19,7 @@ export class WuiFirebaseHttpService {
         "Authorization": idToken
       });
     }
-    return this.httpClient.get(url, options).toPromise();
+    return await this.httpClient.get(url, options).toPromise();
   }
 
   async post(url, data = {}, options: any = {}, withToken = true) {
