@@ -5,17 +5,19 @@ import { RegisterComponent } from './pages/register/register.component';
 import { VerifyPhoneComponent } from './pages/verify-phone/verify-phone.component';
 import { RegisterLembagaComponent } from './pages/register-lembaga/register-lembaga.component';
 import { RegisterUndanganComponent } from './pages/register-undangan/register-undangan.component';
+import { WuiFirebaseNologinGuardService } from './guard/wui-firebase-nologin-guard.service';
+import { WuiFirebaseAksesGuardService, WuiFirebaseVerifyGuardService } from './guard/wui-firebase-problem-guard.service';
 
 export var wuiFirebaseRouting: Routes = [{
-    path: 'landing', component: LandingComponent
+    path: 'landing', component: LandingComponent, canActivate: [WuiFirebaseNologinGuardService]
 }, {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent, canActivate: [WuiFirebaseNologinGuardService]
 }, {
-    path: 'register', component: RegisterComponent
+    path: 'register', component: RegisterComponent, canActivate: [WuiFirebaseNologinGuardService]
 }, {
-    path: 'register/undangan', component: RegisterUndanganComponent
+    path: 'register/undangan', component: RegisterUndanganComponent, canActivate: [WuiFirebaseAksesGuardService]
 }, {
-    path: 'register/lembaga', component: RegisterLembagaComponent
+    path: 'register/lembaga', component: RegisterLembagaComponent, canActivate: [WuiFirebaseAksesGuardService]
 }, {
-    path: 'verify/phone', component: VerifyPhoneComponent
+    path: 'verify/phone', component: VerifyPhoneComponent, canActivate: [WuiFirebaseVerifyGuardService]
 }];

@@ -55,6 +55,11 @@ export class WuiFirebaseAuthService {
     return await this.accountInfo();
   }
 
+  async registerEmail(email: string, password: string) {
+    await firebase.auth().createUserWithEmailAndPassword(email, password);
+    return await this.accountInfo();
+  }
+
   async signInGoogle() {
     await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider);
     return await this.accountInfo();

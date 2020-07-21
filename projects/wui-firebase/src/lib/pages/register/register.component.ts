@@ -1,4 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { WuiFirebaseAuthService } from '../../services/wui-firebase-auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { WuiService } from 'wui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wui-firebase-register',
@@ -15,9 +19,47 @@ export class RegisterComponent implements OnInit {
   buttonText: string;
   beforeGoogleText: string;
 
+  formRegister = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    confirm: new FormControl('', Validators.required)
+  });
+
   constructor(
-    @Inject('wuiFirebaseDecoration') private decoration: any
+    private wuiService: WuiService,
+    private authService: WuiFirebaseAuthService,
+    @Inject('wuiFirebaseDecoration') private decoration: any,
+    private router: Router
   ) { }
+
+  async submit() {
+    if(this.formRegister.invalid) {
+      this.wuiService.dialog({title: 'Error', message: 'Periksa kembali isian anda', buttons: ["OK"]})
+      return;
+    }
+
+    if(this.formRegister.controls['password'].value !== this.formRegister.controls['confirm'].value) {
+      this.wuiService.dialog({title: 'Error', message: 'Password dan konfirmasi password tidak sama', buttons: ["OK"]});
+      return;
+    }
+
+    try {
+      this.wuiService.openLoading();
+      await this.authService.registerEmail(this.formRegister.controls['email'].value, this.formRegister.controls['password'].value);
+      this.wuiService.closeLoading();
+    } catch(e) {
+      this.wuiService.closeLoading();
+      if(e.error) {
+        if(e.error.code == 'firebase-auth/unverified-number') {
+          this.router.navigate(['/verify/phone']);
+        }else if(e.error.code == 'firebase-auth/invalid-akses') {
+          this.router.navigate(['/register/undangan']);
+        }
+      } else {
+        this.wuiService.dialog({ title: 'Error', message: e.message, buttons: ["OK"] });
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.title = this.decoration?.registerDecoration?.title || 'Daftar';

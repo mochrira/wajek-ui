@@ -7,25 +7,27 @@
     <div class="login-box">
         <h1>{{title}}</h1>
         <div class="desc">{{description}}</div>
-        <wui-form-field 
-            class="transparent" 
-            label="{{emailInputDecoration?.labelText}}" 
-            icon="{{emailInputDecoration?.icon}}">
-            <input type="number">
-        </wui-form-field>
-        <wui-form-field 
-            class="transparent" 
-            label="{{passwordInputDecoration?.labelText}}" 
-            icon="{{passwordInputDecoration?.icon}}">
-            <input type="number">
-        </wui-form-field>
-        <wui-form-field 
-            class="transparent" 
-            label="{{confirmInputDecoration?.labelText}}" 
-            icon="{{confirmInputDecoration?.icon}}">
-            <input type="number">
-        </wui-form-field>
-        <button class="btn btn-primary btn-rounded btn-lg">{{buttonText}}</button>
+        <form [formGroup]="formRegister" (ngSubmit)="submit()">
+            <wui-form-field 
+                class="transparent" 
+                label="{{emailInputDecoration?.labelText}}" 
+                icon="{{emailInputDecoration?.icon}}">
+                <input type="text" formControlName="email">
+            </wui-form-field>
+            <wui-form-field 
+                class="transparent" 
+                label="{{passwordInputDecoration?.labelText}}" 
+                icon="{{passwordInputDecoration?.icon}}">
+                <input type="password" formControlName="password">
+            </wui-form-field>
+            <wui-form-field 
+                class="transparent" 
+                label="{{confirmInputDecoration?.labelText}}" 
+                icon="{{confirmInputDecoration?.icon}}">
+                <input type="password" formControlName="confirm">
+            </wui-form-field>
+            <button class="btn btn-primary btn-rounded btn-lg" type="submit">{{buttonText}}</button>
+        </form>
 
         <div class="desc pt-5 pb-3">{{beforeGoogleText}}</div>
         <button class="btn-google">

@@ -27,7 +27,11 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
-    this.authService.isLoggedIn.pipe(filter(isLoggedIn => isLoggedIn !== null )).subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+    this.authService.isLoggedIn
+      .pipe(filter(isLoggedIn => isLoggedIn !== null))
+      .subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn
+      });
   }
 
   async ngAfterViewInit() {
@@ -35,7 +39,6 @@ export class AppComponent implements OnInit, AfterViewInit{
       this.wuiService.openLoading();
       await this.authService.initialize();
       this.wuiService.closeLoading();
-      this.router.navigate(['/home']);
     } catch(e) {
       this.wuiService.closeLoading();
       if(e.error.code == 'firebase-auth/unverified-number') {

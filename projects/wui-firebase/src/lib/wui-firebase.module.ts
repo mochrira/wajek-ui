@@ -11,8 +11,6 @@ import { AppComponent } from './app/app.component';
 import { RegisterUndanganComponent } from './pages/register-undangan/register-undangan.component';
 import { RegisterLembagaComponent } from './pages/register-lembaga/register-lembaga.component';
 import { RegisterComponent } from './pages/register/register.component';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -39,7 +37,6 @@ import { RouterModule } from '@angular/router';
 })
 export class WuiFirebaseModule {
 
-  static initialized = false;
   static forRoot(firebaseConfig: any, decoration: any): ModuleWithProviders<WuiFirebaseModule> {
     return {
       ngModule: WuiFirebaseModule,
