@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { WuiFirebaseAuthService } from '../services/wui-firebase-auth.service';
-import { filter, tap, catchError } from 'rxjs/operators';
+import { filter, tap, catchError, map } from 'rxjs/operators';
 import { throwError, of } from 'rxjs';
 
 @Injectable({
@@ -17,7 +17,14 @@ export class WuiFirebaseAuthGuardService implements CanActivate {
   canActivate() {
     return this.authService.isLoggedIn.pipe(
       filter(isLoggedIn => isLoggedIn !== null),
+      map(isLoggedIn => {
+        if((typeof isLoggedIn) !== "boolean") {
+          isLoggedIn == false;
+        }
+        return isLoggedIn;
+      }),
       tap(isLoggedIn => {
+        console.log('is User LoggedIn ? ' + isLoggedIn);
         if(!isLoggedIn) {
           this.router.navigate(['/login']);
         }

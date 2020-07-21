@@ -12,6 +12,7 @@ import { RegisterUndanganComponent } from './pages/register-undangan/register-un
 import { RegisterLembagaComponent } from './pages/register-lembaga/register-lembaga.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RouterModule } from '@angular/router';
+import { UpgradeComponent } from './pages/upgrade/upgrade.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { RouterModule } from '@angular/router';
     AppComponent,
     RegisterUndanganComponent,
     RegisterLembagaComponent,
-    RegisterComponent
+    RegisterComponent,
+    UpgradeComponent
   ],
   exports: [
     AppComponent

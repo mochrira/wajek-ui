@@ -39,7 +39,8 @@ export class RegisterUndanganComponent implements OnInit {
 
     try {
       this.wuiService.openLoading();
-      await this.undanganService.verify(this.formVerify.controls['code'].value);
+      let pengguna = await this.undanganService.verify(this.formVerify.controls['code'].value);
+      console.log(pengguna);
       this.wuiService.closeLoading();
       this.router.navigate(['/home']);
     } catch(e) {

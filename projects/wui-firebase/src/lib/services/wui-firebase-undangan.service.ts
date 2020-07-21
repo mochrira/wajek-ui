@@ -14,9 +14,7 @@ export class WuiFirebaseUndanganService {
   ) { }
 
   async verify(code) {
-    await this.httpService.post(this.apiURL + 'undangan/verify', {
-      code: code
-    });
+    await this.httpService.post(this.apiURL + 'undangan/verify', {code: code});
     return await this.authService.accountInfo();
   }
 

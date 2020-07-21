@@ -13,7 +13,7 @@ export class WuiFirebaseLembagaService {
   ) { }
 
   async insert(lembaga: Lembaga): Promise<number> {
-    let res: any = await this.httpService.post(this.apiURL + 'lembaga/', lembaga.toJson);
+    let res: any = await this.httpService.post(this.apiURL + 'lembaga', lembaga.toJson());
     return res.idLembaga;
   }
 

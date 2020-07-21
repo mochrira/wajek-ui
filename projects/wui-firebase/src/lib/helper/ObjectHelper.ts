@@ -7,8 +7,7 @@ export function dateFromString(value: string): Date {
 export class ObjectHelper {
     
     static fromJson(object: any, json: any) {
-        Object.assign(object, json);
-        return object;
+        return Object.assign(object, json);
     }
 
     static toJson(object) {

@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/verify/phone']);
         }else if(e.error.code == 'firebase-auth/invalid-akses') {
           this.router.navigate(['/register/undangan']);
+        }else if(e.error.code == 'database/need-upgrade') {
+          this.router.navigate(['/upgrade']);
         }
       } else {
         this.wuiService.dialog({ title: 'Error', message: e.message, buttons: ["OK"] });
@@ -74,6 +76,9 @@ export class LoginComponent implements OnInit {
         }
         if(e.error.code == 'firebase-auth/invalid-akses') {
           this.router.navigate(['/register/undangan']);
+        }
+        if(e.error.code == 'database/need-upgrade') {
+          this.router.navigate(['/upgrade']);
         }
       } else {
         this.wuiService.dialog({title: "Error", message: e.message, buttons: ["OK"]});

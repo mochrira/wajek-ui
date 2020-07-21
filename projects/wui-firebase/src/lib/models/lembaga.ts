@@ -12,7 +12,9 @@ export class Lembaga {
     set tglRegistrasi(value: string) { this._tglRegistrasi = dateFromString(value); }
     get tglRegitrasi() { return this._tglRegistrasi; }
 
-    static fromJson = (json: any) => ObjectHelper.fromJson(new Lembaga(), json);
+    static fromJson(json: any){
+        return ObjectHelper.fromJson(new Lembaga(), json);
+    };
     toJson = () => ObjectHelper.toJson(this);
 
 }

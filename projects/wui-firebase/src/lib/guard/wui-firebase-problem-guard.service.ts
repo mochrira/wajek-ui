@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { WuiFirebaseAuthService } from '../services/wui-firebase-auth.service';
-import { filter, map, tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -15,17 +15,11 @@ export class WuiFirebaseProblemGuardService implements CanActivate{
 
   canActivate() {
     return this.authService.isLoggedIn.pipe(
-      catchError(e => {
-        if(e.error.code == 'firebase-auth/unverified-number') {
-          return of(true);
+      map(isLoggedIn => {
+        if((typeof isLoggedIn) !== "boolean") {
+          
         }
-        if(e.error.code == 'firebase-auth/invalid-akses') {
-          return of(true);
-        }
-        return of(false);
-      }),
-      tap(hasProblem => {
-        console.log(hasProblem);
+        return isLoggedIn;
       })
     );
   }
@@ -45,11 +39,12 @@ export class WuiFirebaseVerifyGuardService implements CanActivate{
 
   canActivate() {
     return this.authService.isLoggedIn.pipe(
-      catchError(e => {
-        if(e.error.code == 'firebase-auth/unverified-number') {
-          return of(true);
+      filter(isLoggedIn => isLoggedIn !== null),
+      map(isLoggedIn => {
+        if(typeof isLoggedIn !== 'boolean' && isLoggedIn.error.code == 'firebase-auth/unverified-number') {
+          return true
         }
-        return of(false);
+        return false;
       }),
       tap(hasProblem => {
         if(!hasProblem) {
@@ -73,11 +68,42 @@ export class WuiFirebaseAksesGuardService implements CanActivate{
 
   canActivate() {
     return this.authService.isLoggedIn.pipe(
-      catchError(e => {
-        if(e.error.code == 'firebase-auth/invalid-akses') {
-          return of(true);
+      filter(isLoggedIn => isLoggedIn !== null),
+      map(isLoggedIn => {
+        if(typeof isLoggedIn !== 'boolean' && isLoggedIn.error.code == 'firebase-auth/invalid-akses') {
+          return true
         }
-        return of(false);
+        return false;
+      }),
+      tap(hasProblem => {
+        if(!hasProblem) {
+            this.router.navigate(['/home'])
+        }
+      })
+    );
+  }
+
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WuiFirebaseUpgradeGuardService implements CanActivate{
+
+  constructor(
+    private authService: WuiFirebaseAuthService,
+    private router: Router
+  ) { }
+
+  canActivate() {
+    return this.authService.isLoggedIn.pipe(
+      filter(isLoggedIn => isLoggedIn !== null),
+      map(isLoggedIn => {
+        if(typeof isLoggedIn !== 'boolean' && isLoggedIn.error.code == 'database/need-upgrade') {
+          return true
+        }
+        return false;
       }),
       tap(hasProblem => {
         if(!hasProblem) {

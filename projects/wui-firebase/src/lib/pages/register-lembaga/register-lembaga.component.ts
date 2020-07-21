@@ -1,4 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { WuiFirebaseLembagaService } from '../../services/wui-firebase-lembaga.service';
+import { WuiService } from 'wui';
+import { Lembaga } from '../../models/lembaga';
+import { Router } from '@angular/router';
+import { WuiFirebaseAuthService } from '../../services/wui-firebase-auth.service';
 
 @Component({
   selector: 'wui-firebase-register-lembaga',
@@ -14,9 +20,41 @@ export class RegisterLembagaComponent implements OnInit {
   kotaInputDecoration: any;
   buttonText: string;
 
+  formLembaga = new FormGroup({
+    nmLembaga: new FormControl('', Validators.required),
+    alamat: new FormControl('', Validators.required),
+    kota: new FormControl('', Validators.required)
+  });
+
   constructor(
+    private wuiService: WuiService,
+    private lembagaService: WuiFirebaseLembagaService,
+    private authservice: WuiFirebaseAuthService,
+    private router: Router,
     @Inject('wuiFirebaseDecoration') private decoration: any
   ) { }
+
+  async submit() {
+    if(this.formLembaga.invalid) {
+      this.wuiService.dialog({
+        title: 'Error',
+        message: 'Periksa kembali isian anda',
+        buttons: ["OK"]
+      });
+      return;
+    }
+
+    try {
+      this.wuiService.openLoading();
+      await this.lembagaService.insert(Lembaga.fromJson(this.formLembaga.value));
+      await this.authservice.accountInfo();
+      this.wuiService.closeLoading();
+      this.router.navigate(['/home']);
+    } catch(e) {
+      this.wuiService.closeLoading();
+      this.wuiService.dialog({title: 'Error', message: e.message, buttons: ["OK"]});
+    }
+  }
 
   ngOnInit(): void {
     this.title = this.decoration?.registerLembagaDecoration?.title || 'Daftar Usaha';

@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { Pengguna } from '../models/pengguna';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import * as firebase from 'firebase';
 import 'firebase/auth';
 import { WuiFirebasePenggunaService } from './wui-firebase-pengguna.service';
-import { WuiService } from '../../../../wui/src/lib/services/wui.service';
+import { WuiFirebaseUpgradeService } from './wui-firebase-upgrade.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,12 @@ import { WuiService } from '../../../../wui/src/lib/services/wui.service';
 export class WuiFirebaseAuthService {
 
   penggunaAktif: Pengguna;
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(null);
+  isLoggedIn: BehaviorSubject<any> = new BehaviorSubject(null);
+  closeListener: any;
 
   constructor(
     private penggunaService: WuiFirebasePenggunaService,
+    private upgradeService: WuiFirebaseUpgradeService,
     @Inject('wuiFirebaseConfig') private firebaseConfig: any
   ) { 
   }
@@ -23,29 +25,40 @@ export class WuiFirebaseAuthService {
   async initialize() {
     return new Promise((resolve, reject) => {
       firebase.initializeApp(this.firebaseConfig);
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if(user !== null){
-          try {
-            await this.accountInfo();
-            resolve(true);
-          } catch(e) {
-            reject(e);
-          }
-        } else {
-          this.isLoggedIn.next(false);
-          resolve(true);
+      this.closeListener = firebase.auth().onAuthStateChanged(async (user) => {
+        try {
+          resolve(await this.accountInfo());
+        } catch(e) {
+          reject(e);
         }
+        this.closeListener();
       });
     });
   }
 
   async accountInfo() {
     try {
-      this.penggunaAktif = await this.penggunaService.row(firebase.auth().currentUser.uid);
-      this.isLoggedIn.next(true);
-      return this.penggunaAktif;
+      if(firebase.auth().currentUser == null) {
+        this.isLoggedIn.next(false);
+        return false;
+      } else {
+        this.penggunaAktif = await this.penggunaService.row(firebase.auth().currentUser.uid);
+        let needUpgrade = await this.upgradeService.needUpgrade();
+        if(needUpgrade) {
+          let error = {
+            error: {
+              code: 'database/need-upgrade'
+            }
+          };
+          this.isLoggedIn.next(error);
+          throw error;
+        } else {
+          this.isLoggedIn.next(true);
+          return this.penggunaAktif;
+        }
+      }
     } catch(e) {
-      this.isLoggedIn.error(e);
+      this.isLoggedIn.next(e);
       throw e;
     }
   }
@@ -65,8 +78,13 @@ export class WuiFirebaseAuthService {
     return await this.accountInfo();
   }
 
-  async signOut() {
-    await firebase.auth().signOut();
+  signOut() {
+    return new Promise(async (resolve) => {
+      await firebase.auth().signOut();
+      this.penggunaAktif = null;
+      this.isLoggedIn.next(false);
+      resolve(true);
+    })
   }
 
 }
