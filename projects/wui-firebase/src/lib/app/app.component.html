@@ -1,3 +1,6 @@
 <wui-app>
+    <wui-drawer *ngIf="isLoggedIn">
+        <ng-content select="drawer-content"></ng-content>
+    </wui-drawer>
     <router-outlet></router-outlet>
 </wui-app>

@@ -12,18 +12,9 @@ export class WuiFirebasePenggunaService {
     private httpService: WuiFirebaseHttpService
   ) { }
 
-  async result(): Promise<Pengguna[]> {
-    let res: any = await this.httpService.get(this.apiURL + 'pengguna');
-    return res.map(item => Pengguna.fromJson(item));
-  }
-
   async row(uid: string): Promise<Pengguna> {
-    try {
-      let res: any = await this.httpService.get(this.apiURL + 'pengguna/' + uid);
-      return Pengguna.fromJson(res);
-    } catch(e) {
-      throw e;
-    }
+    let res: any = await this.httpService.get(this.apiURL + 'pengguna/' + uid);
+    return Pengguna.fromJson(res);
   }
 
 }

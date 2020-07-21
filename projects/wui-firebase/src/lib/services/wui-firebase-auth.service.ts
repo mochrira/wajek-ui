@@ -1,9 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { Pengguna } from '../models/pengguna';
+import { Subject, BehaviorSubject } from 'rxjs';
 import * as firebase from 'firebase';
 import 'firebase/auth';
 import { WuiFirebasePenggunaService } from './wui-firebase-pengguna.service';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { WuiService } from '../../../../wui/src/lib/services/wui.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,30 +12,40 @@ import { Subject, BehaviorSubject } from 'rxjs';
 export class WuiFirebaseAuthService {
 
   penggunaAktif: Pengguna;
-  isLoggedIn: Subject<boolean> = new Subject();
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   constructor(
     private penggunaService: WuiFirebasePenggunaService,
-    @Inject('firebaseConfig') private firebaseConfig: any
+    @Inject('wuiFirebaseConfig') private firebaseConfig: any
   ) { 
-    firebase.initializeApp(this.firebaseConfig);
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user !== null) {
-        this.isLoggedIn.next(true);
-      } else {
-        this.isLoggedIn.next(false);
-      }
+  }
+
+  async initialize() {
+    return new Promise((resolve, reject) => {
+      firebase.initializeApp(this.firebaseConfig);
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if(user !== null){
+          try {
+            await this.accountInfo();
+            resolve(true);
+          } catch(e) {
+            reject(e);
+          }
+        } else {
+          this.isLoggedIn.next(false);
+          resolve(true);
+        }
+      });
     });
   }
 
   async accountInfo() {
     try {
-      let user: firebase.User = firebase.auth().currentUser;
-      console.log(user);
-      if(user !== null) {
-        this.penggunaAktif = await this.penggunaService.row(user.uid);
-      }
+      this.penggunaAktif = await this.penggunaService.row(firebase.auth().currentUser.uid);
+      this.isLoggedIn.next(true);
+      return this.penggunaAktif;
     } catch(e) {
+      this.isLoggedIn.error(e);
       throw e;
     }
   }
@@ -51,7 +62,6 @@ export class WuiFirebaseAuthService {
 
   async signOut() {
     await firebase.auth().signOut();
-    this.penggunaAktif = null;
   }
 
 }

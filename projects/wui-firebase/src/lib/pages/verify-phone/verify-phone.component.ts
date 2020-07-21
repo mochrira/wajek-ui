@@ -1,4 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { WuiFirebaseAuthService } from '../../services/wui-firebase-auth.service';
+import { Router } from '@angular/router';
+import { WuiService } from '../../../../../wui/src/lib/services/wui.service';
 
 @Component({
   selector: 'wui-firebase-verify-phone',
@@ -13,8 +16,22 @@ export class VerifyPhoneComponent implements OnInit {
   buttonText: string;
 
   constructor(
+    private authService: WuiFirebaseAuthService,
+    private router: Router,
+    private wuiService: WuiService,
     @Inject('wuiFirebaseDecoration') private decoration: any
   ) { }
+
+  async signOut() {
+    try {
+      this.wuiService.openLoading();
+      await this.authService.signOut();
+      this.wuiService.closeLoading();
+      this.router.navigate(['/landing']);
+    } catch(e) {
+      this.wuiService.closeLoading();
+    }
+  }
 
   ngOnInit(): void {
     this.title = this.decoration?.verifyPhoneDecoration?.title || 'Verifikasi Nomor';

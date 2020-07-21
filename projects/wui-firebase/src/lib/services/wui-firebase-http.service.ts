@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WuiFirebaseService } from './wui-firebase.service';
+import * as firebase from 'firebase';
+import 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,12 @@ import { WuiFirebaseService } from './wui-firebase.service';
 export class WuiFirebaseHttpService {
 
   constructor(
-    private httpClient: HttpClient,
-    private firebaseService: WuiFirebaseService
+    private httpClient: HttpClient
   ) { }
 
   async get(url, options: any = {}, withToken = true) {
     if(withToken) {
-      let idToken = await this.firebaseService.getIdToken();
+      let idToken = await firebase.auth().currentUser.getIdToken();
       options.headers = Object.assign(options.headers || {}, {
         "Authorization": idToken
       });
@@ -24,7 +24,7 @@ export class WuiFirebaseHttpService {
 
   async post(url, data = {}, options: any = {}, withToken = true) {
     if(withToken) {
-      let idToken = await this.firebaseService.getIdToken();
+      let idToken = await firebase.auth().currentUser.getIdToken();
       options.headers = Object.assign(options.headers || {}, {
         "Authorization": idToken
       });
@@ -34,7 +34,7 @@ export class WuiFirebaseHttpService {
 
   async patch(url, data = {}, options: any = {}, withToken = true) {
     if(withToken) {
-      let idToken = await this.firebaseService.getIdToken();
+      let idToken = await firebase.auth().currentUser.getIdToken();
       options.headers = Object.assign(options.headers || {}, {
         "Authorization": idToken
       });
@@ -44,7 +44,7 @@ export class WuiFirebaseHttpService {
 
   async delete(url, options: any = {}, withToken = true) {
     if(withToken) {
-      let idToken = await this.firebaseService.getIdToken();
+      let idToken = await firebase.auth().currentUser.getIdToken();
       options.headers = Object.assign(options.headers || {}, {
         "Authorization": idToken
       });

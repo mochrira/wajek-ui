@@ -11,9 +11,9 @@ export var wuiFirebaseRouting: Routes = [{
 }, {
     path: 'login', component: LoginComponent
 }, {
-    path: 'register/undangan', component: RegisterUndanganComponent
-}, {
     path: 'register', component: RegisterComponent
+}, {
+    path: 'register/undangan', component: RegisterUndanganComponent
 }, {
     path: 'register/lembaga', component: RegisterLembagaComponent
 }, {

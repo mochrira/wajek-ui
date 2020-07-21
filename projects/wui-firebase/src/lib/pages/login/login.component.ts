@@ -31,15 +31,36 @@ export class LoginComponent implements OnInit {
     @Inject('wuiFirebaseDecoration') private decoration: any
   ) { }
 
+  async signInGoogle() {
+    try {
+      this.wuiService.openLoading();
+      await this.authService.signInGoogle();
+      this.wuiService.closeLoading();
+      this.router.navigate(['/home']);
+    } catch(e) {
+      this.wuiService.closeLoading();
+      if(e.error) {
+        if(e.error.code == 'firebase-auth/unverified-number') {
+          this.router.navigate(['/verify/phone']);
+        }else if(e.error.code == 'firebase-auth/invalid-akses') {
+          this.router.navigate(['/register/undangan']);
+        }
+      } else {
+        this.wuiService.dialog({ title: 'Error', message: e.message, buttons: ["OK"] });
+      }
+    }
+  }
+
   async signInEmail() {
     if(this.formLogin.invalid) {
       this.wuiService.snackbar({
         label: 'Periksa kembali isian anda'
       });
     }
+    
     try {
       this.wuiService.openLoading();
-      let pengguna: any = await this.authService.signInEmail(
+      await this.authService.signInEmail(
         this.formLogin.controls['email'].value, 
         this.formLogin.controls['password'].value
       );
@@ -47,11 +68,16 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
     } catch(e) {
       this.wuiService.closeLoading();
-      this.wuiService.dialog({
-        title: 'Error',
-        message: e.message,
-        buttons: [{caption: 'OK', click: () => { this.wuiService.dialog('close'); }}]
-      });
+      if(e.error) {
+        if(e.error.code == 'firebase-auth/unverified-number') {
+          this.router.navigate(['/verify/phone']);
+        }
+        if(e.error.code == 'firebase-auth/invalid-akses') {
+          this.router.navigate(['/register/undangan']);
+        }
+      } else {
+        this.wuiService.dialog({title: "Error", message: e.message, buttons: ["OK"]});
+      }
     }
   }
 
