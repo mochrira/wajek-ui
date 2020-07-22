@@ -1,7 +1,19 @@
+import { DatePipe } from '@angular/common';
+
 export function dateFromString(value: string): Date {
     let d = new Date();
     d.setTime(Date.parse(value));
     return d;
+}
+
+export function dateToString(value: Date): string {
+    return (new DatePipe('')).transform(value, 'YYYY-mm-dd HH:mm:ss');
+}
+
+export function jsonValidate(json, key, value) {
+    if(value !== null && value !== undefined) {
+        json[key] = value;
+    }
 }
 
 export class ObjectHelper {
@@ -12,21 +24,9 @@ export class ObjectHelper {
 
     static toJson(object) {
         let json = {};
-
-        const proto = Object.getPrototypeOf(object);
-        Object.entries(Object.getOwnPropertyDescriptors(proto))
-        .filter(([key, descriptor]) => typeof descriptor.get === 'function')
-        .map(([key, descriptor]) => {
-            if (descriptor && key[0] !== '_') {
-                try {
-                    const val = (this as any)[key];
-                    json[key] = val;
-                } catch (error) {
-                    console.error(`Error calling getter ${key}`, error);
-                }
-            }
+        Object.keys(object).forEach(key => { 
+            if(object[key] !== null) { json[key] = object[key]; } 
         });
-        
         return json;
     }
 
