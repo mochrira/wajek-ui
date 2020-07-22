@@ -24,7 +24,6 @@ export class WuiFirebaseAuthGuardService implements CanActivate {
         return isLoggedIn;
       }),
       tap(isLoggedIn => {
-        console.log('is User LoggedIn ? ' + isLoggedIn);
         if(!isLoggedIn) {
           this.router.navigate(['/login']);
         }

@@ -132,7 +132,10 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     WindowTitleComponent,
     ScrollEndDirective,
     ScrollDirective,
-    PageHeaderDirective
+    PageHeaderDirective,
+    ActionSheetComponent,
+    DialogComponent,
+    SnackbarComponent
   ], 
   providers: [
     DatePipe

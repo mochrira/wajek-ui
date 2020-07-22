@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { WuiFirebaseAuthService } from '../services/wui-firebase-auth.service';
 import { filter, catchError, map } from 'rxjs/operators';
 import { WuiFirebasePenggunaService } from '../services/wui-firebase-pengguna.service';
-import { WuiService } from 'wui';
+import { WuiService, MessageService } from 'wui';
 import { Router } from '@angular/router';
 import { Observable, merge, throwError, of } from 'rxjs';
 
@@ -14,11 +14,14 @@ import { Observable, merge, throwError, of } from 'rxjs';
 export class AppComponent implements OnInit, AfterViewInit{
 
   isLoggedIn = false;
+  showLoading = false;
 
   constructor(
     private authService: WuiFirebaseAuthService,
     private wuiService: WuiService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private cd: ChangeDetectorRef
   ) { }
 
   async signOut() {
@@ -39,6 +42,11 @@ export class AppComponent implements OnInit, AfterViewInit{
       )
       .subscribe(isLoggedIn => {
         this.isLoggedIn = isLoggedIn
+      });
+
+      this.messageService.get('wui:loading').subscribe(showLoading => {
+        this.showLoading = showLoading;
+        this.cd.detectChanges();
       });
   }
 

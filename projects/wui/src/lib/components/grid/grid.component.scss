@@ -53,15 +53,15 @@
 
         tbody tr{
             background-color:#FFF;
-            cursor:pointer;
 
             &:hover:not(.selected){
                 background-color:#FCFCFC !important;
             }
 
             &.selected {
-                background-color: map-get($theme, "600");
-                color: white;
+                background-color:#F7F7F7 !important;
+                //background-color: map-get($theme, "600");
+                //color: white;
             }
         }
 
@@ -71,14 +71,14 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             border-bottom: 1px solid #EFEFEF;
-            padding: .5rem;
+            padding: 1rem;
 
             &:first-child {
-                padding-left: 1rem;
+                padding-left: 1.5rem;
             }
 
             &:last-child {
-                padding-right: 1rem;
+                padding-right: 1.5rem;
             }
 
             &.no-grow{
@@ -183,7 +183,6 @@
             text-align:left;
             background-color:white;
             font-weight: 500;
-            padding: .5rem;
             font-weight: bold;
             
             &:after{
