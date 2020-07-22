@@ -12,9 +12,21 @@ export class ObjectHelper {
 
     static toJson(object) {
         let json = {};
-        Object.keys(object).forEach(key => { 
-            if(object[key] !== null) { json[key] = object[key]; } 
+
+        const proto = Object.getPrototypeOf(object);
+        Object.entries(Object.getOwnPropertyDescriptors(proto))
+        .filter(([key, descriptor]) => typeof descriptor.get === 'function')
+        .map(([key, descriptor]) => {
+            if (descriptor && key[0] !== '_') {
+                try {
+                    const val = (this as any)[key];
+                    json[key] = val;
+                } catch (error) {
+                    console.error(`Error calling getter ${key}`, error);
+                }
+            }
         });
+        
         return json;
     }
 
