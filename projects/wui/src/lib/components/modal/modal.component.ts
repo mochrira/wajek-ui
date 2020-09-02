@@ -13,6 +13,7 @@ export class ModalComponent implements OnInit {
   _height = '';
   @Input('width') set width(val) {
     this._width = val;
+    
   }
   @Input('height') set height(val) {
     this._height = val;

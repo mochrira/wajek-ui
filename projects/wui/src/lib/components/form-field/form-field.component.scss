@@ -103,11 +103,14 @@
             color:#333;
             opacity:0;
             order: 1;
+            line-height: 1.25;
 
             ~ svg.arrow-down{
                 display:block !important;
                 right:0;
                 top:.75rem;
+                width: 1.5rem;
+                height: 1.5rem;
             }
 
             ~ div.border {
@@ -243,7 +246,7 @@
     &.has-content{
         label{
             font-size:.75rem;
-            bottom:1.75rem;
+            top: 0;
         }
 
         ::ng-deep {
@@ -278,7 +281,7 @@
 
         label{
             font-size:.75rem;
-            bottom:1.75rem;
+            top: 0;
         }
 
         ::ng-deep {
@@ -306,6 +309,8 @@
                 ~ svg.arrow-down{
                     top:.5rem !important;
                     right:.5rem !important;
+                    width: 1.5rem;
+                    height: 1.5rem;
                 }
             }
         }
