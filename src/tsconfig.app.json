@@ -2,7 +2,21 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "wui": [
+        "dist/wui"
+      ],
+      "wui/*": [
+        "dist/wui/*"
+      ],
+      "wui-report": [
+        "dist/wui-report"
+      ],
+      "wui-report/*": [
+        "dist/wui-report/*"
+      ]
+    }
   },
   "files": [
     "main.ts",

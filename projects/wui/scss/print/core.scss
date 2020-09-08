@@ -1,0 +1,50 @@
+@media screen {
+    app-root{
+        wui-app > div#wuiReport{
+            display:none;
+        }
+    }
+
+    wui-report {
+        .outer > .inner > div#wuiReport{
+            font-family: "Arial", sans-serif !important;
+            font-size:11pt;
+            padding: .5in;
+            color:#000;
+            display:block;
+
+            @import "heading.scss";
+            @import "tables.scss";
+            @import "utilities.scss";
+        }
+    } 
+}
+
+@media print {
+    @page{
+        size: auto;
+        margin: .5in;
+    }
+
+    app-root{
+        wui-app{
+            display:block !important;
+            position:relative !important;
+            width:100% !important;
+            height:auto !important;
+    
+            > * {
+                display:none !important;
+            }
+    
+            div#wuiReport{
+                font-family: "Arial", sans-serif !important;
+                font-size:11pt;
+                display:block !important;
+                @import "heading.scss";
+                @import "tables.scss";
+                @import "utilities.scss";
+            }
+        }
+    }
+}

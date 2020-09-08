@@ -25,6 +25,7 @@
     "firebase": "^7.16.1",
     "is-webview": "^1.0.1",
     "ng2-dnd": "^5.0.2",
+    "pdfjs-dist": "^2.4.456",
     "perfect-scrollbar": "^1.5.0",
     "roboto-fontface": "^0.10.0",
     "rxjs": "~6.6.0",

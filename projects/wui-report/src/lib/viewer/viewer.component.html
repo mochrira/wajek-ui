@@ -1,0 +1,12 @@
+<wui-page *ngIf="show" class="flex-page column">
+    <wui-top-bar>
+        <wui-top-bar-item icon="close" (click)="close()"></wui-top-bar-item>
+        <div class="wuiTitle">{{title}}</div>
+        <wui-top-bar-item icon="printer" (click)="print()"></wui-top-bar-item>
+        <wui-top-bar-item icon="content-save" (click)="download()"></wui-top-bar-item>
+    </wui-top-bar>
+
+    <div class="pdf-container">
+        <div #container></div>
+    </div>
+</wui-page>

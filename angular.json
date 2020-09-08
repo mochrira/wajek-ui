@@ -24,16 +24,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              "src/.htaccess",
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/pdfjs-dist/build/", "output": "/assets/pdfjs/" }
             ],
             "styles": [
-              "./node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
-              "./node_modules/@mdi/font/scss/materialdesignicons.scss",
-              "./node_modules/swiper/css/swiper.min.css",
+              "node_modules/@mdi/font/scss/materialdesignicons.scss",
+              "node_modules/swiper/css/swiper.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/pdfjs-dist/build/pdf.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -219,6 +222,46 @@
             "tsConfig": [
               "projects/wui-firebase/tsconfig.lib.json",
               "projects/wui-firebase/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wui-report": {
+      "projectType": "library",
+      "root": "projects/wui-report",
+      "sourceRoot": "projects/wui-report/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/wui-report/tsconfig.lib.json",
+            "project": "projects/wui-report/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/wui-report/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/wui-report/src/test.ts",
+            "tsConfig": "projects/wui-report/tsconfig.spec.json",
+            "karmaConfig": "projects/wui-report/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wui-report/tsconfig.lib.json",
+              "projects/wui-report/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -1,0 +1,18 @@
+@import "../variables/colors.scss";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$theme-colors: map-merge(
+    $theme-colors,
+    (
+        "primary": map-get($theme, "500"),
+        "secondary": map-get($theme, "secondary")
+    )
+);
+
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/forms';

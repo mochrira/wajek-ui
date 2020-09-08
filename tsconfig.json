@@ -27,6 +27,12 @@
     },
     {
       "path": "./projects/wui-firebase/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/wui-report/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/wui-report/tsconfig.spec.json"
     }
   ]
 }

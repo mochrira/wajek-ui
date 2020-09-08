@@ -1,0 +1,240 @@
+@import "../variables/colors.scss";
+
+.btn {
+    background-color: #ECEFF1;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    font-size: .875rem;
+    font-weight: 500;
+    font-family: inherit;
+    color: #424242;
+    transition: all ease .2s;
+
+    &:hover {
+        color: darken(#424242, 5%);
+        background-color: darken(#ECEFF1, 5%);
+    }
+
+    &:disabled {
+        cursor: default;
+    }
+
+    .wuiRipple__obj {
+        background-color: darken(#ECEFF1, 50%) !important;
+    }
+
+    &-primary {
+        background-color: map-get($theme, "500");
+        color: rgba(white, .8);
+
+        &:hover {
+            background-color: lighten(map-get($theme, "500"), 10%) !important;
+            color: #FFF;
+        }
+
+        .wuiRipple__obj {
+            background-color: white !important;
+        }
+    }
+
+    &-danger {
+        background-color: #C62828;
+        color: rgba(white, 0.8);
+
+        &:hover {
+            background-color: lighten(#C62828, 10%);
+            color: #FFF;
+        }
+
+        .wuiRipple__obj {
+            background-color: white !important;
+        }
+    }
+
+    span.mdi{
+        vertical-align: middle;
+        line-height: .875rem;
+
+        &:before {
+            line-height: .875rem;
+        }
+
+        &:first-child {
+            margin-left: -.5rem;
+        }
+
+        &:last-child{
+            margin-right: -.5rem;
+        }
+    }
+
+    &-smooth {
+        background: transparent;
+        border-color: transparent !important;
+
+        &.btn-default {
+            color: #424242;
+
+            &:hover {
+                color: darken(#424242, 5%);
+                background-color: #E0E0E0;
+            }
+        }
+
+        &.btn-primary {
+            color: map-get($theme, "400");
+
+            &:hover {
+                background-color: rgba(map-get($theme, "100"), 0.5);
+                color: map-get($theme, "600");
+            }
+        }
+
+        &.btn-secondary {
+            color: #222;
+
+            &:hover {
+                background-color: rgba(0,0,0,0.15);
+            }
+        }
+
+        &.btn-danger {
+            color: #C62828;
+
+            &:hover {
+                background-color: #C62828;
+                color: white;
+            }
+        }
+    }
+
+    &-rounded {
+        border-radius: 1.5rem;
+        padding-left: .75rem;
+        padding-right: .75rem;
+    }
+
+    &-fab {
+        padding: 0 !important;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        display: inline-flex;
+
+        span.mdi {
+            &:before {
+                width: 1.5rem;
+                height: 1.5rem;
+                line-height: 1.5rem;
+            }
+        }
+
+        &-sm {
+            width: 2.5rem;
+            height: 2.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &-lg {
+        padding: 0 2rem;
+        min-width: 8rem;
+        height: 3rem;
+        font-size: 1rem !important;
+        
+        &.btn-rounded {
+            border-radius: 1.5rem;
+        }
+    }
+
+    + .btn {
+        &:not(.btn-smooth) {
+            margin-left: .25rem;
+        }
+    }
+}
+
+.btn-group {
+    display: flex;
+    
+    .btn  {
+        border-radius: 0;
+
+        &:first-child{
+            border-top-left-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        &:last-child{
+            border-top-right-radius: .25rem;
+            border-bottom-right-radius: .25rem;
+        }
+
+        &-outline {
+            &-primary, &-secondary, &-success, &-danger, &-info, &-warning {
+                border-left-width: 0px !important;
+
+                &:first-child {
+                    border-left-width: 1px !important;
+                }
+
+                &:last-child {
+                    border-right-width: 1px !important;
+                }
+            }
+        }
+
+        + .btn {
+            margin-left: 0;
+        }
+    }
+}
+
+.btn-sosmed {
+    border-radius: 50%;
+    background-color: white !important;
+    border: 1px solid #EFEFEF;
+    font-weight: 500;
+    padding: .75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &:disabled {
+        opacity: 0.7s;
+        filter: grayscale(100%);
+    }
+
+    &:before {
+        font-family: 'Material Design Icons';
+        font-size: 1.25rem;
+        left: .75rem;
+        margin-right: .75rem;
+    }
+
+    &.btn-fb {
+        color: #4267B2;
+        &:before {
+            content: "\F020C";
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn {
+        font-size: .875rem;       
+    }
+}
