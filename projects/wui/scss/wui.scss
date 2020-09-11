@@ -1,3 +1,8 @@
+@import '~@mdi/font/scss/materialdesignicons.scss';
+
+$roboto-font-path: '~roboto-fontface/fonts';
+@import '~roboto-fontface/css/roboto/sass/roboto-fontface.scss';
+
 @import "screen/core.scss";
 @import "print/core.scss";
 
@@ -13,9 +18,11 @@
     &-24 {
         font-size: 1.5rem !important;
     }
+
     &-36 {
         font-size: 2.25rem !important;
     }
+
     &-italic {
         font-style: italic;
     }

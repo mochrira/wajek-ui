@@ -229,46 +229,6 @@
           }
         }
       }
-    },
-    "wui-report": {
-      "projectType": "library",
-      "root": "projects/wui-report",
-      "sourceRoot": "projects/wui-report/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/wui-report/tsconfig.lib.json",
-            "project": "projects/wui-report/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/wui-report/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/wui-report/src/test.ts",
-            "tsConfig": "projects/wui-report/tsconfig.spec.json",
-            "karmaConfig": "projects/wui-report/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/wui-report/tsconfig.lib.json",
-              "projects/wui-report/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
   "defaultProject": "wajek-ui"

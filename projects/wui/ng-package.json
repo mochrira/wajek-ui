@@ -16,6 +16,9 @@
   },
   "whitelistedNonPeerDependencies": [
     "tslib",
-    "perfect-scrollbar"
+    "roboto-fontface",
+    "perfect-scrollbar",
+    "@mdi/font",
+    "bootstrap"
   ]
 }
