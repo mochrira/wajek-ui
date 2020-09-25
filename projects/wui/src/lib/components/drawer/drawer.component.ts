@@ -5,14 +5,12 @@ import {
   HostBinding,
   HostListener,
   ContentChildren,
-  AfterViewInit,
   ElementRef,
   ViewChild
 } from '@angular/core';
 import {
   MessageService
 } from '../../services/message.service';
-import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-drawer-item',
@@ -37,7 +35,7 @@ export class DrawerItemComponent implements OnInit {
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss']
 })
-export class DrawerComponent implements OnInit, AfterViewInit {
+export class DrawerComponent implements OnInit {
 
   swiper: any;
   ps: any;
@@ -88,10 +86,6 @@ export class DrawerComponent implements OnInit, AfterViewInit {
       this.expand = true;
       this.autoCollapse = false;
     }
-  }
-
-  ngAfterViewInit() {
-    this.ps = new PerfectScrollbar(this.inner.nativeElement);
   }
 
 }

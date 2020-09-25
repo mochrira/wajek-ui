@@ -17,7 +17,6 @@ import { ListComponent, ListItemComponent } from './components/list/list.compone
 import { WuiService } from './services/wui.service';
 import { ContextMenuComponent, ContextMenuItemComponent } from './components/context-menu/context-menu.component';
 import { ContextMenuDirective } from './directives/context-menu.directive';
-import { GridComponent, GridColumnComponent } from './components/grid/grid.component';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
@@ -39,7 +38,6 @@ import { TabOrderDirective } from './directives/tab-order.directive';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { WindowTitleComponent } from './components/window-title/window-title.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
-import { ScrollDirective } from './directives/scroll.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
 
 @NgModule({
@@ -61,8 +59,6 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     ContextMenuComponent,
     ContextMenuItemComponent,
     ContextMenuDirective,
-    GridComponent,
-    GridColumnComponent,
     ToggleDrawerDirective,
     NavComponent,
     NavPopDirective,
@@ -85,7 +81,6 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     DateselectComponent,
     WindowTitleComponent,
     ScrollEndDirective,
-    ScrollDirective,
     PageHeaderDirective
   ],
   imports: [
@@ -106,8 +101,6 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     ContextMenuComponent,
     ContextMenuItemComponent,
     ContextMenuDirective,
-    GridComponent,
-    GridColumnComponent,
     NavComponent,
     ToggleDrawerDirective,
     NavPopDirective,
@@ -131,7 +124,6 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     DateselectComponent,
     WindowTitleComponent,
     ScrollEndDirective,
-    ScrollDirective,
     PageHeaderDirective,
     ActionSheetComponent,
     DialogComponent,

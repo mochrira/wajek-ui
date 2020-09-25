@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { WuiModule } from 'wui';
-import { WuiReportModule } from 'wui-report';
+import { WuiModule } from '@wajek/wui';
+import { WuiReportModule } from '@wajek/report';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

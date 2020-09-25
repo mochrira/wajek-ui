@@ -19,9 +19,11 @@
       "dom"
     ],
     "paths": {
-      "wui-report": [
-        "dist/wui-report/wui-report",
-        "dist/wui-report"
+      "@wajek/wui": [
+        "./dist/wui"
+      ],
+      "@wajek/wui/*": [
+        "./dist/wui/*"
       ]
     }
   }
