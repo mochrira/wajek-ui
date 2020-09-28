@@ -9,6 +9,10 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  scrollEnd() {
+    console.log('halo');
+  }
+
   ngOnInit(): void {
   }
 

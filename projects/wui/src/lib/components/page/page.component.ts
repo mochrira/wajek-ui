@@ -21,7 +21,7 @@ export class PageComponent implements OnInit {
 
   onPageScroll(e) {
     this.scroll.next(e);
-    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
+    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight - (e.target.scrollHeight * .125)) {
       this.scrollEnd.next(e);
     }
   }
