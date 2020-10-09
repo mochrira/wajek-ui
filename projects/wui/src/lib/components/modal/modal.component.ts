@@ -30,7 +30,7 @@ export class ModalComponent implements OnInit {
   ) { }
 
   onContentScroll(e) {
-    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
+    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight - (e.target.scrollHeight * .125)) {
       this.scrollEnd.next(e);
     }
   }
