@@ -39,6 +39,7 @@ import { DateselectComponent } from './components/dateselect/dateselect.componen
 import { WindowTitleComponent } from './components/window-title/window-title.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     DateselectComponent,
     WindowTitleComponent,
     ScrollEndDirective,
-    PageHeaderDirective
+    PageHeaderDirective,
+    TitleComponent
   ],
   imports: [
     CommonModule,
@@ -127,7 +129,8 @@ import { PageHeaderDirective } from './directives/page-header.directive';
     PageHeaderDirective,
     ActionSheetComponent,
     DialogComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    TitleComponent
   ], 
   providers: [
     DatePipe

@@ -42,6 +42,9 @@ export class TopBarItemComponent implements OnInit {
 })
 export class TopBarComponent implements OnInit {
 
+  @HostBinding('class.animateTitle') animateTitle = false;
+  @HostBinding('class.showTitle') showTitle = false;
+
   constructor() { }
 
   ngOnInit() { }

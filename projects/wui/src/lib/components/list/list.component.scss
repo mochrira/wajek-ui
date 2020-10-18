@@ -19,6 +19,15 @@
             color:#777;
         }
 
+        div.wui-subheader{
+            padding:2rem 1.5rem .5rem 1.5rem;
+            opacity:.8;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: .875rem;
+        }
+
         wui-list-item{
             min-height:3rem;
             padding:1rem;
