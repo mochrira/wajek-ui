@@ -1,13 +1,1 @@
 <ng-content></ng-content>
-<div class="prefix" *ngIf="prefix.length > 0">{{prefix}}</div>
-<div class="suffix" *ngIf="suffix.length > 0">{{suffix}}</div>
-<span class="mdi mdi-{{_icon}}" *ngIf="_icon.length>0"></span>
-<svg xmlns="http://www.w3.org/2000/svg" *ngIf="type=='select'" class="arrow-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
-<label #labelElement>{{label}}</label>
-<div class="border"></div>
-<div class="error" *ngIf="formControl?.errors">
-    <span *ngIf="formControl.errors?.required">Harus diisi</span>
-    <span *ngIf="formControl.errors?.minLength">Terlalu pendek</span>
-    <span *ngIf="formControl.errors?.maxLength">Terlalu panjang</span>
-    <span *ngIf="formControl.errors?.backend">{{formControl.errors.backend}}</span>
-</div>

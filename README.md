@@ -1,6 +1,6 @@
 # WajekUi
 
-Wajek UI adalah sebuah project yang dibuat khusus membantu developer wajek untuk mengembangkan aplikasi berbasis desktop, web ataupun mobile
+Wajek UI adalah sebuah user interface pack yang dibuat khusus untuk membantu developer mengembangkan aplikasi berbasis desktop, web ataupun mobile dengan framework angular
 
 ## Instalasi
 

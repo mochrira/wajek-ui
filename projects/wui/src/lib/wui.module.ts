@@ -6,7 +6,7 @@ import { WuiComponent } from './wui.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MessageService } from '../lib/services/message.service';
-import { FormFieldComponent } from './components/form-field/form-field.component';
+import { FormFieldComponent, WuiInputDirective } from './components/form-field/form-field.component';
 import { AppComponent } from './components/app/app.component';
 import { TopBarComponent, TopBarItemComponent } from './components/top-bar/top-bar.component';
 import { PageComponent } from './components/page/page.component';
@@ -40,12 +40,14 @@ import { WindowTitleComponent } from './components/window-title/window-title.com
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
 import { TitleComponent } from './components/title/title.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     WuiComponent,
     SnackbarComponent,
     LoadingComponent,
+    WuiInputDirective,
     FormFieldComponent,
     AppComponent,
     TopBarComponent,
@@ -86,11 +88,13 @@ import { TitleComponent } from './components/title/title.component';
     TitleComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     FormsModule
   ],
   exports: [
     WuiComponent,
+    WuiInputDirective,
     FormFieldComponent,
     AppComponent,
     DrawerComponent,

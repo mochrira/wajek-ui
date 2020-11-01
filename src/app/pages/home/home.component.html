@@ -1,13 +1,23 @@
-<wui-page (scrollEnd)="scrollEnd()">
-    <wui-top-bar>
-        <wui-top-bar-item icon="menu" wuiToggleDrawer></wui-top-bar-item>
-        <div class="wuiTitle">Home</div>
-    </wui-top-bar>
-
-    <wui-title>
-        <h3 class="m-0">Home</h3>
-    </wui-title>
-    <div class="p-4">
-        <div style="height: 1024px"></div>
-    </div>
-</wui-page>
+<wui-app>
+    <wui-drawer>
+        <div class="height-10000"></div>
+    </wui-drawer>
+    <wui-page>
+        <wui-top-bar>
+            <button class="btn btn-circle" wuiToggleDrawer>
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </wui-top-bar>
+        
+        <form [formGroup]="form">
+            <div class="p-4">
+                <wui-form-field>
+                    <span class="mdi mdi-account-box"></span>
+                    <label for="name">Input Label</label>
+                    <input wuiInput type="text" placeholder="Placeholder" formControlName="name"/>
+                    <div class="hint error" *ngIf="name.dirty && name.errors?.required">Harus diisi</div>
+                </wui-form-field>
+            </div>
+        </form>
+    </wui-page>
+</wui-app>

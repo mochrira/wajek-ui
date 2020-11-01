@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -6,8 +7,11 @@ import {
   HostListener,
   ContentChildren,
   ElementRef,
-  ViewChild
+  ViewChild,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
+import PerfectScrollbar from 'perfect-scrollbar';
 import {
   MessageService
 } from '../../services/message.service';
@@ -38,7 +42,6 @@ export class DrawerItemComponent implements OnInit {
 export class DrawerComponent implements OnInit {
 
   swiper: any;
-  ps: any;
   @ContentChildren(DrawerItemComponent) items: Array<DrawerItemComponent>;
   @Input() @HostBinding('class.expand') expand: Boolean = false;
   @Input() autoCollapse = true;
@@ -54,10 +57,12 @@ export class DrawerComponent implements OnInit {
   }
 
   @ViewChild('inner', { static: true }) inner: any;
+  scrollBar: any;
 
   constructor(
     private elementRef: ElementRef,
-    private messageService: MessageService
+    private messageService: MessageService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   toggle() {
@@ -82,10 +87,7 @@ export class DrawerComponent implements OnInit {
     this.messageService.get('wui:openDrawer').subscribe(res => {
       this.open();
     });
-    if(window.innerWidth > 768) {
-      this.expand = true;
-      this.autoCollapse = false;
-    }
+    this.scrollBar = new PerfectScrollbar(this.inner.nativeElement);
   }
 
 }

@@ -3,6 +3,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { TitleComponent } from '../title/title.component';
 import { TopBarComponent } from '../top-bar/top-bar.component';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'wui-page',
@@ -16,6 +17,7 @@ export class PageComponent implements OnInit, AfterContentChecked {
   @ViewChild('content', {static: true}) content: any;
   @ContentChild(TitleComponent) titleComponent: TitleComponent;
   @ContentChild(TopBarComponent) topBarComponent: TopBarComponent;
+  scrollBar: any;
 
   private afterViewInit: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private unsub: Subject<any> = new Subject();
@@ -94,7 +96,8 @@ export class PageComponent implements OnInit, AfterContentChecked {
         this.topBarComponent.showTitle = false;
         this.cd.detectChanges();
       }
-    })
+    });
+    this.scrollBar = new PerfectScrollbar(this.content.nativeElement);
   }
 
   ngOnDestroy() {

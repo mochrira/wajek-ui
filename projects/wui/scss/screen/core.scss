@@ -85,16 +85,13 @@
     }
     
     a {
-        color: map-get($theme, "500");
         text-decoration: none;
     
         &:hover{
-            color: map-get($theme, "400");
             text-decoration: underline;
         }
     
         &:visited{
-            color: map-get($theme, "600");
             text-decoration: none;
         }
     
@@ -207,5 +204,8 @@
     @import "box.scss";
     @import "table.scss";
     @import "ripple.scss";
+    @import "utils.scss";
+    @import "drawer.scss";
+    @import "topbar.scss";
 
 }

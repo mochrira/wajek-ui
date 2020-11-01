@@ -1,0 +1,38 @@
+@mixin font-sizes($breakpoint: null) {
+    .font {
+        &#{if($breakpoint != null, "-" + $breakpoint, "")} {
+            &-12 { font-size: .75rem; }
+            &-14 { font-size: .875rem; }
+            &-16 { font-size: 1rem; }
+            &-18 { font-size: 1.125rem; }        
+            &-20 { font-size: 1.25rem; }
+            &-24 { font-size: 1.5rem; }
+            &-28 { font-size: 1.75rem; }
+            &-32 { font-size: 2rem; }
+            &-48 { font-size: 3rem; }
+            &-64 { font-size: 4rem; }
+        }
+    }
+}
+@include font-sizes;
+@include media-breakpoint-down(sm) { @include font-sizes("sm"); }
+@include media-breakpoint-up(sm) { @include font-sizes("md"); }
+@include media-breakpoint-up(md) { @include font-sizes("lg"); }
+@include media-breakpoint-up(lg) { @include font-sizes("xl"); }
+
+@mixin max-width($breakpoint: null) {
+    .mw {
+        &#{if($breakpoint != null, "-" + $breakpoint, "")} {
+            &-400 { max-width: 400px; }
+            &-500 { max-width: 500px; }
+            &-600 { max-width: 600px; }
+            &-700 { max-width: 700px; }
+            &-800 { max-width: 800px; }
+        }
+    }
+}
+@include max-width;
+@include media-breakpoint-down(sm) { @include max-width("sm"); }
+@include media-breakpoint-up(sm) { @include max-width("md"); }
+@include media-breakpoint-up(md) { @include max-width("lg"); }
+@include media-breakpoint-up(lg) { @include max-width("xl"); }

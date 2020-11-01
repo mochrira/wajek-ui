@@ -1,0 +1,62 @@
+@import '../variables/colors.scss';
+
+.wui-drawer {
+    width: 250px;
+    transition: all ease .2s;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        padding: 0 1.625rem;
+        height: 2rem;
+        font-size: 0.875rem;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        color: #333;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 1rem;
+
+        span.mdi {
+            font-size: 1.25rem;
+            margin-right: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        &:hover {
+            background-color: rgba(#EFEFEF, .8);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        &.active {
+            background-color: rgba($theme-primary, 0.15);
+            color: $theme-primary;
+            font-weight: bold;
+        }
+    }
+
+    &-subheader {
+        font-size: .875rem;
+        padding-top: 1rem;
+        padding-left: 1.75rem;
+        padding-bottom: .5rem;
+        font-weight: bold;
+    }
+
+    &.minimize {
+        width: 5rem;
+
+        .wui-drawer-subheader {
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+    }
+}

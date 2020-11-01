@@ -8,15 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsComponent } from './pages/forms/forms.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ReportComponent } from './pages/report/report.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
         FormsComponent,
         HomeComponent,
-        ReportComponent
+        ReportComponent,
+        ChatComponent
     ],
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         WuiModule.forRoot(),

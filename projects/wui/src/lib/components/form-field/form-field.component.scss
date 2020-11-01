@@ -1,322 +1,132 @@
-@import '../../../../../../scss/variables/colors.scss';
+$theme-text: #333 !default;
+$theme-light: #E0E0E0 !default;
+$theme-primary: #1976D2 !default;
+$theme-secondary: #212121 !default;
+$theme-danger: #C62828 !default;
 
 :host{
-    width:100%;
-    display:flex;
-    align-items: center;
-    position:relative;
-    margin-bottom:1.5rem;
-    background-color:#F7F7F7;
-    border-top-left-radius:.25rem;
-    border-top-right-radius:.25rem;
-
-    &.no-margin{
-        margin:0 !important;
-    }
-
-    span.mdi{
-        position:absolute;
-        left:.75rem;
-        top:50% !important;
-        transform: translateY(-50%);
-    }
-
-    &.datefield{
-        position:relative;
-
-        ::ng-deep {
-            span.mdi.mdi-calendar-range-outline{
-                position:absolute;
-                right:.75rem;
-                top:50% !important;
-                transform: translateY(-50%);
-                width:2rem;
-                height:2rem;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                cursor:pointer;
-                border-radius:50%;
-                z-index: 9999;
-                
-                &:hover{
-                    background-color:rgba(0,0,0,0.05);
-                }
-            }
-        }
-    }
-
-    .border{
-        overflow:visible;
-        border:none !important;
-        width:100%;
-        height:1px;
-        position:absolute;
-        left:50%;bottom:-1px;
-        transform:translateX(-50%);
-        display:block;
-        width:100%;
-        bottom:0;
-
-        &:after{
-            content:"";
-            display:block;
-            width:0;
-            height:2px;
-            transition:all ease .4s;
-            bottom:0;
-            left:50%;
-            position:absolute;
-        }
-    }
-
-    label{
-        position:absolute;
-        left:1rem;
-        transition:bottom ease .3s, font-size ease .3s;
-        z-index:0;
-        color:rgba(0,0,0,0.65);
-    }
-
-    svg{
-        position:absolute;
-        fill:#555;
-    }
+    position: relative; 
+    transition: all ease .2s;
+    margin-bottom: .5rem;
+    display: block;
 
     ::ng-deep {
-        input, select, textarea{
-            flex: 1 1 auto;
-            -webkit-appearance: none;
+        label {
+            font-size: 1rem;
+            position: absolute;
+            line-height: 1.125rem;
+            top: 1.25rem;
+            transition: all ease .2s;
+            color: rgba(0,0,0,.54);
+        }
+    
+        input {
+            width: 100%;
+            padding: .5rem 0rem;
+            border: none;
+            font-size: 1rem;
+            opacity: 0;
+            margin-top: .75rem;
+            margin-bottom: 1.25rem;
             box-sizing: border-box;
-            border:none;
-            display:block;
-            width:100%;
-            height:100%;
-            outline:none;
-            font-family:'Roboto', sans-serif;
-            padding:1rem 1rem .5rem;
-            background:transparent; 
-            position:relative;
-            z-index:1;
-            font-size:1rem;
-            color:#333;
-            opacity:0;
-            order: 1;
-            line-height: 1.25;
-
-            ~ svg.arrow-down{
-                display:block !important;
-                right:0;
-                top:.75rem;
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-
-            ~ div.border {
-                background-color:#DDD;
-
-                &:after{
-                    background-color:#DDD;
-                }
-            }
-
-            ~ div.error {
-                color: #C62828;
-                position: absolute;
-                bottom: -1.125rem;
-                left: 1rem;
-                display: none;
-                font-size:.75rem;
-            }
-
-            ~ div.prefix{
-                padding:1rem 0 .5rem 1rem;
-                opacity: 0;
-                order: 0;
-            }
-
-            ~ div.suffix{
-                padding:1rem 0 .5rem 1rem;
-                opacity: 0;
-                order: 2;
-            }
-
-            &.ng-invalid{
-                &.ng-touched{
-                    ~ div.border{
-                        background-color:#C62828;
+            height: 2.125rem;
     
-                        &:after{
-                            background-color:#C62828;
-                        }
-                    }
-    
-                    ~ div.error{
-                        display:block;
-                    }
-    
-                    ~ label {
-                        color: #C62828;
-                    }
-    
-                    ~ .mdi {
-                        color: #C62828;
-                    }
-                }
+            &:focus {
+                opacity: 1;
             }
+        }
+    
+        .hint {
+            position: absolute;
+            bottom: 0;
+            font-size: .75rem;
+            color: rgba(0,0,0,.54);
 
-            &:not(.ng-invalid):not(.ng-pristine), &.ng-untouched, &.ng-valid {
-                &:focus {
-                    ~ .border{
-                        &:after{
-                            background-color:map-get($theme, "500") !important;
-                        }
-                    }
-                }
+            &.error {
+                color: $theme-danger;
             }
-
-            &:disabled{
-                opacity:.5 !important;
-
-                ~ div.border, ~ div.error, ~ label {
-                    opacity:.5;
-                }
-            } 
-        }
-
-        button.btn {
-            order: 99;
-        }
-
-        span.mdi ~ label{
-            left:3rem;
-        }
-
-        textarea ~ label {
-            bottom: auto;
-            top: 1rem;
-            transition:top ease .3s, font-size ease .3s !important;
-        }
-    }
-
-    &.transparent{
-        background-color:transparent !important;
-
-        label{
-            left: 0;
         }
 
         span.mdi {
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+    &:before, &:after {
+        position: absolute;
+        content: "";
+        display: block;
+        top: 2.875rem;
+    }
+
+    &:before {
+        height: 1px;
+        width: 100%;
+        background-color: rgba(0,0,0,.42);
+    }
+
+    &:after {
+        opacity: 0;
+        height: 2px;
+        background-color: $theme-primary;
+        width: 0;
+        left: 50%;
+        transition: all ease .2s;
+    }
+
+    &.is-focused {
+        &:after {
+            opacity: 1;
+            width: 100%;
             left: 0;
         }
 
         ::ng-deep {
-            input, select, textarea {
-                padding-left:0 !important;
-                padding-right:0 !important;
-
-                ~ div.error{
-                    left:0 !important;
-                }
-
-                ~ div.prefix{
-                    padding-left: 0 !important;
-                    padding-right:1rem !important;
-                }
-            }
-            
-        }
-    }
-
-    &.with-icon{
-        padding-left: 2.5rem;
-
-        label{
-            left: 2.5rem;
-        }
-
-        ::ng-deep{
-            input, select, textarea{
-                padding-left: 0 !important;
-            }
-        }
-    }
-
-    &.has-content{
-        label{
-            font-size:.75rem;
-            top: 0;
-        }
-
-        ::ng-deep {
-            input, select, textarea{
-                opacity:1;
-
-                ~ .prefix, ~ .suffix{
-                    opacity:1;
-                }
-            }
-
-            textarea ~ label {
+            label {
                 top: 0;
-                bottom: auto;
+                font-size: .75rem;
+                line-height: .75rem;
+                color: $theme-primary;
             }
         }
     }
 
-    &:focus-within{
-        background-color:#F2F2F2;
-
-        .border{
-            &:after{
-                width:100%;
-                left:0;
-            }
-        }
-
-        span.mdi, label{
-            color:map-get($theme, "500");
-        }
-
-        label{
-            font-size:.75rem;
-            top: 0;
-        }
-
+    &.has-content:not(.is-focused) {
         ::ng-deep {
-            input, select, textarea{
-                opacity:1 !important;
-
-                ~ .prefix, ~ .suffix{
-                    opacity:1 !important;
-                }
-            }
-
-            textarea ~ label {
+            label {
                 top: 0;
-                bottom: auto;
+                font-size: .75rem;
+                line-height: .75rem;
+            }
+
+            input {
+                opacity: 1;
             }
         }
     }
 
-    &.no-label{
+    &.is-invalid {
         ::ng-deep {
-            input, select, textarea{
-                padding-top:.5rem !important;
-                opacity:1;
-                
-                ~ svg.arrow-down{
-                    top:.5rem !important;
-                    right:.5rem !important;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                }
+            label {
+                color: $theme-danger;
             }
         }
 
-        span.mdi{
-            top:50% !important;
-            transform: translateY(-50%);
+        &:before {
+            background-color: $theme-danger;
+        }
+
+        &:after {
+            background-color: $theme-danger;
         }
     }
 

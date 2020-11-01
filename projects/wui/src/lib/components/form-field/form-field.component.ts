@@ -1,81 +1,49 @@
-import { Component, ElementRef, Input, Renderer2, ContentChild, AfterContentInit, HostBinding, OnInit, AfterContentChecked } from '@angular/core';
-import { FormControlName, NgModel } from '@angular/forms';
+import { Component, ElementRef, ContentChild, AfterContentInit, Directive, HostBinding } from '@angular/core';
+import { FormControlName } from '@angular/forms';
+
+@Directive({
+  selector: '[wuiInput]'
+})
+export class WuiInputDirective { }
 
 @Component({
   selector: 'wui-form-field',
   templateUrl: './form-field.component.html',
   styleUrls: ['./form-field.component.scss']
 })
-export class FormFieldComponent implements AfterContentInit, AfterContentChecked {
+export class FormFieldComponent implements AfterContentInit {
 
-  @ContentChild(FormControlName, {static: true}) formControl: FormControlName;
-  @ContentChild(NgModel, {static: true}) ngModel: NgModel;
-  inputElement: any;
-  type = '';
+  @HostBinding('class.is-focused') isFocused = false;
+  @HostBinding('class.has-content') hasContent = false;
+  @HostBinding('class.is-invalid') isInvalid = false;
+  @ContentChild(WuiInputDirective, {read: ElementRef}) input: ElementRef;
+  @ContentChild(WuiInputDirective, {read: FormControlName}) formControlName: FormControlName;
 
-  @Input() label: String = '';
-  @Input() prefix: String = '';
-  @Input() suffix: String = '';
-  @Input() @HostBinding('class.boxed') boxed: Boolean = false;
-  @HostBinding('class.with-icon') withIcon = false;
-  _icon = '';
-  @Input('icon') set setIcon(val) {
-    if (val) {
-      this.withIcon = true;
-      this._icon = val;
-    }
-  }
-
-  constructor(
-    private el: ElementRef,
-    private renderer2: Renderer2
-  ) {}
-
-  detectFloat() {
-    if ((this.getValue() !== '') && (this.getValue() !== null)) {
-      this.renderer2.addClass(this.el.nativeElement, 'has-content');
-    } else {
-      this.renderer2.removeClass(this.el.nativeElement, 'has-content');
-    }
-  }
-
-  getValue() {
-    if(this.formControl){
-      return this.formControl.control.value;
-    }else if(this.ngModel){
-      return this.ngModel.control.value;
-    }else {
-      return this.inputElement.value;
-    }
-  }
-
-  ngAfterContentChecked() {
-    if(this.inputElement){
-      this.detectFloat();
-    }
-  }
+  constructor() { }
 
   ngAfterContentInit() {
-    this.inputElement = this.el.nativeElement.querySelector('input, select, textarea');
-    this.type = this.inputElement.tagName.toLowerCase();
-    if (this.formControl) {
-      this.detectFloat();
-      this.formControl.valueChanges.subscribe(val => {
-        this.detectFloat();
+    this.input.nativeElement.addEventListener('focus', (e) => {
+      this.isFocused = true;
+    });
+    this.input.nativeElement.addEventListener('blur', (e) => {
+      this.isFocused = false;
+    });
+    this.input.nativeElement.addEventListener('keyup', (e) => {
+      if(e.target.value.length > 0) {
+        this.hasContent = true;
+      } else {
+        this.hasContent = false;
+      }
+    });
+    console.log(this.formControlName);
+    if(this.formControlName) {
+      this.formControlName.statusChanges.subscribe(status => {
+        if(status == 'VALID') {
+          this.isInvalid = false;
+        } else {
+          this.isInvalid = true;
+        }
       });
-    } else if (this.ngModel) {
-      this.detectFloat();
-      this.ngModel.valueChanges.subscribe(val => {
-        this.detectFloat();
-      });
-    }else {
-      this.renderer2.listen(this.inputElement, 'keyup', (e) => {
-          this.detectFloat();
-      });
-      this.renderer2.listen(this.inputElement, 'change', (e) => {
-          this.detectFloat();
-      });
-      this.detectFloat();
     }
   }
 
