@@ -1,5 +1,3 @@
-@import "../../../../scss/variables/colors.scss";
-
 :host{
     position:fixed;
     width:100%;
@@ -9,14 +7,12 @@
     background-color:rgba(0,0,0,0.5);
     display:flex;
     transition:all ease .5s;
-    border-right: 1px solid #EFEFEF;
 
     >.inner{
         width: 100%;
         max-width: 16rem;
         background-color: #FFF;
         flex: 1 1 auto;
-        padding: 1rem .5rem;
         overflow-y: auto;
         overflow-x: hidden;
         text-overflow: ellipsis;
@@ -98,14 +94,14 @@
             }
 
             &:hover {
-                color:map-get($theme, "500") !important;
-                background-color: lighten(map-get($theme, "500"), 50%);
+                // color:map-get($theme, "500") !important;
+                // background-color: lighten(map-get($theme, "500"), 50%);
             }
 
             &.active{
                 position: relative;
-                color:map-get($theme, "500") !important;
-                background-color: lighten(map-get($theme, "500"), 45%);
+                // color:map-get($theme, "500") !important;
+                // background-color: lighten(map-get($theme, "500"), 45%);
             }
         
             span.mdi{

@@ -8,37 +8,68 @@
         height:100%;
         margin:0;
         padding:0;
-        color:#263238;
+        color:rgba(0,0,0,.87);
     }
 
-    h1 {
-        font-size: 6rem;
-        font-weight: 300;
-    }
-
-    h2 {
-        font-size: 3.75rem;
-        font-weight: 300;
-    }
-
-    h3 {
-        font-size: 3rem;
-        font-weight: normal;
-    }
-
-    h4 {
-        font-size: 2.125rem;
-        font-weight: normal;
-    }
-
-    h5 {
-        font-size: 1.5rem;
-        font-weight: normal;
-    }
-
-    h6 {
-        font-size: 1.25rem;
+    h1, h2, h3, h4, h5, h6 {
+        display:block;
+        line-height: 1.2;
         font-weight: 500;
+    }
+    
+    h1{
+        font-size: 2.5rem;
+    }
+    
+    h2{
+        font-size: 2rem;
+    }
+    
+    h3{
+        font-size: 1.75rem;
+    }
+    
+    h4{
+        font-size: 1.5rem;
+    }
+    
+    h5{
+        font-size: 1.25rem;
+    }
+    
+    h6{
+        font-size: 1rem;
+    }
+
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    ul {
+        list-style: dotted;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        margin: 0;
+
+        li {
+            line-height: 1rem;
+            margin-bottom: .75rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            ul {
+                list-style: circle;
+                padding-bottom: 0;
+            }
+        }
+
+        &.list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
     }
 
     .subtitle {
@@ -207,5 +238,7 @@
     @import "utils.scss";
     @import "drawer.scss";
     @import "topbar.scss";
+    @import "tooltip.scss";
+    @import "list.scss";
 
 }

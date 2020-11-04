@@ -1,5 +1,5 @@
 <div class="outer">
-    <ng-content select="wui-top-bar"></ng-content>
+    <ng-content select="wui-top-bar, .wui-top-bar"></ng-content>
     <div class="content" #content (scroll)="onPageScroll($event)">
         <ng-content></ng-content>
     </div>

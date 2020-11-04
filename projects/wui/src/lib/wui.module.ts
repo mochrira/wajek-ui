@@ -41,6 +41,7 @@ import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
 import { TitleComponent } from './components/title/title.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { TooltipDirective } from './tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { BrowserModule } from '@angular/platform-browser';
     WindowTitleComponent,
     ScrollEndDirective,
     PageHeaderDirective,
-    TitleComponent
+    TitleComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ActionSheetComponent,
     DialogComponent,
     SnackbarComponent,
-    TitleComponent
+    TitleComponent,
+    TooltipDirective
   ], 
   providers: [
     DatePipe

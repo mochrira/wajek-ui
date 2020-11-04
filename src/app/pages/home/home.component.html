@@ -1,23 +1,77 @@
-<wui-app>
-    <wui-drawer>
-        <div class="height-10000"></div>
-    </wui-drawer>
-    <wui-page>
-        <wui-top-bar>
-            <button class="btn btn-circle" wuiToggleDrawer>
-                <span class="mdi mdi-menu"></span>
-            </button>
-        </wui-top-bar>
-        
-        <form [formGroup]="form">
-            <div class="p-4">
-                <wui-form-field>
-                    <span class="mdi mdi-account-box"></span>
-                    <label for="name">Input Label</label>
-                    <input wuiInput type="text" placeholder="Placeholder" formControlName="name"/>
-                    <div class="hint error" *ngIf="name.dirty && name.errors?.required">Harus diisi</div>
-                </wui-form-field>
+<wui-page>
+    <div class="wui-top-bar">
+        <button class="button button-square button-rounded button-large" wuiToggleDrawer wuiTooltip="Toggle Menu">
+            <span class="mdi mdi-menu"></span>
+        </button>
+        <div class="px-3 text-white font-20">Home</div>
+    </div>
+    
+    <div class="container p-4">
+        <wui-form-field class="boxed">
+            <span class="mdi mdi-at"></span>
+            <label for="name">Email</label>
+            <input type="text" wuiInput name="name" placeholder="Type Your Email">
+            <div class="hint error">Please Enter Your Email</div>
+        </wui-form-field>
+        <wui-form-field>
+            <span class="mdi mdi-at"></span>
+            <label for="name">Email</label>
+            <input type="text" wuiInput name="name" placeholder="Type Your Email">
+            <div class="hint error">Please Enter Your Email</div>
+        </wui-form-field>
+        <div class="row">
+            <div class="col-6">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <h4>Heading 4</h4>
+                <h5>Heading 5</h5>
+                <h6>Heading 6</h6>
             </div>
-        </form>
-    </wui-page>
-</wui-app>
+            <div class="col-6">
+                <h2>Unordered List</h2>
+                <ul class="list-unstyled">
+                    <li>List Item 1</li>
+                    <li>
+                        List Item 2
+                        <ul>
+                            <li>List Child 1</li>
+                            <li>List Child 2</li>
+                            <li>List Child 3</li>
+                            <li>List Child 4</li>
+                        </ul>
+                    </li>
+                    <li>List Item 3</li>
+                    <li>List Item 4</li>
+                    <li>List Item 5</li>
+                    <li>List Item 6</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Paragraph</h2>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque arcu, vulputate nec lacus nec, gravida dictum nisl. Quisque id leo vulputate, tempor mi eget, fringilla nisi. Ut mattis, est nec venenatis mattis, tortor purus venenatis lorem, id pulvinar ex velit eu odio. Integer eu euismod tellus. Donec dui arcu, maximus sit amet est sit amet, molestie maximus quam. Praesent eleifend arcu id nisl condimentum, nec interdum quam fermentum. Etiam porttitor ac nibh sed lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean gravida enim non enim sodales convallis. Curabitur bibendum metus quis ex pellentesque, vitae mollis mi hendrerit.
+        </p>
+        <p>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec volutpat, risus quis feugiat iaculis, est magna porta turpis, a maximus nisl eros nec mauris. Suspendisse ac eros erat. Nunc ut nisl ut felis cursus facilisis. Sed eu tincidunt libero. Praesent tincidunt arcu sit amet velit lobortis rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+        </p>
+        <p>
+        Morbi vehicula, nunc quis pellentesque luctus, sem dolor tincidunt nisl, non pretium tellus diam in elit. Nunc diam ante, suscipit id efficitur at, tincidunt sed libero. Praesent faucibus id ex eget vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eu urna tellus. Pellentesque consequat cursus ex. Donec nec sapien egestas, faucibus ipsum vitae, bibendum tellus. Vivamus malesuada lorem erat, quis feugiat diam vestibulum quis. Curabitur viverra est at nisl volutpat, tincidunt interdum nibh tempor. Sed tempus vitae lorem ac venenatis. Mauris bibendum lacus vel orci sagittis, a condimentum tortor porta. Donec rutrum molestie lacus et laoreet. Mauris posuere volutpat lacus id vehicula. Quisque commodo ipsum felis, eget placerat lorem semper quis. Cras tempus enim sit amet interdum consequat.
+        </p>
+        <p>
+        Nullam molestie tellus et felis lobortis porta non quis neque. Vivamus tincidunt velit turpis, eu suscipit risus aliquam sed. Curabitur gravida est sit amet mauris commodo lobortis. Nulla facilisi. Pellentesque nisl nisl, hendrerit sed varius et, luctus quis enim. Duis auctor elit quis felis iaculis, sit amet consectetur odio faucibus. Pellentesque placerat nec enim vitae posuere. Sed hendrerit porta interdum. Nullam ac libero mollis, sagittis eros eget, ullamcorper purus. Pellentesque auctor tincidunt varius. Morbi convallis lacus quis dolor luctus, interdum vestibulum tortor lacinia.
+        </p>
+        <p>
+        Vestibulum nec interdum nunc. Aenean semper ornare elit in aliquam. Suspendisse a tristique felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris viverra dictum mauris, et eleifend libero dapibus sit amet. Sed ac magna arcu. Nam eget consectetur ante. Integer dictum ligula sem, eget tempus enim mollis nec. Nullam fermentum mollis diam, sed porta libero aliquam non. Sed elementum ex quis laoreet pellentesque. Integer sed nunc ornare, tempus mi eu, vehicula sem. Donec tempus sit amet libero at volutpat. Suspendisse efficitur turpis ac libero ornare consequat.
+        </p>
+        <p>
+        Nam dictum blandit ante, facilisis aliquet mauris lobortis id. Vivamus congue magna ullamcorper porta mattis. Ut efficitur erat id justo pharetra, viverra volutpat tortor congue. Vivamus imperdiet urna orci, et vulputate nunc interdum at. Fusce lectus nisl, vestibulum tempor purus ac, lobortis congue felis. Quisque ante purus, lacinia ac lectus ut, aliquet fermentum augue. In semper sapien enim, quis volutpat neque interdum at. Suspendisse potenti. Proin ornare mauris nec massa sollicitudin egestas. Nam eu arcu in est mollis viverra at at nunc. Nulla condimentum magna eget enim elementum, id bibendum erat convallis. Aliquam sed lobortis arcu. Praesent id nunc sed risus condimentum dictum. Donec mattis neque quis massa accumsan interdum vel in eros. Fusce id arcu vehicula, tempus magna sed, lacinia lorem.
+        </p>
+        <p>
+        Aliquam at luctus orci. Pellentesque sit amet magna porttitor, varius tortor in, congue mauris. In a tincidunt sem. In hac habitasse platea dictumst. Nam mollis nunc at dictum egestas. Praesent congue, metus eget euismod iaculis, lacus magna luctus ante, sit amet mollis lectus lorem et massa. Praesent interdum mollis commodo. Sed quis ipsum ac libero faucibus porttitor sed quis mauris. Sed a sapien erat. Morbi venenatis porta consequat. Mauris varius, sem vitae egestas eleifend, neque nulla sollicitudin velit, eu placerat justo tortor in risus. Cras aliquet lectus eros, et faucibus quam iaculis id. Donec mattis gravida maximus. Suspendisse et nisi sit amet ipsum egestas dictum vestibulum vitae sem.
+        </p>
+    </div>
+</wui-page>

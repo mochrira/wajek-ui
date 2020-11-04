@@ -2,7 +2,7 @@
 
 <div class="main-outer">
     <div class="main">
-        <ng-content select="wui-drawer"></ng-content>
+        <ng-content select="wui-drawer, .wui-drawer"></ng-content>
         <div class="outer">
             <ng-content></ng-content>
         </div>
@@ -15,3 +15,4 @@
 </div>
 <wui-action-sheet></wui-action-sheet>
 <wui-dialog></wui-dialog>
+<div class="tooltip" #tooltip></div>

@@ -1,4 +1,4 @@
-@import "../../../../scss/variables/colors.scss";
+$theme-primary: #1976D2 !default;
 
 :host{
     height:4rem;
@@ -10,11 +10,10 @@
     align-items:center;
     flex-direction:row;
     z-index:99;
-    background-color:white;
-    border-bottom:1px solid #EFEFEF;
+    background-color: var(--theme-primary, $theme-primary);
     overflow:hidden;
     padding: 0 .75rem;
-    border-bottom: 1px solid #EFEFEF !important;
+    color: white;
 
     &.compact{
         height: 3rem;
@@ -128,9 +127,19 @@
 
             &.down{
                 color:white !important;
-                background-color: map-get($theme, "500") !important;
+                // background-color: map-get($theme, "500") !important;
             }
             
+        }
+
+        .button {
+            color:white;
+            background-color: transparent;
+            border-color: transparent;
+
+            &:hover {
+                background-color: rgba(255,255,255,0.125);
+            }
         }
     
         input{

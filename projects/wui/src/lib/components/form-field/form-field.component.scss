@@ -1,132 +1,313 @@
-$theme-text: #333 !default;
-$theme-light: #E0E0E0 !default;
-$theme-primary: #1976D2 !default;
-$theme-secondary: #212121 !default;
-$theme-danger: #C62828 !default;
+@import '../../../../scss/variables/colors.scss';
 
 :host{
-    position: relative; 
-    transition: all ease .2s;
-    margin-bottom: .5rem;
     display: block;
+    text-align: left;
 
-    ::ng-deep {
-        label {
-            font-size: 1rem;
-            position: absolute;
-            line-height: 1.125rem;
-            top: 1.25rem;
-            transition: all ease .2s;
-            color: rgba(0,0,0,.54);
+    .wui-form-field-container {
+        position: relative; 
+        transition: all ease .2s;
+        display: block;
+
+        ::ng-deep {
+            label {
+                font-size: 1rem;
+                position: absolute;
+                line-height: 1.125rem;
+                top: 2rem;
+                transition: top ease .2s, font-size ease .2s;
+                color: rgba(0,0,0,.54);
+                z-index: 1;
+            }
+        
+            input {
+                width: 100%;
+                padding-top: 1.5rem;
+                padding-left: 0;
+                padding-right: 0;
+                border: none;
+                font-size: 1rem;
+                opacity: 0;
+                height: 4rem;
+                z-index: 2;
+                position: relative;
+                box-sizing: border-box;
+        
+                &:focus {
+                    opacity: 1;
+                }
+            }
+    
+            span.mdi {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 1.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: rgba(0,0,0,.54);
+            }
+    
         }
     
-        input {
-            width: 100%;
-            padding: .5rem 0rem;
-            border: none;
-            font-size: 1rem;
-            opacity: 0;
-            margin-top: .75rem;
-            margin-bottom: 1.25rem;
-            box-sizing: border-box;
-            height: 2.125rem;
+        &:before, &:after {
+            position: absolute;
+            content: "";
+            display: block;
+            top: 100%;
+        }
     
-            &:focus {
-                opacity: 1;
+        &:before {
+            height: 1px;
+            width: 100%;
+            background-color: var(--theme-border, $theme-border);
+        }
+    
+        &:after {
+            opacity: 0;
+            height: 2px;
+            background-color: var(--theme-primary, $theme-primary);
+            width: 0;
+            left: 50%;
+            transition: all ease .2s;
+        }
+    }
+
+    &.boxed {
+        
+        .wui-form-field-container {
+            &:before, &:after {
+                display: none;
+            }
+    
+            ::ng-deep {
+                label {
+                    left: .75rem;
+                    top: 1.75rem;
+                    padding-left: .25rem;
+                    padding-right: .25rem;
+                }
+    
+                input {
+                    margin-top: .5rem;
+                    opacity: 1;
+                    padding: 0 calc(1rem - 1px);
+                    height: 56px;
+                    background: transparent;
+                    box-sizing: border-box;
+                    border: 1px solid rgba(0,0,0,0.38);
+                    border-radius: .25rem;
+    
+                    &::placeholder {
+                        opacity: 0;
+                    }
+                }
             }
         }
+
+        &.is-invalid {
+            .wui-form-field-container {
+                ::ng-deep {
+                    input {
+                        border-color: var(--theme-danger, $theme-danger);
+                    }
+                }
+            }
+        }
+
+        &.is-focused {
+            .wui-form-field-container {
+                ::ng-deep {
+                    label {
+                        top: .125rem;
+                        background-color: var(--surface-color, #FFF);
+                        z-index: 3;
+                    }
     
+                    input {
+                        border-width: 2px;
+                        border-color: var(--theme-primary);
+                        padding: 0 calc(1rem - 2px);
+        
+                        &::placeholder {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            &.is-invalid {
+                .wui-form-field-container {
+                    ::ng-deep {
+                        input {
+                            border-color: var(--theme-danger, $theme-danger);
+                        }
+                    }
+                }
+            }
+            
+            
+        }
+
+        &.has-content:not(.is-focused) {
+            .wui-form-field-container {
+                ::ng-deep {
+                    label {
+                        top: .125rem;
+                        background-color: var(--surface-color, #FFF);
+                        z-index: 3;
+                    }
+                }
+            }
+        }
+
+        &.has-icon {
+            &.is-focused {
+                .wui-form-field-container {
+                    ::ng-deep {
+                        input {
+                            padding-left: calc(3rem - 2px);
+                        }
+                    }
+                }
+                
+            }
+
+            .wui-form-field-container {
+                ::ng-deep {
+                    span.mdi {
+                        left: .75rem;
+                        top: 1.5rem;
+                    }
+                    input {
+                        padding-left: calc(3rem - 1px);
+                    }
+                    label {
+                        left: 2.75rem;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    &.is-focused {
+
+        .wui-form-field-container {
+            &:after {
+                opacity: 1;
+                width: 100%;
+                left: 0;
+            }
+    
+            ::ng-deep {
+                label {
+                    top: 1rem;
+                    font-size: .75rem;
+                    line-height: .75rem;
+                    color: var(--theme-primary, $theme-primary);
+                    z-index: 3;
+                }
+            }
+        }
+        
+    }
+
+    &.has-content:not(.is-focused) {
+        .wui-form-field-container {
+            ::ng-deep {
+                label {
+                    z-index: 3;
+                    top: 1rem;
+                    font-size: .75rem;
+                    line-height: .75rem;
+                }
+    
+                input {
+                    opacity: 1;
+                }
+            }
+        }
+        
+    }
+
+    &.is-invalid {
+        .wui-form-field-container {
+            ::ng-deep {
+                label {
+                    color: var(--theme-danger, $theme-danger);
+                }
+            }
+    
+            &:before {
+                background-color: var(--theme-danger, $theme-danger);
+            }
+    
+            &:after {
+                background-color: var(--theme-danger, $theme-danger);
+            }
+        }
+        
+    }
+
+    &.has-icon {
+        .wui-form-field-container {
+            ::ng-deep {
+                span.mdi {
+                    position: absolute;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 1.75rem;
+                    z-index: 3;
+                }
+    
+                input {
+                    padding-left: 2.5rem;
+                }
+    
+                label {
+                    left: 2.5rem;
+                }
+            }
+        }
+        
+
+        &.is-focused {
+            .wui-form-field-container {
+                ::ng-deep {
+                    span.mdi {
+                        color: var(--theme-primary, $theme-primary);
+                    }
+                }
+            }
+            
+        }
+
+        &.is-invalid {
+            .wui-form-field-container {
+                ::ng-deep {
+                    span.mdi {
+                        color: var(--theme-danger, $theme-danger);
+                    }
+                }
+            }
+            
+        }
+    }
+
+    ::ng-deep {
         .hint {
-            position: absolute;
-            bottom: 0;
+            padding-top: .5rem;
+            margin-bottom: .5rem;
             font-size: .75rem;
             color: rgba(0,0,0,.54);
 
             &.error {
-                color: $theme-danger;
+                color: var(--theme-danger, $theme-danger);
             }
-        }
-
-        span.mdi {
-            width: 1.5rem;
-            height: 1.5rem;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-    }
-
-    &:before, &:after {
-        position: absolute;
-        content: "";
-        display: block;
-        top: 2.875rem;
-    }
-
-    &:before {
-        height: 1px;
-        width: 100%;
-        background-color: rgba(0,0,0,.42);
-    }
-
-    &:after {
-        opacity: 0;
-        height: 2px;
-        background-color: $theme-primary;
-        width: 0;
-        left: 50%;
-        transition: all ease .2s;
-    }
-
-    &.is-focused {
-        &:after {
-            opacity: 1;
-            width: 100%;
-            left: 0;
-        }
-
-        ::ng-deep {
-            label {
-                top: 0;
-                font-size: .75rem;
-                line-height: .75rem;
-                color: $theme-primary;
-            }
-        }
-    }
-
-    &.has-content:not(.is-focused) {
-        ::ng-deep {
-            label {
-                top: 0;
-                font-size: .75rem;
-                line-height: .75rem;
-            }
-
-            input {
-                opacity: 1;
-            }
-        }
-    }
-
-    &.is-invalid {
-        ::ng-deep {
-            label {
-                color: $theme-danger;
-            }
-        }
-
-        &:before {
-            background-color: $theme-danger;
-        }
-
-        &:after {
-            background-color: $theme-danger;
         }
     }
 

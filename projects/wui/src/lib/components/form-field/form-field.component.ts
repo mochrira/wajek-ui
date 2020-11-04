@@ -1,4 +1,4 @@
-import { Component, ElementRef, ContentChild, AfterContentInit, Directive, HostBinding } from '@angular/core';
+import { Component, ElementRef, ContentChild, AfterContentInit, Directive, HostBinding, ContentChildren, QueryList, OnInit, Input } from '@angular/core';
 import { FormControlName } from '@angular/forms';
 
 @Directive({
@@ -13,13 +13,17 @@ export class WuiInputDirective { }
 })
 export class FormFieldComponent implements AfterContentInit {
 
+  @HostBinding('class.has-icon') hasIcon = false;
   @HostBinding('class.is-focused') isFocused = false;
   @HostBinding('class.has-content') hasContent = false;
   @HostBinding('class.is-invalid') isInvalid = false;
+
   @ContentChild(WuiInputDirective, {read: ElementRef}) input: ElementRef;
   @ContentChild(WuiInputDirective, {read: FormControlName}) formControlName: FormControlName;
 
-  constructor() { }
+  constructor(
+    private el: ElementRef
+  ) { }
 
   ngAfterContentInit() {
     this.input.nativeElement.addEventListener('focus', (e) => {
@@ -35,7 +39,6 @@ export class FormFieldComponent implements AfterContentInit {
         this.hasContent = false;
       }
     });
-    console.log(this.formControlName);
     if(this.formControlName) {
       this.formControlName.statusChanges.subscribe(status => {
         if(status == 'VALID') {
@@ -44,6 +47,9 @@ export class FormFieldComponent implements AfterContentInit {
           this.isInvalid = true;
         }
       });
+    }
+    if(this.el.nativeElement.querySelector('span.mdi')) {
+      this.hasIcon = true;
     }
   }
 
