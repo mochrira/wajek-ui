@@ -7,17 +7,44 @@
     </div>
     
     <div class="container p-4">
-        <wui-form-field class="boxed">
-            <span class="mdi mdi-at"></span>
-            <label for="name">Email</label>
-            <input type="text" wuiInput name="name" placeholder="Type Your Email">
-            <div class="hint error">Please Enter Your Email</div>
-        </wui-form-field>
+        <div class="wui-list wui-list-hovered wui-list-bordered">
+            <div class="wui-list-item wui-list-item-2-line">
+                <div class="leading">
+                    <span class="mdi mdi-folder"></span>
+                </div>
+                <div class="wui-list-item-text">
+                    <div class="row">
+                        <div class="col-6">halo</div>
+                        <div class="col-6">yang terhormat</div>
+                    </div>
+                </div>
+                <div class="trailing"></div>
+            </div>
+
+            <div class="wui-list-item wui-list-item-2-line">
+                <div class="leading">
+                    <span class="mdi mdi-folder"></span>
+                </div>
+                <div class="wui-list-item-text">
+                    <div class="row">
+                        <div class="col-6">halo</div>
+                        <div class="col-6">yang terhormat</div>
+                    </div>
+                </div>
+                <div class="trailing"></div>
+            </div>
+        </div>
+        <form [formGroup]="form">
+            <wui-form-field class="boxed">
+                <span class="mdi mdi-at"></span>
+                <label for="name">Email</label>
+                <input type="text" wuiInput formControlName="name" placeholder="Type Your Email">
+            </wui-form-field>
+        </form>
         <wui-form-field>
             <span class="mdi mdi-at"></span>
             <label for="name">Email</label>
-            <input type="text" wuiInput name="name" placeholder="Type Your Email">
-            <div class="hint error">Please Enter Your Email</div>
+            <input type="text" wuiInput placeholder="Type Your Email">
         </wui-form-field>
         <div class="row">
             <div class="col-6">

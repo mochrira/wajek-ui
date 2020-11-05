@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   drawerMinimized = false;
 
   form = new FormGroup({
-    name: new FormControl('', Validators.required)
+    name: new FormControl('Test', Validators.required)
   });
   get name() {
     return this.form.controls['name'];

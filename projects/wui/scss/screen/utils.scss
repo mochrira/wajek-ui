@@ -12,9 +12,18 @@
             &-48 { font-size: 3rem; }
             &-64 { font-size: 4rem; }
         }
+
+        &-italic{
+            font-style: italic;
+        }
+
+        &-brand {
+            font-family: 'Montserrat';
+        }
     }
 }
 @include font-sizes;
+
 @include media-breakpoint-down(sm) { @include font-sizes("sm"); }
 @include media-breakpoint-up(sm) { @include font-sizes("md"); }
 @include media-breakpoint-up(md) { @include font-sizes("lg"); }
@@ -41,4 +50,59 @@
     width: 48px;
     height: 48px;
     border-radius: 24px;
+}
+
+.overflow {
+    &-x {
+        &-auto {
+            overflow-x: auto;
+        }
+
+        &-hidden {
+            overflow-x: hidden;
+        }
+
+        &-visible {
+            overflow-x: visible;
+        }
+    }
+
+    &-y {
+        &-auto {
+            overflow-y: auto;
+        }
+
+        &-hidden {
+            overflow-y: hidden;
+        }
+
+        &-visible {
+            overflow-y: visible;
+        }
+    }
+}
+
+span.mdi {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+
+    .icon-inline {
+        font-size: 1rem;
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+.row {
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+    > div {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
