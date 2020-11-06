@@ -7,3 +7,21 @@ Wajek UI adalah sebuah user interface pack yang dibuat khusus untuk membantu dev
 ```
 npm install @wajek/wui --save
 ```
+
+## Setup
+
+```
+....
+import { WuiModule } from '@wajek/wui';
+
+@NgModule({
+  ....
+  imports: [
+    ....
+    WuiModule.forRoot()
+  ]
+  ....
+});
+
+....
+```
