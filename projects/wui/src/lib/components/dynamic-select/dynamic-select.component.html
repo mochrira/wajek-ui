@@ -1,0 +1,13 @@
+<input type="text" 
+    (focus)="inputFocus($event)" 
+    (keyup)="inputKeyup($event)" 
+    (blur)="inputBlur($event)" 
+    [placeholder]="placeholder" 
+    value="{{_value?.label}}">
+<div class="options" *ngIf="showOptions">
+    <div class="wui-list wui-list-hovered">
+        <div *ngFor="let d of _data; let i = index"
+            class="wui-list-item {{i == selectedIndex ? 'active': ''}}" 
+            (click)="writeValue(d)">{{d.label}}</div>
+    </div>
+</div>

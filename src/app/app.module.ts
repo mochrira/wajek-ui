@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ReportComponent } from './pages/report/report.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AppRoutingModule,
         WuiModule.forRoot(),
         WuiReportModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]

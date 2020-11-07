@@ -16,7 +16,7 @@
         
         <div class="wui-page-main flex-grow-1 flex-shrink-0 overflow-y-auto position-relative">
             <div class="wui-list wui-list-hovered wui-list-bordered">
-                <div class="wui-list-item wui-list-item-2-line">
+                <div class="wui-list-item wui-list-item active">
                     <div class="leading">
                         <span class="mdi mdi-folder"></span>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="trailing"></div>
                 </div>
     
-                <div class="wui-list-item wui-list-item-2-line">
+                <div class="wui-list-item">
                     <div class="leading">
                         <span class="mdi mdi-folder"></span>
                     </div>
@@ -70,6 +70,16 @@
                         </wui-form-field>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <wui-form-field>
+                            <span class="mdi mdi-folder"></span>
+                            <label for="name">Kategori</label>
+                            <wui-dynamic-select [data]="dataKategori" [(ngModel)]="kategori" (onKeyup)="kategoriKeyup.next($event)" wuiInput placeholder="Masukkan kata kunci..."></wui-dynamic-select>
+                        </wui-form-field>
+                    </div>
+                    <div class="col-6">{{kategori?.label}}</div>
+                </div>
             </div>
             
             <div class="px-4 pt-4">
@@ -80,16 +90,16 @@
                     <button class="button button-danger">Danger</button>
                 </div>
                 <div class="pt-4">
-                    <button class="button button-smooth">Default</button>
-                    <button class="button button-primary button-smooth">Primary</button>
-                    <button class="button button-secondary button-smooth">Secondary</button>
-                    <button class="button button-danger button-smooth">Danger</button>
-                </div>
-                <div class="pt-4">
                     <button class="button button-outline">Default</button>
                     <button class="button button-primary button-outline">Primary</button>
                     <button class="button button-secondary button-outline">Secondary</button>
                     <button class="button button-danger button-outline">Danger</button>
+                </div>
+                <div class="pt-4">
+                    <button class="button button-smooth">Default</button>
+                    <button class="button button-primary button-smooth">Primary</button>
+                    <button class="button button-secondary button-smooth">Secondary</button>
+                    <button class="button button-danger button-smooth">Danger</button>
                 </div>
             </div>
         </div>

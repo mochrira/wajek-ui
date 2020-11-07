@@ -21,6 +21,11 @@
         padding: 0 1.5rem;
         height: 3rem;
 
+        &.active {
+            background-color: $theme-list-item-active-bg;
+            color: $theme-list-item-active-text;
+        }
+
         &-header {
             padding: 0 5.5rem;
             font-weight: 600;

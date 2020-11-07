@@ -21,7 +21,7 @@
                 z-index: 1;
             }
         
-            input, select {
+            input, select, wui-dynamic-select {
                 width: 100%;
                 padding-top: 1.5rem;
                 padding-left: 0;
@@ -118,7 +118,7 @@
                     padding-right: .25rem;
                 }
     
-                input, select {
+                input, select, wui-dynamic-select {
                     margin-top: .5rem;
                     opacity: 1;
                     padding: 0 calc(1rem - 1px);
@@ -154,14 +154,11 @@
                         z-index: 3;
                     }
     
-                    input, select {
+                    input, select, wui-dynamic-select {
                         border-width: 2px;
                         border-color: var(--theme-primary);
                         padding: 0 calc(1rem - 2px);
-        
-                        &::placeholder {
-                            opacity: 1;
-                        }
+                        opacity: 1;
                     }
                 }
             }
@@ -209,7 +206,7 @@
                         left: .75rem;
                         top: 1.5rem;
                     }
-                    input, select {
+                    input, select, wui-dynamic-select {
                         padding-left: calc(3rem - 1px);
                     }
                     label {
@@ -238,6 +235,10 @@
                     color: var(--theme-primary, $theme-primary);
                     z-index: 3;
                 }
+
+                input, select, wui-dynamic-select {
+                    opacity: 1;
+                }
             }
         }
         
@@ -253,7 +254,7 @@
                     line-height: .75rem;
                 }
     
-                input, select {
+                input, select, wui-dynamic-select {
                     opacity: 1;
                 }
             }
@@ -294,7 +295,7 @@
                     z-index: 3;
                 }
     
-                input, select {
+                input, select, wui-dynamic-select {
                     padding-left: 2.5rem;
                 }
     

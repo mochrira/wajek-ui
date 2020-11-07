@@ -71,3 +71,6 @@ $theme-button-danger-focus-bg: lighten($theme-danger, 10%);
 $theme-button-danger-smooth-text: $theme-danger;
 $theme-button-danger-smooth-hover-bg: rgba($theme-danger, 10%);
 $theme-button-danger-smooth-focus-bg: rgba($theme-danger, 20%);
+
+$theme-list-item-active-bg: rgba($theme-primary, 10%);
+$theme-list-item-active-text: $theme-primary;

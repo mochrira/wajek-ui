@@ -42,6 +42,7 @@ import { PageHeaderDirective } from './directives/page-header.directive';
 import { TitleComponent } from './components/title/title.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { TooltipDirective } from './tooltip.directive';
+import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { TooltipDirective } from './tooltip.directive';
     ScrollEndDirective,
     PageHeaderDirective,
     TitleComponent,
-    TooltipDirective
+    TooltipDirective,
+    DynamicSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +139,8 @@ import { TooltipDirective } from './tooltip.directive';
     DialogComponent,
     SnackbarComponent,
     TitleComponent,
-    TooltipDirective
+    TooltipDirective,
+    DynamicSelectComponent
   ], 
   providers: [
     DatePipe
