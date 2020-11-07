@@ -3,6 +3,7 @@
 :host{
     display: block;
     text-align: left;
+    width: 100%;
 
     .wui-form-field-container {
         position: relative; 
@@ -20,7 +21,7 @@
                 z-index: 1;
             }
         
-            input {
+            input, select {
                 width: 100%;
                 padding-top: 1.5rem;
                 padding-left: 0;
@@ -32,9 +33,37 @@
                 z-index: 2;
                 position: relative;
                 box-sizing: border-box;
+                background-color: transparent;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1rem;
         
                 &:focus {
                     opacity: 1;
+                }
+            }
+
+            input + span.select-icon {
+                display: none;
+            }
+
+            select {
+                appearance: none;
+
+                & + span.select-icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    right: 0;
+                    z-index: 99;
+                    top: 1.75rem;
+                    z-index: 3;
+
+                    &:before {
+                        content: "\F0140";
+                        font-family: 'Material Design Icons';
+                        font-size: 1.5rem;
+                    }
                 }
             }
     
@@ -54,10 +83,10 @@
             position: absolute;
             content: "";
             display: block;
-            top: 100%;
         }
     
         &:before {
+            top: calc(100% - 1px);
             height: 1px;
             width: 100%;
             background-color: var(--theme-border, $theme-border);
@@ -69,6 +98,7 @@
             background-color: var(--theme-primary, $theme-primary);
             width: 0;
             left: 50%;
+            top: calc(100% - 2px);
             transition: all ease .2s;
         }
     }
@@ -88,7 +118,7 @@
                     padding-right: .25rem;
                 }
     
-                input {
+                input, select {
                     margin-top: .5rem;
                     opacity: 1;
                     padding: 0 calc(1rem - 1px);
@@ -124,7 +154,7 @@
                         z-index: 3;
                     }
     
-                    input {
+                    input, select {
                         border-width: 2px;
                         border-color: var(--theme-primary);
                         padding: 0 calc(1rem - 2px);
@@ -179,7 +209,7 @@
                         left: .75rem;
                         top: 1.5rem;
                     }
-                    input {
+                    input, select {
                         padding-left: calc(3rem - 1px);
                     }
                     label {
@@ -223,7 +253,7 @@
                     line-height: .75rem;
                 }
     
-                input {
+                input, select {
                     opacity: 1;
                 }
             }
@@ -264,7 +294,7 @@
                     z-index: 3;
                 }
     
-                input {
+                input, select {
                     padding-left: 2.5rem;
                 }
     

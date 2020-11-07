@@ -12,9 +12,62 @@ $theme: (
     "secondary" : #222
 );
 
-$theme-text: #333;
-$theme-light: #E0E0E0;
 $theme-primary: #1E88E5;
 $theme-secondary: #212121;
 $theme-danger: #C62828;
+$theme-light: #E0E0E0;
+
+$theme-text: rgba(0, 0, 0, 0.67);
 $theme-border: #e5e5e5;
+
+$theme-light-bg: #FFF;
+$theme-light-text: rgba(0, 0, 0, 0.67);
+
+$theme-dark-bg: rgba(0, 0, 0, 0.87);
+$theme-dark-text: rgba(255,255,255,0.67);
+
+$theme-dark-button-text: rgba(255,255,255,0.67);
+$theme-dark-button-bg: transparent;
+
+$theme-dark-button-hover-text: #FFF;
+$theme-dark-button-hover-bg: rgba(255,255,255,.16);
+
+$theme-button-text: $theme-text;
+$theme-button-bg: $theme-light;
+$theme-button-hover-text: darken($theme-text, 5%);
+$theme-button-hover-bg: lighten($theme-light, 3%);
+$theme-button-focus-text: darken($theme-text, 5%);
+$theme-button-focus-bg: lighten($theme-light, 5%);
+$theme-button-smooth-text: $theme-text;
+$theme-button-smooth-hover-bg: lighten($theme-light, 3%);
+$theme-button-smooth-focus-bg: lighten($theme-light, 5%);
+
+$theme-button-primary-text: #FFF;
+$theme-button-primary-bg: $theme-primary;
+$theme-button-primary-hover-text: #FFF;
+$theme-button-primary-hover-bg: lighten($theme-primary, 5%);
+$theme-button-primary-focus-text: #FFF;
+$theme-button-primary-focus-bg: lighten($theme-primary, 10%);
+$theme-button-primary-smooth-text: $theme-primary;
+$theme-button-primary-smooth-hover-bg: rgba($theme-primary, 10%);
+$theme-button-primary-smooth-focus-bg: rgba($theme-primary, 20%);
+
+$theme-button-secondary-text: #FFF;
+$theme-button-secondary-bg: $theme-secondary;
+$theme-button-secondary-hover-text: #FFF;
+$theme-button-secondary-hover-bg: lighten($theme-secondary, 5%);
+$theme-button-secondary-focus-text: #FFF;
+$theme-button-secondary-focus-bg: lighten($theme-secondary, 10%);
+$theme-button-secondary-smooth-text: $theme-secondary;
+$theme-button-secondary-smooth-hover-bg: rgba($theme-secondary, 10%);
+$theme-button-secondary-smooth-focus-bg: rgba($theme-secondary, 20%);
+
+$theme-button-danger-text: #FFF;
+$theme-button-danger-bg: $theme-danger;
+$theme-button-danger-hover-text: #FFF;
+$theme-button-danger-hover-bg: lighten($theme-danger, 5%);
+$theme-button-danger-focus-text: #FFF;
+$theme-button-danger-focus-bg: lighten($theme-danger, 10%);
+$theme-button-danger-smooth-text: $theme-danger;
+$theme-button-danger-smooth-hover-bg: rgba($theme-danger, 10%);
+$theme-button-danger-smooth-focus-bg: rgba($theme-danger, 20%);

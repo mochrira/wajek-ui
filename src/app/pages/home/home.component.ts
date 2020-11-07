@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class HomeComponent implements OnInit {
 
   drawerMinimized = false;
+  topBarTheme = 'light';
 
   form = new FormGroup({
     name: new FormControl('Test', Validators.required)
@@ -18,6 +19,18 @@ export class HomeComponent implements OnInit {
   }
 
   constructor() { }
+
+  toggleTheme() {
+    if(this.topBarTheme == 'dark') {
+      this.topBarTheme = 'light';
+    } else {
+      if(this.topBarTheme == 'light') {
+        this.topBarTheme = 'primary';
+      } else {
+        this.topBarTheme = 'dark';
+      }
+    }
+  }
 
   scrollEnd() {
     console.log('halo');
