@@ -43,6 +43,7 @@ import { TitleComponent } from './components/title/title.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { TooltipDirective } from './tooltip.directive';
 import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
+import { ModalDirective } from './directives/modal.directive';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { DynamicSelectComponent } from './components/dynamic-select/dynamic-sele
     PageHeaderDirective,
     TitleComponent,
     TooltipDirective,
-    DynamicSelectComponent
+    DynamicSelectComponent,
+    ModalDirective
   ],
   imports: [
     BrowserModule,
@@ -140,6 +142,7 @@ import { DynamicSelectComponent } from './components/dynamic-select/dynamic-sele
     SnackbarComponent,
     TitleComponent,
     TooltipDirective,
+    ModalDirective,
     DynamicSelectComponent
   ], 
   providers: [

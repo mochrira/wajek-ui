@@ -11,6 +11,7 @@ import { ReportComponent } from './pages/report/report.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
         ChatComponent
     ],
     imports: [
+        CommonModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { MessageService } from '../../services/message.service';
+import { ModalDirective } from '../../directives/modal.directive';
 
 @Component({
   selector: 'wui-dialog',
@@ -9,6 +10,7 @@ import { MessageService } from '../../services/message.service';
 })
 export class DialogComponent implements OnInit {
 
+  @ViewChild('modal', {read: ModalDirective}) modal: ModalDirective;
   show = false;
   title = '';
   message = '';
@@ -25,7 +27,7 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
     this.messageService.get('wui:dialog').subscribe(res => {
       if (res === 'close') {
-        this.show = false;
+        this.modal.close();
       } else {
         this.title = res.title;
         this.message = res.message;
@@ -34,14 +36,14 @@ export class DialogComponent implements OnInit {
             return {
               caption: item,
               click: () => {
-                this.show = false;
+                this.modal.close();
                 this.messageService.set('wui:dialogResult', index);
               }
             }
           }
           return item;
         });
-        this.show = true;
+        this.modal.open();
       }
     });
   }

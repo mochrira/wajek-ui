@@ -108,6 +108,16 @@
 
             <div class="pt-4">
                 <button class="button button-primary" (click)="openDialog()">Open Dialog</button>
+                <button class="button button-default" (click)="modal.open()">Custom Modal</button>
+            </div>
+
+            <div class="wui-modal" wuiModal #modal="wuiModal">
+                <div class="wui-modal-inner">
+                    Halo ini custom modal
+                    <div class="d-flex pt-3 justify-content-end">
+                        <button class="button button-primary" (click)="modal.close()">Test</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
