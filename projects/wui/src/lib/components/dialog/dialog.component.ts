@@ -9,7 +9,7 @@ import { MessageService } from '../../services/message.service';
 })
 export class DialogComponent implements OnInit {
 
-  @ViewChild('modal', { static: true }) modal: ModalComponent;
+  show = false;
   title = '';
   message = '';
   buttons = [];
@@ -25,7 +25,7 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
     this.messageService.get('wui:dialog').subscribe(res => {
       if (res === 'close') {
-        this.modal.close();
+        this.show = false;
       } else {
         this.title = res.title;
         this.message = res.message;
@@ -34,14 +34,14 @@ export class DialogComponent implements OnInit {
             return {
               caption: item,
               click: () => {
-                this.modal.close();
+                this.show = false;
                 this.messageService.set('wui:dialogResult', index);
               }
             }
           }
           return item;
         });
-        this.modal.open();
+        this.show = true;
       }
     });
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WuiService } from '@wajek/wui';
 import { DynamicSelectComponent } from 'projects/wui/src/lib/components/dynamic-select/dynamic-select.component';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private wuiService: WuiService
   ) { }
 
   toggleTheme() {
@@ -48,6 +50,14 @@ export class HomeComponent implements OnInit {
         this.topBarTheme = 'dark';
       }
     }
+  }
+
+  openDialog() {
+    this.wuiService.dialog({
+      title: 'Konfirmasi',
+      message: 'Anda yakin menghapus tombol ini ?',
+      buttons: ["Ya, Hapus", "Tidak"]
+    });
   }
 
   scrollEnd() {

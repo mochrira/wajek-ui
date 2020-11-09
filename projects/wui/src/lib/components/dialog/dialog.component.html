@@ -1,13 +1,11 @@
-<wui-modal #modal>
-  <wui-top-bar>
-    <div class="wuiTitle">{{title}}</div>
-  </wui-top-bar>
-  <div class="px-4 pb-3">
-    <p>
-      {{message}}
-    </p>
+<div class="wui-modal {{show ? '' : 'hide'}}">
+  <div class="wui-modal-inner">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="flex-grow-1 font-20 font-weight-500">{{title}}</div>
+    </div>
+    <p>{{message}}</p>
     <div class="d-flex justify-content-end btn-container">
-      <button class="btn btn-smooth btn-{{button.class}}" *ngFor="let button of buttons" (click)="button.click()">{{button.caption}}</button>
+      <button class="button button-smooth {{button.class}}" *ngFor="let button of buttons" (click)="button.click()">{{button.caption}}</button>
     </div>
   </div>
-</wui-modal>
+</div>
