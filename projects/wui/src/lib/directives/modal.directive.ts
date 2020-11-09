@@ -13,11 +13,15 @@ export class ModalDirective {
   }
 
   open() {
-    this.el.nativeElement.classList.remove('hide');
+    setTimeout(() => {
+      this.el.nativeElement.classList.remove('hide');
+    }, 100);
   }
 
   close() {
-    this.el.nativeElement.classList.add('hide');
+    setTimeout(() => {
+      this.el.nativeElement.classList.add('hide');
+    }, 100);
   }
 
 }

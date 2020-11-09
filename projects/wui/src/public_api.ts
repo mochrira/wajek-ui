@@ -41,3 +41,4 @@ export * from './lib/components/dialog/dialog.component';
 export * from './lib/components/action-sheet/action-sheet.component';
 export * from './lib/directives/page-header.directive';
 export * from './lib/components/title/title.component';
+export * from './lib/directives/modal.directive';
