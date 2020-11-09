@@ -46,9 +46,22 @@
             <div class="px-4 pt-4">
                 <form [formGroup]="form">
                     <wui-form-field class="boxed">
-                        <span class="mdi mdi-at"></span>
-                        <label for="name">Email</label>
+                        <label for="name">Judul Buku</label>
                         <input type="text" wuiInput formControlName="name" placeholder="Type Your Email">
+                    </wui-form-field>
+                    <wui-form-field>
+                        <span class="mdi mdi-folder"></span>
+                        <label for="name">Kategori</label>
+                        <wui-dynamic-select 
+                            #kategoriSelect 
+                            wuiInput 
+                            placeholder="Masukkan kata kunci..."
+                            formControlName="idKategori" 
+                            [data]="dataKategori" 
+                            [selectedItem]="{}"  
+                            (onSelectItem)="onSelectItem($event)" 
+                            (onKeyup)="kategoriKeyup.next($event)" 
+                            ></wui-dynamic-select>
                     </wui-form-field>
                 </form>
                 <div class="row">
@@ -69,16 +82,6 @@
                             </select>
                         </wui-form-field>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <wui-form-field>
-                            <span class="mdi mdi-folder"></span>
-                            <label for="name">Kategori</label>
-                            <wui-dynamic-select [data]="dataKategori" [(ngModel)]="kategori" (onKeyup)="kategoriKeyup.next($event)" wuiInput placeholder="Masukkan kata kunci..."></wui-dynamic-select>
-                        </wui-form-field>
-                    </div>
-                    <div class="col-6">{{kategori?.label}}</div>
                 </div>
             </div>
             

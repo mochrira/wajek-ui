@@ -30,7 +30,6 @@
                 font-size: 1rem;
                 opacity: 0;
                 height: 4rem;
-                z-index: 2;
                 position: relative;
                 box-sizing: border-box;
                 background-color: transparent;
@@ -40,6 +39,10 @@
                 &:focus {
                     opacity: 1;
                 }
+            }
+
+            input, select {
+                z-index: 2;
             }
 
             input + span.select-icon {

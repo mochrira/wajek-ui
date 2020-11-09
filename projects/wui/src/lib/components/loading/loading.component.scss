@@ -107,7 +107,7 @@
           .path {
             stroke-dasharray: 1, 200;
             stroke-dashoffset: 0;
-            stroke: map-get($theme, "500");
+            stroke: var(--theme-primary, $theme-primary);
             animation: dash 1.5s ease-in-out infinite;
             stroke-linecap: round;
           }

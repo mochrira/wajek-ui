@@ -36,51 +36,52 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-    if(this.formControlName) {
-      if(this.formControlName.value) { 
-        this.hasContent = true; 
-      } else { 
-        this.hasContent = false; 
+    if(this.dynamicSelect) {
+      if(this.dynamicSelect.value) {
+        this.hasContent = true;
+      } else {
+        this.hasContent = false;
       }
-      this.formControlName.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
+      this.dynamicSelect.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
+        console.log(value);
         if(value) {
           this.hasContent = true;
         } else {
           this.hasContent = false;
         }
       });
-      this.formControlName.statusChanges.pipe(takeUntil(this.unsub)).subscribe(status => {
-        this.isInvalid = this.formControlName.invalid;
+      this.dynamicSelect.onFocus.pipe(takeUntil(this.unsub)).subscribe(focused => {
+        this.isFocused = focused;
       });
-      this.input.nativeElement.addEventListener('focus', (e) => {
-        this.isFocused = true;
-      });
-      this.input.nativeElement.addEventListener('blur', (e) => {
-        this.isFocused = false;
-      });
+      let b = this.el.nativeElement.getBoundingClientRect();
+      // this.dynamicSelect.left = b.x;
+      // this.dynamicSelect.top = b.y+b.height;
+      // this.dynamicSelect.width = b.width;
     } else {
-      if(this.dynamicSelect) {
-        if(this.dynamicSelect.value) {
-          this.hasContent = true;
-        } else {
-          this.hasContent = false;
+      if(this.formControlName) {
+        if(this.formControlName.value) { 
+          this.hasContent = true; 
+        } else { 
+          this.hasContent = false; 
         }
-        this.dynamicSelect.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
-          console.log(value);
+        this.formControlName.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
           if(value) {
             this.hasContent = true;
           } else {
             this.hasContent = false;
           }
         });
-        this.dynamicSelect.onFocus.pipe(takeUntil(this.unsub)).subscribe(e => {
-          this.isFocused = true;
-          console.log(this.isFocused);
+        this.formControlName.statusChanges.pipe(takeUntil(this.unsub)).subscribe(status => {
+          this.isInvalid = this.formControlName.invalid;
         });
-        this.dynamicSelect.onBlur.pipe(takeUntil(this.unsub)).subscribe(e => {
+        this.input.nativeElement.addEventListener('focus', (e) => {
+          this.isFocused = true;
+        });
+        this.input.nativeElement.addEventListener('blur', (e) => {
           this.isFocused = false;
         });
-      } else if(this.input) {
+      } 
+      if(this.input) {
         if(this.input.nativeElement.value) {
           this.hasContent = true;
         } else {
@@ -100,7 +101,6 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
           this.isFocused = false;
         });
       }
-      
     }
 
     if(this.el.nativeElement.querySelector('span.mdi')) {

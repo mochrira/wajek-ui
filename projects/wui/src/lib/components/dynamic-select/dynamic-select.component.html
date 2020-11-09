@@ -2,12 +2,16 @@
     (focus)="inputFocus($event)" 
     (keyup)="inputKeyup($event)" 
     (blur)="inputBlur($event)" 
-    [placeholder]="placeholder" 
-    value="{{_value?.label}}">
-<div class="options" *ngIf="showOptions">
-    <div class="wui-list wui-list-hovered">
-        <div *ngFor="let d of _data; let i = index"
-            class="wui-list-item {{i == selectedIndex ? 'active': ''}}" 
-            (click)="writeValue(d)">{{d.label}}</div>
+    value="{{selectedItem?.label}}"
+    [placeholder]="placeholder"
+    #input>
+<div class="options" >
+    <div class="py-3" *ngIf="showLoading">
+        <wui-loading mode="circular"></wui-loading>
+    </div>
+    <div class="wui-list wui-list-hovered" *ngIf="!showLoading">
+        <div *ngFor="let d of data; let i = index" class="wui-list-item {{_selectedIndex == i ? 'active' : ''}}" (click)="itemClick(d)">{{d.label}}</div>
     </div>
 </div>
+
+<!-- [style.top.px]="top" [style.left.px]="left" [style.width.px]="width" -->
