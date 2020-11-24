@@ -25,3 +25,11 @@ import { WuiModule } from '@wajek/wui';
 
 ....
 ```
+
+### Add Style
+
+open your projects's `style.scss` and import wui scss file
+
+```
+@import '~@wajek/wui/scss/wui.scss';
+```

@@ -1,122 +1,66 @@
 <div class="wui-page">
-    <div class="wui-page-inner d-flex flex-column">
-        <div class="wui-top-bar {{topBarTheme == 'dark' ? 'wui-top-bar-dark' : (topBarTheme == 'light' ? '' : 'wui-top-bar-dark wui-top-bar-primary')}} flex-grow-0 flex-shrink-0">
-            <button class="button button-smooth button-square button-rounded button-large" wuiToggleDrawer wuiTooltip="Toggle Menu">
-                <span class="mdi mdi-menu"></span>
-            </button>
-            <div class="px-3 font-20 flex-grow-1">
-                <ng-container *ngIf="topBarTheme == 'dark'">Dark</ng-container>
-                <ng-container *ngIf="topBarTheme == 'light'">Light</ng-container>
-                <ng-container *ngIf="topBarTheme == 'primary'">Primary</ng-container>
-            </div>
-            <button class="button button-smooth button-square button-rounded button-large" (click)="toggleTheme()" wuiTooltip="Toggle Menu">
-                <span class="mdi mdi-brightness-6"></span>
-            </button>
+    <div class="wui-top-bar">
+        <button class="button button-smooth button-square button-rounded button-large" (click)="toggleDrawer()" wuiTooltip="Toggle Menu">
+            <span class="mdi mdi-menu"></span>
+        </button>
+        <div class="px-3 font-20 flex-grow-1">
+            Dashboard
         </div>
-        
-        <div class="wui-page-main flex-grow-1 flex-shrink-0 overflow-y-auto position-relative">
-            <div class="wui-list wui-list-hovered wui-list-bordered">
-                <div class="wui-list-item wui-list-item active">
-                    <div class="leading">
-                        <span class="mdi mdi-folder"></span>
-                    </div>
-                    <div class="wui-list-item-text">
-                        <div class="row">
-                            <div class="col-6">halo</div>
-                            <div class="col-6">yang terhormat</div>
-                        </div>
-                    </div>
-                    <div class="trailing"></div>
-                </div>
-    
-                <div class="wui-list-item">
-                    <div class="leading">
-                        <span class="mdi mdi-folder"></span>
-                    </div>
-                    <div class="wui-list-item-text">
-                        <div class="row">
-                            <div class="col-6">halo</div>
-                            <div class="col-6">yang terhormat</div>
-                        </div>
-                    </div>
-                    <div class="trailing"></div>
+    </div>
+    <div class="wui-page-inner pb-5">
+        <div class="wui-page-header">
+            <div class="wui-page-header-content">
+                <div class="font-32 font-weight-500 text-center">Page Header</div>
+                <div class="font-16 text-center">Subheader</div>
+            </div>
+        </div>
+        <div class="wui-list wui-list-bordered">
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Network & Internet</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
                 </div>
             </div>
-
-            <div class="px-4 pt-4">
-                <form [formGroup]="form">
-                    <wui-form-field class="boxed">
-                        <label for="name">Judul Buku</label>
-                        <input type="text" wuiInput formControlName="name" placeholder="Type Your Email">
-                    </wui-form-field>
-                    <wui-form-field>
-                        <span class="mdi mdi-folder"></span>
-                        <label for="name">Kategori</label>
-                        <wui-dynamic-select 
-                            #kategoriSelect 
-                            wuiInput 
-                            placeholder="Masukkan kata kunci..."
-                            formControlName="idKategori" 
-                            [data]="dataKategori" 
-                            [selectedItem]="{}"  
-                            (onSelectItem)="onSelectItem($event)" 
-                            (onKeyup)="kategoriKeyup.next($event)" 
-                            ></wui-dynamic-select>
-                    </wui-form-field>
-                </form>
-                <div class="row">
-                    <div class="col-6">
-                        <wui-form-field>
-                            <span class="mdi mdi-at"></span>
-                            <label for="name">Email</label>
-                            <input type="text" wuiInput placeholder="Type Your Email">
-                        </wui-form-field>
-                    </div>
-                    <div class="col-6">
-                        <wui-form-field>
-                            <span class="mdi mdi-folder"></span>
-                            <label for="name">Akses</label>
-                            <select wuiInput>
-                                <option value="OWNER">OWNER</option>
-                                <option value="KASIR">KASIR</option>
-                            </select>
-                        </wui-form-field>
-                    </div>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Connected Devices</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
                 </div>
             </div>
-            
-            <div class="px-4 pt-4">
-                <div>
-                    <button class="button">Default</button>
-                    <button class="button button-primary">Primary</button>
-                    <button class="button button-secondary">Secondary</button>
-                    <button class="button button-danger">Danger</button>
-                </div>
-                <div class="pt-4">
-                    <button class="button button-outline">Default</button>
-                    <button class="button button-primary button-outline">Primary</button>
-                    <button class="button button-secondary button-outline">Secondary</button>
-                    <button class="button button-danger button-outline">Danger</button>
-                </div>
-                <div class="pt-4">
-                    <button class="button button-smooth">Default</button>
-                    <button class="button button-primary button-smooth">Primary</button>
-                    <button class="button button-secondary button-smooth">Secondary</button>
-                    <button class="button button-danger button-smooth">Danger</button>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Apps & Notifications</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
                 </div>
             </div>
-
-            <div class="pt-4">
-                <button class="button button-primary" (click)="openDialog()">Open Dialog</button>
-                <button class="button button-default" (click)="modal.open()">Custom Modal</button>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Battery</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
+                </div>
             </div>
-
-            <div class="wui-modal" wuiModal #modal="wuiModal">
-                <div class="wui-modal-inner">
-                    Halo ini custom modal
-                    <div class="d-flex pt-3 justify-content-end">
-                        <button class="button button-primary" (click)="modal.close()">Test</button>
-                    </div>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Display</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
+                </div>
+            </div>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Sound</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
+                </div>
+            </div>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Storage</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
+                </div>
+            </div>
+            <div class="wui-list-item">
+                <div class="wui-list-item-text">Security & Location</div>
+                <div class="trailing">
+                    <span class="mdi mdi-chevron-right icon-24"></span>
                 </div>
             </div>
         </div>

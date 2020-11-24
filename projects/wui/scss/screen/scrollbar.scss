@@ -16,9 +16,9 @@
   .ps__rail-x {
     display: none;
     opacity: 0;
-    transition: background-color .2s linear, opacity .2s linear;
-    -webkit-transition: background-color .2s linear, opacity .2s linear;
-    height: 15px;
+    transition: background-color .2s linear, opacity .2s linear, height .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear, height .2s linear;
+    height: 6px;
     /* there must be 'bottom' or 'top' for ps__rail-x */
     bottom: 0px;
     /* please don't change 'position' */
@@ -29,9 +29,9 @@
   .ps__rail-y {
     display: none;
     opacity: 0;
-    transition: background-color .2s linear, opacity .2s linear;
-    -webkit-transition: background-color .2s linear, opacity .2s linear;
-    width: 15px;
+    transition: background-color .2s linear, opacity .2s linear, width .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear, width .2s linear;
+    width: 6px;
     /* there must be 'right' or 'left' for ps__rail-y */
     right: 0;
     /* please don't change 'position' */
@@ -66,6 +66,7 @@
 
   .ps .ps__rail-y:hover {
     border-left: 1px solid #ededed;
+    width: 15px;
   }
   /*
    * Scrollbar thumb styles
@@ -74,23 +75,25 @@
     background-color: #aaa;
     transition: background-color .2s linear, height .2s ease-in-out;
     -webkit-transition: background-color .2s linear, height .2s ease-in-out;
-    height: 11px;
+    height: 4px;
     /* there must be 'bottom' for ps__thumb-x */
-    bottom: 2px;
+    bottom: 1px;
     box-sizing: border-box;
     /* please don't change 'position' */
     position: absolute;
+    border-radius: 2px;
   }
   
   .ps__thumb-y {
     background-color: #aaa;
     transition: background-color .2s linear, width .2s ease-in-out;
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
-    width: 11px;
+    width: 4px;
     /* there must be 'right' for ps__thumb-y */
-    right: 2px;
+    right: 1px;
     /* please don't change 'position' */
     position: absolute;
+    border-radius: 2px;
   }
   
   .ps__rail-x:hover > .ps__thumb-x,
@@ -98,7 +101,8 @@
   .ps__rail-x.ps--clicking .ps__thumb-x {
     background-color: #999;
     height: 11px;
-    
+    bottom: 2px;
+    border-radius: 6px;
   }
   
   .ps__rail-y:hover > .ps__thumb-y,
@@ -106,6 +110,8 @@
   .ps__rail-y.ps--clicking .ps__thumb-y {
     background-color: #999;
     width: 11px;
+    right: 2px;
+    border-radius: 6px;
   }
   
   /* MS supports */

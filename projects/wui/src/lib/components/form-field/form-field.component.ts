@@ -43,7 +43,6 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
         this.hasContent = false;
       }
       this.dynamicSelect.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
-        console.log(value);
         if(value) {
           this.hasContent = true;
         } else {
@@ -53,10 +52,6 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
       this.dynamicSelect.onFocus.pipe(takeUntil(this.unsub)).subscribe(focused => {
         this.isFocused = focused;
       });
-      let b = this.el.nativeElement.getBoundingClientRect();
-      // this.dynamicSelect.left = b.x;
-      // this.dynamicSelect.top = b.y+b.height;
-      // this.dynamicSelect.width = b.width;
     } else {
       if(this.formControlName) {
         if(this.formControlName.value) { 

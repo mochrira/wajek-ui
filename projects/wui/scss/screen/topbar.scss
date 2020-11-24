@@ -1,15 +1,15 @@
 @import '../variables/colors.scss';
 
 .wui-top-bar {
-    height: 64px;
+    height: 3.5rem;
+    padding: 0 .25rem;
     flex-shrink: 0;
     flex-grow: 0;
     display: flex;
     align-items: center;
-    padding: 0 1rem;
     background-color: var(--theme-light-bg, $theme-light-bg);
     color: var(--theme-light-text, $theme-light-text);
-    border-bottom: 1px solid var(--theme-border);
+    box-shadow: 0 0 .25rem .125rem rgba(0,0,0,0.25) !important;
 
     &-dark {
         background-color: var(--theme-dark-bg, $theme-dark-bg);
@@ -32,14 +32,15 @@
         background-color: var(--theme-primary, $theme-primary);
     }
 
-    // .button {
-    //     margin-right: 0;
-    //     color: white;
-    //     background-color: transparent;
-    //     border-color: transparent;
+    .button {
+        margin-right: 0;
+    }
+}
 
-    //     &:hover {
-    //         background-color: rgba(white, .125);
-    //     }
-    // }
+
+@media screen and (min-width: 767px) {
+    .wui-top-bar {
+        height: 4rem;
+        padding: 0 1rem;
+    }
 }

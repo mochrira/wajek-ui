@@ -1,24 +1,25 @@
 $theme: (
-    "50" : #EDE7F6,
-    "100" : #D1C4E9,
-    "200" : #B39DDB,
-    "300" : #9575CD,
-    "400" : #7E57C2,
-    "500" : #673AB7,
-    "600" : #5E35B1,
-    "700" : #512DA8,
-    "800" : #4527A0,
-    "900" : #311B92,
+    "50" : #E3F2FD,
+    "100" : #BBDEFB,
+    "200" : #90CAF9,
+    "300" : #64B5F6,
+    "400" : #42A5F5,
+    "500" : #2196F3,
+    "600" : #1E88E5,
+    "700" : #1976D2,
+    "800" : #1565C0,
+    "900" : #0D47A1,
     "secondary" : #222
 );
 
-$theme-primary: #1E88E5;
+$theme-primary: map-get($theme, "700");
 $theme-secondary: #212121;
-$theme-danger: #C62828;
+$theme-danger: #B00020;
 $theme-light: #E0E0E0;
+$theme-backdrop: rgba(0,0,0,0.5);
 
 $theme-text: rgba(0, 0, 0, 0.67);
-$theme-border: #e5e5e5;
+$theme-border: rgba(0, 0, 0, 0.12);
 
 $theme-light-bg: #FFF;
 $theme-light-text: rgba(0, 0, 0, 0.67);
@@ -72,5 +73,9 @@ $theme-button-danger-smooth-text: $theme-danger;
 $theme-button-danger-smooth-hover-bg: rgba($theme-danger, 10%);
 $theme-button-danger-smooth-focus-bg: rgba($theme-danger, 20%);
 
-$theme-list-item-active-bg: rgba($theme-primary, 10%);
-$theme-list-item-active-text: $theme-primary;
+$theme-list-item-selected-bg: rgba($theme-primary, 15%);
+$theme-list-item-selected-text: $theme-primary;
+
+$theme-avatar-bg: rgba(#000, 12%);
+$theme-checkbox: rgba(#000, 38%);
+$theme-toggle-track-bg: rgba(#000, 12%);

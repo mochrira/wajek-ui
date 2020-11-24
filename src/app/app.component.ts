@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from '@wajek/wui';
 
 @Component({
     selector: 'app-root',
@@ -7,8 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-    constructor() {}
+    drawerOpen = false;
 
-    ngOnInit(): void {}
+    constructor(
+        private router: Router,
+        private messageService: MessageService
+    ) {}
+
+    route(link) {
+        this.router.navigate([link]);
+        this.drawerOpen = false;
+    }
+
+    ngOnInit(): void {
+        this.messageService.get('app:drawer').subscribe(e => {
+            this.drawerOpen = !this.drawerOpen;
+        });
+    }
 
 }

@@ -70,7 +70,7 @@
                 }
             }
     
-            span.mdi {
+            > span.mdi {
                 width: 1.5rem;
                 height: 1.5rem;
                 font-size: 1.5rem;
@@ -116,19 +116,18 @@
             ::ng-deep {
                 label {
                     left: .75rem;
-                    top: 1.75rem;
+                    top: 1.25rem;
                     padding-left: .25rem;
                     padding-right: .25rem;
                 }
     
                 input, select, wui-dynamic-select {
-                    margin-top: .5rem;
                     opacity: 1;
                     padding: 0 calc(1rem - 1px);
-                    height: 56px;
+                    height: 3.5rem;
                     background: transparent;
                     box-sizing: border-box;
-                    border: 1px solid rgba(0,0,0,0.38);
+                    border: 1px solid rgba(0,0,0,.38);
                     border-radius: .25rem;
     
                     &::placeholder {
@@ -152,7 +151,7 @@
             .wui-form-field-container {
                 ::ng-deep {
                     label {
-                        top: .125rem;
+                        top: -.375rem;
                         background-color: var(--surface-color, #FFF);
                         z-index: 3;
                     }
@@ -183,7 +182,7 @@
             .wui-form-field-container {
                 ::ng-deep {
                     label {
-                        top: .125rem;
+                        top: -.375rem;
                         background-color: var(--surface-color, #FFF);
                         z-index: 3;
                     }
@@ -205,7 +204,7 @@
 
             .wui-form-field-container {
                 ::ng-deep {
-                    span.mdi {
+                    > span.mdi {
                         left: .75rem;
                         top: 1.5rem;
                     }
@@ -287,7 +286,7 @@
     &.has-icon {
         .wui-form-field-container {
             ::ng-deep {
-                span.mdi {
+                > span.mdi {
                     position: absolute;
                     width: 1.5rem;
                     height: 1.5rem;
@@ -312,7 +311,7 @@
         &.is-focused {
             .wui-form-field-container {
                 ::ng-deep {
-                    span.mdi {
+                    > span.mdi {
                         color: var(--theme-primary, $theme-primary);
                     }
                 }
@@ -323,7 +322,7 @@
         &.is-invalid {
             .wui-form-field-container {
                 ::ng-deep {
-                    span.mdi {
+                    > span.mdi {
                         color: var(--theme-danger, $theme-danger);
                     }
                 }

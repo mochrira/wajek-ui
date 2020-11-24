@@ -8,12 +8,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { MessageService } from '../lib/services/message.service';
 import { FormFieldComponent, WuiInputDirective } from './components/form-field/form-field.component';
 import { AppComponent } from './components/app/app.component';
-import { TopBarComponent, TopBarItemComponent } from './components/top-bar/top-bar.component';
-import { PageComponent } from './components/page/page.component';
-import { DrawerComponent, DrawerItemComponent } from './components/drawer/drawer.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { ListComponent, ListItemComponent } from './components/list/list.component';
 import { WuiService } from './services/wui.service';
 import { ContextMenuComponent, ContextMenuItemComponent } from './components/context-menu/context-menu.component';
 import { ContextMenuDirective } from './directives/context-menu.directive';
@@ -24,26 +20,17 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
 import { RippleDirective } from './directives/ripple.directive';
 import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { StarComponent } from './components/star/star.component';
-import { RatingComponent } from './components/rating/rating.component';
 import { HttpService } from './services/http.service';
 import { DatefieldDirective } from './directives/datefield.directive';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { TabComponent, TabItemComponent } from './components/tab/tab.component';
-import { ReportComponent } from './components/report/report.component';
 import { AppTitleComponent } from './components/app-title/app-title.component';
-import { AutofocusDirective } from './directives/autofocus.directive';
-import { TrapFocusDirective } from './directives/trap-focus.directive';
-import { TabOrderDirective } from './directives/tab-order.directive';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
-import { WindowTitleComponent } from './components/window-title/window-title.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
-import { TitleComponent } from './components/title/title.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { TooltipDirective } from './tooltip.directive';
 import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
 import { ModalDirective } from './directives/modal.directive';
+import { ScrollDirective } from './directives/scroll.directive';
 
 @NgModule({
   declarations: [
@@ -53,15 +40,8 @@ import { ModalDirective } from './directives/modal.directive';
     WuiInputDirective,
     FormFieldComponent,
     AppComponent,
-    TopBarComponent,
-    TopBarItemComponent,
-    PageComponent,
-    DrawerComponent,
-    DrawerItemComponent,
     DatepickerComponent,
     ModalComponent,
-    ListComponent,
-    ListItemComponent,
     ContextMenuComponent,
     ContextMenuItemComponent,
     ContextMenuDirective,
@@ -73,25 +53,15 @@ import { ModalDirective } from './directives/modal.directive';
     RippleDirective,
     ActionSheetComponent,
     DialogComponent,
-    StarComponent,
-    RatingComponent,
     DatefieldDirective,
-    CheckboxComponent,
-    TabComponent,
-    TabItemComponent,
-    ReportComponent,
     AppTitleComponent,
-    AutofocusDirective,
-    TrapFocusDirective,
-    TabOrderDirective,
     DateselectComponent,
-    WindowTitleComponent,
     ScrollEndDirective,
     PageHeaderDirective,
-    TitleComponent,
     TooltipDirective,
     DynamicSelectComponent,
-    ModalDirective
+    ModalDirective,
+    ScrollDirective
   ],
   imports: [
     BrowserModule,
@@ -103,11 +73,6 @@ import { ModalDirective } from './directives/modal.directive';
     WuiInputDirective,
     FormFieldComponent,
     AppComponent,
-    DrawerComponent,
-    DrawerItemComponent,
-    PageComponent,
-    TopBarComponent,
-    TopBarItemComponent,
     LoadingComponent,
     ModalComponent,
     ContextMenuComponent,
@@ -118,32 +83,20 @@ import { ModalDirective } from './directives/modal.directive';
     NavPopDirective,
     NavRootDirective,
     NavPushDirective,
-    ListComponent,
-    ListItemComponent,
     RippleDirective,
     DatepickerComponent,
-    StarComponent,
-    RatingComponent,
     DatefieldDirective,
-    CheckboxComponent,
-    TabComponent,
-    TabItemComponent,
-    ReportComponent,
     AppTitleComponent,
-    AutofocusDirective,
-    TrapFocusDirective,
-    TabOrderDirective,
     DateselectComponent,
-    WindowTitleComponent,
     ScrollEndDirective,
     PageHeaderDirective,
     ActionSheetComponent,
     DialogComponent,
     SnackbarComponent,
-    TitleComponent,
     TooltipDirective,
     ModalDirective,
-    DynamicSelectComponent
+    DynamicSelectComponent,
+    ScrollDirective
   ], 
   providers: [
     DatePipe

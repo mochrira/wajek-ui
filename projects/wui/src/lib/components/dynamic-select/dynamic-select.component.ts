@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, forwardRef, Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'wui-dynamic-select',
@@ -12,7 +13,7 @@ import { Subject } from 'rxjs';
     multi: true
   }]
 })
-export class DynamicSelectComponent implements ControlValueAccessor {
+export class DynamicSelectComponent implements ControlValueAccessor, OnInit {
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
   _value: any;
@@ -43,12 +44,16 @@ export class DynamicSelectComponent implements ControlValueAccessor {
     private cd: ChangeDetectorRef
   ) { }
 
-  @Input() selectedItem: any;
+  @Input('initialItem') set setInitialItem(item) {
+    this.selectItem(item);
+  }
+  
+  selectedItem: any;
   @Output() onSelectItem: EventEmitter<any> = new EventEmitter();
   selectItem(item) {
     this.selectedItem = item;
-    this.value = item.value;
-    this.show = false;
+    this.value = item?.value;
+    this.show = false;    
     this.onSelectItem.next(this.selectedItem);
   }
  
@@ -79,43 +84,48 @@ export class DynamicSelectComponent implements ControlValueAccessor {
   closeLoading() { setTimeout(() => {this.showLoading = false; this.cd.detectChanges();}, 500); }
 
   _selectedIndex = -1;
-  @Output('onKeyup') keyup: EventEmitter<any> = new EventEmitter();
+  keyup: Subject<any> = new Subject();
   @Input('data') data: any = [];
   inputKeyup(e) {
     if(e.keyCode == 13) {
       // enter
-      e.stopPropagation();
+      e.preventDefault();
       this.selectTrigger = 'key';
-      this.selectItem(this.data[this._selectedIndex]);
-      return;
+      if(this.data.length > 0) {
+        this.selectItem(this.data[this._selectedIndex]);
+      } else {
+        this.addNewCallback(e.target.value);
+      }
+      return false;
     }
 
     if(e.keyCode == 38) {
       // panah atas
-      e.stopPropagation();
-      if(this.data.length > 0 && !this.showLoading) {
+      e.preventDefault();
+      if(!this.showLoading && (this.data.length > 0 || this.addNewCallback)) {
         if(this._selectedIndex > 0) {
           this._selectedIndex--;
         }
       }
-      return;
+      return false;
     }
 
     if(e.keyCode == 40) {
       // panah bawah
-      e.stopPropagation();
-      if(this.data.length > 0 && !this.showLoading) {
-        if(this._selectedIndex < this.data.length - 1) {
+      e.preventDefault();
+      if(!this.showLoading && (this.data.length > 0 || this.addNewCallback)) {
+        if((this.data.length > 0 && this._selectedIndex < this.data.length - 1) || (this.addNewCallback && this._selectedIndex == -1)) {
           this._selectedIndex++;
         }
       }
-      return;
+      return false;
     }
 
     this.data = [];
     this._selectedIndex = -1;
     this.selectTrigger = 'key';
     this.show = true;
+    this.openLoading();
     this.keyup.next(e);
   }
 
@@ -124,5 +134,24 @@ export class DynamicSelectComponent implements ControlValueAccessor {
     this.selectTrigger = 'click';
     this.selectItem(item);
   }
+
+  @Input('dataCallback') dataCallback: any;
+  private unsub: Subject<any> = new Subject();
+  ngOnInit() {
+    this.keyup.pipe(debounceTime(500), takeUntil(this.unsub)).subscribe(async e => {
+      if(this.dataCallback) {
+        try {
+          this.openLoading();
+          this.data = await this.dataCallback(e.target.value);
+          this.closeLoading();
+        } catch(e) {
+          this.closeLoading();
+        }
+      }
+    });
+  }
+
+  @Input('addNewLabel') addNewLabel: string;
+  @Input('addNewCallback') addNewCallback: any;
 
 }

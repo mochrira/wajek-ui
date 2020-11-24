@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "~10.1.1",
     "@angular/router": "~10.1.1",
     "@mdi/font": "^5.6.55",
-    "@wajek/report": "0.0.1",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "is-webview": "^1.0.1",

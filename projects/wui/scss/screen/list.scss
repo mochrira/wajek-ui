@@ -8,50 +8,59 @@
         margin: 0 !important;
     }
 
-    .wui-list-subheader {
+    &-subheader {
         padding: 1rem 1.25rem .5rem;
         font-size: .875rem;
         color: rgba(0,0,0,0.5);
         font-weight: 600;
     }
 
-    .wui-list-item {
+    &-item {
         display: flex;
         align-items: center;
-        padding: 0 1.5rem;
+        padding: 1rem;
         height: 3rem;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
 
-        &.active {
-            background-color: $theme-list-item-active-bg;
-            color: $theme-list-item-active-text;
+        &.selected {
+            background-color: var(--theme-list-item-selected-bg, $theme-list-item-selected-bg);
+            color: var(--theme-list-item-selected-text, $theme-list-item-selected-text);
         }
 
         &-header {
             padding: 0 5.5rem;
             font-weight: 600;
             font-size: .75rem;
-            color: rgba(0,0,0,.47)
+            color: rgba(0,0,0,.47);
+            background-color: white;
         }
 
         &-2-line {
             height: 4.5rem;
         }
 
-        > div.leading {
-            padding-right: 2rem;
-            flex-grow: 0;
+        &-3-line {
+            height: 5.5rem;
         }
 
-        > div.trailing {
+        div.leading {
+            padding-right: 1rem;
+            flex-grow: 0;
+            position: relative;
+        }
+
+        div.trailing {
             padding-left: 2rem;
             flex-grow: 0;
+            position: relative;
         }
 
         &-text {
-            flex-grow: 1;
-            .sub-title {
-                font-size: .875rem;
-            }
+            flex: 1 1 auto;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
     }
 
@@ -69,25 +78,35 @@
         .wui-list-item {
             cursor: pointer; 
             
-            &:hover {
+            &:hover:not(.wui-list-item-header) {
                 background-color: rgba(0,0,0,0.05);
-            }
-
-            &.wui-list-item-header {
-                &:hover {
-                    background-color: transparent;
-                }
             }
         }
     }
 
     &-bordered {
         .wui-list-item:not(:last-child) {
-            border-bottom: 1px solid var(--theme-border);
+            border-bottom: 1px solid var(--theme-border, $theme-border);
 
             &.wui-list-item-header {
                 border-bottom-color: rgba(0,0,0,.15);
             }
+        }
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .wui-list {
+        &-item {
+            padding: 0 1.75rem;
+
+            div.leading {
+                padding-right: 2rem;
+            }
+        }
+
+        &-subheader {
+            padding: 1rem 1.5rem .5rem;
         }
     }
 }
