@@ -35,6 +35,12 @@
     .button {
         margin-right: 0;
     }
+
+    &-content {
+        padding-left: 1.25rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
 }
 
 
@@ -42,5 +48,9 @@
     .wui-top-bar {
         height: 4rem;
         padding: 0 1rem;
+
+        &-content {
+            padding-left: 2.25rem;
+        }
     }
 }

@@ -158,7 +158,7 @@
     
                     input, select, wui-dynamic-select {
                         border-width: 2px;
-                        border-color: var(--theme-primary);
+                        border-color: var(--theme-primary, $theme-primary);
                         padding: 0 calc(1rem - 2px);
                         opacity: 1;
                     }
@@ -191,6 +191,35 @@
         }
 
         &.has-icon {
+            &.icon-right {
+                ::ng-deep {
+                    input, select {
+                        padding-left: calc(1rem - 1px) !important;
+                        padding-right: calc(3rem - 1px) !important;
+                    }
+                }
+    
+                &.is-focused {
+                    ::ng-deep {
+                        input, select {
+                            padding-left: calc(1rem - 2px) !important;
+                            padding-right: calc(3rem - 2px) !important;
+                        }
+                    }
+                }
+    
+                ::ng-deep {
+                    span.mdi {
+                        left: auto !important;
+                        right: .75rem !important;
+                    }
+        
+                    label {
+                        left: .75rem !important;
+                    }
+                }
+            }
+
             &.is-focused {
                 .wui-form-field-container {
                     ::ng-deep {
@@ -206,7 +235,7 @@
                 ::ng-deep {
                     > span.mdi {
                         left: .75rem;
-                        top: 1.5rem;
+                        top: 1rem;
                     }
                     input, select, wui-dynamic-select {
                         padding-left: calc(3rem - 1px);
@@ -293,7 +322,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    top: 1.75rem;
+                    top: 1rem;
                     z-index: 3;
                 }
     
@@ -306,7 +335,6 @@
                 }
             }
         }
-        
 
         &.is-focused {
             .wui-form-field-container {
