@@ -157,7 +157,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/wui/tsconfig.lib.json",
             "project": "projects/wui/ng-package.json"
@@ -197,7 +197,7 @@
       "prefix": "wui-firebase",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/wui-firebase/tsconfig.lib.json",
             "project": "projects/wui-firebase/ng-package.json"
