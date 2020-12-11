@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 
 @Component({

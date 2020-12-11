@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { WuiModule } from '@wajek/wui';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,9 +22,19 @@ import { ControlComponent } from './pages/control/control.component';
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
-        AppRoutingModule,
-        WuiModule.forRoot(),
+        WuiModule.forRoot([{
+            path: 'home', component: HomeComponent, children: [{
+                path: 'user', component: UserComponent
+            }]
+        }, {
+            path: 'user', component: UserComponent
+        }, {
+            path: '', redirectTo: 'home'
+        }]),
         HttpClientModule
+    ],
+    entryComponents: [
+        HomeComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

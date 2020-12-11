@@ -12,14 +12,8 @@ export class AppComponent implements OnInit {
     drawerOpen = false;
 
     constructor(
-        private router: Router,
         private messageService: MessageService
     ) {}
-
-    route(link) {
-        this.router.navigate([link]);
-        this.drawerOpen = false;
-    }
 
     ngOnInit(): void {
         this.messageService.get('app:drawer').subscribe(e => {

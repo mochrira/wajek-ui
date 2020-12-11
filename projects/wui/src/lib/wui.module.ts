@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { WuiComponent } from './wui.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
@@ -26,11 +27,16 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
-import { BrowserModule } from '@angular/platform-browser';
 import { TooltipDirective } from './tooltip.directive';
 import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
 import { ModalDirective } from './directives/modal.directive';
 import { ScrollDirective } from './directives/scroll.directive';
+import { PageComponent } from './components/page/page.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { RouterComponent } from './components/router/router.component';
+import { RouterLinkDirective } from './directives/router-link.directive';
+import { WuiRouterService } from './services/router.service';
+import { RouterOutletComponent } from './components/router-outlet/router-outlet.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +67,12 @@ import { ScrollDirective } from './directives/scroll.directive';
     TooltipDirective,
     DynamicSelectComponent,
     ModalDirective,
-    ScrollDirective
+    ScrollDirective,
+    PageComponent,
+    TopBarComponent,
+    RouterComponent,
+    RouterLinkDirective,
+    RouterOutletComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +107,12 @@ import { ScrollDirective } from './directives/scroll.directive';
     TooltipDirective,
     ModalDirective,
     DynamicSelectComponent,
-    ScrollDirective
+    ScrollDirective,
+    PageComponent,
+    TopBarComponent,
+    RouterComponent,
+    RouterLinkDirective,
+    RouterOutletComponent
   ], 
   providers: [
     DatePipe
@@ -108,12 +124,17 @@ export class WuiModule {
     return {
       ngModule: WuiModule,
       providers: [
-        MessageService,
+        WuiRouterService,
         WuiService,
+        MessageService,
         NavService,
         HttpService,
         {
           provide: 'predefinedNavs',
+          useValue: predefinedNavs
+        },
+        {
+          provide: 'wuiRoutes', 
           useValue: predefinedNavs
         }
       ]
