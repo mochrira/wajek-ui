@@ -27,7 +27,11 @@
               "src/.htaccess",
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/pdfjs-dist/build/", "output": "/assets/pdfjs/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/pdfjs-dist/build/",
+                "output": "/assets/pdfjs/"
+              }
             ],
             "styles": [
               "node_modules/@mdi/font/scss/materialdesignicons.scss",
@@ -231,5 +235,8 @@
       }
     }
   },
-  "defaultProject": "wajek-ui"
+  "defaultProject": "wajek-ui",
+  "cli": {
+    "analytics": false
+  }
 }
