@@ -20,10 +20,18 @@ wui-app-bar {
         flex: 0 0 auto;
     }
 
+    .leading {
+        padding-right: .5rem;
+    }
+
+    .trailing {
+        padding-left: .5rem;
+    }
+
     .title  {
-        padding-left: 1rem;
+        padding-left: .75rem;
         flex: 1 1 auto;
-        padding-right: 1rem;
+        padding-right: .75rem;
         font-size: 1.25rem;
         font-weight: 500;
     }

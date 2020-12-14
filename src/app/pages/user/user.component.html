@@ -1,5 +1,8 @@
 <wui-page>
-    <wui-top-bar>user</wui-top-bar>
+    <wui-app-bar [title]="title">
+        <ng-template #title>User</ng-template>
+    </wui-app-bar>
+
     <div class="container">
         <h1>User</h1>
         <a wuiNavPop>Back</a>
