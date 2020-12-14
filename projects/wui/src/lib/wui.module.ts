@@ -113,7 +113,8 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     PageComponent,
     TopBarComponent,
     RouterLinkDirective,
-    RouterOutletComponent
+    RouterOutletComponent,
+    AppBarComponent
   ], 
   providers: [
     DatePipe

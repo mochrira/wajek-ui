@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'wui-app-bar',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppBarComponent implements OnInit {
 
+  @Input('leading') leading: any;
+  @Input('content') content: any;
+  @Input('trailing') trailing: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.leading);
   }
 
 }

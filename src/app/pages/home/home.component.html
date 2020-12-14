@@ -1,5 +1,19 @@
 <wui-page>
-    <wui-top-bar>home</wui-top-bar>
+    <wui-app-bar [leading]="leading" [trailing]="trailing" [content]="content">
+        <ng-template #leading>
+            <button class="button button-large button-square button-smooth button-rounded">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </ng-template>
+        <ng-template #content>
+            Home
+        </ng-template>
+        <ng-template #trailing>
+            <button class="button button-large button-square button-smooth button-rounded">
+                <span class="mdi mdi-refresh"></span>
+            </button>
+        </ng-template>
+    </wui-app-bar>
     <div class="container">
         <h1>Home</h1>
         <a wuiNavPush="user">Go to User</a>

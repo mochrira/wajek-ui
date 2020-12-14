@@ -1,6 +1,6 @@
 @import '../variables/colors.scss';
 
-wui-top-bar {
+wui-app-bar {
     position: sticky;
     top: 0;
     left: 0;
@@ -13,6 +13,20 @@ wui-top-bar {
     background-color: var(--theme-light-bg, $theme-light-bg);
     color: var(--theme-light-text, $theme-light-text);
     box-shadow: 0 0 .25rem .125rem rgba(0,0,0,0.25) !important;
+    padding-left: .25rem;
+    padding-right: .25rem;
+
+    .leading, .trailing{
+        flex: 0 0 auto;
+    }
+
+    .content {
+        padding-left: 1rem;
+        flex: 1 1 auto;
+        padding-right: 1rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
 
     &.dark {
         background-color: var(--theme-dark-bg, $theme-dark-bg);

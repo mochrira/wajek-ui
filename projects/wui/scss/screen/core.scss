@@ -169,6 +169,7 @@
         }
     }
 
+    @import "appbar.scss";
     @import "loading.scss";
     @import "scrollbar.scss";
     @import "buttons.scss";
@@ -177,7 +178,6 @@
     @import "ripple.scss";
     @import "utils.scss";
     @import "drawer.scss";
-    @import "topbar.scss";
     @import "tooltip.scss";
     @import "list.scss";
     @import "page.scss";
