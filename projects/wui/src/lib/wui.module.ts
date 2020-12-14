@@ -33,10 +33,11 @@ import { ModalDirective } from './directives/modal.directive';
 import { ScrollDirective } from './directives/scroll.directive';
 import { PageComponent } from './components/page/page.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { RouterComponent } from './components/router/router.component';
 import { RouterLinkDirective } from './directives/router-link.directive';
 import { WuiRouterService } from './services/router.service';
 import { RouterOutletComponent } from './components/router-outlet/router-outlet.component';
+import { RouterComponent } from './components/router/router.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
 
 @NgModule({
   declarations: [
@@ -70,9 +71,10 @@ import { RouterOutletComponent } from './components/router-outlet/router-outlet.
     ScrollDirective,
     PageComponent,
     TopBarComponent,
-    RouterComponent,
     RouterLinkDirective,
-    RouterOutletComponent
+    RouterOutletComponent,
+    RouterComponent,
+    AppBarComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +112,6 @@ import { RouterOutletComponent } from './components/router-outlet/router-outlet.
     ScrollDirective,
     PageComponent,
     TopBarComponent,
-    RouterComponent,
     RouterLinkDirective,
     RouterOutletComponent
   ], 

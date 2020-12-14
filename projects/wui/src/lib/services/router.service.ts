@@ -14,9 +14,7 @@ export class WuiRouterService {
 
   constructor(
     @Inject('wuiRoutes') private routes: any
-  ) { 
-    
-  }
+  ) { }
 
   match(path) {
     let i = 0;

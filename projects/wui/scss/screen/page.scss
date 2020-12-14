@@ -1,14 +1,29 @@
-wui-app {
-    width: 100%;
-}
-
 wui-page {
     position: absolute;
     top: 0; left: 0;
     min-height: 100%;
     width: 100%;
     background-color: white;
-    display: none;
+    display: block;
+
+    &.enterRoot {
+        display: block;
+    }
+
+    &.enterForward {
+        animation: pageEnterForward ease;
+        animation-fill-mode: forwards;
+    }
+
+    &.enterBackward {
+        animation: pageEnterBackward ease;
+        animation-fill-mode: forwards;
+    }
+
+    &.leave {
+        animation: pageLeave ease;
+        animation-fill-mode: forwards;
+    }
 
     &-inner {
         flex: 1 1 auto;
@@ -38,12 +53,38 @@ wui-page {
     }
 }
 
-.wui-toolbar {
-    background-color: white;
-    height: 4.75rem;
-    padding-left: 1.75rem;
+@keyframes pageEnterForward {
+    0% {
+        opacity: 0;
+        transform: translateY(4rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-wui-page:last-of-type {
-    display: block;
+@keyframes pageEnterBackward {
+    0% {
+        opacity: 0;
+        transform: translateY(-4rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageLeave {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: 4rem;
+    }
 }

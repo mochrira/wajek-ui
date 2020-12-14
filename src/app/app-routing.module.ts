@@ -5,9 +5,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [{
-    path: 'user', component: UserComponent
-}, {
-    path: 'home', component: HomeComponent
+    path: 'home', component: HomeComponent, children: [{
+        path: 'user', component: UserComponent
+    }]
 }, {
     path: 'control', component: ControlComponent
 }, {

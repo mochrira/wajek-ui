@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Renderer2 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ declare var document: any;
 })
 export class NavService {
 
+  lastNavId = 0;
   components = [];
   navigation: BehaviorSubject<any> = new BehaviorSubject({});
   navParams: BehaviorSubject<any> = new BehaviorSubject({});
@@ -34,24 +35,31 @@ export class NavService {
   setRoot(name: string, params = {}) {
     localStorage.setItem('lastRoot', name);
     this.navigation.next({
+      navId: this.lastNavId + 1,
       state: 'root',
       name: name,
       params: params
     });
+    this.lastNavId++;
   }
 
   push(name: string, params = {}) {
     this.navigation.next({
+      navId: this.lastNavId + 1,
       state: 'push',
       name: name,
-      params: params
+      params: params,
+      duration: 200
     });
+    this.lastNavId++;
   }
 
   pop(params = {}) {
     this.navigation.next({
+      navId: this.components[this.components.length - 2].navId,
       state: 'pop',
-      params: params
+      params: params,
+      duration: 200
     });
   }
 

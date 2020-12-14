@@ -1,5 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild,
-  ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject } from '@angular/core';
+  ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NavService } from '../../services/nav.service';
 
@@ -20,8 +20,8 @@ export class NavComponent implements OnInit, OnDestroy {
     @Inject('predefinedNavs') private predefinedNavs: any
   ) { }
 
-  pop() {
-    if (this.navService.components.length > 1) {
+  pop(navId) {
+    if (this.navService.components.length > 1 && this.navService.components[this.navService.components.length - 2].navId == navId) {
       const componentIndex = this.navService.components.length - 1;
       this.viewContainer.remove(componentIndex);
       this.navService.components.splice(componentIndex, 1);
@@ -29,15 +29,19 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 
-  push(name: string) {
+  push(navId, name: string) {
     const component = this.predefinedNavs[name];
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef = this.viewContainer.createComponent(componentFactory);
-    this.navService.components.push({name: name, componentRef: componentRef});
+    this.navService.components.push({
+      navId: navId,
+      name: name, 
+      componentRef: componentRef
+    });
     this.changeDetector.detectChanges();
   }
 
-  setRoot(name: string) {
+  setRoot(navId, name: string) {
     const component = this.predefinedNavs[name];
     if ((this.navService.components.length === 0) || !(this.navService.components[0].componentRef.instance instanceof component)) {
       this.viewContainer.clear();
@@ -45,6 +49,7 @@ export class NavComponent implements OnInit, OnDestroy {
       const componentRef = this.viewContainer.createComponent(componentFactory);
       this.navService.components.splice(0, this.navService.components.length);
       this.navService.components.push({
+        navId: navId,
         name: name,
         componentRef: componentRef
       });
@@ -56,12 +61,12 @@ export class NavComponent implements OnInit, OnDestroy {
     this.navService.navigation.subscribe(res => {
       let name = res.name;
       if (res.state === 'push') {
-        this.push(res.name);
+        this.push(res.navId, res.name);
       } else if (res.state === 'pop') {
-        this.pop();
+        this.pop(res.navId);
         name = this.navService.components[this.navService.components.length - 1].name;
       } else if (res.state === 'root') {
-        this.setRoot(res.name);
+        this.setRoot(res.navId, res.name);
       }
       this.navService.navParams.next({
         name: name,

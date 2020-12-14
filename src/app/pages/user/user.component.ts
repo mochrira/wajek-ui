@@ -1,22 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from '@wajek/wui';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  constructor() {}
 
-  toggleDrawer() {
-    this.messageService.set('app:drawer', null);
-  }
+  ngOnInit() {}
 
-  ngOnInit(): void {
-  }
+  ngOnDestroy() {}
 
 }
