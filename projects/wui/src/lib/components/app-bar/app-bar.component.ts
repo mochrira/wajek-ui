@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AppBarComponent implements OnInit {
 
   @Input('leading') leading: any;
-  @Input('content') content: any;
+  @Input('title') title: any;
   @Input('trailing') trailing: any;
 
   constructor() { }
