@@ -24,6 +24,7 @@
     "core-js": "^3.6.5",
     "is-webview": "^1.0.1",
     "ng2-dnd": "^5.0.2",
+    "normalize-url": "^5.3.0",
     "pdfjs-dist": "^2.4.456",
     "perfect-scrollbar": "^1.5.0",
     "roboto-fontface": "^0.10.0",

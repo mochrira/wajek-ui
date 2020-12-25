@@ -10,13 +10,15 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
 import { ControlComponent } from './pages/control/control.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DrawerComponent } from './components/drawer/drawer.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         UserComponent,
-        ControlComponent
+        ControlComponent,
+        DrawerComponent
     ],
     imports: [
         CommonModule,
@@ -25,13 +27,15 @@ import { AppRoutingModule } from './app-routing.module';
         BrowserModule,
         HttpClientModule,
         WuiModule.forRoot({
-            'home': HomeComponent,
-            'user': UserComponent
-        })
+            'HomeComponent': HomeComponent,
+            'UserComponent': UserComponent,
+            'ControlComponent': ControlComponent
+        })        
     ],
     entryComponents: [
         HomeComponent,
-        UserComponent
+        UserComponent,
+        ControlComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

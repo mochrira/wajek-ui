@@ -1,7 +1,5 @@
-import { Directive, HostListener, Input, ElementRef, Inject, Renderer2 } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
 import { NavService } from '../services/nav.service';
-import { Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
 
 @Directive({
   selector: '[wuiNavRoot]'
@@ -9,29 +7,14 @@ import { takeUntil, filter } from 'rxjs/operators';
 export class NavRootDirective {
 
   constructor(
-    private el: ElementRef,
-    private navService: NavService,
-    private renderer: Renderer2
-  ) {}
+    private navService: NavService
+  ) { }
 
   @Input('wuiNavRoot') name = '';
-  @Input('wuiNavRootActive') set setRootActive(val) {
-    this.navService.navigation.pipe(takeUntil(this.unsub), filter(v => v.state === 'root')).subscribe(nav => {
-      if (this.navService.components[0].name === this.name) {
-        this.renderer.addClass(this.el.nativeElement, val);
-      } else {
-        this.renderer.removeClass(this.el.nativeElement, val);
-      }
-    });
-  }
-  @Input() wuiNavParams = {};
-
-  private unsub: Subject<any> = new Subject();
+  @Input('wuiNavParams') params = {};
 
   @HostListener('click', ['$event']) onclick(e) {
-    setTimeout(() => {
-      this.navService.setRoot(this.name, this.wuiNavParams);
-    }, 200);
+    this.navService.setRoot(this.name);
   }
 
 }
@@ -42,12 +25,10 @@ export class NavRootDirective {
 export class NavPushDirective {
 
   @Input('wuiNavPush') name = '';
-  @Input() wuiNavParams = {};
+  @Input('wuiNavParams') params = {};
 
   @HostListener('click', ['$event']) onclick(e) {
-    setTimeout(() => {
-      this.navService.push(this.name, this.wuiNavParams);
-    }, 200);
+    this.navService.push(this.name);
   }
 
   constructor(
@@ -61,11 +42,9 @@ export class NavPushDirective {
 })
 export class NavPopDirective {
 
-  @Input() wuiNavParams = {};
+  @Input('wuiNavParams') params = null;
   @HostListener('click', ['$event']) onclick(e) {
-    setTimeout(() => {
-      this.navService.pop(this.wuiNavParams);
-    }, 200);
+    this.navService.pop(this.params);
   }
 
   constructor(

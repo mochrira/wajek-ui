@@ -1,20 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, ContentChildren, Directive, ElementRef, Input, OnInit, QueryList, TemplateRef } from '@angular/core';
+import { NavService } from '../../services/nav.service';
+
+@Directive({
+  selector: '[wuiAppBarLeading]'
+})
+export class AppBarLeadingDirective {}
 
 @Component({
   selector: 'wui-app-bar',
-  templateUrl: './app-bar.component.html',
-  styleUrls: ['./app-bar.component.scss']
+  template: `<ng-content></ng-content>`
 })
 export class AppBarComponent implements OnInit {
 
-  @Input('leading') leading: any;
-  @Input('title')  title: any;
-  @Input('trailing') trailing: any;
-
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.leading);
+  ngOnInit(): void { 
+
   }
 
 }

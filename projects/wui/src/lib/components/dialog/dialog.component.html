@@ -1,11 +1,1 @@
-<div class="wui-modal" wuiModal #modal="wuiModal">
-  <div class="wui-modal-inner">
-    <div class="d-flex align-items-center justify-content-between">
-        <div class="flex-grow-1 font-20 font-weight-500">{{title}}</div>
-    </div>
-    <p>{{message}}</p>
-    <div class="d-flex justify-content-end btn-container">
-      <button class="button button-smooth {{button.class}}" *ngFor="let button of buttons" (click)="button.click()">{{button.caption}}</button>
-    </div>
-  </div>
-</div>
+<wui-modal title="Konfirmasi" message="Anda yakin menghapus ini ?" [actions]="['HAPUS','BATAL']"></wui-modal>

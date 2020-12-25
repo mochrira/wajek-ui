@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '@wajek/wui';
+import { RouterService } from '@wajek/wui';
 
 @Component({
   selector: 'app-control',
@@ -8,15 +8,8 @@ import { MessageService } from '@wajek/wui';
 })
 export class ControlComponent implements OnInit {
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  constructor() { }
 
-  toggleDrawer() {
-    this.messageService.set('app:drawer', null);
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

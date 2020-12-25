@@ -1,12 +1,10 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild,
-  ViewContainerRef, OnDestroy, ChangeDetectorRef, Inject, Renderer2 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy, Inject, Renderer2, AfterContentChecked, ElementRef } from '@angular/core';
 import { NavService } from '../../services/nav.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'wui-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  template: `<ng-template #navHost></ng-template>`
 })
 export class NavComponent implements OnInit, OnDestroy {
 
@@ -15,63 +13,57 @@ export class NavComponent implements OnInit, OnDestroy {
 
   constructor(
     private navService: NavService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private changeDetector: ChangeDetectorRef,
-    @Inject('predefinedNavs') private predefinedNavs: any
+    private componentFactoryResolver: ComponentFactoryResolver
   ) { }
 
-  pop(navId) {
-    if (this.navService.components.length > 1 && this.navService.components[this.navService.components.length - 2].navId == navId) {
-      const componentIndex = this.navService.components.length - 1;
-      this.viewContainer.remove(componentIndex);
-      this.navService.components.splice(componentIndex, 1);
-      this.changeDetector.detectChanges();
-    }
-  }
+  root(e) {
+    this.viewContainer.clear();
+    this.navService.components = [];
 
-  push(navId, name: string) {
-    const component = this.predefinedNavs[name];
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-    const componentRef = this.viewContainer.createComponent(componentFactory);
-    this.navService.components.push({
-      navId: navId,
-      name: name, 
-      componentRef: componentRef
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(e.componentName);
+    const componentRef = this.viewContainer.createComponent(componentFactory);    
+    (<any> componentRef.instance).navId = e.navId;
+    (<any> componentRef.instance).params = e.params;
+
+    this.navService.components.push({ 
+      navId: e.navId,
+      componentName: e.componentName,
+      componentRef: componentRef,
+      options: e.options
     });
-    this.changeDetector.detectChanges();
   }
 
-  setRoot(navId, name: string) {
-    const component = this.predefinedNavs[name];
-    if ((this.navService.components.length === 0) || !(this.navService.components[0].componentRef.instance instanceof component)) {
-      this.viewContainer.clear();
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-      const componentRef = this.viewContainer.createComponent(componentFactory);
-      this.navService.components.splice(0, this.navService.components.length);
-      this.navService.components.push({
-        navId: navId,
-        name: name,
-        componentRef: componentRef
-      });
-      this.changeDetector.detectChanges();
-    }
+  push(e) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(e.componentName);
+    const componentRef = this.viewContainer.createComponent(componentFactory);
+    (<any> componentRef.instance).navId = e.navId;
+    (<any> componentRef.instance).params = e.params;
+
+    this.navService.components.push({ 
+      navId: e.navId,
+      componentName: e.componentName,
+      componentRef: componentRef,
+      options: e.options
+    });
+  }
+
+  pop(e) {
+    this.viewContainer.remove(this.viewContainer.length - 1);
+    this.navService.components[this.navService.components.length - 1].componentRef.destroy();
+    this.navService.components.pop();
   }
 
   ngOnInit() {
-    this.navService.navigation.subscribe(res => {
-      let name = res.name;
-      if (res.state === 'push') {
-        this.push(res.navId, res.name);
-      } else if (res.state === 'pop') {
-        this.pop(res.navId);
-        name = this.navService.components[this.navService.components.length - 1].name;
-      } else if (res.state === 'root') {
-        this.setRoot(res.navId, res.name);
+    this.navService.events.subscribe(async e => {
+      if(e !== null) {
+        if(e.type == 'command') {
+          switch(e.action) {
+            case 'root': this.root(e); break;
+            case 'push': this.push(e); break;
+            case 'pop': this.pop(e); break;
+          }
+        }
       }
-      this.navService.navParams.next({
-        name: name,
-        params: res.params
-      });
     });
   }
 

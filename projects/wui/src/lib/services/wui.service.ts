@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { MessageService } from './message.service';
+import { DialogComponent } from '../components/dialog/dialog.component';
+import { NavService } from './nav.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,17 +10,12 @@ import { MessageService } from './message.service';
 export class WuiService {
 
   constructor(
-    private messageService: MessageService
+    private messageService: MessageService,
+    private navService: NavService
   ) { }
 
-  dialog(params): Promise<any> {
-    this.messageService.set('wui:dialog', params);
-    return new Promise((resolve) => {
-      let sub = this.messageService.get('wui:dialogResult').subscribe(res => {
-        resolve(res);
-        sub.unsubscribe();
-      });
-    });
+  async dialog(params) {
+    return await this.navService.push(DialogComponent);
   }
 
   snackbar(params) {

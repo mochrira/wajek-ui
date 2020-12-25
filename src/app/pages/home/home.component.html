@@ -1,68 +1,21 @@
 <wui-page>
-    <wui-app-bar [leading]="leading" [trailing]="trailing" [title]="title">
-        <ng-template #leading>
-            <button class="button button-large button-square button-smooth button-rounded">
-                <span class="mdi mdi-menu"></span>
-            </button>
-        </ng-template>
-        <ng-template  #title>
-            Home
-        </ng-template>
-        <ng-template #trailing>
-            <button class="button button-large button-square button-smooth button-rounded">
-                <span class="mdi mdi-refresh"></span>
-            </button>
-        </ng-template>
+    <wui-app-bar title="Home">
+        <div class="leading" wuiAppBarLeading>
+            <wui-icon-button icon="menu" wuiDrawerToggler></wui-icon-button>
+        </div>
     </wui-app-bar>
-    <div class="container">
-        <h1>Home</h1>
-        <a wuiNavPush="user">Go to User</a>
-
-        <div id="lipsum">
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere ultrices laoreet. Praesent porttitor laoreet nulla quis tristique. Phasellus nisl nisl, egestas sit amet accumsan viverra, imperdiet non turpis. Morbi ultricies aliquam scelerisque. Cras facilisis sapien elit, quis interdum libero pellentesque a. Nam placerat mattis diam in sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper orci nec accumsan porta. Curabitur at nibh non dui porta malesuada. Donec vitae arcu quam. Sed tincidunt sem faucibus nunc lacinia sagittis. Duis vel orci eget mi aliquet commodo. Phasellus lacinia porttitor urna nec hendrerit. Duis aliquet augue ut mauris sagittis, at vulputate massa viverra.
-            </p>
-            <p>
-            Nulla eu leo gravida orci bibendum ultrices. Maecenas non est sed purus ultrices porta. Suspendisse dictum eget erat at lobortis. Aliquam facilisis hendrerit augue id venenatis. Nunc vel tellus eu ligula lobortis aliquet. Nulla facilisi. Nullam ullamcorper interdum mi. Sed imperdiet quis mauris nec tincidunt. Donec tempor erat consequat, maximus arcu quis, suscipit lectus. Donec tincidunt neque ut nunc porta pretium. Proin eleifend, est eu porttitor pellentesque, felis felis dictum lectus, eget finibus nulla libero interdum lectus.
-            </p>
-            <p>
-            Morbi vestibulum tempor leo vitae rutrum. Nullam iaculis eget nisi vel semper. Curabitur mauris neque, varius nec neque ut, placerat dignissim massa. Donec posuere aliquet libero eget sodales. Aenean ullamcorper ante imperdiet condimentum blandit. Praesent nec posuere risus. Aenean sit amet massa tempus ipsum vehicula laoreet a nec quam. Aliquam dictum, urna non tempor hendrerit, felis dolor scelerisque tortor, dictum semper turpis libero sit amet elit.
-            </p>
-            <p>
-            Donec in purus egestas, ornare lectus quis, faucibus velit. Nunc maximus porta consectetur. Aliquam blandit posuere ligula eget dignissim. Integer porta arcu non odio lacinia, sit amet tempor sem volutpat. Morbi bibendum rhoncus ex, vel pharetra turpis eleifend a. Maecenas et turpis sit amet turpis rutrum volutpat non vitae nunc. Proin imperdiet auctor enim, in dignissim massa convallis vel. Sed risus mauris, venenatis quis odio sed, pellentesque pretium dolor. Donec eu lacus luctus, congue mi quis, sollicitudin purus. Vestibulum et ipsum vehicula ligula faucibus rutrum id in diam. Phasellus ut sem et sapien pellentesque gravida. Phasellus feugiat nibh et cursus molestie. Integer sed augue bibendum, interdum leo eget, pellentesque massa.
-            </p>
-            <p>
-            Integer et urna eros. Nulla facilisi. In vitae ex ut nisi lacinia condimentum. Donec non turpis leo. Donec semper sed ipsum non fermentum. Curabitur euismod tellus risus, et rhoncus nulla bibendum vestibulum. Aenean varius urna a vestibulum finibus.
-            </p>
-            <p>
-            Nulla facilisis tortor ac nisi lacinia posuere. Suspendisse eu convallis sapien. Sed ultrices diam non hendrerit consequat. Aliquam aliquam finibus condimentum. In erat tortor, malesuada at cursus non, volutpat vel odio. Suspendisse molestie nunc id massa consequat, sit amet auctor sem vestibulum. Quisque vel semper sapien. Suspendisse placerat porttitor justo, eu rhoncus risus iaculis eget. Sed feugiat, purus sit amet condimentum pretium, lorem quam interdum risus, quis gravida ligula dolor id turpis. Vivamus pharetra at neque tempor dapibus. Integer a ante id mi aliquet facilisis. Duis purus risus, ultricies id venenatis ultrices, malesuada eu risus. Donec eget porttitor nisi. Aenean malesuada sollicitudin nibh, non pulvinar arcu luctus sit amet. Proin vitae diam congue, blandit sem in, laoreet magna.
-            </p>
-            <p>
-            Donec gravida lectus lacinia turpis lobortis facilisis. Phasellus eget vehicula ligula, vitae malesuada felis. Integer id dapibus neque. Donec porta, eros eu tempor tincidunt, felis felis interdum sem, id convallis magna justo nec elit. Curabitur vel fermentum quam, at eleifend quam. Donec interdum lectus ipsum, in feugiat nibh viverra vitae. Aliquam elementum pharetra sem, tempor lacinia est commodo in. Suspendisse malesuada dapibus urna, feugiat efficitur mi varius id. Maecenas eu ornare erat. Integer quis ex imperdiet, interdum eros vitae, gravida leo. Sed erat sem, volutpat dictum felis quis, venenatis luctus velit.
-            </p>
-            <p>
-            Fusce turpis nisl, fringilla eu dui in, ultricies tristique libero. Nam molestie velit ligula, ut vestibulum eros sodales et. Pellentesque nec tempor dui. Morbi semper aliquet dignissim. In risus velit, faucibus ut blandit eget, gravida id orci. Phasellus eleifend massa sit amet sagittis sagittis. Vestibulum tempus lorem ac tellus egestas, a aliquet turpis sagittis. Pellentesque facilisis felis turpis, ac cursus diam laoreet nec. Praesent ante lectus, mattis vitae nibh in, dapibus pulvinar arcu. Curabitur accumsan dolor nec dui malesuada, vitae pellentesque risus egestas. Nullam mollis mi sit amet ligula malesuada pellentesque. Nam nec est enim. Maecenas felis metus, sodales at nisi quis, aliquet aliquam leo. Cras pharetra velit ac hendrerit pellentesque. Donec ut dapibus elit. Cras eleifend sollicitudin enim, efficitur hendrerit nisi lobortis ac.
-            </p>
-            <p>
-            Ut pretium leo vel libero congue, eu pretium mi ullamcorper. Nullam libero felis, auctor a accumsan pulvinar, porttitor at lorem. Morbi pellentesque arcu sed bibendum hendrerit. Curabitur interdum varius pretium. Cras efficitur, nisi quis commodo vulputate, eros quam rutrum neque, at volutpat ex velit nec velit. Aliquam ligula magna, imperdiet ac luctus ultricies, elementum vitae leo. Phasellus interdum sollicitudin arcu, eu maximus dolor vestibulum in.
-            </p>
-            <p>
-            Curabitur id libero faucibus, rutrum nisi in, mollis quam. Nam dignissim rutrum felis, eu blandit neque commodo a. Morbi ullamcorper, ex nec semper iaculis, eros dolor consequat tortor, et pulvinar nisi quam eu orci. Quisque tincidunt turpis ut nibh vestibulum, non lacinia magna tincidunt. Nulla mattis varius gravida. Pellentesque efficitur tellus velit, id posuere augue blandit id. Nam luctus libero sit amet nulla ultricies iaculis. Etiam blandit mattis libero, sit amet convallis nibh tincidunt quis. Vestibulum posuere malesuada lorem id placerat. Donec vitae hendrerit nisl. Integer eu ante pulvinar, pellentesque elit quis, ullamcorper turpis. Aliquam erat volutpat. Sed a eros massa.
-            </p>
-            <p>
-            Suspendisse vel vehicula mauris. Duis fringilla urna in lorem auctor, in ultricies est tempus. Donec nec massa tellus. Quisque risus magna, consectetur nec venenatis at, hendrerit nec orci. Ut pellentesque ante non nunc iaculis tempus. Morbi finibus vehicula facilisis. Suspendisse potenti. Sed gravida a ipsum a maximus. Cras est turpis, vestibulum ac purus a, ullamcorper consectetur ante. Integer suscipit justo massa. Nulla at diam vel lacus malesuada dapibus a at quam. Curabitur vel aliquam urna, sed dapibus purus. Aliquam blandit mi nec vehicula tempus.
-            </p>
-            <p>
-            Mauris a egestas tellus, id tincidunt ipsum. Aliquam faucibus ac enim id iaculis. Suspendisse potenti. Sed metus ligula, sagittis in erat eget, tincidunt congue erat. Mauris molestie lorem risus, sagittis hendrerit libero accumsan et. Nullam gravida orci laoreet purus gravida tempor. Phasellus lobortis cursus felis nec porta. Ut ex leo, tristique eu pharetra nec, suscipit ac est. Aliquam feugiat velit diam, eleifend lacinia ante egestas eget. Vestibulum in nisi vitae libero dapibus eleifend. Curabitur pulvinar ultrices aliquet.
-            </p>
-            <p>
-            Donec et nisl tortor. Cras pharetra purus at nisi euismod, nec feugiat augue mollis. Donec erat magna, condimentum sed turpis sit amet, convallis hendrerit nulla. Etiam neque orci, tincidunt auctor dignissim non, hendrerit ac enim. In vel finibus mi. Pellentesque sit amet rutrum nunc, quis consectetur mi. Nam efficitur urna quis faucibus tristique. Curabitur suscipit, velit quis varius pharetra, elit risus efficitur arcu, non iaculis neque massa tristique libero. Curabitur pharetra non nibh sed varius. Donec eget tempus tellus. Sed in tristique velit.
-            </p>
-            <p>
-            Etiam nulla ligula, aliquam et euismod et, tincidunt sit amet massa. Cras sagittis condimentum felis vel rhoncus. Morbi viverra nibh id leo tincidunt convallis et non dui. Curabitur eget lectus rutrum, tincidunt tellus in, vulputate magna. Quisque ultricies, lacus sagittis sollicitudin mollis, ante nunc volutpat velit, et mattis odio nulla et orci. Proin pharetra feugiat tortor, ac dignissim erat pulvinar at. Morbi et sem accumsan, eleifend mi ac, cursus nulla. Nulla facilisi. In sit amet laoreet ligula, at mattis magna. Ut quis risus vehicula, imperdiet neque sit amet, convallis sapien.
-            </p>
-            <p>
-            Praesent id justo et neque malesuada pharetra. Maecenas quis odio in velit porta convallis. Fusce sed nibh sed turpis laoreet pretium. Ut placerat ipsum ac sapien iaculis tristique. Nunc cursus sem nibh, ac suscipit tellus ornare ac. Pellentesque tincidunt odio non condimentum dapibus. Vestibulum interdum tortor orci, quis tincidunt felis viverra nec.
-            </p></div>
-    </div>
+    
+    <wui-list [bordered]="true" [hovered]="true" borderMode="full">
+        <wui-list-tile wuiRouterLink="/home/user">
+            <div class="leading">
+                <wui-avatar [size]="40"></wui-avatar>
+            </div>
+            <div class="content">
+                <div class="text">
+                    <div class="title">Network & Internet</div>
+                    <div class="sub-title">Mobile network, Wi-Fi & Hotspot</div>
+                </div>
+            </div>
+        </wui-list-tile>
+    </wui-list>
 </wui-page>

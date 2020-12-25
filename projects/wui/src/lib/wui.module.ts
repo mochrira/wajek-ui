@@ -12,8 +12,6 @@ import { AppComponent } from './components/app/app.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { WuiService } from './services/wui.service';
-import { ContextMenuComponent, ContextMenuItemComponent } from './components/context-menu/context-menu.component';
-import { ContextMenuDirective } from './directives/context-menu.directive';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
@@ -21,7 +19,6 @@ import { NavPopDirective, NavPushDirective, NavRootDirective } from './directive
 import { RippleDirective } from './directives/ripple.directive';
 import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { HttpService } from './services/http.service';
 import { DatefieldDirective } from './directives/datefield.directive';
 import { AppTitleComponent } from './components/app-title/app-title.component';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
@@ -29,15 +26,19 @@ import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
 import { TooltipDirective } from './tooltip.directive';
 import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
-import { ModalDirective } from './directives/modal.directive';
 import { ScrollDirective } from './directives/scroll.directive';
 import { PageComponent } from './components/page/page.component';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { RouterLinkDirective } from './directives/router-link.directive';
-import { WuiRouterService } from './services/router.service';
-import { RouterOutletComponent } from './components/router-outlet/router-outlet.component';
-import { RouterComponent } from './components/router/router.component';
-import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { RouteComponent, RouterComponent } from './components/router/router.component';
+import { AppBarComponent, AppBarLeadingDirective } from './components/app-bar/app-bar.component';
+import { RouterService } from './services/router.service';
+import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective, DrawerHeaderComponent } from './components/drawer/drawer.component';
+import { ListComponent, ListTileComponent } from './components/list/list.component';
+import { IconComponent } from './components/icon/icon.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
+import { ButtonDirective, ButtonIconDirective, FabButtonDirective } from './components/button/button.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -49,9 +50,6 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     AppComponent,
     DatepickerComponent,
     ModalComponent,
-    ContextMenuComponent,
-    ContextMenuItemComponent,
-    ContextMenuDirective,
     ToggleDrawerDirective,
     NavComponent,
     NavPopDirective,
@@ -67,14 +65,39 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     PageHeaderDirective,
     TooltipDirective,
     DynamicSelectComponent,
-    ModalDirective,
     ScrollDirective,
+
+    ModalComponent,
+
+    IconComponent,
+    AvatarComponent,
+
     PageComponent,
-    TopBarComponent,
-    RouterLinkDirective,
-    RouterOutletComponent,
+    
+    AppBarComponent,
+    AppBarLeadingDirective,
+
     RouterComponent,
-    AppBarComponent
+    RouteComponent,
+    RouterLinkDirective,
+
+    DrawerComponent,
+    DrawerItemComponent,
+    DrawerTogglerDirective,
+    DrawerHeaderComponent,
+
+    ListComponent,
+    ListTileComponent,
+
+    FabButtonDirective,
+    ButtonDirective,
+    ButtonIconDirective,
+
+    PaginationComponent,
+
+    MenuDirective,
+    MenuComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,
@@ -88,9 +111,6 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     AppComponent,
     LoadingComponent,
     ModalComponent,
-    ContextMenuComponent,
-    ContextMenuItemComponent,
-    ContextMenuDirective,
     NavComponent,
     ToggleDrawerDirective,
     NavPopDirective,
@@ -107,14 +127,40 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     DialogComponent,
     SnackbarComponent,
     TooltipDirective,
-    ModalDirective,
     DynamicSelectComponent,
     ScrollDirective,
+
+    ModalComponent,
+  
+    AvatarComponent,
+    IconComponent,
+
     PageComponent,
-    TopBarComponent,
+
+    AppBarComponent,
+    AppBarLeadingDirective,
+
+    RouteComponent,
+    RouterComponent,
     RouterLinkDirective,
-    RouterOutletComponent,
-    AppBarComponent
+
+    DrawerComponent,
+    DrawerItemComponent,
+    DrawerTogglerDirective,
+    DrawerHeaderComponent,
+    
+    ListComponent,
+    ListTileComponent,
+
+    ButtonIconDirective,
+    FabButtonDirective,
+    ButtonDirective,
+
+    PaginationComponent,
+
+    MenuDirective,
+    MenuComponent,
+    MenuItemComponent
   ], 
   providers: [
     DatePipe
@@ -126,11 +172,10 @@ export class WuiModule {
     return {
       ngModule: WuiModule,
       providers: [
-        WuiRouterService,
+        RouterService,
         WuiService,
         MessageService,
         NavService,
-        HttpService,
         {
           provide: 'predefinedNavs',
           useValue: predefinedNavs

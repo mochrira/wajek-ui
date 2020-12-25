@@ -1,10 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, HostBinding, ContentChild } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'wui-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+  <ng-content select="wui-drawer"></ng-content>
+  <div class="wui-app-main">
+    <ng-content></ng-content>
+  </div>`
 })
 export class AppComponent implements OnInit {
 

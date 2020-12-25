@@ -1,6 +1,57 @@
 @import "../variables/colors.scss";
 
-.button {
+.wui-button-fab {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $theme-primary;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.wui-button, .wui-icon-button {
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+        background-color: rgba(0,0,0,0.04);
+    }
+
+    &.primary {
+        color: $theme-primary;
+    }
+
+    &.primary {
+        background-color: $theme-primary;
+        color: white;
+    }
+
+}
+
+.wui-icon-button {
+    width: 3rem;
+    border-radius: 50%;
+    height: 3rem;
+    padding: 0;
+
+    &.small {
+        width: 2rem;
+        height: 2rem;
+    }
+
+}
+
+.wui-button {
     padding-right: 1rem;
     padding-left: 1rem;
     height: 2.25rem;
@@ -9,253 +60,33 @@
     align-items: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: none;
     border-radius: .25rem;
     font-weight: 500;
-    background-color: var(--theme-button-bg, $theme-button-bg);
-    color: var(--theme-button-text, $theme-button-text);
     font-family: 'Roboto';
     font-size: .875rem;
     cursor: pointer;
     vertical-align: middle;
     opacity: 1;
-    border: 1px solid transparent;
+    border:none;
 
     &:hover {
-        background-color: var(--theme-button-hover-bg, $theme-button-hover-bg);
-        color: var(--theme-button-hover-text, $theme-button-hover-text);
+        background-color: rgba(0,0,0,0.04);
     }
 
     &:focus {
         background-color: var(--theme-button-focus-bg, $theme-button-focus-bg);
-        color: var(--theme-button-focus-text, $theme-button-focus-text);
     }
 
-    &:last-child {
-        margin-right: 0;
+    &.large {
+        height: 2.75rem;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        font-size: 1rem;
     }
 
-    span.mdi {
-        font-size: 1.5rem;
-        line-height: 1rem;
-
-        &.leading{
-            margin-left: -.5rem;
-            margin-right: .5rem;
-        }
-
-        &.trailing {
-            margin-right: -.5rem;
-            margin-left: .5rem;
-        }
-    }
-
-    &:disabled {
-        opacity: .5;
-        cursor: default;
-    }
-
-    &-primary {
-        background-color: var(--theme-button-primary-bg, $theme-button-primary-bg);
-        color: var(--theme-button-primary-text, $theme-button-primary-text);
-
-        &:disabled {
-            background-color: var(--theme-button-bg, $theme-button-bg);
-            color: var(--theme-button-text, $theme-button-text);
-        }
-
-        &:hover:not(:disabled) {
-            background-color: var(--theme-button-primary-hover-bg, $theme-button-primary-hover-bg);
-            color: var(--theme-button-primary-hover-text, $theme-button-primary-hover-text);
-        }
-
-        &:focus:not(:disabled) {
-            background-color: var(--theme-button-primary-focus-bg, $theme-button-primary-focus-bg);
-            color: var(--theme-button-primary-focus-text, $theme-button-primary-focus-text);
-        }
-    }
-
-    &-secondary {
-        background-color: var(--theme-button-secondary-bg, $theme-button-secondary-bg);
-        color: var(--theme-button-secondary-text, $theme-button-secondary-text);
-
-        &:hover {
-            background-color: var(--theme-button-secondary-hover-bg, $theme-button-secondary-hover-bg);
-            color: var(--theme-button-secondary-hover-text, $theme-button-secondary-hover-text);
-        }
-
-        &:focus {
-            background-color: var(--theme-button-secondary-focus-bg, $theme-button-secondary-focus-bg);
-            color: var(--theme-button-secondary-focus-text, $theme-button-secondary-focus-text);
-        }
-    }
-
-    &-danger {
-        background-color: var(--theme-button-danger-bg, $theme-button-danger-bg);
-        color: var(--theme-button-danger-text, $theme-button-danger-text);
-
-        &:hover {
-            background-color: var(--theme-button-danger-hover-bg, $theme-button-danger-hover-bg);
-            color: var(--theme-button-danger-hover-text, $theme-button-danger-hover-text);
-        }
-
-        &:focus {
-            background-color: var(--theme-button-danger-focus-bg, $theme-button-danger-focus-bg);
-            color: var(--theme-button-danger-focus-text, $theme-button-danger-focus-text);
-        }
-    }
-
-    &-smooth {
-        background-color: transparent;
-        color: var(--theme-button-smooth-text, $theme-button-smooth-text);
-
-        &:hover {
-            background-color: var(--theme-button-smooth-hover-bg, $theme-button-smooth-hover-bg);
-        }
-
-        &:focus {
-            background-color: var(--theme-button-smooth-focus-bg, $theme-button-smooth-focus-bg);
-        }
-
-        &.button-primary {
-            color: var(--theme-button-primary-smooth-text, $theme-button-primary-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-primary-smooth-hover-bg, $theme-button-primary-smooth-hover-bg);
-                color: var(--theme-button-primary-smooth-text, $theme-button-primary-smooth-text);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-primary-smooth-focus-bg, $theme-button-primary-smooth-focus-bg);
-                color: var(--theme-button-primary-smooth-text, $theme-button-primary-smooth-text);
-            }
-        }
-
-        &.button-secondary {
-            color: var(--theme-button-secondary-smooth-text, $theme-button-secondary-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-secondary-smooth-hover-bg, $theme-button-secondary-smooth-hover-bg);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-secondary-smooth-focus-bg, $theme-button-secondary-smooth-focus-bg);
-            }
-        }
-
-        &.button-danger {
-            color: var(--theme-button-danger-smooth-text, $theme-button-danger-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-danger-smooth-hover-bg, $theme-button-danger-smooth-hover-bg);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-danger-smooth-focus-bg, $theme-button-danger-smooth-focus-bg);
-            }
-        }
-
-        &:disabled {
-            &.button-primary {
-                color: var(--theme-button-text, $theme-button-text);
-                background-color: transparent;
-            }
-        }
-    }
-
-    &-outline {
-        box-sizing: border-box !important;
-        background-color: transparent;
-        border-width: 1px;
-        border-style: solid;
-        color: var(--theme-button-text, $theme-button-text);
-        border-color: var(--theme-button-text, $theme-button-text);
-
-        &:hover {
-            background-color: var(--theme-button-bg, $theme-button-bg);
-            border-color: var(--theme-button-bg, $theme-button-bg);
-        }
-
-        &:focus {
-            background-color: var(--theme-button-focus-bg, $theme-button-focus-bg);
-            border-color: var(--theme-button-focus-bg, $theme-button-focus-bg);
-        }
-
-        &.button-primary {
-            color: var(--theme-button-primary-smooth-text, $theme-button-primary-smooth-text);
-            border-color: var(--theme-button-primary-smooth-text, $theme-button-primary-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-primary-bg, $theme-button-primary-bg);
-                color: var(--theme-button-primary-text, $theme-button-primary-text);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-primary-focus-bg, $theme-button-primary-focus-bg);
-                border-color: var(--theme-button-primary-focus-bg, $theme-button-primary-focus-bg);
-                color: var(--theme-button-primary-text, $theme-button-primary-text);
-            }
-        }
-
-        &.button-secondary {
-            color: var(--theme-button-secondary-smooth-text, $theme-button-secondary-smooth-text);
-            border-color: var(--theme-button-secondary-smooth-text, $theme-button-secondary-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-secondary-bg, $theme-button-secondary-bg);
-                color: var(--theme-button-secondary-text, $theme-button-secondary-text);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-secondary-focus-bg, $theme-button-secondary-focus-bg);
-                border-color: var(--theme-button-secondary-focus-bg, $theme-button-secondary-focus-bg);
-                color: var(--theme-button-secondary-text, $theme-button-secondary-text);
-            }
-        }
-
-        &.button-danger {
-            color: var(--theme-button-danger-smooth-text, $theme-button-danger-smooth-text);
-            border-color: var(--theme-button-danger-smooth-text, $theme-button-danger-smooth-text);
-
-            &:hover {
-                background-color: var(--theme-button-danger-bg, $theme-button-danger-bg);
-                color: var(--theme-button-danger-text, $theme-button-danger-text);
-            }
-
-            &:focus {
-                background-color: var(--theme-button-danger-focus-bg, $theme-button-danger-focus-bg);
-                border-color: var(--theme-button-danger-focus-bg, $theme-button-danger-focus-bg);
-                color: var(--theme-button-danger-text, $theme-button-danger-text);
-            }
-        }
-    }
-
-    &-large {
-        height: 3rem;
-        font-size: 1.125rem;
-        font-weight: 500;
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-
-    &-square {
-        width: 36px;
-        height: 36px;
-        padding: 0;
-        min-width: 0;
-
-        &.button-large {
-            width: 3rem;
-            height: 3rem;
-        }
-    }
-
-    &-rounded {
-        border-radius: 1.125rem;
-
-        &.button-large {
-            border-radius: 1.5rem;
-        }
+    &.block {
+        width: 100%;
     }
 
 }
+
