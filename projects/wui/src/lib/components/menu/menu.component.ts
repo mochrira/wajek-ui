@@ -18,9 +18,15 @@ export class MenuDirective {
 
 @Component({
   selector: 'wui-menu-item',
-  template: `<ng-content></ng-content>`
+  template: `
+  <div class="wui-menu-item-leading">
+    <wui-icon icon="{{icon}}"></wui-icon>
+  </div>
+  <div class="wui-menu-item-content"><ng-content></ng-content></div>`
 })
 export class MenuItemComponent implements OnInit {
+
+  @Input() icon = '';
 
   constructor() { }
 
