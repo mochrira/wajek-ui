@@ -91,6 +91,7 @@ wui-form-field {
 
     &.boxed {
         padding-top: .375rem;
+        margin-bottom: 1.75rem;
         
         &:before, &:after {
             display: none;
@@ -101,7 +102,7 @@ wui-form-field {
             left: calc(.875rem + 1px);
             padding-left: .25rem;
             padding-right: .25rem;
-            top: 1.375rem;
+            top: 1.625rem;
         }
 
         input, select {
@@ -120,7 +121,7 @@ wui-form-field {
             &-container {
                 border: 1px solid $theme-border;
                 border-radius: .25rem;
-                height: 3.125rem;
+                height: 3.625rem;
                 padding: 1px calc(.5rem + 1px);
             }
 

@@ -1,57 +1,10 @@
 @import "../variables/colors.scss";
 
-.wui-button-fab {
-    width: 3.5rem;
-    height: 3.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $theme-primary;
-    color: white;
-    border-radius: 50%;
+.wui-button {
+    color: $theme-text;
     border: none;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-}
-
-.wui-button, .wui-icon-button {
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     background-color: transparent;
-
-    &:hover {
-        background-color: rgba(0,0,0,0.04);
-    }
-
-    &.primary {
-        color: $theme-primary;
-    }
-
-    &.primary {
-        background-color: $theme-primary;
-        color: white;
-    }
-
-}
-
-.wui-icon-button {
-    width: 3rem;
-    border-radius: 50%;
-    height: 3rem;
-    padding: 0;
-
-    &.small {
-        width: 2rem;
-        height: 2rem;
-    }
-
-}
-
-.wui-button {
     padding-right: 1rem;
     padding-left: 1rem;
     height: 2.25rem;
@@ -64,7 +17,6 @@
     font-weight: 500;
     font-family: 'Roboto';
     font-size: .875rem;
-    cursor: pointer;
     vertical-align: middle;
     opacity: 1;
     border:none;
@@ -77,15 +29,82 @@
         background-color: var(--theme-button-focus-bg, $theme-button-focus-bg);
     }
 
-    &.large {
-        height: 2.75rem;
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
-        font-size: 1rem;
+    &-block {
+        width: 100%;
     }
 
-    &.block {
-        width: 100%;
+    &-primary {
+        background-color: $theme-primary;
+        color: white;
+
+        &:hover {
+            background-color: lighten($theme-primary, 10%);
+        }
+
+        &:focus {
+            background-color: darken($theme-primary, 3%);
+        }
+
+        &:active {
+            background-color: darken($theme-primary, 5%);
+        }
+    }
+
+    wui-icon {
+        margin-left: -.25rem;
+        margin-right: .5rem;
+    }
+
+    &-large {
+        height: 3rem;
+        font-size: 1rem;
+
+        wui-icon {
+            margin-right: .75rem;
+        }
+    }
+
+    &-rounded {
+        border-radius: 1.125rem;
+        padding-left: 1.625rem;
+        padding-right: 1.625rem;
+
+        &.wui-button {
+            &-large {
+                border-radius: 1.5rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+    }
+
+    &-square {
+        padding-left: 0;
+        padding-right: 0;
+        width: 2.25rem;
+
+        wui-icon {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        &.wui-button {
+            &-rounded {
+                border-radius: 50%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            &-large {
+                padding-left: 0;
+                padding-right: 0;
+                width: 3rem;
+
+                wui-icon {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 
 }
