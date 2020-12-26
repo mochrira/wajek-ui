@@ -107,5 +107,21 @@
         }
     }
 
-}
+    &-icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        padding: 0;
 
+        wui-icon {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        &.wui-button-large {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+
+}
