@@ -7,73 +7,50 @@ wui-list {
         display: flex;
         align-items: center;
         height: 3rem;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
+    }
 
-        .wui-list-tile {
+    &.wui-list {
+
+        &-hovered{
+            wui-list-tile {
+                &:hover {
+                    background-color: rgba(#000, 4%);
+                }
+            }
+        }
+
+        &-bordered {
+            wui-list-tile:not(:last-child) {
+                border-bottom: 1px solid $theme-border;
+            }
+        }
+    
+    }
+
+    .wui-list {
+        &-tile {
+            &-56 { height: 3.5rem; }
+            &-64 { height: 4rem; }
+            &-72 { height: 4.5rem; }
 
             &-content {
                 flex: 1 1 auto;
             }
+    
             &-leading {
                 flex: 0 0 auto;
-                width: 3.5rem;
+                min-width: 3.5rem;
             }
+    
             &-trailing {
                 flex: 0 0 auto;
             }
-        }
-
-        &.active {
-            background-color: $theme-list-item-selected-bg;
-            color: $theme-primary;
-        }
-
-        div.leading {
-            min-width: 3.5rem;
-        }
-
-        div.content {
-            flex: 1 1 auto;
-
-            div:first-child {
-                font-weight: 500;
-                margin-bottom: .125rem;
-            }
-            div:nth-child(n+2) {
-                font-size: .875rem;
-            }
-        }
-
-        div.trailing {
-            flex: 0 0 auto;
-        }
-    }
-
-    &.bordered {
-        
-    }
-
-    &.hovered{
-        wui-list-tile {
-            &:hover {
-                background-color: rgba(#000, 4%);
-            }
-        }
-    }
-}
-
-.wui-list {
-
-    &-bordered {
-        wui-list-tile:not(:last-child) {
-            border-bottom: 1px solid $theme-border;
-        }
-    }
     
-    &-tile {
-        &-56 { height: 3.5rem; }
-        &-64 { height: 4rem; }
-        &-72 { height: 4.5rem; }
+            &-active {
+                background-color: $theme-list-item-selected-bg;
+                color: $theme-primary;
+            }
+        }
     }
-
 }
