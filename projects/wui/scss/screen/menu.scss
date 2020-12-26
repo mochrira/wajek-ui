@@ -1,5 +1,4 @@
 @keyframes menuShow {
-
     0% {
         opacity: 0;
         transform: translate(.25rem, -.25rem);
@@ -9,7 +8,6 @@
         opacity: 1;
         transform: translate(0, 0);
     }
-
 }
 
 wui-menu {
@@ -20,6 +18,7 @@ wui-menu {
     border-radius: .25rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
+    margin-top: .5rem;
     min-width: 7rem;
     max-width: 17.5rem;
     opacity: 0;

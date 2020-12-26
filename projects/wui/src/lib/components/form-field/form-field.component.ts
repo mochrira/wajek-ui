@@ -25,6 +25,8 @@ export class WuiInputDirective {
     this.onKeyup.next(e);
   }
 
+  @Input('value') value = '';
+
 }
 
 @Component({
@@ -74,6 +76,9 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
           this.hasContent = false;
         }
       });
+      if(this.input.value) {
+        this.hasContent = true;
+      }
     }
   }
 

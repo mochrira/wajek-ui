@@ -7,7 +7,9 @@ import { MessageService } from '../../services/message.service';
   <ng-content select="wui-drawer"></ng-content>
   <div class="wui-app-main">
     <ng-content></ng-content>
-  </div>`
+  </div>
+  <wui-dialog></wui-dialog>
+  `
 })
 export class AppComponent implements OnInit {
 

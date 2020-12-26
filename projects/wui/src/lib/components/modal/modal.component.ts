@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, Directive, TemplateRef, ContentChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, TemplateRef, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavService } from '../../services/nav.service';
@@ -6,36 +6,15 @@ import { NavService } from '../../services/nav.service';
 @Component({
   selector: 'wui-modal',
   template: `
-    <div class="wui-backdrop show"></div>
-    <div class="wui-modal-inner">
-      <div class="wui-modal-header">
-        <ng-container *ngIf="!hasHeaderTemplate()">{{title}}</ng-container>
-        <ng-container *ngIf="hasHeaderTemplate()">
-          <ng-container *ngTemplateOutlet="header"></ng-container>
-        </ng-container>
-      </div>
-      <div class="wui-modal-content">
-        <ng-container *ngIf="!hasContentTemplate()">{{message}}</ng-container>
-        <ng-container *ngIf="hasContentTemplate()">
-          <ng-container *ngTemplateOutlet="content"></ng-container>
-        </ng-container>
-      </div>
-      <div class="wui-modal-footer">
-        <ng-container *ngIf="!hasFooterTemplate()">
-          <button wuiButton *ngFor="let action of actions" [smooth]="true">
-            {{action}}
-          </button>
-        </ng-container>
-        <ng-container *ngIf="hasFooterTemplate()">
-          <ng-container *ngTemplateOutlet="footer"></ng-container>
-        </ng-container>
-      </div>
-    </div>
+    <div class="wui-backdrop" [class.show]="show"></div>
+    <div class="wui-modal-inner" [style.maxWidth.px]="_width"><ng-content></ng-content></div>
   `
 })
 export class ModalComponent implements OnInit {
 
   @HostBinding('class.show') show: Boolean = false;
+  @HostBinding('class.leave') leave: Boolean = false;
+  @Input('width') _width = 350;
   @Input('title') title: string = '';
   @Input('message') message: string = ''
   @Input('actions') actions: Array<any> = [];
@@ -69,7 +48,11 @@ export class ModalComponent implements OnInit {
   }
 
   close() { 
-    this.show = false; 
+    this.leave = true;
+    setTimeout(() => {
+      this.show = false;
+      this.leave = false;
+    }, 200)
   }
 
   ngOnInit() {
