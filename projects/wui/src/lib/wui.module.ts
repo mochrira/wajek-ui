@@ -36,9 +36,9 @@ import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective, DrawerHea
 import { ListComponent, ListTileComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { ButtonDirective, ButtonIconDirective, FabButtonDirective } from './components/button/button.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
+import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 
 @NgModule({
   declarations: [
@@ -89,15 +89,12 @@ import { MenuComponent, MenuDirective, MenuItemComponent } from './components/me
     ListComponent,
     ListTileComponent,
 
-    FabButtonDirective,
-    ButtonDirective,
-    ButtonIconDirective,
-
     PaginationComponent,
 
     MenuDirective,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    LoadingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -151,10 +148,6 @@ import { MenuComponent, MenuDirective, MenuItemComponent } from './components/me
     
     ListComponent,
     ListTileComponent,
-
-    ButtonIconDirective,
-    FabButtonDirective,
-    ButtonDirective,
 
     PaginationComponent,
 

@@ -10,7 +10,7 @@ import { ModalComponent } from '../modal/modal.component';
     <div class="wui-modal-header">{{title}}</div>
     <div class="wui-modal-content">{{message}}</div>
     <div class="wui-modal-footer">
-      <div class="d-flex justify-content-end pt-3">
+      <div class="d-flex justify-content-end">
         <button class="wui-button wui-button-smooth {{getClasses(i)}}" *ngFor="let button of buttons; let i = index" (click)="click(i)">
           {{getCaption(i)}}
         </button>

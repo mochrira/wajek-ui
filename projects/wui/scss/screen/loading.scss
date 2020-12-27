@@ -136,3 +136,38 @@ wui-loading{
 
 }
 
+wui-loading-dialog {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  opacity: 0;
+
+  .wui-loading-dialog-inner {
+    z-index: -1;
+  }
+
+  &.show {
+    z-index: 100;
+    opacity: 1;
+
+    .wui-loading-dialog-inner {
+      z-index: 100;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 
+        0 1px 10px 0 rgba(0,0,0,0.12), 
+        0 2px 4px -1px rgba(0,0,0,0.20);
+    }
+  }
+}

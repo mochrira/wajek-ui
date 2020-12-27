@@ -46,8 +46,8 @@ wui-modal {
             border-radius: .5rem;
             box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
             background-color: white;
-            z-index: 100;
             padding: 1.25rem 1.5rem;
+            z-index: -1;
         }
 
         &-header {
@@ -67,10 +67,11 @@ wui-modal {
     }
 
     &.show {
-        z-index: 999;
+        z-index: 100;
         opacity: 1;
 
         .wui-modal-inner {
+            z-index: 100;
             animation-name: modalShow;
             animation-duration: .2s;
             animation-fill-mode: forwards;

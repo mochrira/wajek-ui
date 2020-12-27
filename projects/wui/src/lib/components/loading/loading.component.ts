@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ElementRef, Renderer2, ChangeDetectorRef } fr
 
 @Component({
   selector: 'wui-loading',
-  template: `<div class="indeterminate" *ngIf="_mode=='indeterminate'"></div>
+  template: `
+  <div class="indeterminate" *ngIf="_mode=='indeterminate'"></div>
   <div class="linear" *ngIf="_mode=='linear'">
       <div class="pos" [style.width.%]="pos"></div>
   </div>
@@ -14,7 +15,8 @@ import { Component, OnInit, Input, ElementRef, Renderer2, ChangeDetectorRef } fr
               </svg>
           </div>
       </div>
-  </div>`
+  </div>
+  `
 })
 export class LoadingComponent implements OnInit {
 

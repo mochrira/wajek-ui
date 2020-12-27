@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Directive, ElementRef, Host, HostBinding, HostListener, Input, OnInit, Optional, Renderer2, SkipSelf } from '@angular/core';
 
 @Directive({
   selector: '[wuiMenu]'
@@ -27,8 +27,13 @@ export class MenuDirective {
 export class MenuItemComponent implements OnInit {
 
   @Input() icon = '';
+  @HostListener('click', ['$event']) onClick(e) {
+    this.host.close();
+  }
 
-  constructor() { }
+  constructor(
+    @Optional() @Host() @SkipSelf() private host: MenuComponent
+  ) { }
 
   ngOnInit() { }
 
@@ -73,9 +78,9 @@ export class MenuComponent {
         this.renderer.setStyle(this.el.nativeElement, 'left', possibleLeft + 'px');
       }
 
-      let possibleTop = triggerRect.y + triggerRect.height;
+      let possibleTop = triggerRect.y;
       if((windowHeight - possibleTop) < menuHeight) {
-        let possibleBottom = windowHeight - triggerRect.y;
+        let possibleBottom = windowHeight - (triggerRect.y + triggerRect.height);
         this.renderer.setStyle(this.el.nativeElement, 'bottom', possibleBottom + 'px');
       } else {
         this.renderer.setStyle(this.el.nativeElement, 'top', possibleTop + 'px');

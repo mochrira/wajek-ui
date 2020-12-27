@@ -7,24 +7,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   </div>
   <ul class="nav">
     <li>
-        <button wuiIconButton size="small" [smooth]="true">
-            <wui-icon icon="chevron-double-left"></wui-icon>
-        </button>
+        
     </li>
     <li>
-        <button wuiIconButton size="small" [smooth]="true">
-            <wui-icon icon="chevron-left"></wui-icon>
-        </button>
+        
     </li>
     <li>
-        <button wuiIconButton size="small" [smooth]="true">
-            <wui-icon icon="chevron-right"></wui-icon>
-        </button>
+        
     </li>
     <li>
-        <button wuiIconButton size="small" [smooth]="true">
-            <wui-icon icon="chevron-double-right"></wui-icon>
-        </button>
+        
     </li>
   </ul>`
 })

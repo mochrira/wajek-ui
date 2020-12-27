@@ -1,5 +1,5 @@
-import { Component, ElementRef, ContentChild, AfterContentInit, Directive, HostBinding, ContentChildren, QueryList, OnInit, Input, OnDestroy, HostListener } from '@angular/core';
-import { FormControlName } from '@angular/forms';
+import { Component, ContentChild, AfterContentInit, Directive, HostBinding, OnInit, Input, OnDestroy, HostListener, Host, SkipSelf, Optional } from '@angular/core';
+import { ControlContainer, FormControlName } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DynamicSelectComponent } from '../dynamic-select/dynamic-select.component';
@@ -8,7 +8,7 @@ import { IconComponent } from '../icon/icon.component';
 @Directive({
   selector: '[wuiInput]'
 })
-export class WuiInputDirective { 
+export class WuiInputDirective implements OnInit, OnDestroy { 
 
   onFocus: Subject<any> = new Subject();
   @HostListener('focus', ['$event']) whenFocused(e) { 
@@ -20,12 +20,35 @@ export class WuiInputDirective {
     this.onBlur.next(e);
   }
 
-  onKeyup: Subject<any> = new Subject();
+  valueChanges: Subject<any> = new Subject();
   @HostListener('keyup', ['$event']) whenKeyup(e) {
-    this.onKeyup.next(e);
+    this.valueChanges.next(e.target.value);
   }
 
   @Input('value') value = '';
+
+  @Input('formControlName') formControlName;
+  private unsub: Subject<any> = new Subject();
+
+  constructor(
+    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
+  ) { }
+
+  ngOnDestroy() {
+    this.unsub.next();
+  }
+
+  ngOnInit() {
+    if(this.controlContainer) {
+      if(this.formControlName) {
+        this.controlContainer.control.get(this.formControlName).valueChanges
+          .pipe(takeUntil(this.unsub)).subscribe(value => {
+            this.valueChanges.next(value);
+          });
+      }
+    }
+    this.valueChanges.next(this.value);
+  }
 
 }
 
@@ -53,9 +76,7 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
 
   private unsub: Subject<any> = new Subject();
 
-  constructor(
-    private el: ElementRef
-  ) { }
+  constructor() { }
 
   ngOnDestroy() {
     this.unsub.next();
@@ -69,16 +90,13 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
       this.input.onBlur.pipe(takeUntil(this.unsub)).subscribe(e => {
         this.isFocused = false;
       });
-      this.input.onKeyup.pipe(takeUntil(this.unsub)).subscribe(e => {        
-        if(e.target.value.length > 0) {
+      this.input.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
+        if(value && value.length > 0) {
           this.hasContent = true;
         } else {
           this.hasContent = false;
         }
       });
-      if(this.input.value) {
-        this.hasContent = true;
-      }
     }
   }
 
