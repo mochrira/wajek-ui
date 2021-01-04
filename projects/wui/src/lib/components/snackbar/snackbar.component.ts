@@ -5,8 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'wui-snackbar',
-  templateUrl: './snackbar.component.html',
-  styleUrls: ['./snackbar.component.scss']
+  template: `{{label}}`
 })
 export class SnackbarComponent implements OnInit, OnDestroy {
 
@@ -20,7 +19,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
     private messageService: MessageService
   ) { }
 
-  open(label, autoclose, backdrop, actionItems = []) {
+  open(label, autoclose, actionItems = []) {
     this.label = label;
     this.actionItems = actionItems;
     if (this.show) {
@@ -49,7 +48,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
       if (data.label === 'close') {
         this.close();
       } else {
-        this.open(data.label, data.autoclose || true, data.backdrop, data.actionItems);
+        this.open(data.label, data.autoclose || true, data.actionItems);
       }
     });
   }

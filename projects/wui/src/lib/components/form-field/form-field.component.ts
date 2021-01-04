@@ -1,6 +1,6 @@
-import { Component, ContentChild, AfterContentInit, Directive, HostBinding, OnInit, Input, OnDestroy, HostListener, Host, SkipSelf, Optional } from '@angular/core';
-import { ControlContainer, FormControlName } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Component, ContentChild, AfterContentInit, Directive, HostBinding, OnInit, Input, OnDestroy, HostListener, Host, SkipSelf, Optional, ElementRef } from '@angular/core';
+import { ControlContainer, FormControlName, NgModel } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DynamicSelectComponent } from '../dynamic-select/dynamic-select.component';
 import { IconComponent } from '../icon/icon.component';
@@ -8,7 +8,7 @@ import { IconComponent } from '../icon/icon.component';
 @Directive({
   selector: '[wuiInput]'
 })
-export class WuiInputDirective implements OnInit, OnDestroy { 
+export class WuiInputDirective implements OnInit, OnDestroy, AfterContentInit { 
 
   onFocus: Subject<any> = new Subject();
   @HostListener('focus', ['$event']) whenFocused(e) { 
@@ -20,8 +20,11 @@ export class WuiInputDirective implements OnInit, OnDestroy {
     this.onBlur.next(e);
   }
 
-  valueChanges: Subject<any> = new Subject();
+  valueChanges: BehaviorSubject<any> = new BehaviorSubject('');
   @HostListener('keyup', ['$event']) whenKeyup(e) {
+    this.valueChanges.next(e.target.value);
+  }
+  @HostListener('change', ['$event']) whenChange(e) {
     this.valueChanges.next(e.target.value);
   }
 
@@ -31,11 +34,17 @@ export class WuiInputDirective implements OnInit, OnDestroy {
   private unsub: Subject<any> = new Subject();
 
   constructor(
-    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
+    private elementRef: ElementRef,
+    @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer,
+    @Optional() private ngModel: NgModel
   ) { }
 
   ngOnDestroy() {
     this.unsub.next();
+  }
+
+  ngAfterContentInit() {
+    
   }
 
   ngOnInit() {
@@ -45,9 +54,17 @@ export class WuiInputDirective implements OnInit, OnDestroy {
           .pipe(takeUntil(this.unsub)).subscribe(value => {
             this.valueChanges.next(value);
           });
+        this.valueChanges.next(this.controlContainer.control.get(this.formControlName).value);
+        return;
       }
     }
-    this.valueChanges.next(this.value);
+    if(this.ngModel) {
+      this.ngModel.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
+        this.valueChanges.next(value);
+      });
+      return;
+    }
+    this.valueChanges.next(this.elementRef.nativeElement.value);
   }
 
 }
@@ -91,7 +108,7 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
         this.isFocused = false;
       });
       this.input.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
-        if(value && value.length > 0) {
+        if(value && value.toString().length > 0) {
           this.hasContent = true;
         } else {
           this.hasContent = false;

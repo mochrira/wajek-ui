@@ -11,6 +11,7 @@ import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.compone
   </div>
   <wui-dialog></wui-dialog>
   <wui-loading-dialog [show]="showLoading"></wui-loading-dialog>
+  <wui-snackbar></wui-snackbar>
   `
 })
 export class AppComponent implements OnInit {

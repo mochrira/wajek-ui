@@ -45,7 +45,7 @@ wui-form-field {
         }
     }
 
-    input {
+    input, select {
         padding: 0;
         border: none;
         font-size: 1rem;
@@ -57,13 +57,17 @@ wui-form-field {
         font-size: 1rem;
         flex: 1 1 auto;
         appearance: none;
-    }
-
-    input, select {
         z-index: 2;
         height: 100%;
         order: 1;
         min-width: 0;
+    }
+
+    select {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.67)" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
+        background-size: 1.5rem 1.5rem;
+        background-repeat: no-repeat;
+        background-position: calc(100% - .375rem) .5rem;
     }
 
     &:before, &:after {
@@ -98,7 +102,7 @@ wui-form-field {
             content: ""
         }
 
-        label {
+        label, select {
             left: calc(.875rem + 1px);
             padding-left: .25rem;
             padding-right: .25rem;
@@ -129,6 +133,12 @@ wui-form-field {
                 padding-top: 0;
                 padding-left: .5rem;
                 padding-right: .5rem;
+            }
+
+            &-suffix {
+                .wui-button {
+                    margin-right: -5rem;
+                }
             }
         }
     }

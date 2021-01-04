@@ -46,8 +46,9 @@ wui-modal {
             border-radius: .5rem;
             box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
             background-color: white;
-            padding: 1.25rem 1.5rem;
             z-index: -1;
+            max-height: calc(100% - 4rem);
+            overflow-y: auto;
         }
 
         &-header {
@@ -55,14 +56,20 @@ wui-modal {
             line-height: 1.25rem;
             font-weight: 500;
             color: rgba(0,0,0,.87);
+            padding: 1.25rem 1.125rem 1.25rem 1.25rem;
+            width: 100%;
+            top: 0;
+            position: sticky;
+            background-color: white;
+            z-index: 9;
         }
 
         &-content {
-            padding-top: 1.25rem;
+            padding: 0 1.5rem 1.25rem;
         }
 
         &-footer {
-            padding-top: .75rem;
+            padding: 0 1.5rem 1.25rem;
         }
     }
 

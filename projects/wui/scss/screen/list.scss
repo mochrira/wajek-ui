@@ -14,7 +14,7 @@ wui-list {
 
         &-hovered{
             wui-list-tile {
-                &:hover {
+                &:not(.wui-list-tile-header):hover {
                     background-color: rgba(#000, 4%);
                 }
             }
@@ -30,6 +30,14 @@ wui-list {
 
     .wui-list {
         &-tile {
+            &-header {
+                position: sticky;
+                top: 0;
+                width: 100%;
+                z-index: 99;
+                background-color: white;
+            }
+
             &-56 { height: 3.5rem; }
             &-64 { height: 4rem; }
             &-72 { height: 4.5rem; }
@@ -41,10 +49,16 @@ wui-list {
             &-leading {
                 flex: 0 0 auto;
                 min-width: 3.5rem;
+
+                .wui-button {
+                    margin-left: -.375rem;
+                }
             }
     
             &-trailing {
                 flex: 0 0 auto;
+                min-width: 3.25rem;
+                padding-left: 1rem;
             }
     
             &-active {
