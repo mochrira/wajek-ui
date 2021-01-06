@@ -50,12 +50,10 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() { 
     this.messageService.get('wui:dialog').subscribe(e => {
-      setTimeout(() => {
-        this.title = e.title || '';
-        this.message = e.message || '';
-        this.buttons = e.buttons || [];
-        this.modal.open();
-      }, 200);
+      this.title = e.title || '';
+      this.message = e.message || '';
+      this.buttons = e.buttons || [];
+      this.modal.open();
     });
   }
 
