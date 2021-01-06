@@ -35,7 +35,6 @@ export class DialogComponent implements OnInit {
   ) { }
 
   click(index) {
-    console.log(index);
     this.modal.close();
     this.messageService.set('wui:dialog:result', index);
   }
