@@ -53,6 +53,11 @@
     wui-icon {
         margin-left: -.25rem;
         margin-right: .5rem;
+
+        &.trailing {
+            margin-right: -.25rem;
+            margin-left: .5rem;
+        }
     }
 
     &-large {
@@ -152,6 +157,7 @@
         position: fixed;
         bottom: 1.5rem;
         right: 1.5rem;
+        z-index: 9;
     }
 
 }

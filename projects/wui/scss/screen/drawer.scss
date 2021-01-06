@@ -151,7 +151,6 @@ wui-drawer {
     }
 
     &-header {
-        padding-bottom: .75rem;
         display: block;
 
         .avatar-outer {
@@ -200,7 +199,7 @@ wui-drawer {
         font-size: .875rem;
         font-weight: 500;
         line-height: 1.25rem;
-        padding: .75rem 1.5rem;
+        padding: .5rem 1.5rem;
         position: relative;
         cursor: pointer;
         white-space: nowrap;

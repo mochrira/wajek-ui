@@ -44,7 +44,13 @@ export class ModalComponent implements OnInit {
   }
 
   open() { 
-    this.show = true; 
+    if(this.leave) {
+      setTimeout(() => {
+        this.show = true; 
+      }, 200);
+      return;
+    }
+    this.show = true;
   }
 
   close() { 

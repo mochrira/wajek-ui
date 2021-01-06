@@ -35,6 +35,7 @@ export class DialogComponent implements OnInit {
   ) { }
 
   click(index) {
+    console.log(index);
     this.modal.close();
     this.messageService.set('wui:dialog:result', index);
   }
@@ -49,10 +50,12 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() { 
     this.messageService.get('wui:dialog').subscribe(e => {
-      this.title = e.title || '';
-      this.message = e.message || '';
-      this.buttons = e.buttons || [];
-      this.modal.open();
+      setTimeout(() => {
+        this.title = e.title || '';
+        this.message = e.message || '';
+        this.buttons = e.buttons || [];
+        this.modal.open();
+      }, 200);
     });
   }
 
