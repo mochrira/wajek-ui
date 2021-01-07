@@ -160,4 +160,8 @@
         z-index: 9;
     }
 
+    &:disabled {
+        opacity: .5;
+    }
+
 }
