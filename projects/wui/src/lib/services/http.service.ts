@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,27 +7,26 @@ import { Inject, Injectable } from '@angular/core';
 export class WuiHttpService {
 
   constructor(
-    @Inject('apiURL') private apiURL: string,
     private httpClient: HttpClient
   ) { }
 
   async get(url: string, options: any = {}) {
-    let res: any = await this.httpClient.get(this.apiURL + url, options).toPromise();
+    let res: any = await this.httpClient.get(url, options).toPromise();
     return res;
   }
 
   async post(url: string, data: any = {}, options: any = {}) {
-    let res: any = await this.httpClient.post(this.apiURL + url, data, options).toPromise();
+    let res: any = await this.httpClient.post(url, data, options).toPromise();
     return res;
   }
 
   async patch(url: string, data: any = {}, options: any = {}) {
-    let res: any = await this.httpClient.patch(this.apiURL + url, data, options).toPromise();
+    let res: any = await this.httpClient.patch(url, data, options).toPromise();
     return res;
   }
 
   async delete(url: string, options: any = {}) {
-    let res: any = await this.httpClient.delete(this.apiURL + url, options).toPromise();
+    let res: any = await this.httpClient.delete(url, options).toPromise();
     return res;
   }
 
