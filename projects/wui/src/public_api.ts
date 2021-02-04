@@ -28,3 +28,4 @@ export * from './lib/directives/scroll.directive';
 export * from './lib/components/page/page.component';
 export * from './lib/services/router.service';
 export * from './lib/components/modal/modal.component';
+export * from './lib/services/http.service';
