@@ -3,12 +3,14 @@
   <div class="asTitle">
    {{title}}
   </div>
-  <wui-list>
-    <wui-list-item *ngFor="let item of items" (click)="itemClick(item)">
-      <span class="mdi mdi-{{item.icon}}"></span>
-      <div>
-        <div class="title">{{item.caption}}</div>
+  <div class="wui-list wui-list-hovered">
+    <div class="wui-list-item" *ngFor="let item of items" (click)="itemClick(item)">
+      <div class="leading">
+        <span class="mdi mdi-{{item.icon}}"></span>
       </div>
-    </wui-list-item>
-  </wui-list>
+      <div class="wui-list-item-text">
+        {{item.caption}}
+      </div>
+    </div>
+  </div>
 </div>

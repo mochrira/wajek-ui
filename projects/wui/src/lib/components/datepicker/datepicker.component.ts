@@ -103,15 +103,19 @@ export class DatepickerComponent implements OnDestroy {
       if (this.datePipe.transform(this.date, 'yyyyMMdd') === this.datePipe.transform(v, 'yyyyMMdd')) {
         return true;
       }
+      return false;
     } else if (this.mode === 'month') {
       if (this.datePipe.transform(this.date, 'yyyyMM') === this.datePipe.transform(new Date(this.year, v, 1), 'yyyyMM')) {
         return true;
       }
+      return false;
     } else if (this.mode === 'year') {
       if (this.datePipe.transform(this.date, 'yyyy') === this.datePipe.transform(new Date(v, 0, 1),'yyyy')) {
         return true;
       }
+      return false;
     }
+    return false;
   }
 
   open(date?): Promise<any> {

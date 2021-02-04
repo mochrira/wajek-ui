@@ -1,101 +1,34 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class WuiHttpService {
 
   constructor(
+    @Inject('apiURL') private apiURL: string,
     private httpClient: HttpClient
   ) { }
 
-  get(url, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if(withToken && localStorage.getItem('token')){
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', localStorage.getItem('token'));
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': localStorage.getItem('token')
-          });
-        }
-      }
-      this.httpClient.get(url, options).subscribe((res:any) => {
-        if(res.next_token){
-          localStorage.setItem('token', res.next_token);
-        }
-        resolve(res);
-      }, rej => {
-        reject(rej);
-      });
-    });
+  async get(url: string, options: any = {}) {
+    let res: any = await this.httpClient.get(this.apiURL + url, options).toPromise();
+    return res;
   }
 
-  post(url, data = {}, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if(withToken && localStorage.getItem('token')){
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', localStorage.getItem('token'));
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': localStorage.getItem('token')
-          });
-        }
-      }
-      this.httpClient.post(url, data, options).subscribe((res:any) => {
-        if(res.next_token){
-          localStorage.setItem('token', res.next_token);
-        }
-        resolve(res);
-      }, rej => {
-        reject(rej);
-      });
-    });
+  async post(url: string, data: any = {}, options: any = {}) {
+    let res: any = await this.httpClient.post(this.apiURL + url, data, options).toPromise();
+    return res;
   }
 
-  patch(url, data = {}, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if(withToken && localStorage.getItem('token')){
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', localStorage.getItem('token'));
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': localStorage.getItem('token')
-          });
-        }
-      }
-      this.httpClient.patch(url, data, options).subscribe((res:any) => {
-        if(res.next_token){
-          localStorage.setItem('token', res.next_token);
-        }
-        resolve(res);
-      }, rej => {
-        reject(rej);
-      });
-    });
+  async patch(url: string, data: any = {}, options: any = {}) {
+    let res: any = await this.httpClient.patch(this.apiURL + url, data, options).toPromise();
+    return res;
   }
 
-  delete(url, options: any = {}, withToken = true): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if(withToken && localStorage.getItem('token')){
-        if (options.headers instanceof HttpHeaders) {
-          options.headers.append('Authorization', localStorage.getItem('token'));
-        } else {
-          options.headers = new HttpHeaders({
-            'Authorization': localStorage.getItem('token')
-          });
-        }
-      }
-      this.httpClient.delete(url, options).subscribe((res:any) => {
-        if(res.next_token){
-          localStorage.setItem('token', res.next_token);
-        }
-        resolve(res);
-      }, rej => {
-        reject(rej);
-      });
-    });
+  async delete(url: string, options: any = {}) {
+    let res: any = await this.httpClient.delete(this.apiURL + url, options).toPromise();
+    return res;
   }
 
 }

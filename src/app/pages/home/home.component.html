@@ -1,68 +1,21 @@
-<div class="wui-page">
-    <div class="wui-top-bar">
-        <button class="button button-smooth button-square button-rounded button-large" (click)="toggleDrawer()" wuiTooltip="Toggle Menu">
-            <span class="mdi mdi-menu"></span>
-        </button>
-        <div class="px-3 font-20 flex-grow-1">
-            Dashboard
+<wui-page>
+    <wui-app-bar title="Home">
+        <div class="leading" wuiAppBarLeading>
+            <wui-icon-button icon="menu" wuiDrawerToggler></wui-icon-button>
         </div>
-    </div>
-    <div class="wui-page-inner pb-5">
-        <div class="wui-page-header">
-            <div class="wui-page-header-content">
-                <div class="font-32 font-weight-500 text-center">Page Header</div>
-                <div class="font-16 text-center">Subheader</div>
+    </wui-app-bar>
+    
+    <wui-list [bordered]="true" [hovered]="true" borderMode="full">
+        <wui-list-tile wuiRouterLink="/home/user">
+            <div class="leading">
+                <wui-avatar [size]="40"></wui-avatar>
             </div>
-        </div>
-        <div class="wui-list wui-list-bordered">
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Network & Internet</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
+            <div class="content">
+                <div class="text">
+                    <div class="title">Network & Internet</div>
+                    <div class="sub-title">Mobile network, Wi-Fi & Hotspot</div>
                 </div>
             </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Connected Devices</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Apps & Notifications</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Battery</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Display</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Sound</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Storage</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-            <div class="wui-list-item">
-                <div class="wui-list-item-text">Security & Location</div>
-                <div class="trailing">
-                    <span class="mdi mdi-chevron-right icon-24"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        </wui-list-tile>
+    </wui-list>
+</wui-page>

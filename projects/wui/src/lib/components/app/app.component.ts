@@ -1,14 +1,23 @@
-import { Component, OnInit, ChangeDetectorRef, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MessageService } from '../../services/message.service';
+import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
 
 @Component({
   selector: 'wui-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+  <ng-content select="wui-drawer"></ng-content>
+  <div class="wui-app-main">
+    <ng-content></ng-content>
+  </div>
+  <wui-dialog></wui-dialog>
+  <wui-loading-dialog [show]="showLoading"></wui-loading-dialog>
+  <wui-snackbar></wui-snackbar>
+  `
 })
 export class AppComponent implements OnInit {
 
   @ViewChild('tooltip') tooltip: any;
+  @ViewChild('loadingDialog') loadingDialog: LoadingDialogComponent;
   showLoading = false;
 
   constructor(

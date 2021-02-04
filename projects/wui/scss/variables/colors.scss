@@ -12,14 +12,15 @@ $theme: (
     "secondary" : #222
 );
 
+$theme-text: rgba(0, 0, 0, 0.87);
 $theme-primary: map-get($theme, "700");
 $theme-secondary: #212121;
 $theme-danger: #B00020;
-$theme-light: #E0E0E0;
+$theme-light: rgba(125,125,125, .12);
 $theme-backdrop: rgba(0,0,0,0.5);
 
-$theme-text: rgba(0, 0, 0, 0.67);
-$theme-border: rgba(0, 0, 0, 0.12);
+$theme-button-hover-bg: darken($theme-light, 50%);
+$theme-button-focus-bg: darken($theme-button-hover-bg, 100%);
 
 $theme-light-bg: #FFF;
 $theme-light-text: rgba(0, 0, 0, 0.67);
@@ -36,9 +37,7 @@ $theme-dark-button-hover-bg: rgba(255,255,255,.16);
 $theme-button-text: $theme-text;
 $theme-button-bg: $theme-light;
 $theme-button-hover-text: darken($theme-text, 5%);
-$theme-button-hover-bg: lighten($theme-light, 3%);
 $theme-button-focus-text: darken($theme-text, 5%);
-$theme-button-focus-bg: lighten($theme-light, 5%);
 $theme-button-smooth-text: $theme-text;
 $theme-button-smooth-hover-bg: lighten($theme-light, 3%);
 $theme-button-smooth-focus-bg: lighten($theme-light, 5%);
@@ -79,3 +78,12 @@ $theme-list-item-selected-text: $theme-primary;
 $theme-avatar-bg: rgba(#000, 12%);
 $theme-checkbox: rgba(#000, 38%);
 $theme-toggle-track-bg: rgba(#000, 12%);
+
+$theme-border: rgba(0, 0, 0, 0.08);
+$theme-text: rgba(0, 0, 0, 0.67);
+$theme-black: (
+    "87": rgba(0, 0, 0, 0.87),
+    "77": rgba(0, 0, 0, 0.77),
+    "67": rgba(0, 0, 0, 0.67),
+    "54": rgba(0, 0, 0, 0.54)
+)

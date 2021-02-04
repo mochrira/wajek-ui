@@ -1,3 +1,44 @@
+h1, h2, h3, h4, h5, h6 {
+    display:block;
+    line-height: 1.2;
+    font-weight: 500;
+}
+h1{ font-size: 2.5rem; }
+h2{ font-size: 2rem; }
+h3{ font-size: 1.75rem; }
+h4{ font-size: 1.5rem; }
+h5{ font-size: 1.25rem; }
+h6{ font-size: 1rem; }
+
+.title {
+    font-size: 1rem;
+}
+
+.sub-title {
+    font-size: .875rem;
+    color: $theme-light-text;
+}
+
+@mixin font-weight($breakpoint: null) {
+    .font-weight {
+        &#{if($breakpoint != null, "-" + $breakpoint, "")} {
+            &-100 { font-weight: 100; }
+            &-200 { font-weight: 200; }
+            &-300 { font-weight: 300; }
+            &-400, &-normal { font-weight: 400; }
+            &-500 { font-weight: 500; }
+            &-600 { font-weight: 600; }
+            &-700, &-bold { font-weight: 700; }
+        }
+    }
+}
+
+@include font-weight;
+@include media-breakpoint-down(sm) { @include font-weight("sm"); }
+@include media-breakpoint-up(sm) { @include font-weight("md"); }
+@include media-breakpoint-up(md) { @include font-weight("lg"); }
+@include media-breakpoint-up(lg) { @include font-weight("xl"); }
+
 @mixin font-sizes($breakpoint: null) {
     .font {
         &#{if($breakpoint != null, "-" + $breakpoint, "")} {
@@ -12,18 +53,10 @@
             &-48 { font-size: 3rem; }
             &-64 { font-size: 4rem; }
         }
-
-        &-italic{
-            font-style: italic;
-        }
-
-        &-brand {
-            font-family: 'Montserrat';
-        }
     }
 }
-@include font-sizes;
 
+@include font-sizes;
 @include media-breakpoint-down(sm) { @include font-sizes("sm"); }
 @include media-breakpoint-up(sm) { @include font-sizes("md"); }
 @include media-breakpoint-up(md) { @include font-sizes("lg"); }
@@ -40,86 +73,36 @@
         }
     }
 }
+
 @include max-width;
 @include media-breakpoint-down(sm) { @include max-width("sm"); }
 @include media-breakpoint-up(sm) { @include max-width("md"); }
 @include media-breakpoint-up(md) { @include max-width("lg"); }
 @include media-breakpoint-up(lg) { @include max-width("xl"); }
 
-.avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-}
 
-.overflow {
-    &-x {
-        &-auto {
-            overflow-x: auto;
-        }
+.wui-label {
+    font-size: .75rem;
+    padding: .25rem;
+    border: 1px solid $theme-text;
+    border-radius: .25rem;
+    display: inline-block;
 
-        &-hidden {
-            overflow-x: hidden;
-        }
-
-        &-visible {
-            overflow-x: visible;
-        }
+    &-success {
+        color: #28a745;
+        border-color: #28a745;
     }
 
-    &-y {
-        &-auto {
-            overflow-y: auto;
-        }
-
-        &-hidden {
-            overflow-y: hidden;
-        }
-
-        &-visible {
-            overflow-y: visible;
-        }
+    &-danger {
+        color: #dc3545;
+        border-color: #dc3545;
     }
 }
 
-span.mdi {
-    width: 1.5rem;
-    height: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-
-    .icon {
-        &-32 {
-            font-size: 2rem;
-            height: 2rem;
-        }
-
-        &-16 {
-            font-size: 1rem;
-            width: 1rem;
-            height: 1rem;
-        }
-    }
-}
-
-.row {
-    margin-left: -1rem;
-    margin-right: -1rem;
-
-    > div {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-}
-
-div.avatar {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1.25rem;
-    background-color: var(--theme-avatar-bg, $theme-avatar-bg);
+.wui-box {
+    background-color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 100%;
+    height: 500px;
 }

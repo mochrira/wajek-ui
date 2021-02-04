@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '@wajek/wui';
+import { NavService } from '@wajek/wui';
+import { RouterService } from '@wajek/wui';
 
 @Component({
   selector: 'app-user',
@@ -9,14 +10,18 @@ import { MessageService } from '@wajek/wui';
 export class UserComponent implements OnInit {
 
   constructor(
-    private messageService: MessageService
-  ) { }
+    private routerService: RouterService,
+    private navService: NavService
+  ) {}
 
-  toggleDrawer() {
-    this.messageService.set('app:drawer', null);
+  async goToControl() {
+    this.routerService.navigate('/user/1/control');
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.routerService.routeParams.subscribe(param => {
+      console.log(param);
+    });
   }
 
 }

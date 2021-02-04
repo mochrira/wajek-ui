@@ -127,6 +127,7 @@ export class DynamicSelectComponent implements ControlValueAccessor, OnInit {
     this.show = true;
     this.openLoading();
     this.keyup.next(e);
+    return false;
   }
 
   selectTrigger = 'key';

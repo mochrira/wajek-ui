@@ -1,150 +1,246 @@
 @import '../variables/colors.scss';
 
-.wui-drawer {
-    overflow: hidden;
-    transition: all ease .2s;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    position: fixed;
-    top: 0; left: 0;
+wui-drawer {
+    position: relative;
     width: 100%;
-    height: 100%;
-    visibility: 0;
-    z-index: -1;
+    max-width: 230px;
+    padding-right: 1.5rem;
 
-    &-open {
-        z-index: 9999;
-        visibility: 1;
+    &-header {
+        padding-top: 1.5rem;
+    }
 
-        .wui-drawer {
-            &-backdrop {
-                opacity: 1;
+    .wui-drawer {
+
+        &-avatar {
+            padding-left: 1.5rem;
+            padding-bottom: .5rem;
+        }
+
+        &-userinfo {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 1rem 0rem 1rem 1.5rem;
+            display: flex;
+            color: $theme-text;
+            text-decoration: none;
+
+            &:hover {
+                color: $theme-primary;
             }
 
-            &-inner {
-                transform: translateX(0);
+            &-caption {
+                flex: 1 1 auto;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &-title {
+                font-size: 1rem;
+                font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &-subtitle {
+                font-size: .75rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &-primary, &-secondary {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        &-inner {
+            background-color: white;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: transform .2s ease-in-out;
+            padding-top: 1.5rem;
+        }
+
+        &-divider {
+            margin-top: 1rem;
+            display: block;
+            border-top: 1px solid $theme-border;
+            padding-top: 1rem;
+            padding-bottom: .5rem;
+
+            &.no-border {
+                border-top: none;
+                margin-top: 0;
+            }
+
+            &-label {
+                font-weight: bold;
+                font-size: .75rem;
+                padding-left: 1.5rem;
+                color: map-get($theme-black, "54");
             }
         }
     }
 
-    &-backdrop {
-        background-color: var(--theme-backdrop, $theme-backdrop);
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: opacity .2s ease-in-out;
-        opacity: 0;
+    &.has-secondary-menu {
+        wui-drawer-header {
+            a.menu-toggle {
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba(#000, .04);
+                }
+
+                wui-icon {
+                    display: inline-flex;
+                }
+            }
+        }
     }
 
-    &-inner {
-        width: 100%;
-        height: 100%;
-        max-width: 16rem;
-        background-color: white;
-        position: absolute;
-        z-index: 1;
-        transform: translateX(-100%);
-        transition: transform .15s ease-in-out;
-        overflow-y: auto;
+    &.primary-menu-active {
+        .wui-drawer-primary {
+            display: block;
+        }
+        .wui-drawer-secondary {
+            display: none;
+        }
+        wui-drawer-header {
+            .menu-toggle {
+                wui-icon {
+                    transition: transform linear .1s;
+                    transform: rotate(0deg);
+                }
+            }
+        }
+    }
+
+    &.secondary-menu-active {
+        .wui-drawer-primary {
+            display: none;
+        }
+        .wui-drawer-secondary {
+            display: block;
+        }
+        wui-drawer-header {
+            .menu-toggle {
+                wui-icon {
+                    transition: transform linear .1s;
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+    }
+
+    &.show {
+        transition: transform .2s linear 0s;
+
+        .wui-drawer {
+            &-inner {
+                opacity: 1;
+                transform: translateX(0);
+                z-index: 99;
+            }
+        }
     }
 
     &-header {
+        display: block;
+
+        .avatar-outer {
+            padding: 1rem 1rem .5rem;
+        }
+
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            padding: .5rem 1rem;
+            font-weight: normal;
+            opacity: 1;
+            color: rgba(#000, .87);
+            width: 100%;
+
+            .title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 1.25rem;
+                width: 100%;
+            }
+    
+            .sub-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: .875rem;
+                color: rgba(#000, .5);
+                width: 100%;
+            }
+
+            .caption {
+                flex: 1 1 auto;
+                overflow: hidden;
+            }
+
+            wui-icon {
+                flex: 0 0 auto;
+                display: none;
+            }
+        }
+    }
+
+    &-item {
+        font-size: .875rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        padding: .5rem 1.5rem;
+        position: relative;
+        cursor: pointer;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
 
-        img.avatar {
-            margin: 0 auto .5rem 1rem;
-            display: block;
-            width: 4rem;
-            height: 4rem;
-            border-radius: 2rem;
+        wui-icon {
+            margin-right: 1.5rem;
         }
 
-        &-button {
-            padding: .75rem 1rem;
-        }
-
-        &-title {
-            font-size: 1.25rem;
-            line-height: 1.25rem;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-
-        &-sub-title {
-            font-size: .875rem;
-            line-height: .875rem;
-            padding-top: .375rem;
-        }
-    }
-
-    .wui-list {
-        &-subheader {
-            font-size: .75rem;
-        }
-
-        &-item {
+        &.active {
+            background-color: rgba($theme-primary, .12);
+            color: $theme-primary;            
             font-weight: 500;
-            font-size: .875rem;
-            cursor: pointer;
+        }
 
-            &:hover {
-                background-color: transparent;
-                color: var(--theme-primary, $theme-primary);
-            }
-    
-            &.selected {
-                color: var(--theme-primary, $theme-primary);
-                position: relative;
-                background-color: transparent;
-    
-                &:hover {
-                    background-color: transparent;
-                }
-    
-                &:before {
-                    z-index: -1;
-                    display: block;
-                    content: "";
-                    width: calc(100% - 1rem);
-                    height: 100%;
-                    background-color: var(--theme-primary, $theme-primary);
-                    opacity: .125;
-                    position: absolute;
-                    left: 0; top: 0;
-                    border-top-right-radius: 1.5rem;
-                    border-bottom-right-radius: 1.5rem;
-                }
-            }
+        &:hover:not(.active) {
+            color: $theme-primary;
         }
     }
+    
 }
 
-@media screen and (min-width: 767px) {
 
-    .wui-drawer {
-        &-header {
-            padding: 1.5rem 0;
-
-            img.avatar {
-                margin: 0 auto .5rem 1.5rem;
-                display: block;
-                width: 4rem;
-                height: 4rem;
-                border-radius: 2rem;
-            }
-    
-            &-button {
-                padding: .75rem 1.5rem;
+@include media-breakpoint-up(md) {
+    wui-drawer {
+        .wui-drawer {
+            &-inner {
+                opacity: 1;
+                transform: translateX(0);
+                transition: none;               
             }
         }
-    }
 
+        .wui-backdrop {
+            display: none;
+            z-index: -1;
+        }
+    }
 }

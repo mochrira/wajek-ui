@@ -18,6 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
+            "allowedCommonJsDependencies": ["url-matcher"],
             "outputPath": "dist/wajek-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,7 +28,11 @@
               "src/.htaccess",
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/pdfjs-dist/build/", "output": "/assets/pdfjs/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/pdfjs-dist/build/",
+                "output": "/assets/pdfjs/"
+              }
             ],
             "styles": [
               "node_modules/@mdi/font/scss/materialdesignicons.scss",
@@ -157,7 +162,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/wui/tsconfig.lib.json",
             "project": "projects/wui/ng-package.json"
@@ -197,7 +202,7 @@
       "prefix": "wui-firebase",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/wui-firebase/tsconfig.lib.json",
             "project": "projects/wui-firebase/ng-package.json"
@@ -231,5 +236,8 @@
       }
     }
   },
-  "defaultProject": "wajek-ui"
+  "defaultProject": "wajek-ui",
+  "cli": {
+    "analytics": false
+  }
 }

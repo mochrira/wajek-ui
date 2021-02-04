@@ -15,6 +15,7 @@
     }
   },
   "whitelistedNonPeerDependencies": [
+    "url-matcher",
     "tslib",
     "roboto-fontface",
     "perfect-scrollbar",

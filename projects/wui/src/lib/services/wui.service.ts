@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from './message.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,14 @@ export class WuiService {
     private messageService: MessageService
   ) { }
 
-  dialog(params): Promise<any> {
-    this.messageService.set('wui:dialog', params);
+  async dialog(params) {
     return new Promise((resolve) => {
-      let sub = this.messageService.get('wui:dialogResult').subscribe(res => {
-        resolve(res);
+      this.messageService.set('wui:dialog', params);
+      let sub = this.messageService.get('wui:dialog:result').pipe(take(1)).subscribe(e => {
         sub.unsubscribe();
-      });
-    });
+        resolve(e);
+      })
+    })
   }
 
   snackbar(params) {

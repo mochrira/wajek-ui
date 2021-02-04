@@ -1,112 +1,70 @@
 @import '../../scss/variables/colors.scss';
 
-.wui-list {
+wui-list {
     display: block;
 
-    .wui-divider {
-        border-bottom: 1px solid var(--theme-border, $theme-border);
-        margin: 0 !important;
-    }
-
-    &-subheader {
-        padding: 1rem 1.25rem .5rem;
-        font-size: .875rem;
-        color: rgba(0,0,0,0.5);
-        font-weight: 600;
-    }
-
-    &-item {
+    &-tile {
         display: flex;
         align-items: center;
-        padding: 1rem;
         height: 3rem;
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-
-        &.selected {
-            background-color: var(--theme-list-item-selected-bg, $theme-list-item-selected-bg);
-            color: var(--theme-list-item-selected-text, $theme-list-item-selected-text);
-        }
-
-        &-header {
-            padding: 0 5.5rem;
-            font-weight: 600;
-            font-size: .75rem;
-            color: rgba(0,0,0,.47);
-            background-color: white;
-        }
-
-        &-2-line {
-            height: 4.5rem;
-        }
-
-        &-3-line {
-            height: 5.5rem;
-        }
-
-        div.leading {
-            padding-right: 1rem;
-            flex-grow: 0;
-            position: relative;
-        }
-
-        div.trailing {
-            padding-left: 2rem;
-            flex-grow: 0;
-            position: relative;
-        }
-
-        &-text {
-            flex: 1 1 auto;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
+        padding: 0 1.125rem 0 1.5rem;
     }
 
-    &-tight {
-        .wui-list-item {
-            padding: 0 1.5rem;
-        }
+    &.wui-list {
 
-        .wui-list-subheader {
-            padding: 1rem 1.5rem;
-        }
-    }
-
-    &-hovered {
-        .wui-list-item {
-            cursor: pointer; 
-            
-            &:hover:not(.wui-list-item-header) {
-                background-color: rgba(0,0,0,0.05);
+        &-hovered{
+            wui-list-tile {
+                &:not(.wui-list-tile-header):hover {
+                    background-color: rgba(#000, 4%);
+                }
             }
         }
-    }
 
-    &-bordered {
-        .wui-list-item:not(:last-child) {
-            border-bottom: 1px solid var(--theme-border, $theme-border);
-
-            &.wui-list-item-header {
-                border-bottom-color: rgba(0,0,0,.15);
+        &-bordered {
+            wui-list-tile:not(:last-child) {
+                border-bottom: 1px solid $theme-border;
             }
         }
+    
     }
-}
 
-@media screen and (min-width: 767px) {
     .wui-list {
-        &-item {
-            padding: 0 1.75rem;
-
-            div.leading {
-                padding-right: 2rem;
+        &-tile {
+            &-header {
+                position: sticky;
+                top: 0;
+                width: 100%;
+                z-index: 99;
+                background-color: white;
             }
-        }
 
-        &-subheader {
-            padding: 1rem 1.5rem .5rem;
+            &-56 { height: 3.5rem; }
+            &-64 { height: 4rem; }
+            &-72 { height: 4.5rem; }
+
+            &-content {
+                flex: 1 1 auto;
+            }
+    
+            &-leading {
+                flex: 0 0 auto;
+                min-width: 3.5rem;
+
+                .wui-button {
+                    margin-left: -.375rem;
+                }
+            }
+    
+            &-trailing {
+                flex: 0 0 auto;
+                min-width: 3.25rem;
+                padding-left: 1rem;
+            }
+    
+            &-active {
+                background-color: $theme-list-item-selected-bg;
+                color: $theme-primary;
+            }
         }
     }
 }
