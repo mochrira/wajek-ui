@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService, NavParams, NavService, WuiPage, RouterService } from '@wajek/wui';
-import { UserComponent } from '../user/user.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',

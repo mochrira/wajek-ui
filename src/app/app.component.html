@@ -1,38 +1,17 @@
 <wui-app>
 
-    <wui-drawer 
-    [primaryMenu]="primaryMenu"
-    [secondaryMenu]="secondaryMenu"
-    [modal]="false">
-
+    <wui-drawer>
         <wui-drawer-header 
-            avatar="https://i.pravatar.cc/150?img=52"
-            title="Moch. Rizal Rachmadani (Admin)"
+            avatar="https://i.pravatar.cc/150?img=52" 
+            title="Moch. Rizal Rachmadani (Admin)" 
             subTitle="mochrira@gmail.com"
         ></wui-drawer-header>
 
-        <ng-template #primaryMenu>
-            <wui-drawer-item icon="home" wuiRouterLink="/home" wuiRouterLinkActive="active">Dashboard</wui-drawer-item>
-            <wui-drawer-item icon="account" wuiRouterLink="/user" wuiRouterLinkActive="active">My Profile</wui-drawer-item>
-            <wui-drawer-item icon="cog" wuiRouterLink="/control" wuiRouterLinkActive="active">Settings</wui-drawer-item>
-        </ng-template>
-
-        <ng-template #secondaryMenu>
-            <wui-drawer-item icon="exit-to-app">Logout</wui-drawer-item>
-        </ng-template>
-        
+        <div class="wui-drawer-primary">
+            <wui-drawer-item icon="home-variant">Home</wui-drawer-item>
+        </div>
     </wui-drawer>
 
-    <wui-router>
-        <wui-route path="/" redirectTo="/home"></wui-route>
-        <wui-route path="/home" name="HomeComponent">
-            <wui-route path="/user" name="UserComponent"></wui-route>
-            <wui-route path="/control" name="ControlComponent"></wui-route>
-        </wui-route>
-        <wui-route path="/user" name="UserComponent"></wui-route>
-        <wui-route path="/control" name="ControlComponent"></wui-route>
-    </wui-router>
-
-    <wui-nav></wui-nav>
+    <router-outlet></router-outlet>
 
 </wui-app>

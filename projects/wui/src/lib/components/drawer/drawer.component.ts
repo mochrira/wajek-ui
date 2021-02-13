@@ -59,7 +59,10 @@ export class DrawerItemComponent {
 @Component({
   selector: 'wui-drawer',
   template: `
-  <ng-content></ng-content>`
+  <div class="wui-drawer-backdrop" (click)="show = false"></div>
+  <div class="wui-drawer-inner">
+    <ng-content></ng-content>
+  </div>`
 })
 export class DrawerComponent implements OnInit, OnDestroy {
 
@@ -85,6 +88,16 @@ export class DrawerComponent implements OnInit, OnDestroy {
   @HostBinding('class.has-secondary-menu') hasSecondaryMenu = false;
   @Input() primaryMenu;
   @Input() secondaryMenu;
+
+  @HostListener('click', ['$event']) onClick(e) {
+    if(e.target.tagName != 'WUI-DRAWER-ITEM') {
+      if(e.target.offsetParent.tagName == 'WUI-DRAWER-ITEM') {
+        this.show = false;
+      }
+    } else {
+      this.show = false;
+    }
+  }
 
   private unsub: Subject<any> = new Subject();
 

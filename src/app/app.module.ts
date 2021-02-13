@@ -26,6 +26,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
         ReactiveFormsModule,
         BrowserModule,
         HttpClientModule,
+        AppRoutingModule,
         WuiModule.forRoot({
             'HomeComponent': HomeComponent,
             'UserComponent': UserComponent,

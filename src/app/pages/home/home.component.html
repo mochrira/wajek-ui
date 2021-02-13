@@ -1,21 +1,21 @@
 <wui-page>
-    <wui-app-bar title="Home">
-        <div class="leading" wuiAppBarLeading>
-            <wui-icon-button icon="menu" wuiDrawerToggler></wui-icon-button>
-        </div>
-    </wui-app-bar>
+    <wui-app-bar>
     
-    <wui-list [bordered]="true" [hovered]="true" borderMode="full">
-        <wui-list-tile wuiRouterLink="/home/user">
-            <div class="leading">
-                <wui-avatar [size]="40"></wui-avatar>
-            </div>
-            <div class="content">
-                <div class="text">
-                    <div class="title">Network & Internet</div>
-                    <div class="sub-title">Mobile network, Wi-Fi & Hotspot</div>
-                </div>
-            </div>
-        </wui-list-tile>
-    </wui-list>
+        <div class="wui-app-bar-leading">
+            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth" wuiToggleDrawer>
+                <wui-icon icon="menu"></wui-icon>
+            </button>
+        </div>
+    
+        <div class="wui-app-bar-title">Home</div>
+        
+        <div class="wui-app-bar-trailing">
+            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
+                <wui-icon icon="refresh"></wui-icon>
+            </button>
+        </div>
+    
+    </wui-app-bar>
+
+    
 </wui-page>
