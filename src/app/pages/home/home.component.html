@@ -17,5 +17,28 @@
     
     </wui-app-bar>
 
+    <div class="p-4">
+        <wui-form-field [boxed]="true">
+            <label for="konten">Konten</label>
+            <textarea name="konten" id="konten" cols="30" rows="10" wuiInput></textarea>
+        </wui-form-field>
+
+        <wui-form-field >
+            <div class="wui-form-field-prefix wui-form-field-smartblock">
+                <wui-icon icon="pencil"></wui-icon>
+            </div>
+            <label for="id">Nama Lengkap</label>
+            <input id="id" type="text" wuiInput>
+        </wui-form-field>
+        
+        <wui-form-field [boxed]="true">
+            <div class="wui-form-field-prefix wui-form-field-smartblock">
+                <wui-icon icon="pencil"></wui-icon>
+            </div>
+            <label for="id">Nama Lengkap (Boxed)</label>
+            <input id="id" type="text" wuiInput>
+        </wui-form-field>
+    </div>
+
     
 </wui-page>
