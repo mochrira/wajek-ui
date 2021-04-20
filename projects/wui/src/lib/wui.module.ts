@@ -32,7 +32,7 @@ import { RouterLinkDirective } from './directives/router-link.directive';
 import { RouteComponent, RouterComponent } from './components/router/router.component';
 import { AppBarComponent, AppBarLeadingDirective } from './components/app-bar/app-bar.component';
 import { RouterService } from './services/router.service';
-import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective, DrawerHeaderComponent } from './components/drawer/drawer.component';
+import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective } from './components/drawer/drawer.component';
 import { ListComponent, ListTileComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
@@ -84,7 +84,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     DrawerComponent,
     DrawerItemComponent,
     DrawerTogglerDirective,
-    DrawerHeaderComponent,
 
     ListComponent,
     ListTileComponent,
@@ -144,7 +143,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     DrawerComponent,
     DrawerItemComponent,
     DrawerTogglerDirective,
-    DrawerHeaderComponent,
     
     ListComponent,
     ListTileComponent,

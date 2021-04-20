@@ -1,14 +1,24 @@
 <wui-app>
 
     <wui-drawer>
-        <wui-drawer-header 
-            avatar="https://i.pravatar.cc/150?img=52" 
-            title="Moch. Rizal Rachmadani (Admin)" 
-            subTitle="mochrira@gmail.com"
-        ></wui-drawer-header>
-
+        <div class="px-4 pt-4 pb-3">
+            <wui-avatar
+                src="https://i.pravatar.cc/150?img=52"
+                size="64"
+            ></wui-avatar>
+        </div>
+        <a href="" class="wui-drawer-userinfo">
+            <div class="wui-drawer-userinfo-caption">
+                <div class="wui-drawer-userinfo-title">Moch. Rizal Rachmadani</div>
+                <div class="wui-drawer-userinfo-subtitle">mochrira@gmail.com</div>
+            </div>
+            <wui-icon icon="menu-down"></wui-icon>
+        </a>
         <div class="wui-drawer-primary">
-            <wui-drawer-item icon="home-variant">Home</wui-drawer-item>
+            <wui-drawer-item icon="home-variant" routerLinkActive="home">Home</wui-drawer-item>
+        </div>
+        <div class="wui-drawer-secondary">
+            <wui-drawer-item icon="account-circle">Data Pengguna</wui-drawer-item>
         </div>
     </wui-drawer>
 
