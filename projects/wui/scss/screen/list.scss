@@ -31,11 +31,16 @@ wui-list {
     .wui-list {
         &-tile {
             &-header {
-                position: sticky;
-                top: 0;
-                width: 100%;
-                z-index: 99;
-                background-color: white;
+                font-weight: bold;
+                font-size: .875rem;
+
+                &-sticky {
+                    position: sticky;
+                    top: 0;
+                    width: 100%;
+                    z-index: 99;
+                    background-color: white;
+                }
             }
 
             &-56 { height: 3.5rem; }
@@ -65,6 +70,14 @@ wui-list {
                 background-color: $theme-list-item-selected-bg;
                 color: $theme-primary;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    wui-list {
+        &-tile {
+            padding: 0 .625rem 0 1.125rem;
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'wui-list-tile',
@@ -6,22 +6,10 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
     <ng-content></ng-content>
   `
 })
-export class ListTileComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() { }
-
-}
+export class ListTileComponent { }
 
 @Component({
   selector: 'wui-list',
   template: `<ng-content></ng-content>`
 })
-export class ListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() { }
-
-}
+export class ListComponent { }

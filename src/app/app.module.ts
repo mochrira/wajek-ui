@@ -11,6 +11,7 @@ import { UserComponent } from './pages/user/user.component';
 import { ControlComponent } from './pages/control/control.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { ListComponent } from './pages/list/list.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { DrawerComponent } from './components/drawer/drawer.component';
         HomeComponent,
         UserComponent,
         ControlComponent,
-        DrawerComponent
+        DrawerComponent,
+        ListComponent
     ],
     imports: [
         CommonModule,
