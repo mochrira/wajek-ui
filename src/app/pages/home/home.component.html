@@ -1,44 +1,20 @@
-<wui-page>
-    <wui-app-bar>
-    
-        <div class="wui-app-bar-leading">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth" wuiToggleDrawer>
-                <wui-icon icon="menu"></wui-icon>
-            </button>
-        </div>
-    
-        <div class="wui-app-bar-title">Home</div>
-        
-        <div class="wui-app-bar-trailing">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
-                <wui-icon icon="refresh"></wui-icon>
-            </button>
-        </div>
-    
-    </wui-app-bar>
-
-    <div class="p-4">
-        <wui-form-field [boxed]="true">
-            <label for="konten">Konten</label>
-            <textarea name="konten" id="konten" cols="30" rows="10" wuiInput></textarea>
+<wui-page class="middle-center">
+    <div class="p-4 box">
+        <wui-form-field>
+            <label for="nmPengguna">Nama Pengguna</label>
+            <input placeholder="Text Input" id="nmPengguna" type="text" wuiInput>
         </wui-form-field>
 
-        <wui-form-field >
-            <div class="wui-form-field-prefix wui-form-field-smartblock">
-                <wui-icon icon="pencil"></wui-icon>
-            </div>
-            <label for="id">Nama Lengkap</label>
-            <input id="id" type="text" wuiInput>
+        <wui-form-field>
+            <label for="keterangan">Keterangan</label>
+            <textarea id="keterangan" placeholder="Text Area" rows="10" wuiInput></textarea>
         </wui-form-field>
-        
-        <wui-form-field [boxed]="true">
-            <div class="wui-form-field-prefix wui-form-field-smartblock">
-                <wui-icon icon="pencil"></wui-icon>
-            </div>
-            <label for="id">Nama Lengkap (Boxed)</label>
-            <input id="id" type="text" wuiInput>
+
+        <wui-form-field>
+            <label for="akses">Akses</label>
+            <select wuiInput id="akses">
+                <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+            </select>
         </wui-form-field>
     </div>
-
-    
 </wui-page>

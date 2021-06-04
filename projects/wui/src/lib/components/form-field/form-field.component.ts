@@ -1,4 +1,4 @@
-import { Component, ContentChild, AfterContentInit, Directive, HostBinding, OnInit, Input, OnDestroy, HostListener, Host, SkipSelf, Optional, ElementRef } from '@angular/core';
+import { Component, ContentChild, AfterContentInit, Directive, HostBinding, OnInit, Input, OnDestroy, HostListener, Host, SkipSelf, Optional, ElementRef, Renderer2 } from '@angular/core';
 import { ControlContainer, FormControlName, NgModel } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -34,7 +34,7 @@ export class WuiInputDirective implements OnInit, OnDestroy, AfterContentInit {
   private unsub: Subject<any> = new Subject();
 
   constructor(
-    private elementRef: ElementRef,
+    public elementRef: ElementRef,
     @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer,
     @Optional() private ngModel: NgModel
   ) { }
@@ -72,8 +72,12 @@ export class WuiInputDirective implements OnInit, OnDestroy, AfterContentInit {
 @Component({
   selector: 'wui-form-field',
   template: `
-    <div class="wui-form-field-container">
-      <ng-content></ng-content>
+    <div class="wui-form-field-flex">
+      <ng-content select=".wui-form-field-prefix"></ng-content>
+      <div class="wui-form-field-infix">
+        <ng-content></ng-content>
+      </div>
+      <ng-content select=".wui-form-field-suffix"></ng-content>
     </div>
   `
 })
@@ -82,6 +86,8 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
   @Input() @HostBinding('class.boxed') boxed = false;
   @HostBinding('class.is-focused') isFocused = false;
   @ContentChild(WuiInputDirective) input: WuiInputDirective;
+
+  tagName = 'input';
 
   @HostBinding('class.has-icon') hasIcon = false;
   @HostBinding('class.has-content') hasContent = false;
@@ -93,7 +99,10 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
 
   private unsub: Subject<any> = new Subject();
 
-  constructor() { }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer2: Renderer2
+  ) { }
 
   ngOnDestroy() {
     this.unsub.next();
@@ -101,6 +110,7 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     if(this.input) {
+      this.renderer2.addClass(this.elementRef.nativeElement, 'tag-'+this.input.elementRef.nativeElement.tagName.toLowerCase());
       this.input.onFocus.pipe(takeUntil(this.unsub)).subscribe(e => {
         this.isFocused = true;
       });
