@@ -70,7 +70,9 @@ export class WuiInputDirective implements OnInit, OnDestroy {
     <div class="wui-form-field-flex">
       <ng-content select=".wui-form-field-prefix"></ng-content>
       <div class="wui-form-field-infix">
+        <ng-content select=".wui-form-field-input-prefix"></ng-content>
         <ng-content></ng-content>
+        <ng-content select=".wui-form-field-input-suffix"></ng-content>
       </div>
       <ng-content select=".wui-form-field-suffix"></ng-content>
     </div>
@@ -102,7 +104,7 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
         this.isFocused = false;
       });
       this.input.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
-        if(value && value.toString().length > 0) {
+        if(value !== null && value.toString().length > 0) {
           this.hasContent = true;
         } else {
           this.hasContent = false;
