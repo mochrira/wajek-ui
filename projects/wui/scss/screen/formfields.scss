@@ -66,19 +66,21 @@ wui-form-field {
 
         &-input {
             &-prefix, &-suffix {
-                padding-top: 1rem;
-                line-height: 1.5rem;
                 opacity: 0;
+                padding-bottom: 2px;
+                flex: 0 1 auto;
+                height: 3rem;
+                padding-top: 1rem;
+                display: inline-flex;
+                align-items: center;
             }
 
             &-prefix {
                 padding-right: .75rem;
-                flex: 0 0 auto;
             }
 
             &-suffix {
                 padding-left: .75rem;
-                flex: 0 0 auto;
             }
         }
 
