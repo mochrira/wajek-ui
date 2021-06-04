@@ -56,12 +56,16 @@ wui-modal {
             line-height: 1.25rem;
             font-weight: 500;
             color: rgba(0,0,0,.87);
-            padding: 1.25rem 1.125rem 1.25rem 1.25rem;
+            padding: 1.25rem 1.5rem;
             width: 100%;
             top: 0;
             position: sticky;
             background-color: white;
             z-index: 9;
+
+            .wui-button:last-child {
+                margin-right: -.375rem;
+            }
         }
 
         &-content {

@@ -1,20 +1,82 @@
 <wui-page class="middle-center">
     <div class="p-4 box">
-        <wui-form-field>
-            <label for="nmPengguna">Nama Pengguna</label>
-            <input placeholder="Text Input" id="nmPengguna" type="text" wuiInput>
-        </wui-form-field>
+        <form [formGroup]="formPengguna" (ngSubmit)="submit()">
+            <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
+                <div class="wui-form-field-suffix">
+                    <button class="wui-button wui-button-icon wui-button-smooth">
+                        <wui-icon icon="eye-off"></wui-icon>
+                    </button>
+                </div>
+                <div class="wui-form-field-input-prefix">+62</div>
+                <div class="wui-form-field-input-suffix">meter</div>
+                <label for="nmPengguna">Nama Pengguna</label>
+                <input placeholder="Text Input" id="nmPengguna" type="text" formControlName="nmPengguna" wuiInput>
+                <div class="wui-form-field-hint">Halo</div>
+            </wui-form-field>
 
-        <wui-form-field>
-            <label for="keterangan">Keterangan</label>
-            <textarea id="keterangan" placeholder="Text Area" rows="10" wuiInput></textarea>
-        </wui-form-field>
+            <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
+                <div class="wui-form-field-suffix">
+                    <button class="wui-button wui-button-icon wui-button-smooth">
+                        <wui-icon icon="eye-off"></wui-icon>
+                    </button>
+                </div>
+                <label for="nmPengguna">Tanggal</label>
+                <input id="nmPengguna" type="date" formControlName="tanggal" wuiInput>
+                <div class="wui-form-field-hint">Halo</div>
+            </wui-form-field>
 
-        <wui-form-field>
-            <label for="akses">Akses</label>
-            <select wuiInput id="akses">
-                <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-            </select>
-        </wui-form-field>
+            <wui-form-field>
+                <label for="keterangan">Keterangan</label>
+                <textarea id="keterangan" placeholder="Text Area" rows="5" wuiInput></textarea>
+            </wui-form-field>
+
+            <wui-form-field>
+                <div class="wui-form-field-suffix">
+                    <button class="wui-button wui-button-icon wui-button-smooth">
+                        <wui-icon icon="eye-off"></wui-icon>
+                    </button>
+                </div>
+                <label for="akses">Akses</label>
+                <select wuiInput id="akses">
+                    <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                </select>
+            </wui-form-field>
+            <div class="d-flex justify-content-between pt-4">
+                <button class="wui-button" type="button" (click)="modal.open()">OPEN MODAL</button>
+                <button class="wui-button wui-button-primary" type="submit">SIMPAN</button>
+            </div>
+        </form>
     </div>
 </wui-page>
+
+<wui-modal #modal>
+    <div class="wui-modal-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>Modal Title</div>
+            <button class="wui-button wui-button-smooth wui-button-icon" (click)="modal.close()">
+                <wui-icon icon="close"></wui-icon>
+            </button>
+        </div>
+    </div>
+
+    <wui-list class="wui-list-bordered wui-list-hovered">
+        <wui-list-tile class="wui-list-tile-56">
+            <div class="wui-list-tile-leading">
+                <wui-icon icon="tag"></wui-icon>
+            </div>
+            <div class="wui-list-tile-content"></div>
+            <div class="wui-list-tile-trailing">
+                <button class="wui-button wui-button-smooth wui-button-icon" (click)="modal.close()">
+                    <wui-icon icon="dots-vertical"></wui-icon>
+                </button>
+            </div>
+        </wui-list-tile>
+    </wui-list>
+
+    <div class="wui-modal-footer pt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="wui-button">BATAL</button>
+            <button class="wui-button wui-button-primary">SIMPAN</button>
+        </div>
+    </div>
+</wui-modal>
