@@ -104,8 +104,10 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
         this.isFocused = false;
       });
       this.input.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
-        if(value !== null && value.toString().length > 0) {
-          this.hasContent = true;
+        if(value !== null && value !== undefined) {
+          if(value.toString().length > 0) {
+            this.hasContent = true;
+          }
         } else {
           this.hasContent = false;
         }
