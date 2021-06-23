@@ -48,7 +48,9 @@ wui-modal {
             background-color: white;
             z-index: -1;
             max-height: calc(100% - 4rem);
-            overflow-y: auto;
+            overflow:hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         &-header {
@@ -58,10 +60,9 @@ wui-modal {
             color: rgba(0,0,0,.87);
             padding: 1.25rem 1.5rem;
             width: 100%;
-            top: 0;
-            position: sticky;
             background-color: white;
             z-index: 9;
+            flex: 0 0 auto;
 
             .wui-button:last-child {
                 margin-right: -.375rem;
@@ -70,10 +71,18 @@ wui-modal {
 
         &-content {
             padding: 0 1.5rem 1.25rem;
+            overflow: auto;
+            flex: 1 1 auto;
+            position: relative;
+
+            &-no-padding {
+                padding: 0;
+            }
         }
 
         &-footer {
             padding: 0 1.5rem 1.25rem;
+            flex: 0 0 auto;
         }
     }
 

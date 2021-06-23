@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "allowedCommonJsDependencies": ["url-matcher"],
+            "allowedCommonJsDependencies": [],
             "outputPath": "dist/wajek-ui",
             "index": "src/index.html",
             "main": "src/main.ts",

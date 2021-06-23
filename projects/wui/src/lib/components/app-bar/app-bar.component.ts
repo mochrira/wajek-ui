@@ -1,10 +1,4 @@
-import { Component, ContentChild, ContentChildren, Directive, ElementRef, Input, OnInit, QueryList, TemplateRef } from '@angular/core';
-import { NavService } from '../../services/nav.service';
-
-@Directive({
-  selector: '[wuiAppBarLeading]'
-})
-export class AppBarLeadingDirective {}
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'wui-app-bar',

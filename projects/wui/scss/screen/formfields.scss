@@ -156,7 +156,7 @@ wui-form-field {
         background-position: calc(100% - .375rem) .75rem;
     }
 
-    input[type="date"] {
+    input[type="date"], input[type="datetime-local"] {
         opacity: 0;
         -webkit-appearance: none;
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.67)" d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M12,13H17V18H12V13Z" /></svg>');
@@ -209,7 +209,7 @@ wui-form-field {
             line-height: 1rem;
         }
 
-        input[type="date"] {
+        input[type="date"], input[type="datetime-local"] {
             opacity: 1;
         }
     }

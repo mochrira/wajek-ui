@@ -48,6 +48,17 @@
             position: relative;
         }
     }
+
+    .ps__rail {
+        &-x, &-y {
+            background-color: transparent !important;
+            z-index: 999;
+
+            &:hover {
+                border: none !important;   
+            }
+        }
+    }
     
     @import "loading.scss";
     @import "scrollbar.scss";

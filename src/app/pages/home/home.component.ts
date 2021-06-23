@@ -15,8 +15,13 @@ export class HomeComponent implements OnInit{
     keterangan: new FormControl('', Validators.required),
     akses: new FormControl('', Validators.required)
   });
+  data = Array(100).fill(0).map((a, i) => i + 1);
 
   constructor() {}
+
+  halo() {
+    console.log('scrollEnd');
+  }
 
   submit() {
     this.submitted = true;

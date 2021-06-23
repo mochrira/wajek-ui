@@ -28,9 +28,7 @@ import { TooltipDirective } from './tooltip.directive';
 import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
 import { ScrollDirective } from './directives/scroll.directive';
 import { PageComponent } from './components/page/page.component';
-import { RouterLinkDirective } from './directives/router-link.directive';
-import { RouteComponent, RouterComponent } from './components/router/router.component';
-import { AppBarComponent, AppBarLeadingDirective } from './components/app-bar/app-bar.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { RouterService } from './services/router.service';
 import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective } from './components/drawer/drawer.component';
 import { ListComponent, ListTileComponent } from './components/list/list.component';
@@ -65,31 +63,19 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     PageHeaderDirective,
     TooltipDirective,
     DynamicSelectComponent,
-    ScrollDirective,
-
-    ModalComponent,
-
-    IconComponent,
     AvatarComponent,
 
+    ScrollDirective,
+    ModalComponent,
+    IconComponent,
     PageComponent,
-    
     AppBarComponent,
-    AppBarLeadingDirective,
-
-    RouterComponent,
-    RouteComponent,
-    RouterLinkDirective,
-
     DrawerComponent,
     DrawerItemComponent,
     DrawerTogglerDirective,
-
     ListComponent,
     ListTileComponent,
-
     PaginationComponent,
-
     MenuDirective,
     MenuComponent,
     MenuItemComponent,
@@ -134,11 +120,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     PageComponent,
 
     AppBarComponent,
-    AppBarLeadingDirective,
-
-    RouteComponent,
-    RouterComponent,
-    RouterLinkDirective,
 
     DrawerComponent,
     DrawerItemComponent,
