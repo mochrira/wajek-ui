@@ -1,51 +1,54 @@
 <wui-page class="middle-center">
-    <div class="p-4 box">
-        <form [formGroup]="formPengguna" (ngSubmit)="submit()">
-            <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
-                <div class="wui-form-field-suffix">
-                    <button class="wui-button wui-button-icon wui-button-smooth">
-                        <wui-icon icon="eye-off"></wui-icon>
-                    </button>
-                </div>
-                <div class="wui-form-field-input-prefix">+62</div>
-                <div class="wui-form-field-input-suffix">meter</div>
-                <label for="nmPengguna">Nama Pengguna</label>
-                <input placeholder="Text Input" id="nmPengguna" type="text" formControlName="nmPengguna" wuiInput>
-                <div class="wui-form-field-hint">Halo</div>
-            </wui-form-field>
 
-            <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
-                <div class="wui-form-field-suffix">
-                    <button class="wui-button wui-button-icon wui-button-smooth">
-                        <wui-icon icon="eye-off"></wui-icon>
-                    </button>
+    <div class="wui-page-inner">
+        <div class="p-4 box">
+            <form [formGroup]="formPengguna" (ngSubmit)="submit()">
+                <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
+                    <div class="wui-form-field-suffix">
+                        <button class="wui-button wui-button-icon wui-button-smooth">
+                            <wui-icon icon="eye-off"></wui-icon>
+                        </button>
+                    </div>
+                    <div class="wui-form-field-input-prefix">+62</div>
+                    <div class="wui-form-field-input-suffix">meter</div>
+                    <label for="nmPengguna">Nama Pengguna</label>
+                    <input placeholder="Text Input" id="nmPengguna" type="text" formControlName="nmPengguna" wuiInput>
+                    <div class="wui-form-field-hint">Halo</div>
+                </wui-form-field>
+    
+                <wui-form-field [class.has-error]="submitted && formPengguna.controls['nmPengguna'].invalid">
+                    <div class="wui-form-field-suffix">
+                        <button class="wui-button wui-button-icon wui-button-smooth">
+                            <wui-icon icon="eye-off"></wui-icon>
+                        </button>
+                    </div>
+                    <label for="nmPengguna">Tanggal</label>
+                    <input id="nmPengguna" type="datetime-local" formControlName="tanggal" wuiInput>
+                    <div class="wui-form-field-hint">Halo</div>
+                </wui-form-field>
+    
+                <wui-form-field>
+                    <label for="keterangan">Keterangan</label>
+                    <textarea id="keterangan" placeholder="Text Area" rows="5" wuiInput></textarea>
+                </wui-form-field>
+    
+                <wui-form-field>
+                    <div class="wui-form-field-suffix">
+                        <button class="wui-button wui-button-icon wui-button-smooth">
+                            <wui-icon icon="eye-off"></wui-icon>
+                        </button>
+                    </div>
+                    <label for="akses">Akses</label>
+                    <select wuiInput id="akses">
+                        <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                    </select>
+                </wui-form-field>
+                <div class="d-flex justify-content-between pt-4">
+                    <button class="wui-button" type="button" (click)="modal.open()">OPEN MODAL</button>
+                    <button class="wui-button wui-button-primary" type="submit">SIMPAN</button>
                 </div>
-                <label for="nmPengguna">Tanggal</label>
-                <input id="nmPengguna" type="datetime-local" formControlName="tanggal" wuiInput>
-                <div class="wui-form-field-hint">Halo</div>
-            </wui-form-field>
-
-            <wui-form-field>
-                <label for="keterangan">Keterangan</label>
-                <textarea id="keterangan" placeholder="Text Area" rows="5" wuiInput></textarea>
-            </wui-form-field>
-
-            <wui-form-field>
-                <div class="wui-form-field-suffix">
-                    <button class="wui-button wui-button-icon wui-button-smooth">
-                        <wui-icon icon="eye-off"></wui-icon>
-                    </button>
-                </div>
-                <label for="akses">Akses</label>
-                <select wuiInput id="akses">
-                    <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-                </select>
-            </wui-form-field>
-            <div class="d-flex justify-content-between pt-4">
-                <button class="wui-button" type="button" (click)="modal.open()">OPEN MODAL</button>
-                <button class="wui-button wui-button-primary" type="submit">SIMPAN</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </wui-page>
 

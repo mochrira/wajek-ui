@@ -1,8 +1,9 @@
-import { ContentChild, Directive, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MessageService } from '../../services/message.service';
+import { AvatarComponent } from '../avatar/avatar.component';
 
 @Component({
   selector: 'wui-drawer-item',
@@ -28,33 +29,23 @@ export class DrawerItemComponent {
 @Component({
   selector: 'wui-drawer',
   template: `
-  <div class="wui-drawer-backdrop" (click)="show = false"></div>
-  <div class="wui-drawer-inner">
-    <ng-content></ng-content>
-  </div>`
+  <div class="wui-drawer-backdrop" (click)="_show = false"></div>
+  <ng-content></ng-content>`
 })
-export class DrawerComponent implements OnInit, OnDestroy {
+export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
 
-  @HostBinding('class.show') _show = false;
-  set show(show) {
-    if(show) {
-      this._show = true;
-    } else {
-      this._show = false;
-    }
-  }
-
-  @HostBinding('class.modal-drawer') @Input() modal = true;
-  
+  @Input('show') @HostBinding('class.show') _show = false;
   @HostListener('click', ['$event']) onClick(e) {
     if(e.target.tagName != 'WUI-DRAWER-ITEM') {
       if(e.target.offsetParent.tagName == 'WUI-DRAWER-ITEM') {
-        this.show = false;
+        this.drawerItemClicked();
       }
     } else {
-      this.show = false;
+      this.drawerItemClicked();
     }
   }
+
+  @ContentChild(AvatarComponent) avatar: AvatarComponent;
 
   private unsub: Subject<any> = new Subject();
 
@@ -62,12 +53,27 @@ export class DrawerComponent implements OnInit, OnDestroy {
     private messageService: MessageService
   ) { }
 
+  isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  drawerItemClicked() {
+    if(this.isMobileDevice()) {
+      this._show = false;
+    }
+  }
+
+  ngAfterContentInit() {
+    if(this.isMobileDevice()) {
+      this._show = false;
+    } else {
+      this._show = true;
+    }
+  }
+
   ngOnInit(): void { 
-    this.messageService.get('wui:showDrawer').pipe(takeUntil(this.unsub)).subscribe(show => {
-      this.show = show;
-    });
     this.messageService.get('wui:toggleDrawer').pipe(takeUntil(this.unsub)).subscribe(e => {
-      this.show = !this.show;
+      this._show = !this._show;
     });
   }
 
@@ -78,7 +84,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
 }
 
 @Directive({
-  selector: '[wuiDrawerToggler]'
+  selector: '[wuiToggleDrawer]'
 })
 export class DrawerTogglerDirective {
 

@@ -12,7 +12,6 @@ import { AppComponent } from './components/app/app.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { WuiService } from './services/wui.service';
-import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
 import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
@@ -48,7 +47,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     AppComponent,
     DatepickerComponent,
     ModalComponent,
-    ToggleDrawerDirective,
     NavComponent,
     NavPopDirective,
     NavRootDirective,
@@ -94,7 +92,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     LoadingComponent,
     ModalComponent,
     NavComponent,
-    ToggleDrawerDirective,
     NavPopDirective,
     NavRootDirective,
     NavPushDirective,

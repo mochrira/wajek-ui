@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent  { }
+export class AppComponent  { 
+
+    drawerData: Array<any> = Array(50).fill(0).map((item, index) => index + 1);
+
+}
