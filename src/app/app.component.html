@@ -1,3 +1,20 @@
 <wui-app>
+    <wui-drawer>
+        <div class="wui-drawer-inner" wuiScroll>
+            <div class="wui-drawer-header">
+                <div class="wui-drawer-header-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="">
+                </div>
+                <div class="wui-drawer-header-title">Moch. Rizal Rachmadani</div>
+                <div class="wui-drawer-header-subtitle">mochrira@gmail.com</div>
+            </div>
+            <wui-drawer-item icon="home-outline" routerLink="/home" routerLinkActive="active">Dashboard</wui-drawer-item>
+            <div class="wui-drawer-divider">
+                <div class="wui-drawer-divider-label">TRANSAKSI</div>
+            </div>
+            <wui-drawer-item icon="cart" routerLink="/list" routerLinkActive="active">Pembelian</wui-drawer-item>
+        </div>
+    </wui-drawer>
+
     <router-outlet></router-outlet>
 </wui-app>

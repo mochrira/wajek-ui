@@ -1,219 +1,11 @@
 @import '../variables/colors.scss';
 
 wui-drawer {
-    position: fixed;
-    width: 100%;
-    z-index: 0;
-    opacity: 0;
     height: 100%;
-    background-color: white;
-    box-shadow: 0 0 .5rem rgba(0,0,0,0.25);
-
-    &.show {
-        z-index: 9999;
-        opacity: 1;
-    }
-
-    &-header {
-        padding-top: 1.5rem;
-    }
-
-    .wui-drawer {
-
-        &-backdrop {
-            z-index: 0;
-            background-color: rgba(0,0,0,0.5);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; 
-            height: 100%;
-        }
-
-        &-avatar {
-            padding-left: 1.5rem;
-            padding-bottom: .5rem;
-        }
-
-        &-userinfo {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 1rem 0rem 1rem 1.5rem;
-            display: flex;
-            color: $theme-text;
-            text-decoration: none;
-
-            &:hover {
-                color: $theme-primary;
-            }
-
-            &-caption {
-                flex: 1 1 auto;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            &-title {
-                font-size: 1rem;
-                font-weight: 500;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            &-subtitle {
-                font-size: .75rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        }
-
-        &-primary, &-secondary {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-
-        &-inner {
-            background-color: white;
-            overflow-y: auto;
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: transform .2s ease-in-out;
-            max-width: 16rem;
-            height: 100%;
-            padding-right: 1.5rem;
-        }
-
-        &-divider {
-            margin-top: 1rem;
-            display: block;
-            border-top: 1px solid $theme-border;
-            padding-top: 1rem;
-            padding-bottom: .5rem;
-
-            &.no-border {
-                border-top: none;
-                margin-top: 0;
-            }
-
-            &-label {
-                font-weight: bold;
-                font-size: .75rem;
-                padding-left: 1.5rem;
-                color: map-get($theme-black, "54");
-            }
-        }
-    }
-
-    &.has-secondary-menu {
-        wui-drawer-header {
-            a.menu-toggle {
-                cursor: pointer;
-
-                &:hover {
-                    background-color: rgba(#000, .04);
-                }
-
-                wui-icon {
-                    display: inline-flex;
-                }
-            }
-        }
-    }
-
-    &.primary-menu-active {
-        .wui-drawer-primary {
-            display: block;
-        }
-        .wui-drawer-secondary {
-            display: none;
-        }
-        wui-drawer-header {
-            .menu-toggle {
-                wui-icon {
-                    transition: transform linear .1s;
-                    transform: rotate(0deg);
-                }
-            }
-        }
-    }
-
-    &.secondary-menu-active {
-        .wui-drawer-primary {
-            display: none;
-        }
-        .wui-drawer-secondary {
-            display: block;
-        }
-        wui-drawer-header {
-            .menu-toggle {
-                wui-icon {
-                    transition: transform linear .1s;
-                    transform: rotate(-180deg);
-                }
-            }
-        }
-    }
-
-    &.show {
-        transition: transform .2s linear 0s;
-
-        .wui-drawer {
-            &-inner {
-                opacity: 1;
-                transform: translateX(0);
-                z-index: 99;
-            }
-        }
-    }
-
-    &-header {
-        display: block;
-
-        .avatar-outer {
-            padding: 1rem 1rem .5rem;
-        }
-
-        .menu-toggle {
-            display: flex;
-            align-items: center;
-            padding: .5rem 1rem;
-            font-weight: normal;
-            opacity: 1;
-            color: rgba(#000, .87);
-            width: 100%;
-
-            .title {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                font-size: 1.25rem;
-                width: 100%;
-            }
-    
-            .sub-title {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                font-size: .875rem;
-                color: rgba(#000, .5);
-                width: 100%;
-            }
-
-            .caption {
-                flex: 1 1 auto;
-                overflow: hidden;
-            }
-
-            wui-icon {
-                flex: 0 0 auto;
-                display: none;
-            }
-        }
-    }
+    position: fixed;
+    z-index: -1;
+    top: 0; left: 0;
+    width: 100%;
 
     &-item {
         font-size: .875rem;
@@ -227,52 +19,256 @@ wui-drawer {
         overflow: hidden;
         display: flex;
         align-items: center;
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-
+        border-top-right-radius: 1.25rem;
+        border-bottom-right-radius: 1.25rem;
+        max-width: 14.5rem;
+        color: $theme-text;
+    
         wui-icon {
             margin-right: 1.5rem;
         }
-
+    
         &.active {
             background-color: rgba($theme-primary, .12);
             color: $theme-primary;            
             font-weight: 500;
         }
-
+    
         &:hover:not(.active) {
             color: $theme-primary;
         }
     }
-    
-}
 
+    .wui-drawer {
+        &-inner {
+            overflow-y: auto;
+            height: 100%;
+            position: relative;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            max-width: 16rem;
+            background-color: white;
+        }
+
+        &-divider {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-top: 1rem;
+            padding-bottom: .5rem;
+    
+            &-label {
+                padding-left: 1.5rem;
+                font-size: 0.75rem;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
+
+        &-header {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-bottom: 1.5rem;
+    
+            &-avatar {
+                padding-left: 1.5rem;
+                padding-bottom: .5rem;
+
+                img {
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 2rem;
+                }
+            }
+
+            &-title {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding-top: 1rem;
+                padding-left: 1.5rem;
+                width: 100%;
+            }
+
+            &-subtitle {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 0.875rem;
+                padding: 0 1.5rem;
+                width: 100%;
+            }
+    
+            &-button{
+                display: flex;
+                align-items: center;
+                color: $theme-text;
+                padding: .75rem 1rem .75rem 1.5rem;
+                overflow: hidden;
+                width: 100%;    
+    
+                &:hover {
+                    text-decoration: none;
+                    background-color: rgba(0,0,0,0.02);
+                }
+    
+                &-caption {
+                    flex: 1 1 auto;
+                }
+    
+                
+    
+                wui-icon {
+                    flex: 0 0 auto;
+                }
+            }
+        }
+    }
+
+    &.show {
+        z-index: 999;
+
+        .wui-drawer {
+            &-backdrop {
+                z-index: 0;
+                background-color: rgba(0,0,0,0.5);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%; 
+                height: 100%;
+            }
+        }
+    }
+}
 
 @include media-breakpoint-up(md) {
     wui-drawer {
         position: relative;
-        opacity: 1;
+        max-width: 6rem;
         z-index: 0;
-        box-shadow: none;
-        flex: 0 0 auto;
-        max-width: 16rem;
+
+        wui-drawer {
+            &-item {
+                max-width: 5rem;
+
+                .content {
+                    display: none;
+                }
+            }
+        }
 
         .wui-drawer {
+            &-header {
+                &-avatar {
+                    padding-left: 1rem;
+
+                    img {
+                        width: 3rem;
+                        height: 3rem;
+                    }
+                }
+
+                &-title, &-subtitle {
+                    display: none;
+                }
+            }
+
             &-inner {
-                opacity: 1;
-                transform: translateX(0);
-                transition: none;
-                position: relative;
+                max-width: none;
             }
 
             &-backdrop {
                 display: none;
             }
+
+            &-divider {
+                &-label {
+                    display: none;
+                }
+            }
         }
 
-        .wui-backdrop {
-            display: none;
-            z-index: -1;
+        &.show {
+            max-width: 16rem;
+
+            wui-drawer{
+                &-item {
+                    max-width: 14.5rem;
+
+                    .content {
+                        display: block;
+                    }
+                }
+            }
+
+            .wui-drawer {
+                &-header {
+                    &-avatar {
+                        padding-left: 1.5rem;
+
+                        img {
+                            width: 4rem;
+                            height: 4rem;
+                        }
+                    }
+
+                    &-title, &-subtitle {
+                        display: block;
+                    }
+                }
+
+                &-divider {
+                    &-label {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        &:hover:not(.show) {
+            overflow-x: visible;
+            z-index: 99;
+
+            wui-drawer{
+                &-item {
+                    max-width: 14.5rem;
+                    .content {
+                        display: block;
+                    }
+                }
+            }
+
+            .wui-drawer {
+                &-header {
+                    &-avatar {
+                        padding-left: 1.5rem;
+
+                        img {
+                            width: 4rem;
+                            height: 4rem;
+                        }
+                    }
+
+                    &-title, &-subtitle {
+                        display: block;
+                    }
+                }
+
+                &-inner {
+                    width: 16rem;
+                    position: absolute;
+                    top: 0; left: 0;
+                    z-index: 999;
+                    background-color: white;
+                    box-shadow: 0 0 .5rem 0.25rem rgba(0,0,0,0.1);
+                }
+
+                &-divider {
+                    &-label {
+                        display: block;
+                    }
+                }
+            }
         }
     }
 }

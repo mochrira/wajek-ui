@@ -20,7 +20,7 @@ export class ScrollDirective implements AfterContentInit {
   ngAfterContentInit() {
     this.ps = new PerfectScrollbar(this.el.nativeElement, this.options);
     this.el.nativeElement.addEventListener('scroll', (e) => {
-      if((e.target.scrollTop + e.target.offsetHeight) >= e.target.scrollHeight) {
+      if(Math.round(e.target.scrollTop + e.target.offsetHeight) >= e.target.scrollHeight) {
         this.scrollEnd.next(e);
       }
     });
