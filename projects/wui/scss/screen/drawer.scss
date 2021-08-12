@@ -190,6 +190,7 @@ wui-drawer {
 
         &.show {
             max-width: 16rem;
+            z-index: 99;
 
             wui-drawer{
                 &-item {
