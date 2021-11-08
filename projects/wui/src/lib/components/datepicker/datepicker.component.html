@@ -2,10 +2,9 @@
     <div class="wui-modal-header">
         <div class="d-flex align-items-center">
             <div class="flex-grow-1 selectedDate">
-                <div>{{date | date: 'EEE, dd MMM yyyy'}}</div>
-                <div>{{date | date: 'h:mm:ss'}}</div>
+                <div>{{selectedDate | date: 'EEE, dd MMM yyyy'}}</div>
             </div>
-            <button class="wui-button wui-button-icon wui-button-smooth" (click)="modal.close()">
+            <button class="wui-button wui-button-icon wui-button-smooth" (click)="close()">
                 <wui-icon icon="close"></wui-icon>
             </button>
         </div>
@@ -13,14 +12,14 @@
     <div class="wui-modal-content">
         <ng-container *ngIf="mode=='date'">
             <div class="d-flex justify-content-{{(yearSelector || datePreviewFormat=='none')?'between':'center'}} align-items-center mb-3">
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()" *ngIf="yearSelector">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewMonthPrev()" *ngIf="yearSelector">
                     <wui-icon icon="chevron-left"></wui-icon>
                 </button>
                 <button type="button" class="wui-button wui-button-smooth" (click)="changeMode('month')">
-                    <span *ngIf="yearSelector">{{shortMonth(months[month]) | uppercase}}</span>&nbsp;<span *ngIf="yearSelector">{{year}}</span>
-                    <span *ngIf="!yearSelector">{{months[month] | uppercase}}</span>
+                    <span *ngIf="yearSelector">{{getShortMonth(previewMonthLabels[previewMonth]) | uppercase}}</span>&nbsp;<span *ngIf="yearSelector">{{previewYear}}</span>
+                    <span *ngIf="!yearSelector">{{previewMonthLabels[previewMonth] | uppercase}}</span>
                 </button>
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()" *ngIf="yearSelector">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewMonthNext()" *ngIf="yearSelector">
                     <wui-icon icon="chevron-right"></wui-icon>
                 </button>
                 <a class="btn btn-circle btn-default" (click)="close()" *ngIf="datePreviewFormat=='none'">
@@ -31,9 +30,10 @@
                 <div *ngFor="let d of dayLabels" class="days">
                     <span>{{d}}</span>
                 </div>
-                <button type="button" *ngFor="let d of dates" (click)="selectDate(d)" 
-                    class="wui-button wui-button-icon {{((d | date:'M') !== ((month+1)+''))?'':'in-month'}} {{(isSelected(d)?'wui-button-primary':'wui-button-smooth')}}">
-                    <span>{{getDate(d)}}</span>
+                <button type="button" *ngFor="let d of previewDates" 
+                    class="wui-button wui-button-icon {{(d | date:'M') !== ((previewMonth + 1) + '') ? 'out-month' : ''}} {{(selectedDate | date:'yyyyMMdd') == (d | date:'yyyyMMdd') ? 'wui-button-primary' : 'wui-button-smooth'}}"
+                    (click)="selectDate(d)">
+                    <span>{{d | date: 'd'}}</span>
                 </button>
             </div>
             <div class="d-flex justify-content-between mt-3">
@@ -42,42 +42,45 @@
                 <button class="wui-button wui-button-smooth" type="button" (click)="submit()">SET</button>
             </div>
         </ng-container>
+
         <ng-container *ngIf="mode=='month'">
             <div class="d-flex justify-content-between mb-3" *ngIf="yearSelector">
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewYearPrev()">
                     <wui-icon icon="chevron-left"></wui-icon>
                 </button>
-                <button type="button" class="wui-button wui-button-smooth" (click)="changeMode('year')">{{year}}</button>
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()">
+                <button type="button" class="wui-button wui-button-smooth" (click)="changeMode('year')">{{previewYear}}</button>
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewYearNext()">
                     <wui-icon icon="chevron-right"></wui-icon>
                 </button>
             </div>
             <div class="months">
-                <button type="button" *ngFor="let m of months; let i = index" (click)="selectMonth(i)" 
-                    class="wui-button {{(isSelected(i)?'wui-button-primary':'wui-button-smooth')}}">
-                    <span>{{shortMonth(m)}}</span>
+                <button type="button" *ngFor="let month of previewMonthLabels; let i = index" (click)="setPreviewMonth(i)" 
+                    class="wui-button {{isPreviewMonthSelected(i) ? 'wui-button-primary' : 'wui-button-smooth'}}">
+                    <span>{{getShortMonth(month)}}</span>
                 </button>
             </div>
         </ng-container>
+
         <ng-container *ngIf="mode=='year'">
             <div class="d-flex justify-content-between mb-3">
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewDecadePrev()">
                     <wui-icon icon="chevron-left"></wui-icon>
                 </button>
                 <button type="button" class="wui-button wui-button-smooth">
-                    {{decadeStart()}} - {{decadeEnd()}}
+                    {{previewDecadeStart}} - {{previewDecadeStop}}
                 </button>
-                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="previewDecadeNext()">
                     <wui-icon icon="chevron-right"></wui-icon>
                 </button>
             </div>
             <div class="years">
-                <button type="button" class="wui-button wui-button-smooth" *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
-                    <span>{{y}}</span>
+                <button type="button" class="wui-button" *ngFor="let year of previewDecadeYears" (click)="setPreviewYear(year)" 
+                    class="{{isPreviewYearSelected(year) ? 'wui-button-primary' : 'wui-button-smooth'}}">
+                    <span>{{year}}</span>
                 </button>
             </div>
         </ng-container>
-        <ng-container *ngIf="mode=='time'">
+        <!-- <ng-container *ngIf="mode=='time'">
             <div class="d-flex time-selector justify-content-between">
                 <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
                     <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('hour')">
@@ -111,23 +114,6 @@
                 <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('date')">DATE</button>
                 <button class="wui-button wui-button-smooth" type="button" (click)="setTime()">OK</button>
             </div>
-        </ng-container>
+        </ng-container> -->
     </div>
 </wui-modal>
-
-<!-- <div class="outer">
-    <div class="inner" #inner>
-        <div class="currentDate" *ngIf="datePreviewFormat!=='none'">
-            <div>
-                <div class="day" *ngIf="dayPreview">{{date | date: 'EEEE'}}</div>
-                <div class="date">{{date | date: 'dd MMMM yyyy'}} <span *ngIf="timeSelector">{{date | date: 'HH:mm:ss'}}</span></div>
-            </div>
-            <a class="close" (click)="close()">
-                <span class="mdi mdi-close"></span>
-            </a>
-        </div>
-        <div class="display">
-            
-        </div>
-    </div>
-</div> -->
