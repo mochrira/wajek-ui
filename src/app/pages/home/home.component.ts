@@ -20,13 +20,18 @@ export class HomeComponent implements OnInit{
   });
   data = Array(100).fill(0).map((a, i) => i + 1);
 
+  tanggal = new Date();
+
   constructor(
     private wuiService: WuiService
   ) {}
 
   async pilihTanggal() {
-    let tanggal = await this.datePicker?.open(new Date());
-    console.log(tanggal);
+    try {
+      this.tanggal = await this.datePicker?.open(this.tanggal, 'yyyy-MM-dd', false);
+    } catch(e: any) {
+      console.log(e);
+    }
   }
 
   openLoading() {

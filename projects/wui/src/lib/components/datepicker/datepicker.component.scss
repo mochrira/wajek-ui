@@ -38,12 +38,14 @@ div.wui-modal-header {
             z-index:1;
         }
     }
+}
 
+.dates {
     button{
         cursor:pointer;
 
-        &:not(.in-month,.wui-button-primary) {
-            opacity: 0.8;
+        &.out-month:not(.wui-button-primary) {
+            opacity: 0.5;
         }
     }
 }
