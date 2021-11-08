@@ -1,5 +1,4 @@
 <wui-page class="middle-center">
-
     <div class="wui-page-inner">
         <div class="p-4 box">
             <form [formGroup]="formPengguna" (ngSubmit)="submit()">
@@ -25,6 +24,16 @@
                     <label for="nmPengguna">Tanggal</label>
                     <input id="nmPengguna" type="datetime-local" formControlName="tanggal" wuiInput>
                     <div class="wui-form-field-hint">Halo</div>
+                </wui-form-field>
+
+                <wui-form-field>
+                    <label for="tanggal">Pilih Tanggal</label>
+                    <input type="text" wuiInput id="tanggal">
+                    <div class="wui-form-field-suffix">
+                        <button class="wui-button wui-button-icon wui-button-smooth" type="button" (click)="pilihTanggal()">
+                            <wui-icon icon="chevron-down"></wui-icon>
+                        </button>
+                    </div>
                 </wui-form-field>
     
                 <wui-form-field>
@@ -86,3 +95,5 @@
         </div>
     </div>
 </wui-modal>
+
+<wui-datepicker #datePicker></wui-datepicker>

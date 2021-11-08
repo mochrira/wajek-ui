@@ -1,4 +1,121 @@
-<div class="outer">
+<wui-modal #modal [width]="300">
+    <div class="wui-modal-header">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1 selectedDate">
+                <div>{{date | date: 'EEE, dd MMM yyyy'}}</div>
+                <div>{{date | date: 'h:mm:ss'}}</div>
+            </div>
+            <button class="wui-button wui-button-icon wui-button-smooth" (click)="modal.close()">
+                <wui-icon icon="close"></wui-icon>
+            </button>
+        </div>
+    </div>
+    <div class="wui-modal-content">
+        <ng-container *ngIf="mode=='date'">
+            <div class="d-flex justify-content-{{(yearSelector || datePreviewFormat=='none')?'between':'center'}} align-items-center mb-3">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()" *ngIf="yearSelector">
+                    <wui-icon icon="chevron-left"></wui-icon>
+                </button>
+                <button type="button" class="wui-button wui-button-smooth" (click)="changeMode('month')">
+                    <span *ngIf="yearSelector">{{shortMonth(months[month]) | uppercase}}</span>&nbsp;<span *ngIf="yearSelector">{{year}}</span>
+                    <span *ngIf="!yearSelector">{{months[month] | uppercase}}</span>
+                </button>
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()" *ngIf="yearSelector">
+                    <wui-icon icon="chevron-right"></wui-icon>
+                </button>
+                <a class="btn btn-circle btn-default" (click)="close()" *ngIf="datePreviewFormat=='none'">
+                    <span class="mdi mdi-close"></span>
+                </a>
+            </div>
+            <div class="dates">
+                <div *ngFor="let d of dayLabels" class="days">
+                    <span>{{d}}</span>
+                </div>
+                <button type="button" *ngFor="let d of dates" (click)="selectDate(d)" 
+                    class="wui-button wui-button-icon {{((d | date:'M') !== ((month+1)+''))?'':'in-month'}} {{(isSelected(d)?'wui-button-primary':'wui-button-smooth')}}">
+                    <span>{{getDate(d)}}</span>
+                </button>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('time')" *ngIf="timeSelector">TIME</button>
+                <button class="wui-button wui-button-smooth" type="button" (click)="setToday()">TODAY</button>
+                <button class="wui-button wui-button-smooth" type="button" (click)="submit()">SET</button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="mode=='month'">
+            <div class="d-flex justify-content-between mb-3" *ngIf="yearSelector">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()">
+                    <wui-icon icon="chevron-left"></wui-icon>
+                </button>
+                <button type="button" class="wui-button wui-button-smooth" (click)="changeMode('year')">{{year}}</button>
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()">
+                    <wui-icon icon="chevron-right"></wui-icon>
+                </button>
+            </div>
+            <div class="months">
+                <button type="button" *ngFor="let m of months; let i = index" (click)="selectMonth(i)" 
+                    class="wui-button {{(isSelected(i)?'wui-button-primary':'wui-button-smooth')}}">
+                    <span>{{shortMonth(m)}}</span>
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="mode=='year'">
+            <div class="d-flex justify-content-between mb-3">
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="prev()">
+                    <wui-icon icon="chevron-left"></wui-icon>
+                </button>
+                <button type="button" class="wui-button wui-button-smooth">
+                    {{decadeStart()}} - {{decadeEnd()}}
+                </button>
+                <button type="button" class="wui-button wui-button-smooth wui-button-icon" (click)="next()">
+                    <wui-icon icon="chevron-right"></wui-icon>
+                </button>
+            </div>
+            <div class="years">
+                <button type="button" class="wui-button wui-button-smooth" *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
+                    <span>{{y}}</span>
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="mode=='time'">
+            <div class="d-flex time-selector justify-content-between">
+                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('hour')">
+                        <wui-icon icon="chevron-up"></wui-icon>
+                    </button>
+                    <input type="number" class="form-control text-center" [(ngModel)]="hour">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('hour')">
+                        <wui-icon icon="chevron-down"></wui-icon>
+                    </button>
+                </div>
+                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('min')">
+                        <wui-icon icon="chevron-up"></wui-icon>
+                    </button>
+                    <input type="number" class="form-control text-center" [(ngModel)]="minute">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('min')">
+                        <wui-icon icon="chevron-down"></wui-icon>
+                    </button>
+                </div>
+                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('sec')">
+                        <span class="mdi mdi-chevron-up"></span>
+                    </button>
+                    <input type="number" class="form-control text-center" [(ngModel)]="second">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('sec')">
+                        <span class="mdi mdi-chevron-down"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('date')">DATE</button>
+                <button class="wui-button wui-button-smooth" type="button" (click)="setTime()">OK</button>
+            </div>
+        </ng-container>
+    </div>
+</wui-modal>
+
+<!-- <div class="outer">
     <div class="inner" #inner>
         <div class="currentDate" *ngIf="datePreviewFormat!=='none'">
             <div>
@@ -10,107 +127,7 @@
             </a>
         </div>
         <div class="display">
-            <ng-container *ngIf="mode=='date'">
-                <div class="d-flex justify-content-{{(yearSelector || datePreviewFormat=='none')?'between':'center'}} align-items-center mb-3">
-                    <a (click)="prev()" class="prev" *ngIf="yearSelector">
-                        <span class="mdi mdi-chevron-left"></span>
-                    </a>
-                    <a class="current" (click)="changeMode('month')">
-                        <span *ngIf="yearSelector">{{shortMonth(months[month]) | uppercase}}</span>&nbsp;<span *ngIf="yearSelector">{{year}}</span>
-                        <span *ngIf="!yearSelector">{{months[month] | uppercase}}</span>
-                    </a>
-                    <a (click)="next()" class="next" *ngIf="yearSelector">
-                        <span class="mdi mdi-chevron-right"></span>
-                    </a>
-                    <a class="btn btn-circle btn-default" (click)="close()" *ngIf="datePreviewFormat=='none'">
-                        <span class="mdi mdi-close"></span>
-                    </a>
-                </div>
-                <div class="dates">
-                    <div *ngFor="let d of dayLabels" class="days">
-                        <span>{{d}}</span>
-                    </div>
-                    <a *ngFor="let d of dates" (click)="selectDate(d)" class="{{((d | date:'M') !== ((month+1)+''))?'':'in-month'}} {{(isSelected(d)?'selected':'')}}">
-                        <span>{{getDate(d)}}</span>
-                    </a>
-                </div>
-                <div class="d-flex justify-content-between mt-3">
-                    <button class="btn btn-light" type="button" (click)="changeMode('time')" *ngIf="timeSelector">TIME</button>
-                    <button class="btn btn-light" type="button" (click)="setToday()">TODAY</button>
-                    <button class="btn btn-light" type="button" (click)="submit()">SET</button>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="mode=='month'">
-                <div class="d-flex justify-content-between mb-3" *ngIf="yearSelector">
-                    <a (click)="prev()" class="prev">
-                        <span class="mdi mdi-chevron-left"></span>
-                    </a>
-                    <a (click)="changeMode('year')" class="current">
-                        {{year}}
-                    </a>
-                    <a (click)="next()" class="next">
-                        <span class="mdi mdi-chevron-right"></span>
-                    </a>
-                </div>
-                <div class="months">
-                    <a *ngFor="let m of months; let i = index" (click)="selectMonth(i)" class="{{(isSelected(i)?'selected':'')}}">
-                        <span>{{shortMonth(m)}}</span>
-                    </a>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="mode=='year'">
-                <div class="d-flex justify-content-between mb-3">
-                    <a (click)="prev()" class="prev">
-                        <span class="mdi mdi-chevron-left"></span>
-                    </a>
-                    <a class="current">
-                        {{decadeStart()}} - {{decadeEnd()}}
-                    </a>
-                    <a (click)="next()" class="next">
-                        <span class="mdi mdi-chevron-right"></span>
-                    </a>
-                </div>
-                <div class="years">
-                    <a *ngFor="let y of years" (click)="selectYear(y)" class="{{(isSelected(y)?'selected':'')}}">
-                        <span>{{y}}</span>
-                    </a>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="mode=='time'">
-                <div class="d-flex time-selector justify-content-between">
-                    <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                        <a (click)="incTime('hour')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-up"></span>
-                        </a>
-                        <input type="number" class="form-control text-center" [(ngModel)]="hour">
-                        <a (click)="decTime('hour')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-down"></span>
-                        </a>
-                    </div>
-                    <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                        <a (click)="incTime('min')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-up"></span>
-                        </a>
-                        <input type="number" class="form-control text-center" [(ngModel)]="minute">
-                        <a (click)="decTime('min')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-down"></span>
-                        </a>
-                    </div>
-                    <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                        <a (click)="incTime('sec')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-up"></span>
-                        </a>
-                        <input type="number" class="form-control text-center" [(ngModel)]="second">
-                        <a (click)="decTime('sec')" class="btn fill btn-circle">
-                            <span class="mdi mdi-chevron-down"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mt-3">
-                    <button class="btn btn-light" type="button" (click)="changeMode('date')">BACK</button>
-                    <button class="btn btn-light" type="button" (click)="setTime()">OK</button>
-                </div>
-            </ng-container>
+            
         </div>
     </div>
-</div>
+</div> -->
