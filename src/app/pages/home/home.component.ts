@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DatepickerComponent, WuiService } from '@wajek/wui';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +7,6 @@ import { DatepickerComponent, WuiService } from '@wajek/wui';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-
-  @ViewChild('datePicker') datePicker?: DatepickerComponent;
 
   submitted = false;
   formPengguna = new FormGroup({
@@ -20,18 +17,7 @@ export class HomeComponent implements OnInit{
   });
   data = Array(100).fill(0).map((a, i) => i + 1);
 
-  constructor(
-    private wuiService: WuiService
-  ) {}
-
-  async pilihTanggal() {
-    let tanggal = await this.datePicker?.open(new Date());
-    console.log(tanggal);
-  }
-
-  openLoading() {
-    this.wuiService.openLoading();
-  }
+  constructor() {}
 
   halo() {
     console.log('scrollEnd');

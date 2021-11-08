@@ -20,16 +20,8 @@
       "dom"
     ],
     "paths": {
-      "@wajek/wui": [
-        "./projects/wui/src/public_api"
-      ],
-      "@wajek/wui/*": [
-        "./projects/wui/src/public_api"
-      ],
-      "focus": [
-        "dist/focus/focus",
-        "dist/focus"
-      ]
+      "@wajek/wui": ["./projects/wui/src/public_api"],
+      "@wajek/wui/*": ["./projects/wui/src/public_api"]
     }
   }
 }

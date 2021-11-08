@@ -1,9 +1,8 @@
 import { Component, HostBinding, ElementRef, Renderer2,
-  Input, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
+  Input, Output, EventEmitter, ViewChild, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'wui-datepicker',
@@ -12,9 +11,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class DatepickerComponent implements OnDestroy {
 
-  @ViewChild('modal', {static: true}) modal?: ModalComponent;
-
-  @Input() outputFormat = 'yyyy-MM-dd hh:mm:ss';
+  @Input() outputFormat = 'yyyy-MM-dd';
   @HostBinding('class.show') show = false;
   @Output() wuiDateSet: EventEmitter<any> = new EventEmitter();
   @Output() wuiDateSelect: EventEmitter<any> = new EventEmitter();
@@ -44,10 +41,17 @@ export class DatepickerComponent implements OnDestroy {
   private unsub: Subject<any> = new Subject();
 
   constructor(
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cd: ChangeDetectorRef
   ) {
     this.generateYears();
     this.generateDates();
+  }
+
+  @HostListener('click', ['$event']) detectOutsideClick(e) {
+    if (!this.inner.nativeElement.contains(e.target)) {
+      this.close();
+    }
   }
 
   incTime(mode) {
@@ -132,8 +136,7 @@ export class DatepickerComponent implements OnDestroy {
         this.minute = this.date.getMinutes();
         this.second = this.date.getSeconds();
       }
-      this.changeMode('date');
-      this.modal?.open();
+      this.show = true;
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res);
         this.close();
@@ -142,7 +145,7 @@ export class DatepickerComponent implements OnDestroy {
   }
 
   close() {
-    this.modal?.close();
+    this.show = false;
     this.unsub.next();
   }
 
@@ -212,7 +215,7 @@ export class DatepickerComponent implements OnDestroy {
   selectDate(d) {
     if(this.timeSelector){
       this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.hour, this.minute, this.second);
-    } else {
+    }else{
       this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
     }
     this.wuiDateSelect.next(this.date);
