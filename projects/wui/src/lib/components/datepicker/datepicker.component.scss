@@ -1,175 +1,95 @@
 @import "../../../../scss/variables/colors.scss";
-:host{
-    display:none;
 
-    &.show{
-        display:block;
-        z-index:9999;
-
-        .outer{
-            position:fixed;
-            z-index:9999;
-            top:0;left:0;
-            width:100%;
-            padding:1.5rem 0;
-            height:100%;
-            background-color:rgba(0,0,0,.5);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            overflow-y:auto;
-        }
+div.wui-modal-header {
+    .wui-button {
+        margin-right: 0;
     }
-
-    .inner{
-        background-color:white;
-        margin:0 1.5rem;
-        width:100%;
-        max-width:18rem;
-        border-radius:.25rem;
-        overflow:hidden;
-
-        .next, .prev, .close{
-            display:inline-flex;
-            justify-content:center;
-            align-items:center;
-            width:2rem;
-            height:2rem;
-            border-radius:50%;
-            color: #555;
-            cursor: pointer;
-
-            &:hover{
-                background-color:#EFEFEF;
-                color: #333;
-            }
-        }
-
-        .current {
-            padding: .5rem 1rem;
-            cursor: pointer;
-            border-radius: .25rem;
-            color: #555;
-            text-decoration: none;
-
-            &:hover {
-                background-color: #EFEFEF;
-                color: #333;
-            }
-        }
-    }
-
-    .dates, .months, .years{
-        display:grid;
-        grid-template-columns: repeat(7, 1fr);
-
-        .days{
-            font-size:.75rem;
-            display:inline-flex;
-            justify-content: center;
-            align-items:center;
-            margin-bottom:.25rem;
-            position:relative;
-
-            &:before{
-                content:"";
-                display:block;
-                width:100%;
-                padding-top:100%;
-            }
-
-            span {
-                position:absolute;
-                top:50%;
-                left:50%;
-                transform:translate(-50%, -50%);
-                z-index:1;
-            }
-        }
-
-        a{
-            position:relative;
-            cursor:pointer;
-            font-size:.875rem;
-            color: #999;
-            border-radius: 50%;
-
-            &.in-month {
-                color: #333;
-            }
-
-            &.selected {
-                background-color: map-get($theme, "700");
-                color: white;
-            }
-
-            &:before {
-                content: "";
-                display: block;
-                width: 100%;
-                padding-top: 100%;
-            }
-
-            &:hover:not(.selected) {
-                background-color: rgba(100,100,100, .1);
-            }
-
-            span {
-                position:absolute;
-                top:50%;
-                left:50%;
-                transform:translate(-50%, -50%);
-                z-index:1;
-            }
-        }
-    }
-
-    .months, .years {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .currentDate {
-        padding:1rem;
-        display: flex;
-        align-items:center;
-
-        > div {
-            flex: 1 1 auto;
-            padding-left:.5rem;
-        }
-
-        .day{
-            font-size:1.25rem;
-        }
-    }
-
-    .display{
-        padding:1rem;
-    }
-
-    .time-selector{
-        text-align: center;
-        input[type=number]{
-            &::-webkit-inner-spin-button, 
-            &::-webkit-outer-spin-button { 
-                -webkit-appearance: none; 
-                margin: 0; 
-            }
-            font-size: 1.25rem;
-            border:none;
-            background:none;
-            margin-top:1rem;
-            margin-bottom:1rem;
-
-        }
-
-        .mdi{
-            font-size:1.5rem;
-        }
-    }
-    
 }
 
-.btn-circle {
-    border-radius: 50%;
+.selectedDate {
+    font-size: 1rem;
+    padding-left: .5rem;
+}
+
+.dates, .months, .years{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .days{
+        font-size:.75rem;
+        display:inline-flex;
+        justify-content: center;
+        align-items:center;
+        margin-bottom:.25rem;
+        position:relative;
+
+        &:before{
+            content:"";
+            display:block;
+            width:100%;
+            padding-top:100%;
+        }
+
+        span {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+            z-index:1;
+        }
+    }
+
+    button{
+        cursor:pointer;
+
+        &:not(.in-month,.wui-button-primary) {
+            opacity: 0.8;
+        }
+    }
+}
+
+.months, .years {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.currentDate {
+    padding:1rem;
+    display: flex;
+    align-items:center;
+
+    > div {
+        flex: 1 1 auto;
+        padding-left:.5rem;
+    }
+
+    .day{
+        font-size:1.25rem;
+    }
+}
+
+.display{
+    padding:1rem;
+}
+
+.time-selector{
+    text-align: center;
+    input[type=number]{
+        &::-webkit-inner-spin-button, 
+        &::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        font-size: 1.25rem;
+        border:none;
+        background:none;
+        margin-top:1rem;
+        margin-bottom:1rem;
+        width: 100%;
+    }
+
+    .mdi{
+        font-size:1.5rem;
+    }
 }
