@@ -10,9 +10,21 @@ wui-page {
     z-index: 9;
 
     .wui-page {
+        &-header {
+            flex: 0 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
         &-inner {
             flex: 1 1 auto;
             overflow-y: auto;
+            width: 100%;
+            position: relative;
+        }
+
+        &-header {
+            flex: 0 0 auto;
             width: 100%;
             position: relative;
         }

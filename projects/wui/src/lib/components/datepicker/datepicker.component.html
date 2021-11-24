@@ -3,6 +3,7 @@
         <div class="d-flex align-items-center">
             <div class="flex-grow-1 selectedDate">
                 <div>{{selectedDate | date: 'EEE, dd MMM yyyy'}}</div>
+                <div class="font-14" *ngIf="timeSelector">{{selectedDate | date: 'HH:mm:ss'}}</div>
             </div>
             <button class="wui-button wui-button-icon wui-button-smooth" (click)="close()">
                 <wui-icon icon="close"></wui-icon>
@@ -37,7 +38,7 @@
                 </button>
             </div>
             <div class="d-flex justify-content-between mt-3">
-                <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('time')" *ngIf="timeSelector">TIME</button>
+                <button class="wui-button wui-button-smooth" type="button" *ngIf="timeSelector" (click)="changeMode('time')">TIME</button>
                 <button class="wui-button wui-button-smooth" type="button" (click)="setToday()">TODAY</button>
                 <button class="wui-button wui-button-smooth" type="button" (click)="submit()">SET</button>
             </div>
@@ -80,40 +81,41 @@
                 </button>
             </div>
         </ng-container>
-        <!-- <ng-container *ngIf="mode=='time'">
+
+        <ng-container *ngIf="mode=='time'">
             <div class="d-flex time-selector justify-content-between">
-                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('hour')">
+                <div class="d-inline-flex flex-column p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="incHour()">
                         <wui-icon icon="chevron-up"></wui-icon>
                     </button>
-                    <input type="number" class="form-control text-center" [(ngModel)]="hour">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('hour')">
+                    <input type="number" class="form-control text-center" [(ngModel)]="previewHour">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="decHour()">
                         <wui-icon icon="chevron-down"></wui-icon>
                     </button>
                 </div>
-                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('min')">
+                <div class="d-inline-flex flex-column p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="incMinute()">
                         <wui-icon icon="chevron-up"></wui-icon>
                     </button>
-                    <input type="number" class="form-control text-center" [(ngModel)]="minute">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('min')">
+                    <input type="number" class="form-control text-center" [(ngModel)]="previewMinute">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="decMinute()">
                         <wui-icon icon="chevron-down"></wui-icon>
                     </button>
                 </div>
-                <div class="d-flex flex-column col-4 p-0 align-items-center justify-content-center">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="incTime('sec')">
+                <div class="d-inline-flex flex-column p-0 align-items-center justify-content-center">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="incSecond()">
                         <span class="mdi mdi-chevron-up"></span>
                     </button>
-                    <input type="number" class="form-control text-center" [(ngModel)]="second">
-                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" (click)="decTime('sec')">
+                    <input type="number" class="form-control text-center" [(ngModel)]="previewSecond">
+                    <button type="button" class="wui-button wui-button-icon wui-button-smooth" tabindex="-1" (click)="decSecond()">
                         <span class="mdi mdi-chevron-down"></span>
                     </button>
                 </div>
             </div>
             <div class="d-flex justify-content-between mt-3">
-                <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('date')">DATE</button>
-                <button class="wui-button wui-button-smooth" type="button" (click)="setTime()">OK</button>
+                <button class="wui-button wui-button-smooth" type="button" (click)="changeMode('date')">KEMBALI</button>
+                <button class="wui-button wui-button-smooth" type="button" (click)="selectTime()">OK</button>
             </div>
-        </ng-container> -->
+        </ng-container>
     </div>
 </wui-modal>
