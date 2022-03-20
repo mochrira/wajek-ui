@@ -33,12 +33,7 @@ import { ListComponent } from './pages/list/list.component';
             'HomeComponent': HomeComponent,
             'UserComponent': UserComponent,
             'ControlComponent': ControlComponent
-        })        
-    ],
-    entryComponents: [
-        HomeComponent,
-        UserComponent,
-        ControlComponent
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -29,3 +29,7 @@ export * from './lib/services/router.service';
 export * from './lib/components/modal/modal.component';
 export * from './lib/services/http.service';
 export * from './lib/components/drawer/drawer.component';
+export * from './lib/components/app-bar/app-bar.component';
+export * from './lib/components/list/list.component';
+export * from './lib/components/icon/icon.component';
+export * from './lib/components/menu/menu.component';

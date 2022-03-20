@@ -23,8 +23,6 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
-import { TooltipDirective } from './tooltip.directive';
-import { DynamicSelectComponent } from './components/dynamic-select/dynamic-select.component';
 import { ScrollDirective } from './directives/scroll.directive';
 import { PageComponent } from './components/page/page.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
@@ -32,8 +30,6 @@ import { RouterService } from './services/router.service';
 import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective } from './components/drawer/drawer.component';
 import { ListComponent, ListTileComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
-import { AvatarComponent } from './components/avatar/avatar.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
 import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
 import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 
@@ -59,9 +55,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     DateselectComponent,
     ScrollEndDirective,
     PageHeaderDirective,
-    TooltipDirective,
-    DynamicSelectComponent,
-    AvatarComponent,
 
     ScrollDirective,
     ModalComponent,
@@ -73,7 +66,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     DrawerTogglerDirective,
     ListComponent,
     ListTileComponent,
-    PaginationComponent,
     MenuDirective,
     MenuComponent,
     MenuItemComponent,
@@ -105,13 +97,9 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     ActionSheetComponent,
     DialogComponent,
     SnackbarComponent,
-    TooltipDirective,
-    DynamicSelectComponent,
     ScrollDirective,
 
     ModalComponent,
-  
-    AvatarComponent,
     IconComponent,
 
     PageComponent,
@@ -124,8 +112,6 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     
     ListComponent,
     ListTileComponent,
-
-    PaginationComponent,
 
     MenuDirective,
     MenuComponent,

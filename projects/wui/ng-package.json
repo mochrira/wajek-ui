@@ -5,20 +5,11 @@
     "./scss/**/*"
   ],
   "lib": {
-    "entryFile": "src/public_api.ts",
-    "umdModuleIds": {
-      "perfect-scrollbar": "PerfectScrollbar",
-      "ng2-dnd": "ng2Dnd",
-      "swiper": "swiper",
-      "swiper/js/swiper.esm.js": "swiper",
-      "is-webview": "isWebView"
-    }
+    "entryFile": "src/public_api.ts"
   },
-  "whitelistedNonPeerDependencies": [
-    "tslib",
-    "roboto-fontface",
-    "perfect-scrollbar",
+  "allowedNonPeerDependencies": [
     "@mdi/font",
-    "bootstrap"
+    "bootstrap",
+    "perfect-scrollbar"
   ]
 }
