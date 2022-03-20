@@ -195,46 +195,6 @@
         }
       }
     },
-    "wui-firebase": {
-      "root": "projects/wui-firebase",
-      "sourceRoot": "projects/wui-firebase/src",
-      "projectType": "library",
-      "prefix": "wui-firebase",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/wui-firebase/tsconfig.lib.json",
-            "project": "projects/wui-firebase/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/wui-firebase/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/wui-firebase/src/test.ts",
-            "tsConfig": "projects/wui-firebase/tsconfig.spec.json",
-            "karmaConfig": "projects/wui-firebase/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/wui-firebase/tsconfig.lib.json",
-              "projects/wui-firebase/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "focus": {
       "projectType": "library",
       "root": "projects/focus",
