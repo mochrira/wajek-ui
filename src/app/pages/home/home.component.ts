@@ -33,10 +33,10 @@ export class HomeComponent implements OnInit{
   }
 
   async pilihTanggal() {
-    try {
-      this.tanggal = await this.datePicker?.open(this.tanggal, 'yyyy-MM-dd', false);
-    } catch(e: any) {
-      console.log(e);
+    let tanggal = await this.datePicker?.open(this.tanggal, 'yyyy-MM-dd HH:mm:ss', true);
+    if(tanggal != null) {
+      this.tanggal = tanggal;
+      console.log(this.tanggal);
     }
   }
 

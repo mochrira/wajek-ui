@@ -195,6 +195,60 @@ export class DatepickerComponent implements OnDestroy {
     }
   }
 
+  previewHour: any;
+
+  incHour() {
+    if(this.previewHour == 24) {
+      this.previewHour = 0;
+      return;
+    }
+    this.previewHour++;
+  }
+
+  decHour() {
+    if(this.previewHour == 0) {
+      this.previewHour = 24;
+      return;
+    }
+    this.previewHour--;
+  }
+
+  previewMinute: any;
+
+  incMinute() {
+    if(this.previewMinute == 60) {
+      this.previewMinute = 0;
+      return;
+    }
+    this.previewMinute++;
+  }
+
+  decMinute() {
+    if(this.previewMinute == 0) {
+      this.previewMinute = 60;
+      return;
+    }
+    this.previewMinute--;
+  }
+
+  previewSecond: any;
+
+  incSecond() {
+    if(this.previewSecond == 60) {
+      this.previewSecond = 0;
+      return;
+    }
+    this.previewSecond++;
+  }
+
+  decSecond() {
+    if(this.previewSecond == 0) {
+      this.previewSecond = 60;
+      return;
+    }
+    this.previewSecond--;
+  }
+
   getShortMonth(m) {
     return m.substring(0, 3);
   }
@@ -233,11 +287,26 @@ export class DatepickerComponent implements OnDestroy {
   selectedDate: any;
 
   selectDate(d: any) {
+    d.setHours(this.previewHour);
+    d.setMinutes(this.previewMinute);
+    d.setSeconds(this.previewSecond);
     this.selectedDate = d;
   }
 
+  selectTime() {
+    this.selectedDate = new Date(
+      this.selectedDate.getFullYear(), 
+      this.selectedDate.getMonth(), 
+      this.selectedDate.getDate(), 
+      this.previewHour, 
+      this.previewMinute, 
+      this.previewSecond
+    );
+    this.changeMode('date');
+  }
+
   open(date = new Date(), outputFormat = 'yyyy-MM-dd', timeSelector = false): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.outputFormat = outputFormat;
       this.timeSelector = timeSelector;
 
@@ -249,16 +318,15 @@ export class DatepickerComponent implements OnDestroy {
       this.previewYear = this.selectedDate.getFullYear();
       this.previewDecade = Math.floor(this.previewYear / 10);
       this.previewMonth = this.selectedDate.getMonth();
+      this.previewHour = this.selectedDate.getHours();
+      this.previewMinute = this.selectedDate.getMinutes();
+      this.previewSecond = this.selectedDate.getSeconds();
       
       this.changeMode('date');
       this.modal?.open();
 
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
-        if(res == null) { 
-          reject('No date selected'); 
-        } else {
-          resolve(res);
-        }
+        resolve(res);
         this.modal?.close();
         this.unsub.next();
         return;
@@ -274,7 +342,10 @@ export class DatepickerComponent implements OnDestroy {
     this.selectedDate = new Date();
     this.previewYear = this.selectedDate.getFullYear();
     this.previewDecade = Math.floor(this.previewYear / 10);
-    this.previewMonth = this.selectedDate.getMonth(); 
+    this.previewMonth = this.selectedDate.getMonth();
+    this.previewHour = this.selectedDate.getHours();
+    this.previewMinute = this.selectedDate.getMinutes();
+    this.previewSecond = this.selectedDate.getSeconds();
   }
 
   submit() {
