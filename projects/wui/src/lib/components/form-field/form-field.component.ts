@@ -4,7 +4,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[wuiInput]'
+  selector: '[wuiInput]',
+  exportAs: 'wuiInput'
 })
 export class WuiInputDirective implements OnInit, OnDestroy { 
 

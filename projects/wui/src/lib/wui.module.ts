@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -32,6 +32,7 @@ import { ListComponent, ListTileComponent } from './components/list/list.compone
 import { IconComponent } from './components/icon/icon.component';
 import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
 import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
+import { NumInputDirective } from './directives/num-input.directive';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
     MenuDirective,
     MenuComponent,
     MenuItemComponent,
-    LoadingDialogComponent
+    LoadingDialogComponent,
+    NumInputDirective
   ],
   imports: [
     BrowserModule,
@@ -115,10 +117,13 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
 
     MenuDirective,
     MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+
+    NumInputDirective
   ], 
   providers: [
-    DatePipe
+    DatePipe,
+    DecimalPipe
   ]
 })
 export class WuiModule {

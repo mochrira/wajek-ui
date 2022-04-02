@@ -16,15 +16,21 @@ export class HomeComponent implements OnInit{
     tanggal: new FormControl(null, Validators.required),
     nmPengguna: new FormControl('', Validators.required),
     keterangan: new FormControl('', Validators.required),
-    akses: new FormControl('', Validators.required)
+    akses: new FormControl('', Validators.required),
+    jumlah: new FormControl(15000, Validators.required)
   });
   data = Array(100).fill(0).map((a, i) => i + 1);
 
   tanggal = new Date();
+  jumlah = 500000;
 
   constructor(
     private wuiService: WuiService
   ) {}
+
+  jumlahKeyUp(e: any) {
+    console.log(e.target.value, this.jumlah);
+  }
 
   async pilihTanggal() {
     try {

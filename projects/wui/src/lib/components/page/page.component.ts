@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'wui-page',
   template: `
   <ng-content select="wui-app-bar"></ng-content>
-  <ng-content select=".page-tab"></ng-content>
-  <ng-content select=".wui-page-inner"></ng-content>`
+  <ng-content select=".wui-page-inner"></ng-content>
+  <ng-content select=".wui-page-footer"></ng-content>`
 })
 export class PageComponent implements OnInit {
   
