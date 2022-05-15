@@ -125,7 +125,7 @@ wui-drawer {
     }
 
     &.show {
-        z-index: 999;
+        z-index: 99;
 
         .wui-drawer {
             &-backdrop {
@@ -147,13 +147,11 @@ wui-drawer {
         max-width: 6rem;
         z-index: 0;
 
-        wui-drawer {
-            &-item {
-                max-width: 5rem;
+        &-item {
+            max-width: 5rem;
 
-                .content {
-                    display: none;
-                }
+            .content {
+                display: none;
             }
         }
 
@@ -190,7 +188,7 @@ wui-drawer {
 
         &.show {
             max-width: 16rem;
-            z-index: 99;
+            z-index: 0;
 
             wui-drawer{
                 &-item {

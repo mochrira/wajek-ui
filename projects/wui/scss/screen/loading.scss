@@ -152,11 +152,11 @@ wui-loading-dialog {
   }
 
   &.show {
-    z-index: 100;
+    z-index: 10000;
     opacity: 1;
 
     .wui-loading-dialog-inner {
-      z-index: 100;
+      z-index: 1000;
       position: relative;
       width: 3rem;
       height: 3rem;
