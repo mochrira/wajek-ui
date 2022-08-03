@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { DatepickerComponent, WuiService } from '@wajek/wui';
 
 @Component({
@@ -12,12 +12,12 @@ export class HomeComponent implements OnInit{
   @ViewChild('datePicker') datePicker?: DatepickerComponent;
 
   submitted = false;
-  formPengguna = new FormGroup({
-    tanggal: new FormControl(null, Validators.required),
-    nmPengguna: new FormControl('', Validators.required),
-    keterangan: new FormControl('', Validators.required),
-    akses: new FormControl('', Validators.required),
-    jumlah: new FormControl(15000, Validators.required)
+  formPengguna = new UntypedFormGroup({
+    tanggal: new UntypedFormControl(null, Validators.required),
+    nmPengguna: new UntypedFormControl('', Validators.required),
+    keterangan: new UntypedFormControl('', Validators.required),
+    akses: new UntypedFormControl('', Validators.required),
+    jumlah: new UntypedFormControl(15000, Validators.required)
   });
   data = Array(100).fill(0).map((a, i) => i + 1);
 
