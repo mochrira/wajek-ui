@@ -1,6 +1,6 @@
 {
   "name": "@wajek/wui",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "peerDependencies": {
     "@mdi/font": "^5.6.55",
     "bootstrap": "^4.5.0",

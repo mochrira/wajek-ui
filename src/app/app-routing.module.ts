@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from "./pages/list/list.component";
+import { SortableComponent } from "./pages/sortable/sortable.component";
 import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [{
@@ -10,6 +11,8 @@ const routes: Routes = [{
     }]
 }, {
     path: 'list', component: ListComponent
+}, {
+    path: 'sortable', component: SortableComponent
 }, {
     path: '', redirectTo: 'home', pathMatch: 'full'
 }];

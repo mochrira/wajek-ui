@@ -12,6 +12,7 @@ import { ControlComponent } from './pages/control/control.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { ListComponent } from './pages/list/list.component';
+import { SortableComponent } from './pages/sortable/sortable.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { ListComponent } from './pages/list/list.component';
         UserComponent,
         ControlComponent,
         DrawerComponent,
-        ListComponent
+        ListComponent,
+        SortableComponent
     ],
     imports: [
         CommonModule,

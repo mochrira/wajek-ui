@@ -9,4 +9,17 @@
     --theme-border: #e5e5e5;
 }
 
+.draggable {
+    padding: 3rem 1.5rem;
+    margin-bottom: 2.5rem;
+
+    wui-list-tile {
+        background-color: white;
+
+        &.dragging {
+            opacity: 0;
+        }
+    }
+}
+
 @import '../projects/wui/scss/wui.scss';

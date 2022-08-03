@@ -33,6 +33,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
 import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 import { NumInputDirective } from './directives/num-input.directive';
+import { SortableDirective, SortableItemDirective } from './directives/sortable.directive';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,9 @@ import { NumInputDirective } from './directives/num-input.directive';
     MenuComponent,
     MenuItemComponent,
     LoadingDialogComponent,
-    NumInputDirective
+    NumInputDirective,
+    SortableDirective,
+    SortableItemDirective
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,9 @@ import { NumInputDirective } from './directives/num-input.directive';
     MenuComponent,
     MenuItemComponent,
 
-    NumInputDirective
+    NumInputDirective,
+    SortableDirective,
+    SortableItemDirective
   ], 
   providers: [
     DatePipe,

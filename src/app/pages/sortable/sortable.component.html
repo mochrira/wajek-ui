@@ -1,0 +1,40 @@
+<wui-page>
+    <wui-app-bar>
+        <div class="wui-app-bar-leading">
+            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
+                <wui-icon icon="menu"></wui-icon>
+            </button>
+        </div>
+        <div class="wui-app-bar-title">title</div>
+        <div class="wui-app-bar-trailing">
+            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
+                <wui-icon icon="refresh"></wui-icon>
+            </button>
+        </div>
+    </wui-app-bar>
+
+    <div class="wui-page-inner">
+        <wui-list class="wui-list-bordered wui-list-hovered" wuiSortable (onChange)="sortableChange($event)">
+            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="103">
+                <div class="wui-list-tile-leading">
+                    <wui-icon icon="tag"></wui-icon>
+                </div>
+                <div class="wui-list-tile-content">Apple</div>
+            </wui-list-tile>
+
+            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="102">
+                <div class="wui-list-tile-leading">
+                    <wui-icon icon="tag"></wui-icon>
+                </div>
+                <div class="wui-list-tile-content">Banana</div>
+            </wui-list-tile>
+
+            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="101">
+                <div class="wui-list-tile-leading">
+                    <wui-icon icon="tag"></wui-icon>
+                </div>
+                <div class="wui-list-tile-content">Watermelon</div>
+            </wui-list-tile>
+        </wui-list>
+    </div>
+</wui-page>

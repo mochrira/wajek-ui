@@ -8,7 +8,6 @@
     "entryFile": "src/public_api.ts"
   },
   "allowedNonPeerDependencies": [
-    "@mdi/font",
     "bootstrap",
     "perfect-scrollbar"
   ]

@@ -34,3 +34,4 @@ export * from './lib/components/list/list.component';
 export * from './lib/components/icon/icon.component';
 export * from './lib/components/menu/menu.component';
 export * from './lib/directives/num-input.directive';
+export * from './lib/directives/sortable.directive';
