@@ -16,8 +16,9 @@ export class SortableDirective implements AfterViewInit {
 
   @HostListener('window:mousemove', ['$event']) mouseMove(e: any) {
     if(this.child == null && this.placeholder == null) return;
-    this.child.style.top = e.clientY - this.yFactor + 'px';
-    this.child.style.left = e.clientX - this.xFactor + 'px';
+    let parentRect = this.child.offsetParent != null ? this.child.offsetParent.getBoundingClientRect() : {x: 0, y: 0};
+    this.child.style.top = e.clientY - parentRect.y - this.yFactor + 'px';
+    this.child.style.left = e.clientX - parentRect.x - this.xFactor + 'px';
 
     let elementAfter = this.getElementBefore(this.el.nativeElement, e.clientY);
     if(elementAfter == null) {
@@ -62,6 +63,8 @@ export class SortableDirective implements AfterViewInit {
     [].slice.call(this.el.nativeElement.children).forEach((child: any) => {
       child.classList.add('wui-sortable-item');
       child.addEventListener('mousedown', (e: any) => {
+        let parentRect = child.offsetParent != null ? child.offsetParent.getBoundingClientRect() : {x: 0, y: 0};
+        // console.log(child.offsetParent);
         this.childOriginRect = child.getBoundingClientRect();
         this.xFactor = e.clientX - this.childOriginRect.x;
         this.yFactor = e.clientY - this.childOriginRect.y;
@@ -75,8 +78,8 @@ export class SortableDirective implements AfterViewInit {
         this.child = child;
         this.child.classList.add('wui-sortable-item-dragging');
         this.child.style.width = this.childOriginRect.width + 'px';
-        this.child.style.top = e.clientY - this.yFactor + 'px';
-        this.child.style.left = e.clientX - this.xFactor + 'px';
+        this.child.style.top = e.clientY - parentRect.y - this.yFactor + 'px';
+        this.child.style.left = e.clientX - parentRect.x - this.xFactor + 'px';
       });
     });
   }
