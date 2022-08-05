@@ -1,0 +1,8 @@
+.wui-sortable {
+    &-item {
+        &-dragging {
+            z-index: 9999;
+            position: fixed;
+        }
+    }
+}

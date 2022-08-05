@@ -14,22 +14,22 @@
     </wui-app-bar>
 
     <div class="wui-page-inner">
-        <wui-list class="wui-list-bordered wui-list-hovered" wuiSortable (onChange)="sortableChange($event)">
-            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="103">
+        <wui-list class="wui-list-bordered wui-list-hovered" wuiSortable (wuiSortableChange)="sortableChange($event)">
+            <wui-list-tile class="wui-list-tile-56" data-key="1">
                 <div class="wui-list-tile-leading">
                     <wui-icon icon="tag"></wui-icon>
                 </div>
                 <div class="wui-list-tile-content">Apple</div>
             </wui-list-tile>
 
-            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="102">
+            <wui-list-tile class="wui-list-tile-56" data-key="2">
                 <div class="wui-list-tile-leading">
                     <wui-icon icon="tag"></wui-icon>
                 </div>
                 <div class="wui-list-tile-content">Banana</div>
             </wui-list-tile>
 
-            <wui-list-tile class="wui-list-tile-56" wuiSortableItem key="101">
+            <wui-list-tile class="wui-list-tile-56" data-key="3">
                 <div class="wui-list-tile-leading">
                     <wui-icon icon="tag"></wui-icon>
                 </div>
