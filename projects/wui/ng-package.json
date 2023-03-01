@@ -6,9 +6,5 @@
   ],
   "lib": {
     "entryFile": "src/public_api.ts"
-  },
-  "allowedNonPeerDependencies": [
-    "bootstrap",
-    "perfect-scrollbar"
-  ]
+  }
 }
