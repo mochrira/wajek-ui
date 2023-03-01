@@ -23,7 +23,6 @@ export * from './lib/components/snackbar/snackbar.component';
 export * from './lib/components/dialog/dialog.component';
 export * from './lib/components/action-sheet/action-sheet.component';
 export * from './lib/directives/page-header.directive';
-export * from './lib/directives/scroll.directive';
 export * from './lib/components/page/page.component';
 export * from './lib/services/router.service';
 export * from './lib/components/modal/modal.component';
