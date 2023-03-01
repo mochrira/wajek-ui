@@ -23,7 +23,6 @@ import { AppTitleComponent } from './components/app-title/app-title.component';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
-import { ScrollDirective } from './directives/scroll.directive';
 import { PageComponent } from './components/page/page.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { RouterService } from './services/router.service';
@@ -58,7 +57,6 @@ import { SortableDirective } from './directives/sortable.directive';
     ScrollEndDirective,
     PageHeaderDirective,
 
-    ScrollDirective,
     ModalComponent,
     IconComponent,
     PageComponent,
@@ -101,7 +99,6 @@ import { SortableDirective } from './directives/sortable.directive';
     ActionSheetComponent,
     DialogComponent,
     SnackbarComponent,
-    ScrollDirective,
 
     ModalComponent,
     IconComponent,
