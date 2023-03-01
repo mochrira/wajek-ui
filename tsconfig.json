@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2015",
     "typeRoots": [
       "node_modules/@types"
@@ -24,10 +24,6 @@
       ],
       "@wajek/wui/*": [
         "./projects/wui/src/public_api"
-      ],
-      "focus": [
-        "dist/focus/focus",
-        "dist/focus"
       ]
     }
   }
