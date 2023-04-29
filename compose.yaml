@@ -1,0 +1,17 @@
+version: '3.0'
+name: wui
+services:
+  web:
+    container_name: wui_container
+    image: mochrira/angular:15.2.3-nginx
+    volumes:
+      - $PWD:/home/node/app
+    networks:
+      - environment
+    ports:
+      - 8081:80
+
+networks:
+  environment:
+    name: environment
+    external: true

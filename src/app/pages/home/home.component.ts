@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
     nmPengguna: new UntypedFormControl('', Validators.required),
     keterangan: new UntypedFormControl('', Validators.required),
     akses: new UntypedFormControl('', Validators.required),
-    jumlah: new UntypedFormControl(15000, Validators.required)
+    jumlah: new UntypedFormControl(-15928000.003, Validators.required)
   });
   data = Array(100).fill(0).map((a, i) => i + 1);
 
