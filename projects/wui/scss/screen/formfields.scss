@@ -7,7 +7,6 @@ wui-form-field {
     margin-bottom: 1.25rem;
 
     // layout
-
     .wui-form-field {
         &-flex {
             display: flex;
@@ -115,6 +114,10 @@ wui-form-field {
                 }
             }
         }       
+    }
+
+    wui-icon {
+        color: #777;
     }
 
     // input behavior : normal
@@ -245,6 +248,64 @@ wui-form-field {
 
             &-hint {
                 color: #E82C2C;
+            }
+        }
+    }
+
+    &.wui-form-field-boxed {
+        margin-bottom: 1.625rem;
+
+        .wui-form-field-flex {
+            border: 1px solid #CCC;
+            border-radius: .375rem;
+            padding: 0 .5rem;
+
+            &:before, &:after {
+                display: none !important;
+            }
+        }
+
+        .wui-form-field-trailing {
+            padding-right: .25rem;
+        }
+
+        .wui-form-field-suffix {
+            padding-right: .5rem;
+        }
+
+        label {
+            padding-left: .5rem;
+            padding-right: .5rem;
+            background-color: #FFF;
+            color: #555;
+        }
+
+        input, select {
+            padding: .75rem .5rem .25rem;
+        }
+
+        &.is-focused {
+            label {
+                color: $theme-primary;
+            }
+
+            .wui-form-field-flex {
+                border: 1px solid $theme-primary;
+                box-sizing: border-box;
+            }
+        }
+
+        &.is-focused, &.has-content {
+            label {
+                top: -.5rem;
+                font-size: .875rem;
+            }
+        }
+
+        &:not(.is-focused) {
+            .wui-form-field-flex {
+                box-sizing: border-box;
+                border-color: #d8d9e2 !important;
             }
         }
     }

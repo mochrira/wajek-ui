@@ -12,12 +12,12 @@ $theme: (
     "secondary" : #222
 );
 
-$theme-text: rgba(0, 0, 0, 0.87);
-$theme-primary: map-get($theme, "700");
-$theme-secondary: #212121;
-$theme-danger: #B00020;
-$theme-light: rgba(125,125,125, .12);
-$theme-backdrop: rgba(0,0,0,0.5);
+$theme-text: rgba(0, 0, 0, 0.87) !default;
+$theme-primary: map-get($theme, "700") !default;
+$theme-secondary: #212121 !default;
+$theme-danger: #B00020 !default;
+$theme-light: rgba(125,125,125, .12) !default;
+$theme-backdrop: rgba(0,0,0,0.5) !default;
 
 $theme-button-hover-bg: darken($theme-light, 50%);
 $theme-button-focus-bg: darken($theme-button-hover-bg, 100%);

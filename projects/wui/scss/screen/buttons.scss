@@ -1,32 +1,64 @@
 @import "../variables/colors.scss";
 
 .wui-button {
-    color: $theme-text;
     border: none;
     cursor: pointer;
     padding-right: 1rem;
     padding-left: 1rem;
-    height: 2.25rem;
+    height: 2.5rem;
+    line-height: 1;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    border-radius: .25rem;
-    font-weight: 500;
-    font-family: 'Roboto';
-    font-size: .875rem;
+    border-radius: .5rem;
     vertical-align: middle;
-    opacity: 1;
-    border:none;
-    background-color: rgba(0,0,0,0.04);
+    color: #333;
+    background-color: #EFEFEF;
 
     &:hover {
-        background-color: rgba(0,0,0,0.08);
+        color: #222;
+        background-color: #DEDEDE;
     }
 
     &:focus {
-        background-color: rgba(0,0,0,0.12);
+        color: #222;
+        background-color: #CDCDCD;
+    }
+
+    &-small {
+        height: 2rem;
+        font-size: .875rem;
+        padding-left: .875rem;
+        padding-right:.875rem;
+        border-radius: .375rem;
+    }
+
+    &-large {
+        height: 3rem;
+        font-size: 1.125rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        border-radius: .625rem;
+
+        wui-icon {
+            margin-right: .75rem;
+        }
+    }
+
+    &-rounded {
+        border-radius: 1.25rem;
+
+        &.wui-button {
+            &-small {
+                border-radius: 1rem;
+            }
+
+            &-large {
+                border-radius: 1.5rem;
+            }
+        }
     }
 
     &-block {
@@ -35,18 +67,18 @@
 
     &-primary {
         background-color: $theme-primary;
-        color: white;
+        color: white !important;
 
         &:hover {
-            background-color: lighten($theme-primary, 10%);
+            background-color: darken($theme-primary, 5%);
         }
 
         &:focus {
-            background-color: darken($theme-primary, 3%);
+            background-color: darken($theme-primary, 10%);
         }
 
         &:active {
-            background-color: darken($theme-primary, 5%);
+            background-color: darken($theme-primary, 15%);
         }
     }
 
@@ -60,28 +92,7 @@
         }
     }
 
-    &-large {
-        height: 3rem;
-        font-size: 1rem;
-
-        wui-icon {
-            margin-right: .75rem;
-        }
-    }
-
-    &-rounded {
-        border-radius: 1.125rem;
-        padding-left: 1.625rem;
-        padding-right: 1.625rem;
-
-        &.wui-button {
-            &-large {
-                border-radius: 1.5rem;
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-        }
-    }
+    
 
     &-square {
         padding-left: 0;
