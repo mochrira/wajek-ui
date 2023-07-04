@@ -16,10 +16,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { NavService } from './services/nav.service';
 import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
 import { RippleDirective } from './directives/ripple.directive';
-import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DatefieldDirective } from './directives/datefield.directive';
-import { AppTitleComponent } from './components/app-title/app-title.component';
 import { DateselectComponent } from './components/dateselect/dateselect.component';
 import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
@@ -49,10 +47,8 @@ import { SortableDirective } from './directives/sortable.directive';
     NavRootDirective,
     NavPushDirective,
     RippleDirective,
-    ActionSheetComponent,
     DialogComponent,
     DatefieldDirective,
-    AppTitleComponent,
     DateselectComponent,
     ScrollEndDirective,
     PageHeaderDirective,
@@ -92,11 +88,9 @@ import { SortableDirective } from './directives/sortable.directive';
     RippleDirective,
     DatepickerComponent,
     DatefieldDirective,
-    AppTitleComponent,
     DateselectComponent,
     ScrollEndDirective,
     PageHeaderDirective,
-    ActionSheetComponent,
     DialogComponent,
     SnackbarComponent,
 
