@@ -17,6 +17,12 @@ wui-list {
                 &:not(.wui-list-tile-header):hover {
                     background-color: rgba(#000, 4%);
                 }
+
+                &.wui-list-tile-no-hover {
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
             }
         }
 

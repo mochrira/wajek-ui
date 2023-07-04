@@ -7,7 +7,6 @@ wui-form-field {
     margin-bottom: 1.25rem;
 
     // layout
-
     .wui-form-field {
         &-flex {
             display: flex;
@@ -117,6 +116,10 @@ wui-form-field {
         }       
     }
 
+    wui-icon {
+        color: #777;
+    }
+
     // input behavior : normal
 
     input, textarea, select {
@@ -128,6 +131,7 @@ wui-form-field {
         font-family: 'Roboto', sans-serif;
         font-weight: normal;
         -webkit-appearance: none;
+        appearance: none;
         padding-bottom: 2px;
         box-sizing: border-box;
 
@@ -159,6 +163,7 @@ wui-form-field {
     input[type="date"], input[type="datetime-local"] {
         opacity: 0;
         -webkit-appearance: none;
+        appearance: none;
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.67)" d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M12,13H17V18H12V13Z" /></svg>');
         background-size: 1.5rem 1.5rem;
         background-repeat: no-repeat;
@@ -245,6 +250,64 @@ wui-form-field {
 
             &-hint {
                 color: #E82C2C;
+            }
+        }
+    }
+
+    &.wui-form-field-boxed {
+        margin-bottom: 1.625rem;
+
+        .wui-form-field-flex {
+            border: 1px solid #CCC;
+            border-radius: .375rem;
+            padding: 0 .5rem;
+
+            &:before, &:after {
+                display: none !important;
+            }
+        }
+
+        .wui-form-field-trailing {
+            padding-right: .25rem;
+        }
+
+        .wui-form-field-suffix {
+            padding-right: .5rem;
+        }
+
+        label {
+            padding-left: .5rem;
+            padding-right: .5rem;
+            background-color: #FFF;
+            color: #555;
+        }
+
+        input, select {
+            padding: .75rem .5rem .25rem;
+        }
+
+        &.is-focused {
+            label {
+                color: $theme-primary;
+            }
+
+            .wui-form-field-flex {
+                border: 1px solid $theme-primary;
+                box-sizing: border-box;
+            }
+        }
+
+        &.is-focused, &.has-content {
+            label {
+                top: -.5rem;
+                font-size: .875rem;
+            }
+        }
+
+        &:not(.is-focused) {
+            .wui-form-field-flex {
+                box-sizing: border-box;
+                border-color: #d8d9e2 !important;
             }
         }
     }

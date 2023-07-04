@@ -1,26 +1,33 @@
 <wui-page>
-    <wui-app-bar>
-        <div class="wui-app-bar-leading">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth" wuiToggleDrawer>
-                <wui-icon icon="menu"></wui-icon>
-            </button>
-        </div>
-        <div class="wui-app-bar-title">Sign In Layout</div>
-        <div class="wui-app-bar-trailing">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
-                <wui-icon icon="refresh"></wui-icon>
-            </button>
-        </div>
-    </wui-app-bar>
+    <div class="wui-page-inner d-flex align-items-center justify-content-center">
+        <div class="py-5 login-box text-left">
+            <img src="/assets/logo.svg" class="brand-logo" alt="">
 
-    <div class="wui-page-inner">
-        <div class="signin">
-            <div class="signin-side">
-                <div class="signin-side-content">
-                    <h1>Customer Relationship Manager<br/>for Wajek Studio Customer</h1>
+            <div class="font-28 font-weight-500 mb-3">Sign In</div>
+            <div class="mb-5">Masukkan username dan password anda untuk melanjutkan aplikasi</div>
+
+            <wui-form-field class="wui-form-field-boxed">
+                <label for="username">Username</label>
+                <input id="username" type="text" wuiInput>
+                <div class="wui-form-field-suffix">
+                    <wui-icon icon="account-box"></wui-icon>
                 </div>
+            </wui-form-field>
+
+            <wui-form-field class="wui-form-field-boxed">
+                <label for="password">Password</label>
+                <input id="password" type="password" wuiInput>
+                <div class="wui-form-field-suffix">
+                    <wui-icon icon="lock"></wui-icon>
+                </div>
+            </wui-form-field>
+
+            <div class="pt-3 pb-5 d-flex justify-content-between align-items-center">
+                <a href="#">Lupa Password?</a>
+                <button class="wui-button wui-button-primary">Masuk</button>
             </div>
-            <div class="signin-content"></div>
+
+            <div class="font-14 pt-5">Copyright &copy; 2023 by Wajek Studio. All Rights Reserved</div>
         </div>
     </div>
 </wui-page>

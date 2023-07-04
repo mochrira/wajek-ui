@@ -20,7 +20,7 @@ wui-loading{
               content: '';
               position: absolute;
               height: 100%;
-              background-color: map-get($theme, "500");
+              background-color: map-get($wui-colors, $theme, "500");
               animation: indeterminate_first 1.5s infinite ease-out;
           }
           
