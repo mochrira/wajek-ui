@@ -7,7 +7,7 @@
         </div>
         <div class="wui-app-bar-title"></div>
         <div class="wui-app-bar-trailing">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
+            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth" [wuiMenu]="menuTest">
                 <wui-icon icon="refresh"></wui-icon>
             </button>
         </div>
@@ -50,3 +50,7 @@
         </div>
     </div>
 </wui-page>
+
+<wui-menu class="compact" #menuTest>
+    <wui-menu-item *ngFor="let i of dummy" icon="lead-pencil">Menu Item {{i}}</wui-menu-item>
+</wui-menu>
