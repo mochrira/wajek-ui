@@ -9,6 +9,7 @@ import { DatepickerComponent, WuiService } from '@wajek/wui';
 })
 export class HomeComponent implements OnInit{
 
+  dummy: Array<number> = Array(50).fill(0).map((v, i) => i + 1);
   @ViewChild('datePicker') datePicker?: DatepickerComponent;
 
   submitted = false;
@@ -36,7 +37,6 @@ export class HomeComponent implements OnInit{
     let tanggal = await this.datePicker?.open(this.tanggal, 'yyyy-MM-dd HH:mm:ss', true);
     if(tanggal != null) {
       this.tanggal = tanggal;
-      console.log(this.tanggal);
     }
   }
 

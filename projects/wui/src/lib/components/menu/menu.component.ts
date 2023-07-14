@@ -78,12 +78,17 @@ export class MenuComponent {
         this.renderer.setStyle(this.el.nativeElement, 'left', possibleLeft + 'px');
       }
 
-      let possibleTop = triggerRect.y;
-      if((windowHeight - possibleTop) < menuHeight) {
-        let possibleBottom = windowHeight - (triggerRect.y + triggerRect.height);
-        this.renderer.setStyle(this.el.nativeElement, 'bottom', possibleBottom + 'px');
+      if(windowHeight < menuHeight) {
+        this.renderer.setStyle(this.el.nativeElement, 'top', '1rem');
+        this.renderer.setStyle(this.el.nativeElement, 'bottom', '1rem');
       } else {
-        this.renderer.setStyle(this.el.nativeElement, 'top', possibleTop + 'px');
+        let possibleTop = triggerRect.y;
+        if((windowHeight - possibleTop) > menuHeight) {
+          this.renderer.setStyle(this.el.nativeElement, 'top', possibleTop + 'px');
+        } else {
+          let possibleBottom = windowHeight - (triggerRect.y + triggerRect.height);
+          this.renderer.setStyle(this.el.nativeElement, 'bottom', possibleBottom + 'px');
+        }
       }
 
       this.listenDocumentClick = true;
