@@ -1,0 +1,26 @@
+wui-app-bar {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    border-bottom: 1px solid #EFEFEF;
+
+    .wui-app-bar {
+        &-leading{
+            margin-right: .75rem;
+            flex: 0 0 auto;
+        }
+
+        &-title {
+            flex: 1 1 auto;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        &-trailing {
+            margin-left: .75rem;
+            flex: 0 0 auto;
+        }
+    }
+}

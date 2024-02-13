@@ -1,1 +1,7 @@
-@import "screen/core.scss";
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+@import 'components/page';
+@import 'components/appbar';

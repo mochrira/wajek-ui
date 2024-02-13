@@ -3,7 +3,7 @@ name: wui
 services:
   web:
     container_name: wui_container
-    image: mochrira/angular:15.2.3-nginx
+    image: mochrira/angular:15.2-apache
     volumes:
       - $PWD:/home/node/app
     networks:
