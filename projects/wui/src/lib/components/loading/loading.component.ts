@@ -26,7 +26,7 @@ export class LoadingComponent implements OnInit {
     this.renderer.addClass(this.el.nativeElement, 'mode-' + this._mode);
   }
   _pos = 0
-  @Input() set pos(val) {
+  @Input() set pos(val: any) {
     this._pos = val;
     this.cd.detectChanges();
   }

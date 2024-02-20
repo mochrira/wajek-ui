@@ -15,31 +15,31 @@ export class ModalComponent implements OnInit {
   @HostBinding('class.show') show: Boolean = false;
   @HostBinding('class.leave') leave: Boolean = false;
 
-  @Input('mode') mode = 'center';
-  @HostBinding('class.mode-center') get isModeCenter() {
+  @Input('mode') mode: string = 'center';
+  @HostBinding('class.mode-center') get isModeCenter(): boolean {
     return this.mode == 'center';
   }
 
-  @HostBinding('class.mode-bottom') get isModeBottom() {
+  @HostBinding('class.mode-bottom') get isModeBottom(): boolean {
     return this.mode == 'bottom';
   }
 
-  @HostBinding('style.animation-duration') get duration() {
+  @HostBinding('style.animation-duration') get duration(): number {
     return this._duration;
   }
 
-  @Input('width') _width = 350;
-  @Input('duration') _duration = 200;
+  @Input('width') _width: number = 350;
+  @Input('duration') _duration: number = 200;
 
   @Input('title') title: string = '';
   @Input('message') message: string = ''
   @Input('actions') actions: Array<any> = [];
 
-  @Input('header') header: TemplateRef<any>;
-  @Input('content') content: TemplateRef<any>;
-  @Input('footer') footer: TemplateRef<any>;
+  @Input('header') header?: TemplateRef<any>;
+  @Input('content') content?: TemplateRef<any>;
+  @Input('footer') footer?: TemplateRef<any>;
 
-  navId = null;
+  navId: string | null = null;
   private unsub: Subject<any> = new Subject();
 
   constructor(
@@ -105,7 +105,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
 }

@@ -7,7 +7,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 export class AvatarComponent implements OnInit {
 
   @Input() src = '';
-  @Input('size') set size(s) {
+  @Input('size') set size(s: number) {
     this.width = s + 'px';
     this.height = s + 'px';
   };

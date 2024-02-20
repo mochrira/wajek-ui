@@ -11,7 +11,7 @@ export class WuiService {
     private messageService: MessageService
   ) { }
 
-  async dialog(params) {
+  async dialog(params: any) {
     return new Promise((resolve) => {
       this.messageService.set('wui:dialog', params);
       let sub = this.messageService.get('wui:dialog:result').pipe(take(1)).subscribe(e => {
@@ -21,7 +21,7 @@ export class WuiService {
     })
   }
 
-  snackbar(params) {
+  snackbar(params: any) {
     this.messageService.set('wui:snackbar', params);
   }
 
@@ -37,7 +37,7 @@ export class WuiService {
     this.messageService.set('wui:loading', false);
   }
 
-  actionSheet(params) {
+  actionSheet(params: any) {
     this.messageService.set('wui:action-sheet', params);
   }
 

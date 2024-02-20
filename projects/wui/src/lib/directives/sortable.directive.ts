@@ -38,10 +38,10 @@ export class SortableDirective implements AfterViewInit {
     this.el.nativeElement.insertBefore(this.child, this.placeholder);
     this.placeholder.remove();
     this.child = null; this.placeholder = null;
-    this.change.emit([].slice.call(this.el.nativeElement.children).map(child => child.dataset.key));
+    this.change.emit([].slice.call(this.el.nativeElement.children).map((child: any) => child.dataset.key));
   }
 
-  getElementBefore(container, y) {
+  getElementBefore(container: any, y: any) {
     let items = [...container.querySelectorAll('.wui-sortable-item:not(.wui-sortable-item-dragging, .wui-sortable-item-placeholder)')];
     return items.reduce((terdekat, child) => {
       let box = child.getBoundingClientRect();

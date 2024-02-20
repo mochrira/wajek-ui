@@ -25,25 +25,25 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class DialogComponent implements OnInit {
 
-  @ViewChild('modal') modal: ModalComponent;
-  title = '';
-  message = '';
-  buttons = [];
+  @ViewChild('modal') modal?: ModalComponent;
+  title: string = '';
+  message: string = '';
+  buttons: Array<any> = [];
 
   constructor(
     private messageService: MessageService
   ) { }
 
-  click(index) {
-    this.modal.close();
+  click(index: number) {
+    this.modal?.close();
     this.messageService.set('wui:dialog:result', index);
   }
 
-  getCaption(index) {
+  getCaption(index: number) {
     return (typeof this.buttons[index] == 'string' ? this.buttons[index] : (this.buttons[index]?.caption || ''));
   }
 
-  getClasses(index) {
+  getClasses(index: number) {
     return (typeof this.buttons[index] == 'string' ? '' : (this.buttons[index]?.cssClasses || ''));
   }
 
@@ -52,7 +52,7 @@ export class DialogComponent implements OnInit {
       this.title = e.title || '';
       this.message = e.message || '';
       this.buttons = e.buttons || [];
-      this.modal.open();
+      this.modal?.open();
     });
   }
 

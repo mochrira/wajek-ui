@@ -27,11 +27,11 @@ export class RouterService {
   }
 
   get routeParams() {
-    let currentNav = this.navService.components[this.navService.components.length - 1];
+    let currentNav: any = this.navService.components[this.navService.components.length - 1];
     return this.$params.pipe(filter(v => v !== null && v.navId == currentNav.navId), map(v => v.params));
   }
 
-  setParams(navId, params = {}) {
+  setParams(navId: any, params = {}) {
     this.$params.next({ navId: navId, params: params });
   }
 

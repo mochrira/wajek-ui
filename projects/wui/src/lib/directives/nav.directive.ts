@@ -13,7 +13,7 @@ export class NavRootDirective {
   @Input('wuiNavRoot') name = '';
   @Input('wuiNavParams') params = {};
 
-  @HostListener('click', ['$event']) onclick(e) {
+  @HostListener('click', ['$event']) onclick(e: any) {
     this.navService.setRoot(this.name);
   }
 
@@ -27,7 +27,7 @@ export class NavPushDirective {
   @Input('wuiNavPush') name = '';
   @Input('wuiNavParams') params = {};
 
-  @HostListener('click', ['$event']) onclick(e) {
+  @HostListener('click', ['$event']) onclick(e: any) {
     this.navService.push(this.name);
   }
 
@@ -43,7 +43,7 @@ export class NavPushDirective {
 export class NavPopDirective {
 
   @Input('wuiNavParams') params = null;
-  @HostListener('click', ['$event']) onclick(e) {
+  @HostListener('click', ['$event']) onclick(e: any) {
     this.navService.pop(this.params);
   }
 

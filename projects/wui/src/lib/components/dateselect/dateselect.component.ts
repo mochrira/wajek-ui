@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding, Output, EventEmitter, Input } from '@angular/core';
 import { WuiService } from '../../services/wui.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'wui-dateselect',
@@ -12,37 +12,41 @@ export class DateselectComponent implements OnInit {
   date = new Date();
   @HostBinding('class.show') show: boolean = false;
 
-  dates = Array(31).fill(0).map((v,i) => { return i+1; });
-  months = Array(12).fill(0).map((v,i) => { return i; });
-  years = Array(21).fill(0).map((v,i) => { return this.date.getFullYear() - 10 + i; });
+  dates: Array<number> = Array(31).fill(0).map((v,i) => { return i+1; });
+  months: Array<number> = Array(12).fill(0).map((v,i) => { return i; });
+  years: Array<number> = Array(21).fill(0).map((v,i) => { return this.date.getFullYear() - 10 + i; });
 
-  hours = Array(23).fill(0).map((v,i) => { return i; });
-  minutes = Array(59).fill(0).map((v,i) => { return i; });
-  seconds = Array(59).fill(0).map((v,i) => { return i; });
+  hours: Array<number> = Array(23).fill(0).map((v,i) => { return i; });
+  minutes: Array<number> = Array(59).fill(0).map((v,i) => { return i; });
+  seconds: Array<number> = Array(59).fill(0).map((v,i) => { return i; });
 
-  monthLabels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+  monthLabels: Array<string> = [
+    'Januari', 'Februari', 'Maret', 
+    'April', 'Mei', 'Juni', 
+    'Juli', 'Agustus', 'September', 
+    'Oktober', 'November', 'Desember'
+  ];
   
-  tanggal = this.date.getDate();
-  bulan = this.date.getMonth();
-  tahun = this.date.getFullYear();
+  tanggal: number = this.date.getDate();
+  bulan: number = this.date.getMonth();
+  tahun: number = this.date.getFullYear();
 
-  jam = this.date.getHours();
-  menit = this.date.getMinutes();
-  detik = this.date.getSeconds();
+  jam: number = this.date.getHours();
+  menit: number = this.date.getMinutes();
+  detik: number = this.date.getSeconds();
 
-  invalid = false;
+  invalid: boolean = false;
 
   @Input() timeSelect: boolean = false;
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
-  private sub: Subscription;
+  private sub?: Subscription;
 
   constructor(
     private wuiService: WuiService
   ) { }
 
-  dateChange(e) {
-    let cek = new Date(this.tahun, this.bulan, e.target.value, this.jam, this.menit, this.detik);
+  dateChange(e: any) {
+    let cek: Date = new Date(this.tahun, this.bulan, e.target.value, this.jam, this.menit, this.detik);
     if(cek.getFullYear() == this.tahun && cek.getMonth() == this.bulan && cek.getDate() == e.target.value && 
       cek.getHours() == this.jam && cek.getMinutes() == this.menit && cek.getSeconds() == this.detik) {
       this.tanggal = e.target.value;
@@ -55,8 +59,8 @@ export class DateselectComponent implements OnInit {
     }
   }
 
-  monthChange(e) {
-    let cek = new Date(this.tahun, e.target.value, this.tanggal, this.jam, this.menit, this.detik);
+  monthChange(e: any) {
+    let cek: Date = new Date(this.tahun, e.target.value, this.tanggal, this.jam, this.menit, this.detik);
     if(cek.getFullYear() == this.tahun && cek.getMonth() == e.target.value && cek.getDate() == this.tanggal && 
       cek.getHours() == this.jam && cek.getMinutes() == this.menit && cek.getSeconds() == this.detik) {
       this.bulan = e.target.value;
@@ -69,8 +73,8 @@ export class DateselectComponent implements OnInit {
     }
   }
 
-  yearChange(e) {
-    let cek = new Date(e.target.value, this.bulan, this.tanggal, this.jam, this.menit, this.detik);
+  yearChange(e: any) {
+    let cek: Date = new Date(e.target.value, this.bulan, this.tanggal, this.jam, this.menit, this.detik);
     if(cek.getFullYear() == e.target.value && cek.getMonth() == this.bulan && cek.getDate() == this.tanggal && 
       cek.getHours() == this.jam && cek.getMinutes() == this.menit && cek.getSeconds() == this.detik) {
       this.tahun = e.target.value;
@@ -83,8 +87,8 @@ export class DateselectComponent implements OnInit {
     }
   }
 
-  hourChange(e) {
-    let cek = new Date(this.tahun, this.bulan, this.tanggal, e.target.value, this.menit, this.detik);
+  hourChange(e: any) {
+    let cek: Date = new Date(this.tahun, this.bulan, this.tanggal, e.target.value, this.menit, this.detik);
     if(cek.getFullYear() == this.tahun && cek.getMonth() == this.bulan && cek.getDate() == this.tanggal && 
       cek.getHours() == e.target.value && cek.getMinutes() == this.menit && cek.getSeconds() == this.detik) {
       this.jam = e.target.value;
@@ -97,8 +101,8 @@ export class DateselectComponent implements OnInit {
     }
   }
 
-  minuteChange(e) {
-    let cek = new Date(this.tahun, this.bulan, this.tanggal, this.jam, e.target.value, this.detik);
+  minuteChange(e: any) {
+    let cek: Date = new Date(this.tahun, this.bulan, this.tanggal, this.jam, e.target.value, this.detik);
     if(cek.getFullYear() == this.tahun && cek.getMonth() == this.bulan && cek.getDate() == this.tanggal && 
       cek.getHours() == this.jam && cek.getMinutes() == e.target.value && cek.getSeconds() == this.detik) {
       this.menit = e.target.value;
@@ -111,8 +115,8 @@ export class DateselectComponent implements OnInit {
     }
   }
 
-  secondChange(e) {
-    let cek = new Date(this.tahun, this.bulan, this.tanggal, this.jam, this.menit, e.target.value);
+  secondChange(e: any) {
+    let cek: Date = new Date(this.tahun, this.bulan, this.tanggal, this.jam, this.menit, e.target.value);
     if(cek.getFullYear() == this.tahun && cek.getMonth() == this.bulan && cek.getDate() == this.tanggal && 
       cek.getHours() == this.jam && cek.getMinutes() == this.menit && cek.getSeconds() == e.target.value) {
       this.detik = e.target.value;
@@ -127,7 +131,7 @@ export class DateselectComponent implements OnInit {
 
   close() {
     this.show = false;
-    this.sub.unsubscribe();
+    this.sub?.unsubscribe();
   }
 
   open(date: Date): Promise<any> {

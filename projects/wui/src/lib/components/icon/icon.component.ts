@@ -7,7 +7,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 export class IconComponent implements OnInit {
 
   @HostBinding('class') _class = 'mdi';
-  @Input('icon') set setIcon(icon) {
+  @Input('icon') set setIcon(icon: string) {
     this._class = 'mdi mdi-' + icon;
   }
 

@@ -16,8 +16,8 @@ import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.compone
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('tooltip') tooltip: any;
-  @ViewChild('loadingDialog') loadingDialog: LoadingDialogComponent;
+  @ViewChild('tooltip') tooltip?: any;
+  @ViewChild('loadingDialog') loadingDialog?: LoadingDialogComponent;
   showLoading = false;
 
   constructor(
