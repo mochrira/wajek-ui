@@ -14,7 +14,23 @@ export class ModalComponent implements OnInit {
 
   @HostBinding('class.show') show: Boolean = false;
   @HostBinding('class.leave') leave: Boolean = false;
+
+  @Input('mode') mode = 'center';
+  @HostBinding('class.mode-center') get isModeCenter() {
+    return this.mode == 'center';
+  }
+
+  @HostBinding('class.mode-bottom') get isModeBottom() {
+    return this.mode == 'bottom';
+  }
+
+  @HostBinding('style.animation-duration') get duration() {
+    return this._duration;
+  }
+
   @Input('width') _width = 350;
+  @Input('duration') _duration = 200;
+
   @Input('title') title: string = '';
   @Input('message') message: string = ''
   @Input('actions') actions: Array<any> = [];
@@ -54,11 +70,14 @@ export class ModalComponent implements OnInit {
   }
 
   close() { 
-    this.leave = true;
-    setTimeout(() => {
-      this.show = false;
-      this.leave = false;
-    }, 200)
+    return new Promise((resolve) => {
+      this.leave = true;
+      setTimeout(() => {
+        this.show = false;
+        this.leave = false;
+        resolve(true);
+      }, this.duration);
+    });
   }
 
   ngOnInit() {
