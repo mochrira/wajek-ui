@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
   @ViewChild('loadingDialog') loadingDialog?: LoadingDialogComponent;
   showLoading = false;
 
+  backdropShow = false;
+  backdropZIndex = -1;
+
   constructor(
     private messageService: MessageService,
     private cd: ChangeDetectorRef
@@ -30,6 +33,7 @@ export class AppComponent implements OnInit {
       this.showLoading = showLoading;
       this.cd.detectChanges();
     });
+
     this.messageService.get('wui:tooltip').subscribe(params => {
       this.tooltip.nativeElement.textContent = params.label;
       let rect = params.el.getBoundingClientRect();
@@ -37,9 +41,19 @@ export class AppComponent implements OnInit {
       this.tooltip.nativeElement.style.left = (rect.x + (rect.width / 2)) + 'px';
       this.tooltip.nativeElement.classList.add('show');
     });
+
     this.messageService.get('wui:tooltip:hide').subscribe(params => {
       this.tooltip.nativeElement.classList.remove('show');
     });
+
+    this.messageService.get('wui:backdrop').subscribe(params => {
+      this.backdropShow = params.show ?? false;
+      if(!this.backdropShow) {
+        this.backdropZIndex = -1;
+      } else {
+        this.backdropZIndex = params.zIndex;
+      }
+    })
   }
 
 }
