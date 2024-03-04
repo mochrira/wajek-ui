@@ -29,9 +29,7 @@ wui-page {
         }
 
         &-container {
-            width: auto;
-            max-width: 1400px;
-            padding: 3.75rem 5rem;
+            width: 100%;
             margin: auto;
 
             > wui-list {
@@ -46,6 +44,72 @@ wui-page {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+
+    .wui-page {
+        &-container {
+            max-width: none;
+            padding: 0 1rem;
+        }
+
+        &-inner {
+            > .wui-page-container {
+                padding-top: 3.75rem;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 576px) {
+
+    .wui-page {
+        &-container {
+            max-width: 540px;
+        }
+
+        &-inner {
+            > .wui-page-container {
+                padding-top: 3.75rem;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .wui-page {
+        &-container {
+            max-width: 720px;
+            padding: 0 1.5rem;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .wui-page {
+        &-container {
+            max-width: 960px;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .wui-page {
+        &-container {
+            max-width: 1140px;
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .wui-page {
+        &-container {
+            max-width: 1320px;
         }
     }
 }

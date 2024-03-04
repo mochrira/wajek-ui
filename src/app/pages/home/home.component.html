@@ -6,51 +6,17 @@
             </button>
         </div>
         <div class="wui-app-bar-title"></div>
-        <div class="wui-app-bar-trailing">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth" [wuiMenu]="menuTest">
-                <wui-icon icon="refresh"></wui-icon>
-            </button>
-        </div>
+        <div class="wui-app-bar-trailing"></div>
     </wui-app-bar>
 
     <div class="wui-page-inner">
         <div class="wui-page-container">
             <ul class="wui-breadcrumb">
-                <li>Home</li>
-                <li>Neraca</li>
+                <li><wui-icon icon="home"></wui-icon></li>
+                <li>Dashboard</li>
             </ul>
-            
-            <div class="mb-5 d-flex align-items-center">
-                <div class="flex-grow-1">
-                    <div class="font-32 font-weight-500 mb-2 text-blueGrey-900">Neraca</div>
-                    <div>01 Jul 2023 &mdash; 03 Jul 2023</div>
-                </div>
-                <button class="wui-button wui-button-primary" routerLink="baru">
-                    <wui-icon icon="plus"></wui-icon>Baru
-                </button>
-            </div>
-            
-            <div id="lipsum">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet, quam ac pulvinar consectetur, tortor ligula vulputate augue, at interdum leo purus id lorem. Sed congue sem leo, ut tincidunt metus cursus a. Aliquam pretium ut eros nec congue. Maecenas ultricies urna id odio aliquam consectetur at ut orci. Mauris tincidunt lacus nec lorem pulvinar rutrum. Vestibulum non libero lorem. Ut at suscipit neque. Phasellus volutpat eleifend fermentum.
-                </p>
-                <p>
-                Ut nec porta nisl, fringilla iaculis neque. Vestibulum et nulla scelerisque, mattis enim id, vulputate ante. Phasellus sit amet eros consectetur, interdum lorem nec, ornare sem. Sed id elementum urna. Maecenas rutrum purus nec enim euismod, at interdum ligula varius. Cras ullamcorper mattis mi, ut sollicitudin est euismod et. Nullam a urna quis mi sagittis ullamcorper et vel quam. In euismod laoreet tellus nec pellentesque. Sed consequat tristique lorem, eu luctus eros venenatis ut. Suspendisse faucibus, elit a laoreet imperdiet, massa purus commodo orci, eget commodo odio orci vitae magna. Vestibulum vitae massa eget massa hendrerit blandit in nec urna. Cras a feugiat odio. Proin nibh neque, ullamcorper a mollis quis, malesuada non metus. Aenean sed rhoncus sem. In non facilisis mauris. Phasellus consequat velit ut turpis ullamcorper, id ultricies nisl porttitor.
-                </p>
-                <p>
-                Nam vestibulum eu elit a cursus. Aliquam dapibus, urna quis eleifend malesuada, augue nisl consequat ipsum, sed iaculis elit ligula placerat leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam dapibus ultrices fringilla. Sed dapibus sapien tortor, eget consequat lacus efficitur vitae. Proin mattis, urna in tempor pretium, eros diam accumsan dolor, sed commodo purus metus eget tellus. Nullam est velit, ullamcorper sed orci in, tristique iaculis libero. Nam congue, risus id blandit faucibus, elit justo posuere urna, quis luctus arcu tortor quis ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis in cursus leo, et sollicitudin arcu. Quisque eu risus enim. Nullam molestie tincidunt odio ac lobortis.
-                </p>
-                <p>
-                Curabitur massa metus, congue sit amet iaculis ut, sodales non nulla. Nulla euismod eros vitae tortor ultricies fermentum vel et ligula. Donec non lorem quam. Integer finibus, nunc ac volutpat iaculis, dolor lacus pharetra nisi, et vehicula leo ex eget nulla. Mauris eu est nec lorem interdum dictum. Praesent finibus diam vitae ligula consequat, a hendrerit orci lacinia. Mauris vel euismod diam. Donec efficitur felis nec sem auctor, quis vehicula libero commodo. Donec nisi lectus, porttitor non dolor ac, commodo maximus mauris. Nulla ultrices sapien at tristique aliquet. Quisque nec tellus ac augue vehicula cursus at in nisi. Nam pulvinar lorem rhoncus massa blandit efficitur.
-                </p>
-                <p>
-                Nullam in molestie erat. Nam elementum arcu a dictum elementum. Mauris aliquam ultricies magna, et maximus diam condimentum in. Morbi quis leo in tortor facilisis pellentesque vitae nec neque. Etiam dapibus ac massa at dapibus. Cras quis mi metus. Curabitur egestas commodo velit, eu tincidunt ante tincidunt et. Quisque vitae dui semper, porttitor est id, dictum sem. Donec sed massa accumsan, semper diam eu, finibus purus. Maecenas viverra ante vitae sapien sodales volutpat. Aliquam mattis vulputate velit, at fermentum erat gravida sed. In sit amet urna ac tortor fringilla convallis non ac augue. In hac habitasse platea dictumst. Ut vulputate malesuada mi, id pulvinar sem.
-                </p>
-            </div>
+
+            <h1>Dashboard</h1>
         </div>
     </div>
 </wui-page>
-
-<wui-menu class="compact" #menuTest>
-    <wui-menu-item *ngFor="let i of dummy" icon="lead-pencil">Menu Item {{i}}</wui-menu-item>
-</wui-menu>

@@ -11,14 +11,14 @@ export class WuiService {
     private messageService: MessageService
   ) { }
 
-  async dialog(params: any) {
+  dialog(params: any) {
     return new Promise((resolve) => {
       this.messageService.set('wui:dialog', params);
       let sub = this.messageService.get('wui:dialog:result').pipe(take(1)).subscribe(e => {
         sub.unsubscribe();
         resolve(e);
-      })
-    })
+      });
+    });
   }
 
   snackbar(params: any) {

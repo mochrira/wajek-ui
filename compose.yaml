@@ -3,13 +3,14 @@ name: wui
 services:
   web:
     container_name: wui_container
-    image: mochrira/angular:15.2.3-nginx
+    image: mochrira/dev:latest
     volumes:
-      - $PWD:/home/node/app
+      - ./:/workspace
     networks:
       - environment
-    ports:
-      - 8081:80
+    environment:
+      - NG_INSTALL=YES
+      - NG_VERSION=17
 
 networks:
   environment:

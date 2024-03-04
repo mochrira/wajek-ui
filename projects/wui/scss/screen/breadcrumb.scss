@@ -4,7 +4,6 @@ ul.wui-breadcrumb {
     list-style: none;
     display: flex;
     align-items: center;
-    height: 3rem;
 
     > li {
         font-size: 0.875rem;
@@ -26,8 +25,7 @@ ul.wui-breadcrumb {
                 align-items: center;
                 font-family: 'Material Design Icons';
                 font-size: 1.5rem;
-                width: 2rem;
-                height: 2rem;
+                line-height: 1.5rem;
                 right: .25rem;
                 top: 0;
             }

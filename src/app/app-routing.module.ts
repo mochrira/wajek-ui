@@ -4,12 +4,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from "./pages/list/list.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SortableComponent } from "./pages/sortable/sortable.component";
-import { UserComponent } from './pages/user/user.component';
+import { ArtikelComponent } from "./pages/artikel/artikel.component";
 
 const routes: Routes = [{
-    path: 'home', component: HomeComponent, children: [{
-        path: 'user', component: UserComponent
-    }]
+    path: 'home', component: HomeComponent
+}, {
+    path: 'artikel', component: ArtikelComponent
 }, {
     path: 'list', component: ListComponent
 }, {

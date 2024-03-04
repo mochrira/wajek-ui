@@ -25,6 +25,7 @@
     a {
         color: var(--wui-color-blue-700);
         cursor: pointer;
+        text-decoration: none;
 
         &:hover {
             color: var(--theme-text-link-hover, darken($theme-primary, 10%));
