@@ -16,6 +16,8 @@ import { SortableComponent } from './pages/sortable/sortable.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { GridComponent } from './pages/grid/grid.component';
 import { ArtikelComponent } from './pages/artikel/artikel.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { ArtikelComponent } from './pages/artikel/artikel.component';
         SortableComponent,
         SigninComponent,
         GridComponent,
-        ArtikelComponent
+        ArtikelComponent,
+        LoginComponent,
+        AdminComponent
     ],
     imports: [
         CommonModule,

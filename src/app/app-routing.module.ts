@@ -5,8 +5,14 @@ import { ListComponent } from "./pages/list/list.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SortableComponent } from "./pages/sortable/sortable.component";
 import { ArtikelComponent } from "./pages/artikel/artikel.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { AdminComponent } from "./pages/admin/admin.component";
 
 const routes: Routes = [{
+    path: 'login', component: LoginComponent
+}, {
+    path: 'admin', component: AdminComponent
+}, {
     path: 'home', component: HomeComponent
 }, {
     path: 'artikel', component: ArtikelComponent

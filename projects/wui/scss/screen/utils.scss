@@ -52,10 +52,10 @@ h6{
 }
 
 @include font-weight;
-@include media-breakpoint-down(sm) { @include font-weight("sm"); }
-@include media-breakpoint-up(sm) { @include font-weight("md"); }
-@include media-breakpoint-up(md) { @include font-weight("lg"); }
-@include media-breakpoint-up(lg) { @include font-weight("xl"); }
+@media screen and (max-width: 575px) { @include font-weight("sm"); }
+@media screen and (min-width: 576px) { @include font-weight("md"); }
+@media screen and (min-width: 992px) { @include font-weight("lg"); }
+@media screen and (min-width: 1200px) { @include font-weight("xl"); }
 
 @mixin font-sizes($breakpoint: null) {
     .font {
@@ -75,10 +75,10 @@ h6{
 }
 
 @include font-sizes;
-@include media-breakpoint-down(sm) { @include font-sizes("sm"); }
-@include media-breakpoint-up(sm) { @include font-sizes("md"); }
-@include media-breakpoint-up(md) { @include font-sizes("lg"); }
-@include media-breakpoint-up(lg) { @include font-sizes("xl"); }
+@media screen and (max-width: 575px){ @include font-sizes("sm"); }
+@media screen and (min-width: 576px) { @include font-sizes("md"); }
+@media screen and (min-width: 992px) { @include font-sizes("lg"); }
+@media screen and (min-width: 1200px) { @include font-sizes("xl"); }
 
 @mixin max-width($breakpoint: null) {
     .mw {
@@ -93,10 +93,10 @@ h6{
 }
 
 @include max-width;
-@include media-breakpoint-down(sm) { @include max-width("sm"); }
-@include media-breakpoint-up(sm) { @include max-width("md"); }
-@include media-breakpoint-up(md) { @include max-width("lg"); }
-@include media-breakpoint-up(lg) { @include max-width("xl"); }
+@media screen and (max-width: 575px){ @include max-width("sm"); }
+@media screen and (min-width: 576px) { @include max-width("md"); }
+@media screen and (min-width: 992px) { @include max-width("lg"); }
+@media screen and (min-width: 1200px) { @include max-width("xl"); }
 
 
 .wui-label {

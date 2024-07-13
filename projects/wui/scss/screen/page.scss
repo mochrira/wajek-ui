@@ -21,6 +21,11 @@ wui-page {
             overflow-y: auto;
             width: 100%;
             position: relative;
+
+            > .wui-page-container {
+                padding-top: 3.75rem;
+                padding-bottom: 3.75rem;
+            }
         }
 
         &-footer {
@@ -48,34 +53,12 @@ wui-page {
     }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 767px) {
 
     .wui-page {
         &-container {
             max-width: none;
             padding: 0 1rem;
-        }
-
-        &-inner {
-            > .wui-page-container {
-                padding-top: 3.75rem;
-            }
-        }
-    }
-
-}
-
-@media screen and (min-width: 576px) {
-
-    .wui-page {
-        &-container {
-            max-width: 540px;
-        }
-
-        &-inner {
-            > .wui-page-container {
-                padding-top: 3.75rem;
-            }
         }
     }
 
@@ -84,7 +67,7 @@ wui-page {
 @media screen and (min-width: 768px) {
     .wui-page {
         &-container {
-            max-width: 720px;
+            max-width: 540px;
             padding: 0 1.5rem;
         }
     }
@@ -93,7 +76,7 @@ wui-page {
 @media screen and (min-width: 992px) {
     .wui-page {
         &-container {
-            max-width: 960px;
+            max-width: 720px;
         }
     }
 }
@@ -101,12 +84,20 @@ wui-page {
 @media screen and (min-width: 1200px) {
     .wui-page {
         &-container {
-            max-width: 1140px;
+            max-width: 960px;
         }
     }
 }
 
 @media screen and (min-width: 1400px) {
+    .wui-page {
+        &-container {
+            max-width: 1140px;
+        }
+    }
+}
+
+@media screen and (min-width: 1600px) {
     .wui-page {
         &-container {
             max-width: 1320px;
