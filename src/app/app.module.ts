@@ -18,6 +18,7 @@ import { GridComponent } from './pages/grid/grid.component';
 import { ArtikelComponent } from './pages/artikel/artikel.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { TableComponent } from './pages/table/table.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { AdminComponent } from './pages/admin/admin.component';
         GridComponent,
         ArtikelComponent,
         LoginComponent,
-        AdminComponent
+        AdminComponent,
+        TableComponent
     ],
     imports: [
         CommonModule,

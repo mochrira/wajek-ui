@@ -124,3 +124,17 @@ h6{
     width: 100%;
     height: 500px;
 }
+
+.wui-edge-fix {
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .wui-edge-fix {
+        width: calc(100% + 2rem);
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }   
+}
