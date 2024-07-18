@@ -5,6 +5,7 @@
   "assets": [
     "./scss/**/*"
   ],
+  "allowedNonPeerDependencies": ["bootstrap"],
   "lib": {
     "entryFile": "src/public_api.ts"
   }

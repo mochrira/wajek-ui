@@ -9,6 +9,10 @@ export class SigninComponent implements OnInit {
 
   constructor() { }
 
+  submit() {
+    alert('Submitted');
+  }
+
   ngOnInit(): void {
   }
 
