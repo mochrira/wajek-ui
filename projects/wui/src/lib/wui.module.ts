@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { WuiComponent } from './wui.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
@@ -31,6 +30,7 @@ import { MenuComponent, MenuDirective, MenuItemComponent } from './components/me
 import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 import { NumInputDirective } from './directives/num-input.directive';
 import { SortableDirective } from './directives/sortable.directive';
+import { ToggleComponent } from './components/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -67,10 +67,11 @@ import { SortableDirective } from './directives/sortable.directive';
     MenuItemComponent,
     LoadingDialogComponent,
     NumInputDirective,
-    SortableDirective
+    SortableDirective,
+
+    ToggleComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
     FormsModule
   ],
@@ -113,7 +114,9 @@ import { SortableDirective } from './directives/sortable.directive';
     MenuItemComponent,
 
     NumInputDirective,
-    SortableDirective
+    SortableDirective,
+
+    ToggleComponent
   ], 
   providers: [
     DatePipe,
