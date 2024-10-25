@@ -141,7 +141,7 @@ wui-drawer {
     }
 }
 
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 768px){
     wui-drawer {
         position: relative;
         max-width: 6rem;

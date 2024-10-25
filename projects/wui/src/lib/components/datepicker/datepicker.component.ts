@@ -15,20 +15,14 @@ export class DatepickerComponent implements OnDestroy {
   @Output() wuiDateSelect: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('modal', {static: true}) modal?: ModalComponent;
-  @Input() outputFormat = 'yyyy-MM-dd hh:mm:ss';
-  @Input() datePreviewFormat = 'dd MMM yyyy';
+  @Input() outputFormat: string = 'yyyy-MM-dd hh:mm:ss';
+  @Input() datePreviewFormat: string = 'dd MMM yyyy';
 
-  @Input() yearSelector = true;
-  @Input() timeSelector = true;
-  @Input() dayPreview = true;
+  @Input() yearSelector: boolean = true;
+  @Input() timeSelector: boolean = true;
+  @Input() dayPreview: boolean = true;
 
-  // date = new Date();
-  // month = this.date.getMonth();
-  // year = this.date.getFullYear();
-  // hour: number = this.date.getHours();
-  // minute: number = this.date.getMinutes();
-  // second: number = this.date.getSeconds();
-  // decade = Math.floor(this.year / 10);
+  mode: string = '';
 
   private unsub: Subject<any> = new Subject();
 
@@ -37,92 +31,11 @@ export class DatepickerComponent implements OnDestroy {
     private cd: ChangeDetectorRef
   ) { }
 
-  // incTime(mode) {
-  //   if(mode=='hour'){
-  //     if(this.hour < 23){
-  //       this.hour++;
-  //     }else{
-  //       this.hour = 0;
-  //     }
-  //   }else if(mode=='min'){
-  //     if(this.minute < 59){
-  //       this.minute++;
-  //     }else{
-  //       this.minute = 0;
-  //     }
-  //   }else if(mode=='sec'){
-  //     if(this.second < 59){
-  //       this.second++;
-  //     }else{
-  //       this.second = 0;
-  //     }
-  //   }
-  // }
-
-  // decTime(mode) {
-  //   if(mode=='hour'){
-  //     if(this.hour > 0){
-  //       this.hour--;
-  //     }else{
-  //       this.hour = 23;
-  //     }
-  //   }else if(mode=='min'){
-  //     if(this.minute > 0){
-  //       this.minute--;
-  //     }else{
-  //       this.minute = 59;
-  //     }
-  //   }else if(mode=='sec'){
-  //     if(this.second > 0){
-  //       this.second--;
-  //     }else{
-  //       this.second = 59;
-  //     }
-  //   }
-  // }
-
-  // isSelected(v) {
-  //   if (this.mode === 'date') {
-  //     if (this.datePipe.transform(this.date, 'yyyyMMdd') === this.datePipe.transform(v, 'yyyyMMdd')) {
-  //       return true;
-  //     }
-  //     return false;
-  //   } else if (this.mode === 'month') {
-  //     if (this.datePipe.transform(this.date, 'yyyyMM') === this.datePipe.transform(new Date(this.year, v, 1), 'yyyyMM')) {
-  //       return true;
-  //     }
-  //     return false;
-  //   } else if (this.mode === 'year') {
-  //     if (this.datePipe.transform(this.date, 'yyyy') === this.datePipe.transform(new Date(v, 0, 1),'yyyy')) {
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  //   return false;
-  // }
-
-  // setTime() {
-  //   this.date = new Date(
-  //     this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), this.hour, this.minute, this.second
-  //   )
-  //   this.changeMode('date');
-  // }
-
-  // selectDate(d) {
-  //   if(this.timeSelector){
-  //     this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.hour, this.minute, this.second);
-  //   } else {
-  //     this.date = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
-  //   }
-  //   this.wuiDateSelect.next(this.date);
-  // }
-
-  mode = '';
-  changeMode(mode) {
+  changeMode(mode: string) {
     this.mode = mode;
   }
 
-  previewDecade: number;
+  previewDecade: number = -1;
 
   get previewDecadeStart() {
     return this.previewDecade.toString() + '0';
@@ -146,7 +59,7 @@ export class DatepickerComponent implements OnDestroy {
     this.previewDecade++;
   }
 
-  previewYear: number;
+  previewYear: number = -1;
 
   setPreviewYear(v: any) {
     this.previewYear = v;
@@ -161,15 +74,15 @@ export class DatepickerComponent implements OnDestroy {
     this.previewYear--;
   }
 
-  isPreviewYearSelected(y) {
+  isPreviewYearSelected(y: any) {
     if(this.selectedDate.getFullYear() == y) {
       return true;
     }
     return false;
   }
 
-  previewMonth: number;
-  previewMonthLabels = ['January', 'February', 'March', 'April', 'May', 'June',
+  previewMonth: number = -1;
+  previewMonthLabels: Array<string> = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 
   setPreviewMonth(v: any) {
@@ -249,11 +162,11 @@ export class DatepickerComponent implements OnDestroy {
     this.previewSecond--;
   }
 
-  getShortMonth(m) {
+  getShortMonth(m: string): string {
     return m.substring(0, 3);
   }
 
-  isPreviewMonthSelected(m) {
+  isPreviewMonthSelected(m: number): boolean {
     if(this.previewYear == this.selectedDate.getFullYear() && m == this.selectedDate.getMonth()) {
       return true;
     }
@@ -328,7 +241,7 @@ export class DatepickerComponent implements OnDestroy {
       this.wuiDateSet.asObservable().pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res);
         this.modal?.close();
-        this.unsub.next();
+        this.unsub?.next(null);
         return;
       });
     });

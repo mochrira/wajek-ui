@@ -13,15 +13,15 @@ export class RippleDirective implements OnInit {
     private el: ElementRef
   ) { }
 
-  @HostListener('mousedown', ['$event']) onMouseDown(e) {
+  @HostListener('mousedown', ['$event']) onMouseDown(e: any) {
     this.start(e.clientX, e.clientY);
   }
 
-  @HostListener('touchstart', ['$event']) onTouchStart(e) {
+  @HostListener('touchstart', ['$event']) onTouchStart(e: any) {
     this.start(e.touches[0].clientX, e.touches[0].clientY);
   }
 
-  start(x, y) {
+  start(x: number, y: number) {
     if(!this.rippleEl) {
       this.rippleEl = document.createElement('div');
       this.rippleEl.classList.add('wuiRipple__obj');
@@ -52,7 +52,7 @@ export class RippleDirective implements OnInit {
     this.animate(size, 200 + (200 * (size / durMatrix)));
   }
 
-  animate(size, duration) {
+  animate(size: any, duration: any) {
     let pos = 0;
     this.interval = setInterval(() => {
       let vsize = this.rippleEl.offsetHeight + (size / (duration / 10));

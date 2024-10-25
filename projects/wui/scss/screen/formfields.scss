@@ -1,30 +1,29 @@
 @import '../variables/colors.scss';
 
 wui-form-field {
-    width: 100%;
     position: relative;
     display: block;
-    margin-bottom: 1.25rem;
+    width: 100%;
+    margin-bottom: 1.75rem;
 
-    // layout
     .wui-form-field {
+
         &-flex {
             display: flex;
+            align-items: center;
             z-index: 0;
             width: 100%;
-            height: 100%;
             position: relative;
+            height: 3.5rem;
 
-            // border behavior : normal
             &:before {
                 content: "";
                 display: block;
                 height: 1px;
                 width: 100%;
                 position: absolute;
-                bottom: 0;
-                left: 0;
-                background-color: rgba(0,0,0,0.08);
+                bottom: 0; left: 0;
+                background-color: #CCC;
                 z-index: 0;
             }
 
@@ -47,104 +46,54 @@ wui-form-field {
             position: relative;
             display: flex;
             align-items: center;
-        }
-
-        &-prefix, &-suffix {
-            display: flex;
-            align-items: center;
-            line-height: 1.5rem;
-        }
-
-        &-prefix {
-            padding-right: .75rem;
-        }
-
-        &-suffix {
-            padding-left: .75rem;
+            height: 100%;
+            opacity: 1;
         }
 
         &-input {
             &-prefix, &-suffix {
-                opacity: 0;
-                padding-bottom: 2px;
                 flex: 0 1 auto;
-                height: 3rem;
-                padding-top: 1rem;
                 display: inline-flex;
                 align-items: center;
             }
+        }
 
-            &-prefix {
-                padding-right: .75rem;
-            }
+        &-input-prefix, &-prefix {
+            padding-right: 1rem;
+        }
 
-            &-suffix {
-                padding-left: .75rem;
-            }
+        &-input-suffix, &-suffix {
+            padding-left: 1rem;
         }
 
         &-hint {
-            padding-top: .375rem;
+            margin-top: .5rem;
             font-size: .75rem;
             line-height: 1rem;
         }
     }
 
-    // border behavior : focused
-    &.is-focused {
-        .wui-form-field {
-            &-flex {
-                &:after {
-                    opacity: 1;
-                    display: block;
-                    width: 100%;
-                    bottom: 0;
-                    left: 0;
-                    z-index: 1;
-                }
-            }
-        }
-    }
-
-    &.is-focused, &.has-content {
-        .wui-form-field {
-            &-input{
-                &-prefix, &-suffix {
-                    opacity: 1;
-                }
-            }
-        }       
-    }
-
-    wui-icon {
-        color: #777;
-    }
-
-    // input behavior : normal
-
     input, textarea, select {
+        -webkit-appearance: none;
+        height: 100%;
         width: 100%;
         border: none;
         position: relative;
         z-index: 1;
         background-color: transparent;
-        font-family: 'Roboto', sans-serif;
-        font-weight: normal;
-        -webkit-appearance: none;
+        font-family: inherit;
         appearance: none;
-        padding-bottom: 2px;
         box-sizing: border-box;
+        padding: 0;
+
+        &:-webkit-autofill{
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #ffffff;
+        }
 
         &::placeholder {
-            opacity: 0;
+            font-family: inherit;
         }
-    }
-
-    input, select {
-        height: 3rem;
-        padding-left: 0;
-        padding-right: 0;
-        padding-top: 1rem;
     }
 
     textarea {
@@ -157,89 +106,71 @@ wui-form-field {
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.67)" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>');
         background-size: 1.5rem 1.5rem;
         background-repeat: no-repeat;
-        background-position: calc(100% - .375rem) .75rem;
+        background-position: calc(100% - .5rem) 50%;
     }
 
     input[type="date"], input[type="datetime-local"] {
-        opacity: 0;
         -webkit-appearance: none;
         appearance: none;
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path fill="rgba(0,0,0,.67)" d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M12,13H17V18H12V13Z" /></svg>');
         background-size: 1.5rem 1.5rem;
         background-repeat: no-repeat;
-        background-position: calc(100% - .375rem) .75rem;
+        background-position: calc(100% - .5rem) 50%;
 
         &::-webkit-inner-spin-button, &::-webkit-calendar-picker-indicator {
             background: transparent;
-            bottom: 0;
+            bottom: 0; left: 0; right: 0; top: 0;
             color: transparent;
             cursor: pointer;
             height: auto;
-            left: 0;
             position: absolute;
-            right: 0;
-            top: 0;
             width: auto;
-            // display: none;
-            // -webkit-appearance: none;
         }
     }
 
-    // input behavior : focused
+    label {
+        position: absolute;
+        left: 0; top: 50%;
+        transform: translateY(-50%);
+        transition: all .15s ease-in-out;
+    }
 
-    &.is-focused {
-        input, textarea {
-            &::placeholder {
+    &:has(label) {
+        .wui-form-field-infix > *:not(label) {
+            opacity: 0;
+        }
+
+        &:has(input:focus), &:has(select:focus), &.has-content {
+            .wui-form-field-infix > *:not(label) {
+                opacity: 1;
+            }
+
+            label {
+                top: 0;
+                font-size: .75rem;
+            }
+        }
+    }
+
+    &:has(input:focus), &:has(select:focus) {
+        .wui-form-field-flex {
+            &:after {
+                width: 100%;
+                left: 0;
                 opacity: 1;
             }
         }
     }
 
-    // label behavior : normal
-
-    label {
-        position: absolute;
-        left: 0;
-        top: .75rem;
-        line-height: 1.5rem;
-        transition: all .15s ease-in-out;
-    }
-
-    // label behavior : focused & has content
-
-    &.is-focused, &.has-content {
-        label {
-            top: 0;
-            font-size: .75rem;
-            line-height: 1rem;
-        }
-
-        input[type="date"], input[type="datetime-local"] {
-            opacity: 1;
-        }
-    }
-
-    // label behavior : focused only
-
-    &.is-focused {
-        label {
-            color: $theme-primary;
-        }
-    }
-
-    // has error styling
     &.has-error {
         label {
             color: #E82C2C;
         }
 
         .wui-form-field {
-            &-flex {
-                &::before {
-                    background-color: #E82C2C;
-                }
 
-                &::after {
+            &-flex {
+                &:before, &:after {
                     background-color: #E82C2C;
                 }
 
@@ -254,60 +185,103 @@ wui-form-field {
         }
     }
 
-    &.wui-form-field-boxed {
-        margin-bottom: 1.625rem;
+    &.wui-form-field {
+        &-boxed {
+            .wui-form-field {
+                &-flex {
+                    border: 1px solid #CCC;
+                    border-radius: .375rem;
+                    padding: 0 .5rem;
+                    height: 3.5rem;
 
-        .wui-form-field-flex {
-            border: 1px solid #CCC;
-            border-radius: .375rem;
-            padding: 0 .5rem;
+                    &:before {
+                        display: none;
+                    }
 
-            &:before, &:after {
-                display: none !important;
+                    &:after {
+                        display: none;
+                    }
+                }
+
+                &-prefix, &-suffix {
+                    padding-left: .5rem;
+                    padding-right: .5rem;
+                }
+
+                &-input {
+                    &-prefix, &-suffix {
+                        padding-left: .5rem;
+                        padding-right: .5rem;
+                    }   
+                }
+
+                &-hint {
+                    padding: 0 .5rem;
+                }
             }
-        }
 
-        .wui-form-field-trailing {
-            padding-right: .25rem;
-        }
-
-        .wui-form-field-suffix {
-            padding-right: .5rem;
-        }
-
-        label {
-            padding-left: .5rem;
-            padding-right: .5rem;
-            background-color: #FFF;
-            color: #555;
-        }
-
-        input, select {
-            padding: .75rem .5rem .25rem;
-        }
-
-        &.is-focused {
             label {
-                color: $theme-primary;
+                background-color: #FFF;
+                padding: 0 0.5rem;
             }
 
-            .wui-form-field-flex {
-                border: 1px solid $theme-primary;
-                box-sizing: border-box;
+            &:not(.has-error) {
+                &:has(input:focus), &:has(select:focus) {
+                    .wui-form-field-flex  {
+                        border-color: $theme-primary;
+                    }
+    
+                    label {
+                        color: $theme-primary;
+                    }
+                }
+            }
+
+            input, select, textarea  {
+                padding: 0 .5rem;
+            }
+
+            &.has-error {
+                .wui-form-field-flex {
+                    border-color: #E82C2C;
+                }
             }
         }
 
-        &.is-focused, &.has-content {
-            label {
-                top: -.5rem;
-                font-size: .875rem;
-            }
-        }
+        &-narrow {
+            margin-bottom: 1.25rem;
 
-        &:not(.is-focused) {
-            .wui-form-field-flex {
-                box-sizing: border-box;
-                border-color: #d8d9e2 !important;
+            .wui-form-field{
+                &-flex {
+                    height: 2.5rem;
+                    // padding: 0 .25rem;
+                }
+
+                &-input-prefix, &-prefix {
+                    padding-left: .25rem;
+                    padding-right: .5rem;
+                }
+
+                &-input-suffix, &-suffix {
+                    padding-right: .25rem;
+                    padding-left: .5rem;
+                }
+            }
+
+            &.wui-form-field-boxed {
+                .wui-form-field {
+                    &-suffix, &-prefix, &-input-prefix, &-input-suffix {
+                        padding: 0 .25rem;
+                    }
+                }
+            }
+
+            // label, input, select {
+            //     padding: 0 .25rem;
+            // }
+
+            input[type="date"], input[type="datetime-local"], select {
+                background-position: calc(100% - .25rem) 50%;
             }
         }
     }

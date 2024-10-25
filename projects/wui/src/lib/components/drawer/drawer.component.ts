@@ -16,7 +16,7 @@ import { AvatarComponent } from '../avatar/avatar.component';
 export class DrawerItemComponent {
 
   @Input() icon = '';
-  @HostListener('click', ['$event']) onClick(e) {
+  @HostListener('click', ['$event']) onClick(e: any) {
     this.messageService.set('wui:showDrawer', false);
   }
 
@@ -35,7 +35,7 @@ export class DrawerItemComponent {
 export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @Input('show') @HostBinding('class.show') _show = false;
-  @HostListener('click', ['$event']) onClick(e) {
+  @HostListener('click', ['$event']) onClick(e: any) {
     if(e.target.tagName != 'WUI-DRAWER-ITEM') {
       if(e.target.offsetParent.tagName == 'WUI-DRAWER-ITEM') {
         this.drawerItemClicked();
@@ -45,7 +45,7 @@ export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  @ContentChild(AvatarComponent) avatar: AvatarComponent;
+  @ContentChild(AvatarComponent) avatar?: AvatarComponent;
 
   private unsub: Subject<any> = new Subject();
 
@@ -78,7 +78,7 @@ export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
 }
@@ -88,7 +88,7 @@ export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
 })
 export class DrawerTogglerDirective {
 
-  @HostListener('click', ['$event']) onClick(e) {
+  @HostListener('click', ['$event']) onClick(e: any) {
     this.messageService.set('wui:toggleDrawer', null);
   }
 

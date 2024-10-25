@@ -1,6 +1,7 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy, Inject, Renderer2, AfterContentChecked, ElementRef } from '@angular/core';
 import { NavService } from '../../services/nav.service';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'wui-nav',
@@ -8,7 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class NavComponent implements OnInit, OnDestroy {
 
-  @ViewChild('navHost', { read: ViewContainerRef, static: true }) viewContainer: ViewContainerRef;
+  @ViewChild('navHost', { read: ViewContainerRef, static: true }) viewContainer?: ViewContainerRef;
   private unsub: Subject<any> = new Subject();
 
   constructor(
@@ -16,12 +17,12 @@ export class NavComponent implements OnInit, OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver
   ) { }
 
-  root(e) {
-    this.viewContainer.clear();
+  root(e: any) {
+    this.viewContainer?.clear();
     this.navService.components = [];
 
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(e.componentName);
-    const componentRef = this.viewContainer.createComponent(componentFactory);    
+    const componentFactory: any = this.componentFactoryResolver?.resolveComponentFactory(e.componentName);
+    const componentRef: any = this.viewContainer?.createComponent(componentFactory);    
     (<any> componentRef.instance).navId = e.navId;
     (<any> componentRef.instance).params = e.params;
 
@@ -33,9 +34,9 @@ export class NavComponent implements OnInit, OnDestroy {
     });
   }
 
-  push(e) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(e.componentName);
-    const componentRef = this.viewContainer.createComponent(componentFactory);
+  push(e: any) {
+    const componentFactory: any = this.componentFactoryResolver?.resolveComponentFactory(e.componentName);
+    const componentRef: any = this.viewContainer?.createComponent(componentFactory);
     (<any> componentRef.instance).navId = e.navId;
     (<any> componentRef.instance).params = e.params;
 
@@ -47,14 +48,16 @@ export class NavComponent implements OnInit, OnDestroy {
     });
   }
 
-  pop(e) {
-    this.viewContainer.remove(this.viewContainer.length - 1);
+  pop(e: any) {
+    if(this.viewContainer && (this.viewContainer?.length ?? 0) > 0) {
+      this.viewContainer.remove(this.viewContainer?.length - 1);
+    }
     this.navService.components[this.navService.components.length - 1].componentRef.destroy();
     this.navService.components.pop();
   }
 
   ngOnInit() {
-    this.navService.events.subscribe(async e => {
+    this.navService.events.pipe(takeUntil(this.unsub)).subscribe(async (e: any) => {
       if(e !== null) {
         if(e.type == 'command') {
           switch(e.action) {
@@ -68,7 +71,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
 }

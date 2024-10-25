@@ -32,3 +32,5 @@ export * from './lib/components/icon/icon.component';
 export * from './lib/components/menu/menu.component';
 export * from './lib/directives/num-input.directive';
 export * from './lib/directives/sortable.directive';
+
+export * from './lib/components/toggle/toggle.component';

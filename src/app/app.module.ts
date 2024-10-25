@@ -15,6 +15,10 @@ import { ListComponent } from './pages/list/list.component';
 import { SortableComponent } from './pages/sortable/sortable.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { GridComponent } from './pages/grid/grid.component';
+import { ArtikelComponent } from './pages/artikel/artikel.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { TableComponent } from './pages/table/table.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +30,11 @@ import { GridComponent } from './pages/grid/grid.component';
         ListComponent,
         SortableComponent,
         SigninComponent,
-        GridComponent
+        GridComponent,
+        ArtikelComponent,
+        LoginComponent,
+        AdminComponent,
+        TableComponent
     ],
     imports: [
         CommonModule,

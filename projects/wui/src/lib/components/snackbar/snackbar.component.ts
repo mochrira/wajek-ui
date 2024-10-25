@@ -19,7 +19,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
     private messageService: MessageService
   ) { }
 
-  open(label, autoclose, actionItems = []) {
+  open(label: string, autoclose = true, actionItems = []) {
     this.label = label;
     this.actionItems = actionItems;
     if (this.show) {
@@ -54,7 +54,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
 }

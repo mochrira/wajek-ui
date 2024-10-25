@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 })
 export class DatefieldDirective implements AfterViewInit{
 
-  @Input() datepicker: DatepickerComponent;
+  @Input() datepicker?: DatepickerComponent;
   @Input() format: string = 'yyyy-MM-dd';
 
   constructor(

@@ -12,27 +12,27 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class NumInputDirective implements ControlValueAccessor {
 
-  value: string;
+  value: string | null = null;
 
   get isNegative() {
-    return this.value.indexOf('-') != -1;
+    return this.value?.indexOf('-') != -1;
   }
 
   get isDecimal() {
-    return this.value.indexOf('.') != -1;
+    return this.value?.indexOf('.') != -1;
   }
 
   get number() {
     let regex = "(.*)";
     if(this.isNegative) regex = "-" + regex;
     if(this.isDecimal) regex = regex + "\\.";
-    return this.getNumber(this.value.match(new RegExp(regex))?.[1] ?? null);
+    return this.getNumber((this.value?.match(new RegExp(regex))?.[1]) ?? null);
   }
   
   get decimal() {
     let regex = "(.*)";
     if(!this.isDecimal) return null;
-    return this.value.match(new RegExp("\\." + regex))?.[1] ?? null;
+    return (this.value?.match(new RegExp("\\." + regex))?.[1]) ?? null;
   }
 
   get realValue() {
@@ -46,7 +46,7 @@ export class NumInputDirective implements ControlValueAccessor {
       (this.isDecimal ? '.' + this.decimal : '');
   }
 
-  filters = {
+  filters: any = {
     "allowNumbers": this.allowNumbers,
     "allowFunctional": this.allowFunctional,
     "allowDecimals": this.allowDecimals,
@@ -56,7 +56,7 @@ export class NumInputDirective implements ControlValueAccessor {
   onChange: any = (_: any) => {};
   @Input('format') format = '1.0-2';
 
-  @HostListener('keydown', ['$event']) whenKeyDown(e) {
+  @HostListener('keydown', ['$event']) whenKeyDown(e: any) {
     let results: any = {};
     Object.keys(this.filters).forEach(key => {
       results[key] = this.filters[key](e);
@@ -73,7 +73,7 @@ export class NumInputDirective implements ControlValueAccessor {
     }, 1);
   }
 
-  @HostListener('focusout', ['$event']) focusOut(e) {
+  @HostListener('focusout', ['$event']) focusOut(e: any) {
     this.value = this.elementRef.nativeElement.value;
     this.elementRef.nativeElement.value = this.formattedValue;
     this.onChange(this.realValue);

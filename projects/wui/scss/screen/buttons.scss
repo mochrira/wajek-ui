@@ -20,6 +20,7 @@
     &:hover {
         color: #222;
         background-color: #DEDEDE;
+        text-decoration: none;
     }
 
     &:focus {
@@ -83,16 +84,14 @@
     }
 
     wui-icon {
-        margin-left: -.25rem;
+        margin-left: 0;
         margin-right: .5rem;
 
         &.trailing {
-            margin-right: -.25rem;
+            margin-right: 0;
             margin-left: .5rem;
         }
     }
-
-    
 
     &-square {
         padding-left: 0;

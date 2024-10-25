@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { MessageService } from '../../services/message.service';
 import { ModalComponent } from '../modal/modal.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'wui-dialog',
@@ -25,35 +26,42 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class DialogComponent implements OnInit {
 
-  @ViewChild('modal') modal: ModalComponent;
-  title = '';
-  message = '';
-  buttons = [];
+  @ViewChild('modal') modal?: ModalComponent;
+  title: string = '';
+  message: string = '';
+  buttons: Array<any> = [];
+
+  private unsub: Subject<any> = new Subject();
 
   constructor(
     private messageService: MessageService
   ) { }
 
-  click(index) {
-    this.modal.close();
+  async click(index: number) {
+    await this.modal?.close();
     this.messageService.set('wui:dialog:result', index);
   }
 
-  getCaption(index) {
+  getCaption(index: number) {
     return (typeof this.buttons[index] == 'string' ? this.buttons[index] : (this.buttons[index]?.caption || ''));
   }
 
-  getClasses(index) {
+  getClasses(index: number) {
     return (typeof this.buttons[index] == 'string' ? '' : (this.buttons[index]?.cssClasses || ''));
   }
 
   ngOnInit() { 
-    this.messageService.get('wui:dialog').subscribe(e => {
+    this.messageService.get('wui:dialog').pipe(takeUntil(this.unsub)).subscribe(async e => {
       this.title = e.title || '';
       this.message = e.message || '';
       this.buttons = e.buttons || [];
-      this.modal.open();
+      await this.modal?.open();
     });
+  }
+
+  ngOnDestroy() {
+    this.unsub.next(null);
+    this.unsub.complete();
   }
 
 }

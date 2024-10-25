@@ -9,28 +9,18 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class WuiInputDirective implements OnInit, OnDestroy { 
 
-  onFocus: Subject<any> = new Subject();
-  @HostListener('focus', ['$event']) whenFocused(e) { 
-    this.onFocus.next(e);
-  }
-
-  onBlur: Subject<any> = new Subject();
-  @HostListener('blur', ['$event']) whenBlur(e) { 
-    this.onBlur.next(e);
-  }
-
   valueChanges: BehaviorSubject<any> = new BehaviorSubject('');
-  @HostListener('keyup', ['$event']) whenKeyup(e) {
+  @HostListener('keyup', ['$event']) whenKeyup(e: any) {
     this.valueChanges.next(e.target.value);
   }
 
-  @HostListener('change', ['$event']) whenChange(e) {
+  @HostListener('change', ['$event']) whenChange(e: any) {
     this.valueChanges.next(e.target.value);
   }
 
   @Input('value') value = '';
 
-  @Input('formControlName') formControlName;
+  @Input('formControlName') formControlName?: string;
   private unsub: Subject<any> = new Subject();
 
   constructor(
@@ -40,22 +30,22 @@ export class WuiInputDirective implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
   ngOnInit() {
     if(this.controlContainer) {
       if(this.formControlName) {
-        this.controlContainer.control.get(this.formControlName).valueChanges
+        this.controlContainer.control?.get(this.formControlName)?.valueChanges
           .pipe(takeUntil(this.unsub)).subscribe(value => {
             this.valueChanges.next(value);
           });
-        this.valueChanges.next(this.controlContainer.control.get(this.formControlName).value);
+        this.valueChanges.next(this.controlContainer.control?.get(this.formControlName)?.value);
         return;
       }
     }
     if(this.ngModel) {
-      this.ngModel.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
+      this.ngModel.valueChanges?.pipe(takeUntil(this.unsub)).subscribe(value => {
         this.valueChanges.next(value);
       });
       return;
@@ -82,38 +72,25 @@ export class WuiInputDirective implements OnInit, OnDestroy {
 })
 export class FormFieldComponent implements AfterContentInit, OnDestroy {
 
-  @HostBinding('class.is-focused') isFocused = false;
-  @ContentChild(WuiInputDirective) input: WuiInputDirective;
-
-  @HostBinding('class.has-icon') hasIcon = false;
-  @HostBinding('class.has-content') hasContent = false;
+  @ContentChild(WuiInputDirective) input?: WuiInputDirective;
+  @HostBinding('class.has-content') hasContent: boolean = false;
 
   private unsub: Subject<any> = new Subject();
 
-  constructor() { }
-
-  ngOnDestroy() {
-    this.unsub.next();
-  }
-
   ngAfterContentInit() {
     if(this.input) {
-      this.input.onFocus.pipe(takeUntil(this.unsub)).subscribe(e => {
-        this.isFocused = true;
-      });
-      this.input.onBlur.pipe(takeUntil(this.unsub)).subscribe(e => {
-        this.isFocused = false;
-      });
       this.input.valueChanges.pipe(takeUntil(this.unsub)).subscribe(value => {
         if(value !== null && value !== undefined) {
-          if(value.toString().length > 0) {
-            this.hasContent = true;
-          }
+          this.hasContent = (value.toString().length > 0);
         } else {
           this.hasContent = false;
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.unsub.next(null);
   }
 
 }

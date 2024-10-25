@@ -1,37 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { filter, subscribeOn } from 'rxjs/operators';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class NavParams {
-
-  private $params: Subject<any> = new Subject();
-
-  routeParams() {
-    
-  }
-
-}
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavService {
 
-  lastNavId = 0;
-  components = [];
+  lastNavId: number = 0;
+  components: Array<any> = [];
   events: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() { }
 
-  willPop(navId) {
-    let index = this.components.findIndex(c => c.navId == navId);
+  willPop(navId: any) {
+    let index = this.components.findIndex((c: any) => c.navId == navId);
     return index > 0;
   }
 
-  setRoot(name, params = {}, options = {}) {
+  setRoot(name: string, params: any = {}, options: any = {}) {
     this.lastNavId++;
     this.events.next({
       type: 'command',
@@ -44,7 +30,7 @@ export class NavService {
     return this.lastNavId;
   }
 
-  push(name, params = null, options = {}) {
+  push(name: string, params: any = null, options: any = {}) {
     this.lastNavId++;
     this.events.next({
       type: 'command',
@@ -57,7 +43,7 @@ export class NavService {
     return this.lastNavId;
   }
 
-  pop(params = null, options = {}) {
+  pop(params: any = null, options: any = {}) {
     this.events.next({
       type: 'command',
       action: 'pop',

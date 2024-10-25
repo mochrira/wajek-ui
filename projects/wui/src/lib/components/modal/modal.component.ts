@@ -2,63 +2,86 @@ import { Component, OnInit, Input, HostBinding, TemplateRef, Renderer2 } from '@
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavService } from '../../services/nav.service';
+import { ModalService } from '../../services/modal.service';
+import { ModalInterface } from '../../interfaces/modal.interface';
 
 @Component({
   selector: 'wui-modal',
   template: `
-    <div class="wui-backdrop" [class.show]="show"></div>
-    <div class="wui-modal-inner" [style.maxWidth.px]="_width"><ng-content></ng-content></div>
+    <div class="wui-backdrop" [class.show]="show && showBackdrop"></div>
+    <div class="wui-modal-inner" [style.maxWidth.px]="_width">
+      <ng-content></ng-content>
+    </div>
   `
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements ModalInterface, OnInit {
 
-  @HostBinding('class.show') show: Boolean = false;
-  @HostBinding('class.leave') leave: Boolean = false;
-  @Input('width') _width = 350;
-  @Input('title') title: string = '';
-  @Input('message') message: string = ''
-  @Input('actions') actions: Array<any> = [];
+  showBackdrop = true;
+  @HostBinding('style.z-index') zIndex: number = -1;
+  @HostBinding('class.show') show: boolean = false;
+  @HostBinding('class.leave') leave: boolean = false;
 
-  @Input('header') header: TemplateRef<any>;
-  @Input('content') content: TemplateRef<any>;
-  @Input('footer') footer: TemplateRef<any>;
+  @Input('mode') mode: string = 'center';
+  @HostBinding('class.mode-center') get isModeCenter(): boolean {
+    return this.mode == 'center';
+  }
 
-  navId = null;
+  @HostBinding('class.mode-bottom') get isModeBottom(): boolean {
+    return this.mode == 'bottom';
+  }
+
+  @HostBinding('style.animation-duration') get duration(): number {
+    return this._duration;
+  }
+
+  @Input('width') _width: number = 350;
+  @Input('duration') _duration: number = 200;
+
+  navId: string | null = null;
   private unsub: Subject<any> = new Subject();
 
   constructor(
-    private renderer: Renderer2,
     private navService: NavService,
+    private modalService: ModalService
   ) { }
 
-  hasHeaderTemplate() {
-    return this.header !== undefined;
+  openService(zIndex: number = -1): Promise<void> {
+    return new Promise((resolve) => {
+      this.zIndex = zIndex;
+      if(this.leave) {
+        setTimeout(() => {
+          this.show = true;
+          resolve();
+        }, this.duration);
+      }
+      this.show = true;
+      resolve();
+    });
   }
 
-  hasContentTemplate() {
-    return this.content !== undefined;
+  open(): Promise<void> { 
+    return new Promise(async (resolve) => {
+      await this.modalService.open(this);
+      resolve();
+    });
   }
 
-  hasFooterTemplate() {
-    return this.footer !== undefined;
+  close(): Promise<void> { 
+    return new Promise(async (resolve) => {
+      await this.modalService.close();
+      resolve();
+    });
   }
 
-  open() { 
-    if(this.leave) {
+  closeService(): Promise<void> {
+    return new Promise((resolve) => {
+      this.leave = true;
       setTimeout(() => {
-        this.show = true; 
-      }, 200);
-      return;
-    }
-    this.show = true;
-  }
-
-  close() { 
-    this.leave = true;
-    setTimeout(() => {
-      this.show = false;
-      this.leave = false;
-    }, 200)
+        this.show = false;
+        this.leave = false;
+        resolve();
+      }, this.duration);
+    });
   }
 
   ngOnInit() {
@@ -69,10 +92,6 @@ export class ModalComponent implements OnInit {
 
       if(this.navId == null) {
         this.navId = e.navId;
-      }
-
-      if(this.navId == e.navId) {
-        this.renderer.addClass(document.body, "modal-open");
       }
 
       if(e.action == 'pop') {
@@ -86,7 +105,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.unsub.next();
+    this.unsub.next(null);
   }
 
 }

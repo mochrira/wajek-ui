@@ -4,18 +4,27 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from "./pages/list/list.component";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { SortableComponent } from "./pages/sortable/sortable.component";
-import { UserComponent } from './pages/user/user.component';
+import { ArtikelComponent } from "./pages/artikel/artikel.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { AdminComponent } from "./pages/admin/admin.component";
+import { TableComponent } from "./pages/table/table.component";
 
 const routes: Routes = [{
-    path: 'home', component: HomeComponent, children: [{
-        path: 'user', component: UserComponent
-    }]
+    path: 'login', component: LoginComponent
+}, {
+    path: 'admin', component: AdminComponent
+}, {
+    path: 'home', component: HomeComponent
+}, {
+    path: 'artikel', component: ArtikelComponent
 }, {
     path: 'list', component: ListComponent
 }, {
     path: 'sortable', component: SortableComponent
 }, {
     path: 'signin', component: SigninComponent
+}, {
+    path: 'table', component: TableComponent
 }, {
     path: '', redirectTo: 'home', pathMatch: 'full'
 }];

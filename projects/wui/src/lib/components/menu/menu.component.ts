@@ -5,9 +5,9 @@ import { Component, Directive, ElementRef, Host, HostBinding, HostListener, Inpu
 })
 export class MenuDirective {
 
-  @Input('wuiMenu') menu: MenuComponent;
+  @Input('wuiMenu') menu?: MenuComponent;
   @HostListener('click') onClick() {
-    this.menu.open(this.el.nativeElement);
+    this.menu?.open(this.el.nativeElement);
   }
 
   constructor(
@@ -27,7 +27,7 @@ export class MenuDirective {
 export class MenuItemComponent implements OnInit {
 
   @Input() icon = '';
-  @HostListener('click', ['$event']) onClick(e) {
+  @HostListener('click', ['$event']) onClick(e: any) {
     this.host.close();
   }
 
@@ -48,7 +48,7 @@ export class MenuComponent {
   @HostBinding('class.show') _show = false;
 
   listenDocumentClick = false;
-  @HostListener('document:click', ['$event']) onWindowClick(e) {
+  @HostListener('document:click', ['$event']) onWindowClick(e: any) {
     if(this.listenDocumentClick === true) {
       if(this._show && !this.el.nativeElement.contains(e.target)) {
         this.close();
@@ -61,7 +61,7 @@ export class MenuComponent {
     private renderer: Renderer2
   ) { }
 
-  open(triggerElement) {
+  open(triggerElement: any) {
     this.close();
     setTimeout(() => {
       let triggerRect = triggerElement.getBoundingClientRect();
