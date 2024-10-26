@@ -4,6 +4,6 @@ export interface ModalInterface {
     showBackdrop: boolean;
     open(): Promise<void>;
     openService(zIndex: number): Promise<void>;
-    close(): Promise<void>;
+    close();
     closeService(): Promise<void>;
 }
