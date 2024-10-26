@@ -1,9 +1,20 @@
-import { Component, OnInit, Input, HostBinding, TemplateRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, TemplateRef, Renderer2, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavService } from '../../services/nav.service';
 import { ModalService } from '../../services/modal.service';
 import { ModalInterface } from '../../interfaces/modal.interface';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+
+@Component({
+  selector: 'wui-modal-content',
+  template: `
+    <h1>Halo</h1>
+  `
+})
+export class ModalContentComponent {
+
+}
 
 @Component({
   selector: 'wui-modal',
@@ -15,6 +26,10 @@ import { ModalInterface } from '../../interfaces/modal.interface';
   `
 })
 export class ModalComponent implements ModalInterface, OnInit {
+
+  @Input('template') template: TemplateRef<any>;
+  dialog = inject(Dialog);
+  ref: DialogRef;
 
   showBackdrop = true;
   @HostBinding('style.z-index') zIndex: number = -1;
@@ -61,16 +76,15 @@ export class ModalComponent implements ModalInterface, OnInit {
 
   open(): Promise<void> { 
     return new Promise(async (resolve) => {
-      await this.modalService.open(this);
-      resolve();
+      this.ref = this.dialog.open(this.template);
+      this.ref.closed.subscribe(result => {
+        resolve();
+      });
     });
   }
 
-  close(): Promise<void> { 
-    return new Promise(async (resolve) => {
-      await this.modalService.close();
-      resolve();
-    });
+  close() { 
+    this.ref.close();
   }
 
   closeService(): Promise<void> {

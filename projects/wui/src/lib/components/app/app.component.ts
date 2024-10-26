@@ -1,22 +1,28 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, ElementRef, Renderer2 } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AppDialog } from './app-dialog';
 
 @Component({
   selector: 'wui-app',
   template: `
-  <ng-content select="wui-drawer"></ng-content>
-  <div class="wui-app-main">
-    <ng-content></ng-content>
-  </div>
-  <wui-dialog></wui-dialog>
-  <wui-loading-dialog [show]="showLoading"></wui-loading-dialog>
-  <wui-snackbar></wui-snackbar>
+    <ng-content select="wui-drawer"></ng-content>
+    <div class="wui-app-main">
+      <ng-content></ng-content>
+    </div>
+    <wui-snackbar></wui-snackbar>
   `
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  messageService = inject(MessageService);
+  cd = inject(ChangeDetectorRef);
+
+  elementRef = inject(ElementRef);
+  renderer = inject(Renderer2);
+  appDialog = inject(AppDialog);
 
   @ViewChild('tooltip') tooltip?: any;
   @ViewChild('loadingDialog') loadingDialog?: LoadingDialogComponent;
@@ -27,10 +33,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private unsub: Subject<any> = new Subject();
 
-  constructor(
-    private messageService: MessageService,
-    private cd: ChangeDetectorRef
-  ) { }
+  constructor() {
+    this.appDialog.setContainerElement(this.elementRef.nativeElement, this.renderer);
+  }
 
   ngOnInit() {
     this.messageService.get('wui:loading').pipe(takeUntil(this.unsub)).subscribe(showLoading => {

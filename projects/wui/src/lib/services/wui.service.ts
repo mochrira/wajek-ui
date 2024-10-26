@@ -1,22 +1,60 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, TemplateRef } from '@angular/core';
 import { MessageService } from './message.service';
-import { take } from 'rxjs/operators';
+import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
+import { AppDialog } from '../components/app/app-dialog';
+import { ComponentType } from '@angular/cdk/portal';
+import { DialogComponent } from '../components/dialog/dialog.component';
+import { LoadingDialogComponent } from '../components/loading-dialog/loading-dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WuiService {
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  currentAppDialogRef: DialogRef;
+  appDialog = inject(AppDialog);
 
-  dialog(params: any) {
+  currentGlobalDialogRef: DialogRef;
+  globalDialog = inject(Dialog);
+
+  loadingRef: DialogRef;
+
+  messageService = inject(MessageService);
+
+  openModal(template: TemplateRef<any> | ComponentType<any>, options?: DialogConfig): Promise<any> {
     return new Promise((resolve) => {
-      this.messageService.set('wui:dialog', params);
-      let sub = this.messageService.get('wui:dialog:result').pipe(take(1)).subscribe(e => {
+      this.currentAppDialogRef = this.appDialog.open(template, options);
+      let sub = this.currentAppDialogRef.closed.subscribe(result => {
         sub.unsubscribe();
-        resolve(e);
+        resolve(result);
+      });
+    });
+  }
+
+  closeModal(result?: any) : void {
+    this.currentAppDialogRef.close(result);
+  }
+
+  openModalRaw(template: TemplateRef<any> | ComponentType<any>, options?: DialogConfig): DialogRef<any> {
+    this.currentAppDialogRef = this.appDialog.open(template, options);
+    return this.currentAppDialogRef;
+  }
+
+  openDialog(template: TemplateRef<any> | ComponentType<any>, options?: DialogConfig): DialogRef<any> {
+    this.currentGlobalDialogRef = this.globalDialog.open(template, options);
+    return this.currentGlobalDialogRef;
+  }
+
+  closeDialog(result?: any): void {
+    this.currentGlobalDialogRef.close(result);
+  }
+
+  dialog(params: any, options: DialogConfig = { width: '400px', disableClose: true }) {
+    return new Promise((resolve) => {
+      let ref = this.openDialog(DialogComponent, Object.assign({ data: params }, options ?? {}));
+      let sub = ref.closed.subscribe(result => {
+        sub.unsubscribe();
+        resolve(result);
       });
     });
   }
@@ -30,11 +68,13 @@ export class WuiService {
   }
 
   openLoading() {
-    this.messageService.set('wui:loading', true);
+    this.loadingRef = this.openDialog(LoadingDialogComponent, {
+      disableClose: true
+    });
   }
 
   closeLoading() {
-    this.messageService.set('wui:loading', false);
+    this.loadingRef.close();
   }
 
   actionSheet(params: any) {

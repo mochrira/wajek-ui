@@ -55,57 +55,39 @@
 }
 
 
-wui-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
+.wui-modal {
+    background-color: white;
+    overflow: hidden;
+    border-radius: 1rem;
 
-    .wui-modal {
-        &-inner {
-            width: calc(100% - 2rem);
-            max-width: 350px;
-            border-radius: .5rem;
-            box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
-            background-color: white;
-            max-height: calc(100% - 4rem);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+    &-header {
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+        font-weight: 500;
+        color: rgba(0,0,0,.87);
+        padding: 1.25rem 1.5rem;
+        width: 100%;
+        flex: 0 0 auto;
+
+        .wui-button:last-child {
+            margin-right: -.375rem;
         }
+    }
 
-        &-header {
-            font-size: 1.25rem;
-            line-height: 1.25rem;
-            font-weight: 500;
-            color: rgba(0,0,0,.87);
-            padding: 1.25rem 1.5rem;
-            width: 100%;
-            background-color: white;
-            flex: 0 0 auto;
+    &-content {
+        padding: 0 1.5rem 1.25rem;
+        overflow: auto;
+        flex: 1 1 auto;
+        position: relative;
 
-            .wui-button:last-child {
-                margin-right: -.375rem;
-            }
+        &-no-padding {
+            padding: 0;
         }
+    }
 
-        &-content {
-            padding: 0 1.5rem 1.25rem;
-            overflow: auto;
-            flex: 1 1 auto;
-            position: relative;
-
-            &-no-padding {
-                padding: 0;
-            }
-        }
-
-        &-footer {
-            padding: 0 1.5rem 1.25rem;
-            flex: 0 0 auto;
-        }
+    &-footer {
+        padding: 0 1.5rem 1.25rem;
+        flex: 0 0 auto;
     }
 
     &.show {

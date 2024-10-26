@@ -1,18 +1,11 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'wui-loading-dialog',
   template: `
-    <div class="wui-backdrop" [class.show]="show"></div>
-    <div class="wui-loading-dialog-inner">
+    <div class="wui-loading-dialog">
       <wui-loading mode="circular"></wui-loading>
     </div>
   `
 })
-export class LoadingDialogComponent {
-
-  @Input('show') @HostBinding('class.show') show = false;
-
-  constructor() { }
-
-}
+export class LoadingDialogComponent { }

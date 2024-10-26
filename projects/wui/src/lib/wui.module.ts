@@ -31,6 +31,8 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
 import { NumInputDirective } from './directives/num-input.directive';
 import { SortableDirective } from './directives/sortable.directive';
 import { ToggleComponent } from './components/toggle/toggle.component';
+import { AppDialog, AppDialogOverlay, AppDialogOverlayContainer } from './components/app/app-dialog';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { ToggleComponent } from './components/toggle/toggle.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DialogModule
   ],
   exports: [
     WuiComponent,
@@ -120,7 +123,11 @@ import { ToggleComponent } from './components/toggle/toggle.component';
   ], 
   providers: [
     DatePipe,
-    DecimalPipe
+    DecimalPipe,
+
+    AppDialog,
+    AppDialogOverlay,
+    AppDialogOverlayContainer
   ]
 })
 export class WuiModule {

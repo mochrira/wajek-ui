@@ -15,7 +15,7 @@ import { ListComponent } from './pages/list/list.component';
 import { SortableComponent } from './pages/sortable/sortable.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { GridComponent } from './pages/grid/grid.component';
-import { ArtikelComponent } from './pages/artikel/artikel.component';
+import { ArtikelComponent, ModalShareComponent } from './pages/artikel/artikel.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TableComponent } from './pages/table/table.component';
@@ -34,7 +34,8 @@ import { TableComponent } from './pages/table/table.component';
         ArtikelComponent,
         LoginComponent,
         AdminComponent,
-        TableComponent
+        TableComponent,
+        ModalShareComponent
     ],
     imports: [
         CommonModule,
