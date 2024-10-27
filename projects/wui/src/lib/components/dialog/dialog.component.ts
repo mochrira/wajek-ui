@@ -1,67 +1,32 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { take, takeUntil } from 'rxjs/operators';
-import { MessageService } from '../../services/message.service';
-import { ModalComponent } from '../modal/modal.component';
-import { Subject } from 'rxjs';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'wui-dialog',
   template: `
-  <wui-modal #modal>
-    <div class="wui-modal-header">{{title}}</div>
-    <div class="wui-modal-content">{{message}}</div>
-    <div class="wui-modal-footer">
-      <div class="d-flex justify-content-end">
-        <button class="wui-button wui-button-smooth {{getClasses(i)}}" *ngFor="let button of buttons; let i = index" (click)="click(i)">
-          {{getCaption(i)}}
-        </button>
+    <div class="wui-modal">
+      <div class="wui-modal-inner">
+        <div class="wui-modal-header">{{data?.title ?? ""}}</div>
+        <div class="wui-modal-content">{{data?.message ?? ""}}</div>
+        <div class="wui-modal-footer">
+          <div class="d-flex justify-content-end">
+            @for(caption of (data?.buttons ?? []); track $index) {
+              <button class="wui-button wui-button-smooth" (click)="close($index)">
+                {{caption}}
+              </button>
+            }
+          </div>
+        </div>
       </div>
     </div>
-  </wui-modal>`,
-  styles: [`
-    .wui-button:not(:last-child) {
-      margin-right: .5rem;
-    }
-  `]
+  `
 })
-export class DialogComponent implements OnInit {
 
-  @ViewChild('modal') modal?: ModalComponent;
-  title: string = '';
-  message: string = '';
-  buttons: Array<any> = [];
+export class DialogComponent {
+  data = inject(DIALOG_DATA);
+  ref = inject(DialogRef);
 
-  private unsub: Subject<any> = new Subject();
-
-  constructor(
-    private messageService: MessageService
-  ) { }
-
-  async click(index: number) {
-    await this.modal?.close();
-    this.messageService.set('wui:dialog:result', index);
+  close(index) {
+    this.ref.close(index);
   }
-
-  getCaption(index: number) {
-    return (typeof this.buttons[index] == 'string' ? this.buttons[index] : (this.buttons[index]?.caption || ''));
-  }
-
-  getClasses(index: number) {
-    return (typeof this.buttons[index] == 'string' ? '' : (this.buttons[index]?.cssClasses || ''));
-  }
-
-  ngOnInit() { 
-    this.messageService.get('wui:dialog').pipe(takeUntil(this.unsub)).subscribe(async e => {
-      this.title = e.title || '';
-      this.message = e.message || '';
-      this.buttons = e.buttons || [];
-      await this.modal?.open();
-    });
-  }
-
-  ngOnDestroy() {
-    this.unsub.next(null);
-    this.unsub.complete();
-  }
-
 }

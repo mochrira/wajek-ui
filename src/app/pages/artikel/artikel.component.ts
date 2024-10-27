@@ -19,11 +19,10 @@ export class ArtikelComponent {
       buttons: ['Batal', 'Share']
     });
     if(res == 1) {
-      this.wuiService.dialog({
-        title: 'Agree',
-        message: 'Viola, you agree to share this article to Facebook !',
-        buttons: ['Ok']
-      });
+      this.wuiService.openLoading();
+      setTimeout(() => {
+        this.wuiService.closeLoading();
+      }, 5000);
     }
   }
 

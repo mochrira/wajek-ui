@@ -5,6 +5,7 @@
   "assets": [
     "./scss/**/*"
   ],
+  "allowedNonPeerDependencies": ["@angular/cdk"],
   "lib": {
     "entryFile": "src/public_api.ts"
   }

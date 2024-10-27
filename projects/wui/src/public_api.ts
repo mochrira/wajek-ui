@@ -19,7 +19,6 @@ export * from './lib/components/loading/loading.component';
 export * from './lib/components/app/app.component';
 export * from './lib/components/form-field/form-field.component';
 export * from './lib/components/snackbar/snackbar.component';
-export * from './lib/components/dialog/dialog.component';
 export * from './lib/directives/page-header.directive';
 export * from './lib/components/page/page.component';
 export * from './lib/services/router.service';
@@ -32,5 +31,7 @@ export * from './lib/components/icon/icon.component';
 export * from './lib/components/menu/menu.component';
 export * from './lib/directives/num-input.directive';
 export * from './lib/directives/sortable.directive';
+export * from './lib/components/app/app-dialog';
+export * from './lib/components/dialog/dialog.component';
 
 export * from './lib/components/toggle/toggle.component';

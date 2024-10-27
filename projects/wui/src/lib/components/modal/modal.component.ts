@@ -1,111 +1,37 @@
-import { Component, OnInit, Input, HostBinding, TemplateRef, Renderer2 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { NavService } from '../../services/nav.service';
-import { ModalService } from '../../services/modal.service';
-import { ModalInterface } from '../../interfaces/modal.interface';
+import { Component, Input, TemplateRef, inject, ViewChild } from '@angular/core';
+import { DialogRef } from '@angular/cdk/dialog';
+import { AppDialog } from '../app/app-dialog';
 
 @Component({
   selector: 'wui-modal',
   template: `
-    <div class="wui-backdrop" [class.show]="show && showBackdrop"></div>
-    <div class="wui-modal-inner" [style.maxWidth.px]="_width">
-      <ng-content></ng-content>
-    </div>
+    <ng-template #template>
+      <div class="wui-modal">
+        <div class="wui-modal-inner">
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </ng-template>
   `
 })
-export class ModalComponent implements ModalInterface, OnInit {
+export class ModalComponent {
 
-  showBackdrop = true;
-  @HostBinding('style.z-index') zIndex: number = -1;
-  @HostBinding('class.show') show: boolean = false;
-  @HostBinding('class.leave') leave: boolean = false;
+  appDialog = inject(AppDialog);
+  modalRef: DialogRef;
 
-  @Input('mode') mode: string = 'center';
-  @HostBinding('class.mode-center') get isModeCenter(): boolean {
-    return this.mode == 'center';
-  }
+  @ViewChild('template') template: TemplateRef<any>;
+  @Input('width') _width: string = '350px';
+  @Input('disableClose') _disableClose: boolean = false;
 
-  @HostBinding('class.mode-bottom') get isModeBottom(): boolean {
-    return this.mode == 'bottom';
-  }
-
-  @HostBinding('style.animation-duration') get duration(): number {
-    return this._duration;
-  }
-
-  @Input('width') _width: number = 350;
-  @Input('duration') _duration: number = 200;
-
-  navId: string | null = null;
-  private unsub: Subject<any> = new Subject();
-
-  constructor(
-    private navService: NavService,
-    private modalService: ModalService
-  ) { }
-
-  openService(zIndex: number = -1): Promise<void> {
-    return new Promise((resolve) => {
-      this.zIndex = zIndex;
-      if(this.leave) {
-        setTimeout(() => {
-          this.show = true;
-          resolve();
-        }, this.duration);
-      }
-      this.show = true;
-      resolve();
+  open() {
+    this.modalRef = this.appDialog.open(this.template, {
+      width: this._width,
+      disableClose: this._disableClose
     });
   }
 
-  open(): Promise<void> { 
-    return new Promise(async (resolve) => {
-      await this.modalService.open(this);
-      resolve();
-    });
-  }
-
-  close(): Promise<void> { 
-    return new Promise(async (resolve) => {
-      await this.modalService.close();
-      resolve();
-    });
-  }
-
-  closeService(): Promise<void> {
-    return new Promise((resolve) => {
-      this.leave = true;
-      setTimeout(() => {
-        this.show = false;
-        this.leave = false;
-        resolve();
-      }, this.duration);
-    });
-  }
-
-  ngOnInit() {
-    this.navService.events.pipe(takeUntil(this.unsub)).subscribe(e => {
-      if(e?.type !== 'reply') {
-        return;
-      }
-
-      if(this.navId == null) {
-        this.navId = e.navId;
-      }
-
-      if(e.action == 'pop') {
-        console.log('pop', e);
-      }
-
-      if(e.action == 'push') {
-        console.log('push', e);
-      }
-    });    
-  }
-
-  ngOnDestroy() {
-    this.unsub.next(null);
+  close() {
+    this.modalRef.close();
   }
 
 }
