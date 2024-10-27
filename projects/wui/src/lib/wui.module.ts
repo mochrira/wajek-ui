@@ -12,7 +12,6 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { ModalComponent } from './components/modal/modal.component';
 import { WuiService } from './services/wui.service';
 import { NavComponent } from './components/nav/nav.component';
-import { NavService } from './services/nav.service';
 import { NavPopDirective, NavPushDirective, NavRootDirective } from './directives/nav.directive';
 import { RippleDirective } from './directives/ripple.directive';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -22,7 +21,6 @@ import { ScrollEndDirective } from './directives/scroll-end.directive';
 import { PageHeaderDirective } from './directives/page-header.directive';
 import { PageComponent } from './components/page/page.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
-import { RouterService } from './services/router.service';
 import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective } from './components/drawer/drawer.component';
 import { ListComponent, ListTileComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -31,6 +29,8 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
 import { NumInputDirective } from './directives/num-input.directive';
 import { SortableDirective } from './directives/sortable.directive';
 import { ToggleComponent } from './components/toggle/toggle.component';
+import { AppDialog, AppDialogOverlay, AppDialogOverlayContainer } from './components/app/app-dialog';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,8 @@ import { ToggleComponent } from './components/toggle/toggle.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DialogModule
   ],
   exports: [
     WuiComponent,
@@ -117,30 +118,23 @@ import { ToggleComponent } from './components/toggle/toggle.component';
     SortableDirective,
 
     ToggleComponent
-  ], 
-  providers: [
-    DatePipe,
-    DecimalPipe
   ]
 })
 export class WuiModule {
 
-  static forRoot(predefinedNavs?: any): ModuleWithProviders<WuiModule> {
+  static forRoot(): ModuleWithProviders<WuiModule> {
     return {
       ngModule: WuiModule,
       providers: [
-        RouterService,
+        DatePipe,
+        DecimalPipe,
+
+        AppDialogOverlayContainer,
+        AppDialogOverlay,
+        AppDialog,
+
         WuiService,
-        MessageService,
-        NavService,
-        {
-          provide: 'predefinedNavs',
-          useValue: predefinedNavs
-        },
-        {
-          provide: 'wuiRoutes', 
-          useValue: predefinedNavs
-        }
+        MessageService
       ]
     };
   }

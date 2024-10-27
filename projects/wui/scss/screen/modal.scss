@@ -54,6 +54,50 @@
 
 }
 
+.wui-modal {
+    &-inner {
+        width: 100%;
+        border-radius: .5rem;
+        box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
+        background-color: white;
+        max-height: calc(100% - 4rem);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-header {
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+        font-weight: 500;
+        color: rgba(0,0,0,.87);
+        padding: 1.25rem 1.5rem;
+        width: 100%;
+        background-color: white;
+        flex: 0 0 auto;
+
+        .wui-button:last-child {
+            margin-right: -.375rem;
+        }
+    }
+
+    &-content {
+        padding: 0 1.5rem 1.25rem;
+        overflow: auto;
+        flex: 1 1 auto;
+        position: relative;
+
+        &-no-padding {
+            padding: 0;
+        }
+    }
+
+    &-footer {
+        padding: 0 1.5rem 1.25rem;
+        flex: 0 0 auto;
+    }
+}
+
 
 wui-modal {
     position: fixed;
@@ -108,55 +152,55 @@ wui-modal {
         }
     }
 
-    &.show {
-        display: flex;
-        justify-content: center;
+    // &.show {
+    //     display: flex;
+    //     justify-content: center;
 
-        &.mode {
-            &-center {
-                align-items: center;
+    //     &.mode {
+    //         &-center {
+    //             align-items: center;
 
-                > .wui-modal-inner {
-                    animation-name: modalShow;
-                    animation-duration: .2s;
-                    animation-fill-mode: forwards;
-                }
-            }
+    //             > .wui-modal-inner {
+    //                 animation-name: modalShow;
+    //                 animation-duration: .2s;
+    //                 animation-fill-mode: forwards;
+    //             }
+    //         }
 
-            &-bottom {
-                align-items: end;
+    //         &-bottom {
+    //             align-items: end;
 
-                > .wui-modal-inner {
-                    animation-name: showModalFromBottom;
-                    animation-duration: .2s;
-                    animation-fill-mode: forwards;
-                    border-bottom-right-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
-            }
-        }
+    //             > .wui-modal-inner {
+    //                 animation-name: showModalFromBottom;
+    //                 animation-duration: .2s;
+    //                 animation-fill-mode: forwards;
+    //                 border-bottom-right-radius: 0;
+    //                 border-bottom-left-radius: 0;
+    //             }
+    //         }
+    //     }
 
-        &.leave {
+    //     &.leave {
 
-            &.mode {
-                &-center {
-                    .wui-modal-inner {
-                        animation-name: modalHide;
-                        animation-duration: .2s;
-                        animation-fill-mode: forwards;
-                    }
-                }
+    //         &.mode {
+    //             &-center {
+    //                 .wui-modal-inner {
+    //                     animation-name: modalHide;
+    //                     animation-duration: .2s;
+    //                     animation-fill-mode: forwards;
+    //                 }
+    //             }
 
-                &-bottom {
-                    .wui-modal-inner {
-                        animation-name: hideModalToBottom;
-                        animation-duration: .2s;
-                        animation-fill-mode: forwards;
-                    }
-                }
-            }
-        }
-    }
+    //             &-bottom {
+    //                 .wui-modal-inner {
+    //                     animation-name: hideModalToBottom;
+    //                     animation-duration: .2s;
+    //                     animation-fill-mode: forwards;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 
 }

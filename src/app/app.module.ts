@@ -43,11 +43,7 @@ import { TableComponent } from './pages/table/table.component';
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
-        WuiModule.forRoot({
-            'HomeComponent': HomeComponent,
-            'UserComponent': UserComponent,
-            'ControlComponent': ControlComponent
-        })
+        WuiModule.forRoot()
     ],
     providers: [],
     bootstrap: [AppComponent]
