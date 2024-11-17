@@ -31,6 +31,7 @@ import { SortableDirective } from './directives/sortable.directive';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { AppDialog, AppDialogOverlay, AppDialogOverlayContainer } from './components/app/app-dialog';
 import { DialogModule } from '@angular/cdk/dialog';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { DialogModule } from '@angular/cdk/dialog';
   imports: [
     CommonModule,
     FormsModule,
-    DialogModule
+    DialogModule,
+    A11yModule
   ],
   exports: [
     WuiComponent,
