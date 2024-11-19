@@ -37,7 +37,7 @@
             </div>
 
             <div class="py-5">
-                <button class="wui-button wui-button-primary mr-2" (click)="modalShare.open()">
+                <button class="wui-button wui-button-primary mr-2" routerLink="share">
                     Share <wui-icon icon="share-circle" class="trailing"></wui-icon>
                 </button>
             </div>
@@ -93,3 +93,5 @@
         </wui-list>
     </div>
 </wui-modal>
+
+<router-outlet></router-outlet>

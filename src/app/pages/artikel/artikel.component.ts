@@ -10,7 +10,11 @@ export class ArtikelComponent {
 
   constructor(
     private wuiService: WuiService
-  ) {}
+  ) { }
+
+  async share() {
+    
+  }
 
   async shareToFacebook() {
     let res: any = await this.wuiService.dialog({

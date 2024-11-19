@@ -1,8 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, TemplateRef } from '@angular/core';
 import { MessageService } from './message.service';
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { LoadingDialogComponent } from '../components/loading-dialog/loading-dialog.component';
+import { ComponentType } from '@angular/cdk/portal';
+import { AppDialog } from '../components/app/app-dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,14 @@ import { LoadingDialogComponent } from '../components/loading-dialog/loading-dia
 export class WuiService {
 
   messageService = inject(MessageService);
+  
   rootDialog = inject(Dialog);
+  appDialog = inject(AppDialog);
   loadingRef: DialogRef;
+
+  modal(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
+    return this.appDialog.open(component, config);
+  }
 
   dialog(params: any) {
     return new Promise((resolve) => {
