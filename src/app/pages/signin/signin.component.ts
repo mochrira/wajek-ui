@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { DialogRef } from '@angular/cdk/dialog';
+import { Component, inject, OnInit, TemplateRef, viewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PageService } from '@wajek/wui';
 
 @Component({
   selector: 'app-signin',
@@ -7,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
+  pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
+  pageService = inject(PageService);
+
   constructor() { }
 
   submit() {
@@ -14,6 +20,7 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pageService.replace(this.pageTemplate());
   }
 
 }

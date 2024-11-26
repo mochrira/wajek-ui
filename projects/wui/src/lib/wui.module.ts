@@ -29,9 +29,11 @@ import { LoadingDialogComponent } from './components/loading-dialog/loading-dial
 import { NumInputDirective } from './directives/num-input.directive';
 import { SortableDirective } from './directives/sortable.directive';
 import { ToggleComponent } from './components/toggle/toggle.component';
-import { AppDialog, AppDialogOverlay, AppDialogOverlayContainer } from './components/app/app-dialog';
 import { DialogModule } from '@angular/cdk/dialog';
 import { A11yModule } from '@angular/cdk/a11y';
+import { PageHostComponent } from './components/page/page-host.component';
+import { WuiPage, WuiPageOverlay, WuiPageOverlayContainer } from './components/page/page-overlay';
+import { WuiModal, WuiModalOverlay, WuiModalOverlayContainer } from './components/modal/modal-overlay';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     FormFieldComponent,
     AppComponent,
     DatepickerComponent,
-    ModalComponent,
+
     NavComponent,
     NavPopDirective,
     NavRootDirective,
@@ -55,8 +57,10 @@ import { A11yModule } from '@angular/cdk/a11y';
     PageHeaderDirective,
 
     ModalComponent,
-    IconComponent,
     PageComponent,
+    PageHostComponent,
+
+    IconComponent,
     AppBarComponent,
     DrawerComponent,
     DrawerItemComponent,
@@ -131,9 +135,13 @@ export class WuiModule {
         DatePipe,
         DecimalPipe,
 
-        AppDialogOverlayContainer,
-        AppDialogOverlay,
-        AppDialog,
+        WuiModalOverlayContainer,
+        WuiModalOverlay,
+        WuiModal,
+
+        WuiPageOverlayContainer,
+        WuiPageOverlay,
+        WuiPage,
 
         WuiService,
         MessageService

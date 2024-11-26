@@ -2,7 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppDialog, WuiService } from '@wajek/wui';
+import { WuiService } from '@wajek/wui';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

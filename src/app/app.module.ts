@@ -20,6 +20,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TableComponent } from './pages/table/table.component';
 import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.component';
+import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comments.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.compo
         LoginComponent,
         AdminComponent,
         TableComponent,
-        ArtikelShareComponent
+        ArtikelShareComponent,
+        ArtikelCommentsComponent
     ],
     imports: [
         CommonModule,

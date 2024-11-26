@@ -1,48 +1,35 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, Renderer2, ElementRef } from '@angular/core';
 import { MessageService } from '../../services/message.service';
-import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AppDialog } from './app-dialog';
+import { WuiModal } from '../modal/modal-overlay';
 
 @Component({
   selector: 'wui-app',
   template: `
   <ng-content select="wui-drawer"></ng-content>
   <div class="wui-app-main">
-    <ng-content></ng-content>
+    <ng-content/>
+    <wui-page-host/>
   </div>
-  <wui-snackbar></wui-snackbar>
+  <wui-snackbar/>
   `
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  appDialog = inject(AppDialog);
+  messageService = inject(MessageService);
+  wuiModal = inject(WuiModal);
   elementRef = inject(ElementRef);
   renderer = inject(Renderer2);
 
   @ViewChild('tooltip') tooltip?: any;
-  @ViewChild('loadingDialog') loadingDialog?: LoadingDialogComponent;
-  showLoading = false;
-
-  backdropShow = false;
-  backdropZIndex = -1;
-
   private unsub: Subject<any> = new Subject();
 
-  constructor(
-    private messageService: MessageService,
-    private cd: ChangeDetectorRef
-  ) {
-    this.appDialog.setContainerElement(this.elementRef.nativeElement, this.renderer);
+  constructor() {
+    this.wuiModal.setContainerElement(this.elementRef.nativeElement, this.renderer);
   }
 
   ngOnInit() {
-    this.messageService.get('wui:loading').pipe(takeUntil(this.unsub)).subscribe(showLoading => {
-      this.showLoading = showLoading;
-      this.cd.detectChanges();
-    });
-
     this.messageService.get('wui:tooltip').pipe(takeUntil(this.unsub)).subscribe(params => {
       this.tooltip.nativeElement.textContent = params.label;
       let rect = params.el.getBoundingClientRect();
@@ -54,15 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.messageService.get('wui:tooltip:hide').pipe(takeUntil(this.unsub)).subscribe(params => {
       this.tooltip.nativeElement.classList.remove('show');
     });
-
-    this.messageService.get('wui:backdrop').pipe(takeUntil(this.unsub)).subscribe(params => {
-      this.backdropShow = params.show ?? false;
-      if(!this.backdropShow) {
-        this.backdropZIndex = -1;
-      } else {
-        this.backdropZIndex = params.zIndex;
-      }
-    })
   }
 
   ngOnDestroy() {

@@ -1,34 +1,21 @@
-import { Injectable } from '@angular/core';
-import { ModalInterface } from '../interfaces/modal.interface';
+import { inject, Injectable, TemplateRef } from '@angular/core';
+import { ComponentType } from '@angular/cdk/portal';
+import { DialogConfig, DialogRef } from '@angular/cdk/dialog';
+import { WuiModal } from '../components/modal/modal-overlay';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
-  instances: Array<ModalInterface> = [];
+  wuiModal = inject(WuiModal);
 
-  constructor() { }
-
-  async open(instance: ModalInterface) {
-    let zIndex = 99;
-    if(this.instances.length > 0) {
-      zIndex = this.instances[this.instances.length - 1].zIndex + 1;
-      this.instances.forEach(instance => {
-        instance.showBackdrop = false;
-      });
-    }
-    instance.zIndex = zIndex;
-    this.instances.push(instance);
-    return await instance.openService(zIndex);
+  open(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
+    return this.wuiModal.open(component, config);
   }
 
-  async close() {
-    await this.instances[this.instances.length - 1].closeService();
-    this.instances.pop();
-    if(this.instances.length > 0) {
-      this.instances[this.instances.length - 1].showBackdrop = true;
-    }
+  closeAll() {
+    this.wuiModal.closeAll();
   }
 
 }

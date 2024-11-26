@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { WuiService } from '@wajek/wui';
+import { Component, inject, TemplateRef, viewChild, ViewChild } from '@angular/core';
+import { PageService, WuiService } from '@wajek/wui';
 
 @Component({
   selector: 'app-artikel',
@@ -8,9 +8,17 @@ import { WuiService } from '@wajek/wui';
 })
 export class ArtikelComponent {
 
+  pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
+  pageService = inject(PageService);
+
   constructor(
     private wuiService: WuiService
   ) { }
+
+  ngOnInit() {
+    console.log('artikel init');
+    let pageRef = this.pageService.replace(this.pageTemplate());
+  }
 
   async share() {
     

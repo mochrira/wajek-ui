@@ -7,6 +7,8 @@ export * from './lib/wui.module';
 export * from './lib/services/message.service';
 export * from './lib/services/wui.service';
 export * from './lib/services/nav.service';
+export * from './lib/services/page.service';
+
 export * from './lib/components/modal/modal.component';
 export * from './lib/components/datepicker/datepicker.component';
 export * from './lib/components/dateselect/dateselect.component';
@@ -31,7 +33,6 @@ export * from './lib/components/icon/icon.component';
 export * from './lib/components/menu/menu.component';
 export * from './lib/directives/num-input.directive';
 export * from './lib/directives/sortable.directive';
-export * from './lib/components/app/app-dialog';
 export * from './lib/components/dialog/dialog.component';
 
 export * from './lib/components/toggle/toggle.component';

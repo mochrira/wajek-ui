@@ -4,7 +4,7 @@ import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { LoadingDialogComponent } from '../components/loading-dialog/loading-dialog.component';
 import { ComponentType } from '@angular/cdk/portal';
-import { AppDialog } from '../components/app/app-dialog';
+import { WuiModal } from '../components/modal/modal-overlay';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,17 @@ import { AppDialog } from '../components/app/app-dialog';
 export class WuiService {
 
   messageService = inject(MessageService);
-  
   rootDialog = inject(Dialog);
-  appDialog = inject(AppDialog);
   loadingRef: DialogRef;
 
+  wuiModal = inject(WuiModal);
+  /**
+   * 
+   * @deprecated This method included on future deprecation, use modalService.open()
+   * 
+   */
   modal(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
-    return this.appDialog.open(component, config);
+    return this.wuiModal.open(component, config);
   }
 
   dialog(params: any) {

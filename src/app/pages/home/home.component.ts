@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef, viewChild, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { DatepickerComponent, WuiService } from '@wajek/wui';
+import { DatepickerComponent, PageService, WuiService } from '@wajek/wui';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit{
 
   tanggal = new Date();
   jumlah = 500000;
+
+  pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
+  pageService = inject(PageService);
 
   constructor(
     private wuiService: WuiService
@@ -53,7 +56,7 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.formPengguna);
+    this.pageService.replace(this.pageTemplate());
   }
 
 }
