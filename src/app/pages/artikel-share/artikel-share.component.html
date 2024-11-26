@@ -1,0 +1,22 @@
+<ng-template #dialogTpl>
+    <form [formGroup]="formShare" (submit)="submit()">
+        <div class="wui-modal-inner">
+            <div class="wui-modal-header d-flex align-items-center">
+                <div class="flex-grow-1">Share To...</div>
+                <button class="wui-button wui-button-icon wui-button-smooth" tabindex=-1 type="button" (click)="close()">
+                    <wui-icon icon="close"></wui-icon>
+                </button>
+            </div>
+            <div class="wui-modal-content pt-3">
+                <wui-form-field class="wui-form-field-boxed">
+                    <label for="social">Social</label>
+                    <input id="social" type="text" wuiInput formControlName="social">
+                </wui-form-field>
+            </div>
+            <div class="wui-modal-footer d-flex align-items-center justify-content-between">
+                <button class="wui-button" type="button" (click)="close()">Close</button>
+                <button class="wui-button wui-button-primary" type="submit">Simpan</button>
+            </div>
+        </div>
+    </form>
+</ng-template>

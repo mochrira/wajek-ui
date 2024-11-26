@@ -1,37 +1,24 @@
-import { Component, Input, TemplateRef, inject, ViewChild } from '@angular/core';
-import { DialogRef } from '@angular/cdk/dialog';
-import { AppDialog } from '../app/app-dialog';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'wui-modal',
   template: `
-    <ng-template #template>
-      <div class="wui-modal">
-        <div class="wui-modal-inner">
-          <ng-content></ng-content>
-        </div>
-      </div>
-    </ng-template>
+    <div class="wui-modal-inner" [style.max-width]="width" cdkTrapFocus>
+      <ng-content></ng-content>
+    </div>
   `
 })
 export class ModalComponent {
 
-  appDialog = inject(AppDialog);
-  modalRef: DialogRef;
-
-  @ViewChild('template') template: TemplateRef<any>;
-  @Input('width') _width: string = '350px';
-  @Input('disableClose') _disableClose: boolean = false;
+  @Input('width') width = '300px';
+  @HostBinding('class.show') show = false;
 
   open() {
-    this.modalRef = this.appDialog.open(this.template, {
-      width: this._width,
-      disableClose: this._disableClose
-    });
+    this.show = true;
   }
 
   close() {
-    this.modalRef.close();
+    this.show = false;
   }
 
 }

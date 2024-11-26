@@ -8,6 +8,8 @@ import { ArtikelComponent } from "./pages/artikel/artikel.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AdminComponent } from "./pages/admin/admin.component";
 import { TableComponent } from "./pages/table/table.component";
+import { ArtikelShareComponent } from "./pages/artikel-share/artikel-share.component";
+import { ArtikelCommentsComponent } from "./pages/artikel-comments/artikel-comments.component";
 
 const routes: Routes = [{
     path: 'login', component: LoginComponent
@@ -16,7 +18,11 @@ const routes: Routes = [{
 }, {
     path: 'home', component: HomeComponent
 }, {
-    path: 'artikel', component: ArtikelComponent
+    path: 'artikel', component: ArtikelComponent, children: [{
+        path: 'share', component: ArtikelShareComponent
+    }, {
+        path: 'comments', component: ArtikelCommentsComponent
+    }]
 }, {
     path: 'list', component: ListComponent
 }, {

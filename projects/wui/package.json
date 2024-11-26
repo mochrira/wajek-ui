@@ -1,7 +1,4 @@
 {
   "name": "@wajek/wui",
-  "version": "17.0.3",
-  "devDependencies": {
-    "@angular/cdk": "^17.3.10"
-  }
+  "version": "17.1.0"
 }

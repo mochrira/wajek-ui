@@ -101,11 +101,11 @@
 
 wui-modal {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     height: 100%;
     display: none;
+    background-color: rgba(0, 0, 0, 0.32);
 
     .wui-modal {
         &-inner {
@@ -152,55 +152,69 @@ wui-modal {
         }
     }
 
-    // &.show {
-    //     display: flex;
-    //     justify-content: center;
+    > .wui-modal-inner {
+        animation-name: modalHide;
+        animation-duration: .2s;
+        animation-fill-mode: forwards;
+    }
 
-    //     &.mode {
-    //         &-center {
-    //             align-items: center;
+    &.show {
+        display: flex;
+        justify-content: center;
+        z-index: 99;
+        align-items: center;
 
-    //             > .wui-modal-inner {
-    //                 animation-name: modalShow;
-    //                 animation-duration: .2s;
-    //                 animation-fill-mode: forwards;
-    //             }
-    //         }
+        > .wui-modal-inner {
+            animation-name: modalShow;
+            animation-duration: .2s;
+            animation-fill-mode: forwards;
+        }
 
-    //         &-bottom {
-    //             align-items: end;
+        &.mode {
+            &-center {
+                align-items: center;
 
-    //             > .wui-modal-inner {
-    //                 animation-name: showModalFromBottom;
-    //                 animation-duration: .2s;
-    //                 animation-fill-mode: forwards;
-    //                 border-bottom-right-radius: 0;
-    //                 border-bottom-left-radius: 0;
-    //             }
-    //         }
-    //     }
+                > .wui-modal-inner {
+                    animation-name: modalShow;
+                    animation-duration: .2s;
+                    animation-fill-mode: forwards;
+                }
+            }
 
-    //     &.leave {
+            &-bottom {
+                align-items: end;
 
-    //         &.mode {
-    //             &-center {
-    //                 .wui-modal-inner {
-    //                     animation-name: modalHide;
-    //                     animation-duration: .2s;
-    //                     animation-fill-mode: forwards;
-    //                 }
-    //             }
+                > .wui-modal-inner {
+                    animation-name: showModalFromBottom;
+                    animation-duration: .2s;
+                    animation-fill-mode: forwards;
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
 
-    //             &-bottom {
-    //                 .wui-modal-inner {
-    //                     animation-name: hideModalToBottom;
-    //                     animation-duration: .2s;
-    //                     animation-fill-mode: forwards;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+        &.leave {
+
+            &.mode {
+                &-center {
+                    .wui-modal-inner {
+                        animation-name: modalHide;
+                        animation-duration: .2s;
+                        animation-fill-mode: forwards;
+                    }
+                }
+
+                &-bottom {
+                    .wui-modal-inner {
+                        animation-name: hideModalToBottom;
+                        animation-duration: .2s;
+                        animation-fill-mode: forwards;
+                    }
+                }
+            }
+        }
+    }
 
 
 }
