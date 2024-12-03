@@ -25,6 +25,10 @@ export class ArtikelShareComponent {
     social: new FormControl(null, Validators.required)
   });
 
+  close() {
+    this.modalRef?.close();
+  }
+
   submit() {
     this.wuiService.openLoading();
     setTimeout(() => {
@@ -34,16 +38,13 @@ export class ArtikelShareComponent {
   }
 
   ngOnInit() {
-    this.modalRef = this.wuiService.modal(this.dialogTpl, {width: '400px'});
+    this.modalRef = this.wuiService.modal(this.dialogTpl, { width: '400px', closeOnDestroy: true });
     this.modalRef.closed.pipe(takeUntil(this.unsub)).subscribe(closed => {
+      console.log('share closed');
       this.router.navigate(['../'], {
         relativeTo: this.activatedRoute
       });
     });
-  }
-
-  close() {
-    this.modalRef?.close();
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, Renderer2, ElementRef, viewChild } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { WuiModal } from '../modal/modal-overlay';
   selector: 'wui-app',
   template: `
   <ng-content select="wui-drawer"></ng-content>
-  <div class="wui-app-main">
+  <div class="wui-app-main" #appMain>
     <ng-content/>
     <wui-page-host/>
   </div>

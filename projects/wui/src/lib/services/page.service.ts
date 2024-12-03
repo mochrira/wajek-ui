@@ -9,29 +9,32 @@ import { ComponentType } from '@angular/cdk/portal';
 export class PageService {
 
   private wuiPage = inject(WuiPage);
-  private config: DialogConfig = {
-    hasBackdrop: false,
-    width: '100%',
-    disableClose: true,
-    autoFocus: false
-  };
   isCloseAll = false;
 
   constructor() { }
 
-  open(component: ComponentType<any> | TemplateRef<any>): DialogRef {
-    return this.wuiPage.open(component, this.config);
+  open(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
+    if(config == null) config = {};
+    if(config.width == null) config.width = '100%';
+    if(config.autoFocus = null) config.autoFocus = false;
+    if(config.closeOnNavigation == null) config.closeOnNavigation = true;
+    if(config.closeOnDestroy == null) config.closeOnDestroy = true;
+    console.log('open', config);
+    return this.wuiPage.open(component, config);
+  }
+
+  replace(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
+    this.closeAll();
+    if(config == null) config = {};
+    if(config.closeOnNavigation == null) config.closeOnNavigation = false;
+    console.log('replace', config);
+    return this.open(component, config);
   }
 
   closeAll() {
     this.isCloseAll = true;
     this.wuiPage.closeAll();
     this.isCloseAll = false;
-  }
-
-  replace(component: ComponentType<any> | TemplateRef<any>): DialogRef {
-    this.closeAll();
-    return this.open(component);
   }
 
 }

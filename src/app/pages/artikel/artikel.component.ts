@@ -1,28 +1,23 @@
-import { Component, inject, TemplateRef, viewChild, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, TemplateRef, viewChild, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageService, WuiService } from '@wajek/wui';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-artikel',
   templateUrl: './artikel.component.html',
   styleUrl: './artikel.component.scss'
 })
-export class ArtikelComponent {
+export class ArtikelComponent implements OnInit, OnDestroy {
 
   pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
   pageService = inject(PageService);
+  router = inject(Router);
+  wuiService = inject(WuiService);
 
-  constructor(
-    private wuiService: WuiService
-  ) { }
+  unsub: Subject<any> = new Subject<any>();
 
-  ngOnInit() {
-    console.log('artikel init');
-    let pageRef = this.pageService.replace(this.pageTemplate());
-  }
-
-  async share() {
-    
-  }
+  constructor() { }
 
   async shareToFacebook() {
     let res: any = await this.wuiService.dialog({
@@ -66,6 +61,14 @@ export class ArtikelComponent {
         buttons: ['Ok']
       });
     }
+  }
+
+  ngOnInit() {
+    this.pageService.replace(this.pageTemplate()!);
+  }
+
+  ngOnDestroy() {
+    this.unsub.next(null);
   }
 
 }
