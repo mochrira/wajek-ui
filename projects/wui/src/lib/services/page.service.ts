@@ -19,7 +19,6 @@ export class PageService {
     if(config.autoFocus = null) config.autoFocus = false;
     if(config.closeOnNavigation == null) config.closeOnNavigation = true;
     if(config.closeOnDestroy == null) config.closeOnDestroy = true;
-    console.log('open', config);
     return this.wuiPage.open(component, config);
   }
 
@@ -27,7 +26,6 @@ export class PageService {
     this.closeAll();
     if(config == null) config = {};
     if(config.closeOnNavigation == null) config.closeOnNavigation = false;
-    console.log('replace', config);
     return this.open(component, config);
   }
 
