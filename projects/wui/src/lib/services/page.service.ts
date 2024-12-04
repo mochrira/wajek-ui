@@ -17,7 +17,8 @@ export class PageService {
     if(config == null) config = {};
     if(config.width == null) config.width = '100%';
     if(config.autoFocus = null) config.autoFocus = false;
-    if(config.closeOnNavigation == null) config.closeOnNavigation = true;
+    if(config.disableClose == null) config.disableClose = true;
+    if(config.closeOnNavigation == null) config.closeOnNavigation = false;
     if(config.closeOnDestroy == null) config.closeOnDestroy = true;
     return this.wuiPage.open(component, config);
   }
@@ -25,7 +26,6 @@ export class PageService {
   replace(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
     this.closeAll();
     if(config == null) config = {};
-    if(config.closeOnNavigation == null) config.closeOnNavigation = false;
     return this.open(component, config);
   }
 

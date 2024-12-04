@@ -21,6 +21,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { TableComponent } from './pages/table/table.component';
 import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.component';
 import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comments.component';
+import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artikel-comment-form.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comme
         AdminComponent,
         TableComponent,
         ArtikelShareComponent,
-        ArtikelCommentsComponent
+        ArtikelCommentsComponent,
+        ArtikelCommentFormComponent
     ],
     imports: [
         CommonModule,

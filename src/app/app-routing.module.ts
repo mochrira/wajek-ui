@@ -10,6 +10,7 @@ import { AdminComponent } from "./pages/admin/admin.component";
 import { TableComponent } from "./pages/table/table.component";
 import { ArtikelShareComponent } from "./pages/artikel-share/artikel-share.component";
 import { ArtikelCommentsComponent } from "./pages/artikel-comments/artikel-comments.component";
+import { ArtikelCommentFormComponent } from "./pages/artikel-comment-form/artikel-comment-form.component";
 
 const routes: Routes = [{
     path: 'login', component: LoginComponent
@@ -21,7 +22,9 @@ const routes: Routes = [{
     path: 'artikel', component: ArtikelComponent, children: [{
         path: 'share', component: ArtikelShareComponent
     }, {
-        path: 'comments', component: ArtikelCommentsComponent
+        path: 'comments', component: ArtikelCommentsComponent, children: [{
+            path: 'baru', component: ArtikelCommentFormComponent
+        }]
     }]
 }, {
     path: 'list', component: ListComponent
