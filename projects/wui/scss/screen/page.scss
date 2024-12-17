@@ -1,3 +1,13 @@
+wui-page-host {
+    div.cdk-overlay-backdrop {
+        z-index: 0;
+    }
+
+    div.cdk-global-overlay-wrapper {
+        z-index: 0;
+    }
+}
+
 wui-page {
     position: absolute;
     top: 0; left: 0;
