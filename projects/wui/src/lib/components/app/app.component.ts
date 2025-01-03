@@ -12,6 +12,7 @@ import { WuiModal } from '../modal/modal-overlay';
     <ng-content/>
     <wui-page-host/>
   </div>
+  <wui-modal-host/>
   <wui-snackbar/>
   `
 })
@@ -24,10 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('tooltip') tooltip?: any;
   private unsub: Subject<any> = new Subject();
-
-  constructor() {
-    this.wuiModal.setContainerElement(this.elementRef.nativeElement, this.renderer);
-  }
 
   ngOnInit() {
     this.messageService.get('wui:tooltip').pipe(takeUntil(this.unsub)).subscribe(params => {

@@ -16,10 +16,12 @@ export class PageService {
   open(component: ComponentType<any> | TemplateRef<any>, config?: DialogConfig): DialogRef {
     if(config == null) config = {};
     if(config.width == null) config.width = '100%';
+    if(config.height == null) config.height = '100%';
     if(config.autoFocus = null) config.autoFocus = false;
     if(config.disableClose == null) config.disableClose = true;
     if(config.closeOnNavigation == null) config.closeOnNavigation = false;
     if(config.closeOnDestroy == null) config.closeOnDestroy = true;
+    if(config.hasBackdrop == null) config.hasBackdrop = false;
     return this.wuiPage.open(component, config);
   }
 

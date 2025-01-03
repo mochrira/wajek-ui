@@ -2,7 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WuiService } from '@wajek/wui';
+import { ModalService, WuiService } from '@wajek/wui';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -15,6 +15,7 @@ export class ArtikelShareComponent {
   @ViewChild('dialogTpl', {static: true, read: TemplateRef}) dialogTpl: TemplateRef<any>;
 
   wuiService = inject(WuiService);
+  modalService = inject(ModalService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
 
@@ -38,17 +39,16 @@ export class ArtikelShareComponent {
   }
 
   ngOnInit() {
-    this.modalRef = this.wuiService.modal(this.dialogTpl, { width: '400px', closeOnDestroy: true });
-    this.modalRef.closed.pipe(takeUntil(this.unsub)).subscribe(closed => {
+    this.modalRef = this.modalService.open(this.dialogTpl, { width: '400px', closeOnDestroy: true });
+    this.modalRef?.closed.pipe(takeUntil(this.unsub)).subscribe(closed => {
       console.log('share closed');
-      this.router.navigate(['../'], {
-        relativeTo: this.activatedRoute
-      });
+      this.router.navigate(['../'], { relativeTo: this.activatedRoute});
     });
   }
 
   ngOnDestroy() {
     this.unsub.next(null);
+    this.modalRef?.close();
   }
 
 }

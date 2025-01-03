@@ -34,6 +34,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { PageHostComponent } from './components/page/page-host.component';
 import { WuiPage, WuiPageOverlay, WuiPageOverlayContainer } from './components/page/page-overlay';
 import { WuiModal, WuiModalOverlay, WuiModalOverlayContainer } from './components/modal/modal-overlay';
+import { ModalHostComponent } from './components/modal/modal-host.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,8 @@ import { WuiModal, WuiModalOverlay, WuiModalOverlayContainer } from './component
     PageHeaderDirective,
 
     ModalComponent,
+    ModalHostComponent,
+
     PageComponent,
     PageHostComponent,
 

@@ -80,8 +80,7 @@ export class WuiModal extends Dialog {
       this._customOverlay = _overlay;
     }
   
-    public setContainerElement(containerElement: HTMLElement, renderer: Renderer2) {
-      renderer.setStyle(containerElement, 'transform', 'translateZ(0)');
+    public setContainerElement(containerElement: HTMLElement) {
       this._customOverlay.setContainerElement(containerElement);
     }
 

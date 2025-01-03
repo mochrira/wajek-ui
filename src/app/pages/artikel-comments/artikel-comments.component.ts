@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, OnDestroy, OnInit, TemplateRef, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageService } from '@wajek/wui';
+import { PageService, WuiService } from '@wajek/wui';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -18,6 +18,8 @@ export class ArtikelCommentsComponent {
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
 
+  wuiService = inject(WuiService);
+
   unsub: Subject<any> = new Subject();
 
   back() {
@@ -25,12 +27,17 @@ export class ArtikelCommentsComponent {
   }
 
   ngOnInit() {
-    this.pageRef = this.pageService.open(this.pageTemplate());
-    this.pageRef.closed.pipe(filter((v) => !this.pageService.isCloseAll), takeUntil(this.unsub)).subscribe(res => {
-      this.router.navigate(['../'], {
-        relativeTo: this.activatedRoute
+    this.wuiService.openLoading();
+    setTimeout(() => {
+      this.wuiService.closeLoading();
+
+      this.pageRef = this.pageService.open(this.pageTemplate());
+      this.pageRef.closed.pipe(filter((v) => !this.pageService.isCloseAll), takeUntil(this.unsub)).subscribe(res => {
+        this.router.navigate(['../'], {
+          relativeTo: this.activatedRoute
+        });
       });
-    });
+    }, 1000);
   }
 
   ngOnDestroy() {

@@ -6,18 +6,17 @@ wui-page-host {
     div.cdk-global-overlay-wrapper {
         z-index: 0;
     }
+
+    
 }
 
 wui-page {
-    position: absolute;
-    top: 0; left: 0;
     background-color: white;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     width: 100%;
     height: 100%;
-    z-index: 9;
 
     .wui-page {
         &-header {

@@ -9,10 +9,9 @@ export class PageHostComponent {
 
     pageDialog = inject(WuiPage);
     elementRef = inject(ElementRef);
-    renderer = inject(Renderer2);
 
     constructor() {
-        this.pageDialog.setContainerElement(this.elementRef.nativeElement, this.renderer);
+        this.pageDialog.setContainerElement(this.elementRef.nativeElement);
     }
 
 }
