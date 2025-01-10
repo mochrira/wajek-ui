@@ -1,5 +1,5 @@
 import { Component, inject, TemplateRef, viewChild, ViewChild } from '@angular/core';
-import { PageService, WuiService } from '@wajek/wui';
+import { PageService, WuiService, ModalService } from '@wajek/wui';
 
 @Component({
   selector: 'app-artikel',
@@ -8,11 +8,15 @@ import { PageService, WuiService } from '@wajek/wui';
 })
 export class ArtikelComponent {
 
+  socialMedia = '';
+  tplDialog = viewChild('tplDialog', {read: TemplateRef});
+
   pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
   pageService = inject(PageService);
 
   constructor(
-    private wuiService: WuiService
+    private wuiService: WuiService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -20,8 +24,11 @@ export class ArtikelComponent {
     let pageRef = this.pageService.replace(this.pageTemplate());
   }
 
-  async share() {
-    
+  async share(name: string) {
+    this.socialMedia = name;
+    this.modalService.open(this.tplDialog(), {
+      width: '500px'
+    });
   }
 
   async shareToFacebook() {
@@ -51,6 +58,14 @@ export class ArtikelComponent {
         buttons: ['Ok']
       });
     }
+  }
+
+  wuiMenuOpened() {
+    console.log('opened');
+  }
+
+  wuiMenuClosed() {
+    console.log('closed');
   }
 
   async shareToEmail() {

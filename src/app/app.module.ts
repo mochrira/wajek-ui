@@ -21,6 +21,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { TableComponent } from './pages/table/table.component';
 import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.component';
 import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comments.component';
+import { CdkMenuModule, PARENT_OR_NEW_INLINE_MENU_STACK_PROVIDER } from '@angular/cdk/menu';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,9 @@ import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comme
         AppRoutingModule,
         WuiModule.forRoot()
     ],
-    providers: [],
+    providers: [
+
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
