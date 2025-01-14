@@ -42,7 +42,7 @@
                         Share <wui-icon icon="share-circle" class="trailing"></wui-icon>
                     </button>
 
-                    <button class="wui-button" [wuiMenu]="menuShareComponent">
+                    <button class="wui-button" routerLink="comments">
                         Comments <wui-icon icon="message-text" class="trailing"></wui-icon>
                     </button>
                 </div>
@@ -50,6 +50,8 @@
         </div>
     </wui-page>
 </ng-template>
+
+<router-outlet></router-outlet>
 
 <ng-template #menuShare>
     <div class="wui-menu wui-menu-compact" wuiContextMenu>
