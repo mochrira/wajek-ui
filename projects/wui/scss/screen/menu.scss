@@ -10,6 +10,48 @@
     }
 }
 
+.wui-menu {
+    display: block;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+    background-color: white;
+    border-radius: .25rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    min-width: 7rem;
+    max-width: 17.5rem;
+    overflow-y: auto;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        padding: 0 1.5rem;
+        height: 3rem;
+        font-size: .875rem;
+        line-height: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: rgba(0,0,0,.67);
+        border: none;
+        background-color: transparent;
+        width: 100%;
+
+        &:hover, &:active, &:focus {
+            background-color: rgba(0,0,0, .04);
+            cursor: pointer;
+        }
+
+        wui-icon {
+            line-height: 1rem;
+        }
+    }
+
+    &-compact {
+        .wui-menu-item {
+            height: 2.25rem;
+        }
+    }
+}
+
 wui-menu {
     position: fixed;
     display: block;

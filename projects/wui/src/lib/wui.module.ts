@@ -24,7 +24,7 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { DrawerComponent, DrawerItemComponent, DrawerTogglerDirective } from './components/drawer/drawer.component';
 import { ListComponent, ListTileComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
-import { MenuComponent, MenuDirective, MenuItemComponent } from './components/menu/menu.component';
+import { MenuDirective, MenuComponent, MenuItemComponent } from './components/menu/menu.component';
 import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 import { NumInputDirective } from './directives/num-input.directive';
 import { SortableDirective } from './directives/sortable.directive';
@@ -35,6 +35,8 @@ import { PageHostComponent } from './components/page/page-host.component';
 import { WuiPage, WuiPageOverlay, WuiPageOverlayContainer } from './components/page/page-overlay';
 import { WuiModal, WuiModalOverlay, WuiModalOverlayContainer } from './components/modal/modal-overlay';
 import { ModalHostComponent } from './components/modal/modal-host.component';
+import { ContextMenuDirective, ContextMenuItemDirective, ContextMenuTriggerDirective } from './directives/menu.directive';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @NgModule({
   declarations: [
@@ -70,9 +72,15 @@ import { ModalHostComponent } from './components/modal/modal-host.component';
     DrawerTogglerDirective,
     ListComponent,
     ListTileComponent,
+
+    ContextMenuDirective,
+    ContextMenuItemDirective,
+    ContextMenuTriggerDirective,
+
     MenuDirective,
     MenuComponent,
     MenuItemComponent,
+
     LoadingDialogComponent,
     NumInputDirective,
     SortableDirective,
@@ -83,7 +91,8 @@ import { ModalHostComponent } from './components/modal/modal-host.component';
     CommonModule,
     FormsModule,
     DialogModule,
-    A11yModule
+    A11yModule,
+    CdkMenuModule
   ],
   exports: [
     WuiComponent,
@@ -119,6 +128,11 @@ import { ModalHostComponent } from './components/modal/modal-host.component';
     ListComponent,
     ListTileComponent,
 
+    ContextMenuDirective,
+    ContextMenuItemDirective,
+    ContextMenuTriggerDirective,
+
+    /** deprecated */
     MenuDirective,
     MenuComponent,
     MenuItemComponent,

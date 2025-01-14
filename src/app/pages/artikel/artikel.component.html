@@ -38,7 +38,7 @@
                 </div>
     
                 <div class="py-5 d-flex">
-                    <button class="wui-button wui-button-primary me-2" routerLink="share">
+                    <button class="wui-button wui-button-primary me-2" [wuiContextMenuTrigger]="menuShare">
                         Share <wui-icon icon="share-circle" class="trailing"></wui-icon>
                     </button>
 
@@ -53,54 +53,31 @@
 
 <router-outlet></router-outlet>
 
-<!-- 
-<wui-modal #modalShare [width]="'500px'">
-    <div class="wui-modal-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>Share to...</div>
-            <button class="wui-button wui-button-smooth wui-button-icon" (click)="modalShare.close()">
-                <wui-icon icon="close"></wui-icon>
-            </button>
+<ng-template #menuShare>
+    <div class="wui-menu wui-menu-compact" wuiContextMenu>
+        <button class="wui-menu-item" wuiContextMenuItem (click)="share('Facebook')">Facebook</button>
+        <button class="wui-menu-item" wuiContextMenuItem (click)="share('Twitter')">Twitter</button>
+        <button class="wui-menu-item" wuiContextMenuItem (click)="share('Linked In')">Linked In</button>
+    </div>
+</ng-template>
+
+<wui-menu class="compact" #menuShareComponent>
+    <wui-menu-item icon="lead-pencil">Menu Item</wui-menu-item>
+</wui-menu>
+
+<ng-template #tplDialog>
+    <div class="wui-modal-inner">
+        <div class="wui-modal-header">Share to {{socialMedia}}</div>
+        <div class="wui-modal-content">
+            <wui-form-field class="wui-form-field-boxed">
+                <label for="id">Description</label>
+                <input id="id" type="text" wuiInput>
+                <div class="wui-form-field-suffix">
+                    <button class="wui-button wui-button-smooth wui-button-icon" [wuiContextMenuTrigger]="menuShare">
+                        <wui-icon icon="dots-vertical"></wui-icon>
+                    </button>
+                </div>
+            </wui-form-field>
         </div>
     </div>
-
-    <div class="wui-modal-content wui-modal-content-no-padding">
-        <wui-list class="wui-list-bordered wui-list-hovered">
-            <wui-list-tile class="wui-list-tile-48">
-                <div class="wui-list-tile-leading">
-                    <wui-icon icon="facebook"></wui-icon>
-                </div>
-                <div class="wui-list-tile-content">Facebook</div>
-                <div class="wui-list-tile-trailing">
-                    <button class="wui-button wui-button-icon wui-button-smooth" (click)="shareToFacebook()">
-                        <wui-icon icon="chevron-right"></wui-icon>
-                    </button>
-                </div>
-            </wui-list-tile>
-            <wui-list-tile class="wui-list-tile-48">
-                <div class="wui-list-tile-leading">
-                    <wui-icon icon="twitter"></wui-icon>
-                </div>
-                <div class="wui-list-tile-content">Twitter</div>
-                <div class="wui-list-tile-trailing">
-                    <button class="wui-button wui-button-icon wui-button-smooth" (click)="shareToTwitter()">
-                        <wui-icon icon="chevron-right"></wui-icon>
-                    </button>
-                </div>
-            </wui-list-tile>
-            <wui-list-tile class="wui-list-tile-48">
-                <div class="wui-list-tile-leading">
-                    <wui-icon icon="email"></wui-icon>
-                </div>
-                <div class="wui-list-tile-content">Email</div>
-                <div class="wui-list-tile-trailing">
-                    <button class="wui-button wui-button-icon wui-button-smooth" (click)="shareToEmail()">
-                        <wui-icon icon="chevron-right"></wui-icon>
-                    </button>
-                </div>
-            </wui-list-tile>
-        </wui-list>
-    </div>
-</wui-modal>
-
-<router-outlet></router-outlet> -->
+</ng-template>

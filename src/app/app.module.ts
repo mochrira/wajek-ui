@@ -51,7 +51,9 @@ import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artike
         AppRoutingModule,
         WuiModule.forRoot()
     ],
-    providers: [],
+    providers: [
+
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

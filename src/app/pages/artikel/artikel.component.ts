@@ -10,6 +10,9 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ArtikelComponent implements OnInit, OnDestroy {
 
+  socialMedia = '';
+  tplDialog = viewChild('tplDialog', {read: TemplateRef});
+
   pageTemplate = viewChild('pageTemplate', {read: TemplateRef});
   pageService = inject(PageService);
   router = inject(Router);
@@ -46,6 +49,14 @@ export class ArtikelComponent implements OnInit, OnDestroy {
         buttons: ['Ok']
       });
     }
+  }
+
+  wuiMenuOpened() {
+    console.log('opened');
+  }
+
+  wuiMenuClosed() {
+    console.log('closed');
   }
 
   async shareToEmail() {
