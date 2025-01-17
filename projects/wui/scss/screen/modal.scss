@@ -54,13 +54,21 @@
 
 }
 
+wui-modal-host {
+    .cdk-dialog-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 .wui-modal {
     &-inner {
         width: 100%;
         border-radius: .5rem;
         box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
         background-color: white;
-        max-height: calc(100% - 4rem);
+        max-height: 100%;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -82,7 +90,7 @@
     }
 
     &-content {
-        padding: 0 1.5rem 1.25rem;
+        padding: 0 1.5rem;
         overflow: auto;
         flex: 1 1 auto;
         position: relative;
@@ -93,8 +101,18 @@
     }
 
     &-footer {
-        padding: 0 1.5rem 1.25rem;
+        padding: 1.25rem 1.5rem;
         flex: 0 0 auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wui-modal {
+        &-inner {
+            max-height: calc(100% - 4rem);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
     }
 }
 
