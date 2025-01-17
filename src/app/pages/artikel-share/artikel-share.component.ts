@@ -1,5 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService, WuiService } from '@wajek/wui';
@@ -18,6 +18,8 @@ export class ArtikelShareComponent {
   modalService = inject(ModalService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
+
+  rows = signal<Array<number>>([]);
 
   modalRef: DialogRef;
   private unsub = new Subject<any>();
@@ -39,11 +41,16 @@ export class ArtikelShareComponent {
   }
 
   ngOnInit() {
-    this.modalRef = this.modalService.open(this.dialogTpl, { width: '400px', closeOnDestroy: true });
+    this.rows.set(Array(20).fill(0).map((v, i) => i + 1));
+    this.modalRef = this.modalService.open(this.dialogTpl, { width: '400px'});
     this.modalRef?.closed.pipe(takeUntil(this.unsub)).subscribe(closed => {
-      console.log('share closed');
       this.router.navigate(['../'], { relativeTo: this.activatedRoute});
     });
+  }
+
+  rebuild() {
+    let count = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    this.rows.set(Array(count).fill(0).map((v, i) => i + 1));
   }
 
   ngOnDestroy() {

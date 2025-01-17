@@ -20,7 +20,9 @@ const routes: Routes = [{
     path: 'home', component: HomeComponent
 }, {
     path: 'artikel', component: ArtikelComponent, children: [{
-        path: 'share', component: ArtikelShareComponent
+        path: 'share', component: ArtikelShareComponent, children: [{
+            path: 'stack', component: ArtikelShareComponent
+        }]
     }, {
         path: 'comments', component: ArtikelCommentsComponent, children: [{
             path: 'baru', component: ArtikelCommentFormComponent
