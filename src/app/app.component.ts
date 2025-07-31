@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { mdiAbTesting, mdiPlayCircle } from '@mdi/js';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent  { 
+export class AppComponent  implements OnInit {
 
-    drawerData: Array<any> = Array(50).fill(0).map((item, index) => index + 1);
+    icons: any = {
+        "play-circle": mdiPlayCircle
+    };
+
+    ngOnInit(): void {}
 
 }
