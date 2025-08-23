@@ -37,6 +37,8 @@ import { WuiModal, WuiModalOverlay, WuiModalOverlayContainer } from './component
 import { ModalHostComponent } from './components/modal/modal-host.component';
 import { ContextMenuDirective, ContextMenuItemDirective, ContextMenuTriggerDirective } from './directives/menu.directive';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { TableDirective } from './directives/table.directive';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     DateselectComponent,
     ScrollEndDirective,
     PageHeaderDirective,
+
+    TableDirective,
 
     ModalComponent,
     ModalHostComponent,
@@ -92,7 +96,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     FormsModule,
     DialogModule,
     A11yModule,
-    CdkMenuModule
+    CdkMenuModule,
+    CdkTableModule
   ],
   exports: [
     WuiComponent,
@@ -111,6 +116,9 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     DateselectComponent,
     ScrollEndDirective,
     PageHeaderDirective,
+
+    TableDirective,
+
     DialogComponent,
     SnackbarComponent,
 

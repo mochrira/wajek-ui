@@ -20,6 +20,7 @@ export * from './lib/directives/page-header.directive';
 export * from './lib/directives/num-input.directive';
 export * from './lib/directives/sortable.directive';
 export * from './lib/directives/menu.directive';
+export * from './lib/directives/table.directive';
 
 export * from './lib/components/modal/modal.component';
 export * from './lib/components/datepicker/datepicker.component';

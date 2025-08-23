@@ -56,7 +56,7 @@ import { MenuComponent } from './pages/menu/menu.component';
         HttpClientModule,
         AppRoutingModule,
         WuiModule.forRoot(),
-        MarkdownModule.forRoot({loader: HttpClient}),
+        MarkdownModule.forRoot({loader: HttpClient})
         // HighlightModule
     ],
     providers: [{

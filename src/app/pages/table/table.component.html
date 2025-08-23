@@ -1,3 +1,4 @@
+<ng-template #pageTpl>
 <wui-page>
     <wui-app-bar>
         <div class="wui-app-bar-leading">
@@ -6,22 +7,18 @@
             </button>
         </div>
         <div class="wui-app-bar-title"></div>
-        <div class="wui-app-bar-trailing">
-            <button class="wui-button wui-button-large wui-button-icon wui-button-smooth">
-                <wui-icon icon="refresh"></wui-icon>
-            </button>
-        </div>
+        <div class="wui-app-bar-trailing"></div>
     </wui-app-bar>
-
+    
     <div class="wui-page-inner">
         <div class="wui-page-container">
             <div class="mb-5 d-flex align-items-center">
                 <div class="flex-grow-1">
-                    <h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                    <div>3 March 2024 by <a href="#">Admin</a></div>
+                    <h1>Table</h1>
                 </div>
             </div>
 
+            <h2>Basic Table</h2>
             <div class="wui-table-responsive wui-edge-fix">
                 <table class="wui-table wui-table-hover inside-container">
                     <thead>
@@ -66,7 +63,13 @@
                     </tfoot>
                 </table>
             </div>
-            
+
+            <div class="wui-table-responsive">
+                <table wui-table>
+                    <tr wui-row></tr>
+                </table>
+            </div>
         </div>
     </div>
 </wui-page>
+</ng-template>
