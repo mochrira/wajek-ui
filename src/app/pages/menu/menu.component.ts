@@ -2,9 +2,10 @@ import { Component, TemplateRef, inject, viewChild } from '@angular/core';
 import { PageService } from '@wajek/wui';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.scss',
+    standalone: false
 })
 export class MenuComponent {
 

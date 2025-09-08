@@ -1,7 +1,8 @@
 import { Component, Directive, ElementRef, Host, HostBinding, HostListener, Input, OnInit, Optional, Renderer2, SkipSelf } from '@angular/core';
 
 @Directive({
-  selector: '[wuiMenu]'
+    selector: '[wuiMenu]',
+    standalone: false
 })
 export class MenuDirective {
 
@@ -17,12 +18,13 @@ export class MenuDirective {
 }
 
 @Component({
-  selector: 'wui-menu-item',
-  template: `
+    selector: 'wui-menu-item',
+    template: `
   <div class="wui-menu-item-leading">
     <wui-icon icon="{{icon}}"></wui-icon>
   </div>
-  <div class="wui-menu-item-content"><ng-content></ng-content></div>`
+  <div class="wui-menu-item-content"><ng-content></ng-content></div>`,
+    standalone: false
 })
 export class MenuItemComponent implements OnInit {
 
@@ -40,8 +42,9 @@ export class MenuItemComponent implements OnInit {
 }
 
 @Component({
-  selector: 'wui-menu',
-  template: `<ng-content></ng-content>`
+    selector: 'wui-menu',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class MenuComponent {
 

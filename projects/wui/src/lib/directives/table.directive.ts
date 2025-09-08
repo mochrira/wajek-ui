@@ -3,6 +3,7 @@ import { Component, Directive } from "@angular/core";
 
 @Component({
     selector: 'wui-table, table[wui-table]',
-    template: ``
+    template: ``,
+    standalone: false
 })
 export class TableDirective extends CdkTable<any> { }

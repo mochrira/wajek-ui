@@ -6,9 +6,10 @@ import { ModalService, WuiService } from '@wajek/wui';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-artikel-share',
-  templateUrl: './artikel-share.component.html',
-  styleUrl: './artikel-share.component.scss'
+    selector: 'app-artikel-share',
+    templateUrl: './artikel-share.component.html',
+    styleUrl: './artikel-share.component.scss',
+    standalone: false
 })
 export class ArtikelShareComponent {
 

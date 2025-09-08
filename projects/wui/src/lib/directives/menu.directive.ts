@@ -2,28 +2,31 @@ import { CdkMenu, CdkMenuItem, CdkMenuTrigger, MENU_TRIGGER, PARENT_OR_NEW_MENU_
 import { Directive, HostListener, Input } from "@angular/core";
 
 @Directive({
-  selector: '[wuiContextMenu]'
+    selector: '[wuiContextMenu]',
+    standalone: false
 })
 export class ContextMenuDirective extends CdkMenu { }
 
 @Directive({
-  selector: '[wuiContextMenuItem]'
+    selector: '[wuiContextMenuItem]',
+    standalone: false
 })
 export class ContextMenuItemDirective extends CdkMenuItem { }
 
 @Directive({
-  selector: '[wuiContextMenuTrigger]',
-  exportAs: 'wuiContextMenuTrigger',
-  inputs: [
-    {name: 'menuTemplateRef', alias: 'wuiContextMenuTrigger'},
-    {name: 'menuPosition', alias: 'wuiContextMenuPosition'},
-    {name: 'menuData', alias: 'wuiContextMenuTriggerData'}
-  ],
-  outputs: ['opened: wuiMenuOpened', 'closed: wuiMenuClosed'],
-  providers: [
-    {provide: MENU_TRIGGER, useExisting: ContextMenuTriggerDirective},
-    PARENT_OR_NEW_MENU_STACK_PROVIDER,
-  ],
+    selector: '[wuiContextMenuTrigger]',
+    exportAs: 'wuiContextMenuTrigger',
+    inputs: [
+        { name: 'menuTemplateRef', alias: 'wuiContextMenuTrigger' },
+        { name: 'menuPosition', alias: 'wuiContextMenuPosition' },
+        { name: 'menuData', alias: 'wuiContextMenuTriggerData' }
+    ],
+    outputs: ['opened: wuiMenuOpened', 'closed: wuiMenuClosed'],
+    providers: [
+        { provide: MENU_TRIGGER, useExisting: ContextMenuTriggerDirective },
+        PARENT_OR_NEW_MENU_STACK_PROVIDER,
+    ],
+    standalone: false
 })
 export class ContextMenuTriggerDirective extends CdkMenuTrigger {
 

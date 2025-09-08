@@ -1,7 +1,8 @@
 import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[wuiScrollEnd]'
+    selector: '[wuiScrollEnd]',
+    standalone: false
 })
 export class ScrollEndDirective {
 

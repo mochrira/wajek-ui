@@ -4,8 +4,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'wui-snackbar',
-  template: `{{label}}`
+    selector: 'wui-snackbar',
+    template: `{{label}}`,
+    standalone: false
 })
 export class SnackbarComponent implements OnInit, OnDestroy {
 

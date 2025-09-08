@@ -2,9 +2,10 @@ import { Component, inject, TemplateRef, viewChild } from '@angular/core';
 import { PageService } from '@wajek/wui';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    styleUrl: './table.component.scss',
+    standalone: false
 })
 export class TableComponent {
 

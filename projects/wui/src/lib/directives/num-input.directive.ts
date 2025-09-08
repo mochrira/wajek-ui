@@ -3,12 +3,13 @@ import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
-  selector: '[wuiNumInput]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: NumInputDirective,
-    multi: true
-  }]
+    selector: '[wuiNumInput]',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: NumInputDirective,
+            multi: true
+        }],
+    standalone: false
 })
 export class NumInputDirective implements ControlValueAccessor {
 

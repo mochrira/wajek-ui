@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'wui-loading',
-  template: `
+    selector: 'wui-loading',
+    template: `
   <div class="indeterminate" *ngIf="_mode=='indeterminate'"></div>
   <div class="linear" *ngIf="_mode=='linear'">
       <div class="pos" [style.width.%]="pos"></div>
@@ -16,7 +16,8 @@ import { Component, OnInit, Input, ElementRef, Renderer2, ChangeDetectorRef } fr
           </div>
       </div>
   </div>
-  `
+  `,
+    standalone: false
 })
 export class LoadingComponent implements OnInit {
 

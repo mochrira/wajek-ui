@@ -5,9 +5,10 @@ import { PageService } from '@wajek/wui';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-artikel-comment-form',
-  templateUrl: './artikel-comment-form.component.html',
-  styleUrl: './artikel-comment-form.component.scss'
+    selector: 'app-artikel-comment-form',
+    templateUrl: './artikel-comment-form.component.html',
+    styleUrl: './artikel-comment-form.component.scss',
+    standalone: false
 })
 export class ArtikelCommentFormComponent implements OnInit, OnDestroy {
 

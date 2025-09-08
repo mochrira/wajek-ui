@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { WuiService } from '@wajek/wui';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.scss',
+    standalone: false
 })
 export class AdminComponent {
 

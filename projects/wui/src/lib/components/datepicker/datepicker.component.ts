@@ -5,9 +5,10 @@ import { DatePipe } from '@angular/common';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-  selector: 'wui-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss']
+    selector: 'wui-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    standalone: false
 })
 export class DatepickerComponent implements OnDestroy {
 

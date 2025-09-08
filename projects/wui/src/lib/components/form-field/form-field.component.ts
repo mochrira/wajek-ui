@@ -4,8 +4,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[wuiInput]',
-  exportAs: 'wuiInput'
+    selector: '[wuiInput]',
+    exportAs: 'wuiInput',
+    standalone: false
 })
 export class WuiInputDirective implements OnInit, OnDestroy { 
 
@@ -56,8 +57,8 @@ export class WuiInputDirective implements OnInit, OnDestroy {
 }
 
 @Component({
-  selector: 'wui-form-field',
-  template: `
+    selector: 'wui-form-field',
+    template: `
     <div class="wui-form-field-flex">
       <ng-content select=".wui-form-field-prefix"></ng-content>
       <div class="wui-form-field-infix">
@@ -68,7 +69,8 @@ export class WuiInputDirective implements OnInit, OnDestroy {
       <ng-content select=".wui-form-field-suffix"></ng-content>
     </div>
     <ng-content select=".wui-form-field-hint"></ng-content>
-  `
+  `,
+    standalone: false
 })
 export class FormFieldComponent implements AfterContentInit, OnDestroy {
 

@@ -4,13 +4,14 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export const WUI_SVG_ICONS = new InjectionToken<any>('SVG icon data collections');
 
 @Component({
-  selector: 'wui-icon',
-  template: `@if(svgIcon() !== null) {
+    selector: 'wui-icon',
+    template: `@if(svgIcon() !== null) {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [innerHTML]="svgIconData()"></svg>
   }`,
-  'host': {
-    '[class]': 'class()'
-  }
+    'host': {
+        '[class]': 'class()'
+    },
+    standalone: false
 })
 export class IconComponent {
 

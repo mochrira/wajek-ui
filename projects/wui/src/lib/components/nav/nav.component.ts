@@ -4,8 +4,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'wui-nav',
-  template: `<ng-template #navHost></ng-template>`
+    selector: 'wui-nav',
+    template: `<ng-template #navHost></ng-template>`,
+    standalone: false
 })
 export class NavComponent implements OnInit, OnDestroy {
 

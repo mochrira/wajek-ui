@@ -1,7 +1,8 @@
 import { Directive, ElementRef, OnInit, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[wuiRipple]'
+    selector: '[wuiRipple]',
+    standalone: false
 })
 export class RippleDirective implements OnInit {
 

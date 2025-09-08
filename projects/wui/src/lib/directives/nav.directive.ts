@@ -2,7 +2,8 @@ import { Directive, HostListener, Input } from '@angular/core';
 import { NavService } from '../services/nav.service';
 
 @Directive({
-  selector: '[wuiNavRoot]'
+    selector: '[wuiNavRoot]',
+    standalone: false
 })
 export class NavRootDirective {
 
@@ -20,7 +21,8 @@ export class NavRootDirective {
 }
 
 @Directive({
-  selector: '[wuiNavPush]'
+    selector: '[wuiNavPush]',
+    standalone: false
 })
 export class NavPushDirective {
 
@@ -38,7 +40,8 @@ export class NavPushDirective {
 }
 
 @Directive({
-  selector: '[wuiNavPop]'
+    selector: '[wuiNavPop]',
+    standalone: false
 })
 export class NavPopDirective {
 

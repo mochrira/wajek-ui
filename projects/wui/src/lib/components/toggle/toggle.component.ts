@@ -2,16 +2,17 @@ import { Component, EventEmitter, HostBinding, HostListener, Input, Output } fro
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
 @Component({
-  selector: 'wui-toggle',
-  templateUrl: './toggle.component.html',
-  styleUrl: './toggle.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: ToggleComponent
-    }
-  ]
+    selector: 'wui-toggle',
+    templateUrl: './toggle.component.html',
+    styleUrl: './toggle.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: ToggleComponent
+        }
+    ],
+    standalone: false
 })
 export class ToggleComponent implements ControlValueAccessor {
 

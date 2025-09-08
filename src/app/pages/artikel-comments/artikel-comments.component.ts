@@ -5,9 +5,10 @@ import { PageService, WuiService } from '@wajek/wui';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-artikel-comments',
-  templateUrl: './artikel-comments.component.html',
-  styleUrl: './artikel-comments.component.scss'
+    selector: 'app-artikel-comments',
+    templateUrl: './artikel-comments.component.html',
+    styleUrl: './artikel-comments.component.scss',
+    standalone: false
 })
 export class ArtikelCommentsComponent {
 

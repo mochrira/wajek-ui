@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Directive({
-  selector: '[wuiSortable]'
+    selector: '[wuiSortable]',
+    standalone: false
 })
 export class SortableDirective implements AfterViewInit {
 

@@ -3,7 +3,8 @@ import { WuiPage } from "./page-overlay";
 
 @Component({
     selector: 'wui-page-host',
-    template: ``
+    template: ``,
+    standalone: false
 })
 export class PageHostComponent {
 

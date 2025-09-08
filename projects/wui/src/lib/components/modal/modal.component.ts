@@ -1,12 +1,13 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'wui-modal',
-  template: `
+    selector: 'wui-modal',
+    template: `
     <div class="wui-modal-inner" [style.max-width]="width" cdkTrapFocus>
       <ng-content></ng-content>
     </div>
-  `
+  `,
+    standalone: false
 })
 export class ModalComponent {
 

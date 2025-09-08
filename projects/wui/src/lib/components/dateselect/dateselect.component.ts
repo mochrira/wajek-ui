@@ -3,9 +3,10 @@ import { WuiService } from '../../services/wui.service';
 import { Subject, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'wui-dateselect',
-  templateUrl: './dateselect.component.html',
-  styleUrls: ['./dateselect.component.scss']
+    selector: 'wui-dateselect',
+    templateUrl: './dateselect.component.html',
+    styleUrls: ['./dateselect.component.scss'],
+    standalone: false
 })
 export class DateselectComponent implements OnInit {
 

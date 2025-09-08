@@ -4,7 +4,8 @@ import { FormFieldComponent } from '../components/form-field/form-field.componen
 import { DatePipe } from '@angular/common';
 
 @Directive({
-  selector: '[wuiDatefield]'
+    selector: '[wuiDatefield]',
+    standalone: false
 })
 export class DatefieldDirective implements AfterViewInit{
 

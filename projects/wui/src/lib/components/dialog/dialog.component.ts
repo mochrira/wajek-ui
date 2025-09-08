@@ -2,8 +2,8 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject } from '@angular/core';
 
 @Component({
-  selector: 'wui-dialog',
-  template: `
+    selector: 'wui-dialog',
+    template: `
     <div class="wui-modal">
       <div class="wui-modal-inner">
         <div class="wui-modal-header">{{data?.title ?? ""}}</div>
@@ -19,7 +19,8 @@ import { Component, inject } from '@angular/core';
         </div>
       </div>
     </div>
-  `
+  `,
+    standalone: false
 })
 
 export class DialogComponent {

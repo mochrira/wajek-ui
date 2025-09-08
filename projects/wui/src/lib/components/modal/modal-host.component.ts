@@ -3,7 +3,8 @@ import { WuiModal } from "./modal-overlay";
 
 @Component({
     selector: 'wui-modal-host',
-    template: ``
+    template: ``,
+    standalone: false
 })
 export class ModalHostComponent {
 

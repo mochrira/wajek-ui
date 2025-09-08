@@ -4,9 +4,10 @@ import { PageService, WuiService } from '@wajek/wui';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-artikel',
-  templateUrl: './artikel.component.html',
-  styleUrl: './artikel.component.scss'
+    selector: 'app-artikel',
+    templateUrl: './artikel.component.html',
+    styleUrl: './artikel.component.scss',
+    standalone: false
 })
 export class ArtikelComponent implements OnInit, OnDestroy {
 

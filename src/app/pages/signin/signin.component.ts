@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from '@wajek/wui';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+    selector: 'app-signin',
+    templateUrl: './signin.component.html',
+    styleUrls: ['./signin.component.scss'],
+    standalone: false
 })
 export class SigninComponent implements OnInit {
 

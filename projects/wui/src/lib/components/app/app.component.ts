@@ -5,8 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 import { WuiModal } from '../modal/modal-overlay';
 
 @Component({
-  selector: 'wui-app',
-  template: `
+    selector: 'wui-app',
+    template: `
   <ng-content select="wui-drawer"></ng-content>
   <div class="wui-app-main" #appMain>
     <ng-content/>
@@ -14,7 +14,8 @@ import { WuiModal } from '../modal/modal-overlay';
   </div>
   <wui-modal-host/>
   <wui-snackbar/>
-  `
+  `,
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
 

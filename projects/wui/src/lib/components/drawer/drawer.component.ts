@@ -6,12 +6,13 @@ import { MessageService } from '../../services/message.service';
 import { AvatarComponent } from '../avatar/avatar.component';
 
 @Component({
-  selector: 'wui-drawer-item',
-  template: `
+    selector: 'wui-drawer-item',
+    template: `
   <wui-icon [icon]="icon" *ngIf="icon.length > 0"></wui-icon>
   <div class="content">
     <ng-content></ng-content>
-  </div>`
+  </div>`,
+    standalone: false
 })
 export class DrawerItemComponent {
 
@@ -27,10 +28,11 @@ export class DrawerItemComponent {
 }
 
 @Component({
-  selector: 'wui-drawer',
-  template: `
+    selector: 'wui-drawer',
+    template: `
   <div class="wui-drawer-backdrop" (click)="_show = false"></div>
-  <ng-content></ng-content>`
+  <ng-content></ng-content>`,
+    standalone: false
 })
 export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
 
@@ -84,7 +86,8 @@ export class DrawerComponent implements OnInit, OnDestroy, AfterContentInit {
 }
 
 @Directive({
-  selector: '[wuiToggleDrawer]'
+    selector: '[wuiToggleDrawer]',
+    standalone: false
 })
 export class DrawerTogglerDirective {
 

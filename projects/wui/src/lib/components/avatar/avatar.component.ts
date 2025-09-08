@@ -1,8 +1,9 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'wui-avatar',
-  template: `<img *ngIf="src.length > 0" [src]="src"/>`
+    selector: 'wui-avatar',
+    template: `<img *ngIf="src.length > 0" [src]="src"/>`,
+    standalone: false
 })
 export class AvatarComponent implements OnInit {
 
