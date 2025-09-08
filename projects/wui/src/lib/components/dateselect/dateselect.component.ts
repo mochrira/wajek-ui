@@ -6,7 +6,6 @@ import { Subject, Subscription } from 'rxjs';
     selector: 'wui-dateselect',
     templateUrl: './dateselect.component.html',
     styleUrls: ['./dateselect.component.scss'],
-    standalone: false
 })
 export class DateselectComponent implements OnInit {
 

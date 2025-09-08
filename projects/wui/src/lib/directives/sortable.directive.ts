@@ -1,8 +1,7 @@
 import { Directive, ElementRef, HostListener, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Directive({
-    selector: '[wuiSortable]',
-    standalone: false
+  selector: '[wuiSortable]',
 })
 export class SortableDirective implements AfterViewInit {
 
@@ -65,7 +64,6 @@ export class SortableDirective implements AfterViewInit {
       child.classList.add('wui-sortable-item');
       child.addEventListener('mousedown', (e: any) => {
         let parentRect = child.offsetParent != null ? child.offsetParent.getBoundingClientRect() : {x: 0, y: 0};
-        // console.log(child.offsetParent);
         this.childOriginRect = child.getBoundingClientRect();
         this.xFactor = e.clientX - this.childOriginRect.x;
         this.yFactor = e.clientY - this.childOriginRect.y;

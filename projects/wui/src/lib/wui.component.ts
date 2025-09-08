@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
     </p>
   `,
     styles: [],
-    standalone: false
 })
 export class WuiComponent implements OnInit {
 

@@ -1,22 +1,28 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, effect, HostBinding, input  } from '@angular/core';
 
 @Component({
     selector: 'wui-avatar',
-    template: `<img *ngIf="src.length > 0" [src]="src"/>`,
-    standalone: false
+    imports: [CommonModule],
+    template: `
+    @if (src().length > 0) {
+      <img [src]="src()"/>
+    }
+    `
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent  {
 
-  @Input() src = '';
-  @Input('size') set size(s: number) {
-    this.width = s + 'px';
-    this.height = s + 'px';
-  };
-  @HostBinding('style.height') height = '40px'; @HostBinding('style.width') width = '40px';
+  src = input('');
+  size = input<number>(40);
 
-  constructor() { }
+  @HostBinding('style.width') width = '40px';
+  @HostBinding('style.height') height = '40px';
 
-  ngOnInit(): void {
+  constructor() {
+    effect(() => {
+      const px = this.size() + 'px';
+      this.width = px;
+      this.height = px;
+    });
   }
-
 }

@@ -1,12 +1,16 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy, inject, Renderer2, ElementRef, viewChild } from '@angular/core';
-import { MessageService } from '../../services/message.service';
+import { Component, OnInit, ViewChild, OnDestroy, inject, Renderer2, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { WuiModal } from '../modal/modal-overlay';
+import { MessageService } from '../../services/message.service';
+import { ModalHostComponent } from '../modal/modal-host.component';
+import { PageHostComponent } from '../page/page-host.component';
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
-    selector: 'wui-app',
-    template: `
+  selector: 'wui-app',
+  imports : [PageHostComponent, ModalHostComponent, SnackbarComponent],
+  template: `
   <ng-content select="wui-drawer"></ng-content>
   <div class="wui-app-main" #appMain>
     <ng-content/>
@@ -14,8 +18,7 @@ import { WuiModal } from '../modal/modal-overlay';
   </div>
   <wui-modal-host/>
   <wui-snackbar/>
-  `,
-    standalone: false
+  `
 })
 export class AppComponent implements OnInit, OnDestroy {
 

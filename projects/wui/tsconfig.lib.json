@@ -2,31 +2,32 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "target": "es2020",
-    "module": "es2015",
-    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "declaration": true,
+    "declarationMap": false,
     "sourceMap": true,
     "inlineSources": true,
     "experimentalDecorators": true,
-    "declarationMap": false,
     "importHelpers": true,
     "types": [],
     "lib": [
-      "dom",
-      "es2018"
+      "ES2022",
+      "dom"
     ],
     "paths": {
-      "~/bootstrap": ["../../node_modules/bootstrap"]
+      "~/bootstrap": [
+        "../../node_modules/bootstrap"
+      ]
     }
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "compilationMode": "partial",
-    "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
     "enableResourceInlining": true
   },
   "exclude": [

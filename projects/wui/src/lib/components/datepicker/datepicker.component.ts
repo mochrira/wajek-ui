@@ -8,7 +8,6 @@ import { ModalComponent } from '../modal/modal.component';
     selector: 'wui-datepicker',
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
-    standalone: false
 })
 export class DatepickerComponent implements OnDestroy {
 

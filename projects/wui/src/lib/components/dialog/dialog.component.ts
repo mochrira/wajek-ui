@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 
 @Component({
     selector: 'wui-dialog',
+    imports: [],
     template: `
     <div class="wui-modal">
       <div class="wui-modal-inner">
@@ -19,15 +20,14 @@ import { Component, inject } from '@angular/core';
         </div>
       </div>
     </div>
-  `,
-    standalone: false
+  `
 })
 
 export class DialogComponent {
   data = inject(DIALOG_DATA);
   ref = inject(DialogRef);
 
-  close(index) {
+  close(index:any) {
     this.ref.close(index);
   }
 }

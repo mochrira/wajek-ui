@@ -1,6 +1,6 @@
 import { Directionality } from "@angular/cdk/bidi";
 import { Overlay, OverlayContainer, OverlayKeyboardDispatcher, OverlayOutsideClickDispatcher, OverlayPositionBuilder, ScrollStrategyOptions } from "@angular/cdk/overlay";
-import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector, NgZone, Optional, Renderer2 } from "@angular/core";
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector, NgZone, Optional } from "@angular/core";
 import { DOCUMENT, Location as Location_2 } from '@angular/common';
 import { DEFAULT_DIALOG_CONFIG, Dialog, DIALOG_SCROLL_STRATEGY, DialogConfig } from "@angular/cdk/dialog";
 
@@ -16,7 +16,7 @@ export class WuiModalOverlayContainer extends OverlayContainer {
 @Injectable()
 export class WuiModalOverlay extends Overlay {
 
-    private _pageOverlayContainer: WuiModalOverlayContainer;
+    private _modalOverlayContainer: WuiModalOverlayContainer;
 
     constructor(
         _scrollStrategies: ScrollStrategyOptions,
@@ -46,11 +46,11 @@ export class WuiModalOverlay extends Overlay {
             _outsideClickDispatcher
         );
 
-        this._pageOverlayContainer = _overlayContainer;
+        this._modalOverlayContainer = _overlayContainer;
     }
 
     public setContainerElement(containerElement: HTMLElement): void {
-        this._pageOverlayContainer.setContainerElement(containerElement);
+        this._modalOverlayContainer.setContainerElement(containerElement);
     }
 
 }
@@ -76,10 +76,10 @@ export class WuiModal extends Dialog {
         _overlayContainer,
         _scrollStrategy
       );
-  
+
       this._customOverlay = _overlay;
     }
-  
+
     public setContainerElement(containerElement: HTMLElement) {
       this._customOverlay.setContainerElement(containerElement);
     }

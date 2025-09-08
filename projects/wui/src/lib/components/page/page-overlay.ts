@@ -1,6 +1,6 @@
 import { Directionality } from "@angular/cdk/bidi";
 import { Overlay, OverlayContainer, OverlayKeyboardDispatcher, OverlayOutsideClickDispatcher, OverlayPositionBuilder, ScrollStrategyOptions } from "@angular/cdk/overlay";
-import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector, NgZone, Optional, Renderer2 } from "@angular/core";
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector, NgZone, Optional } from "@angular/core";
 import { DOCUMENT, Location as Location_2 } from '@angular/common';
 import { DEFAULT_DIALOG_CONFIG, Dialog, DIALOG_SCROLL_STRATEGY, DialogConfig } from "@angular/cdk/dialog";
 
@@ -62,26 +62,26 @@ export class WuiPage extends Dialog {
 
     constructor(
         _overlay: WuiPageOverlay,
-      _injector: Injector,
-      @Optional() @Inject(DEFAULT_DIALOG_CONFIG) _defaultOptions: DialogConfig,
-      _parentDialog: Dialog,
-      _overlayContainer: WuiPageOverlayContainer,
-      @Optional() @Inject(DIALOG_SCROLL_STRATEGY) _scrollStrategy: any
+        _injector: Injector,
+        @Optional() @Inject(DEFAULT_DIALOG_CONFIG) _defaultOptions: DialogConfig,
+        _parentDialog: Dialog,
+        _overlayContainer: WuiPageOverlayContainer,
+        @Optional() @Inject(DIALOG_SCROLL_STRATEGY) _scrollStrategy: any
     ) {
-      super(
-        _overlay,
-        _injector,
-        _defaultOptions,
-        _parentDialog,
-        _overlayContainer,
-        _scrollStrategy
-      );
-  
-      this._customOverlay = _overlay;
+        super(
+            _overlay,
+            _injector,
+            _defaultOptions,
+            _parentDialog,
+            _overlayContainer,
+            _scrollStrategy
+        );
+
+        this._customOverlay = _overlay;
     }
-  
+
     public setContainerElement(containerElement: HTMLElement) {
-      this._customOverlay.setContainerElement(containerElement);
+        this._customOverlay.setContainerElement(containerElement);
     }
 
 }

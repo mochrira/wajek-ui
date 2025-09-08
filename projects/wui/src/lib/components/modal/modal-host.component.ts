@@ -1,10 +1,9 @@
-import { Component, ElementRef, inject, Renderer2 } from "@angular/core";
+import { Component, ElementRef, inject } from "@angular/core";
 import { WuiModal } from "./modal-overlay";
 
 @Component({
     selector: 'wui-modal-host',
-    template: ``,
-    standalone: false
+    template: ``
 })
 export class ModalHostComponent {
 

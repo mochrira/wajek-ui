@@ -5,7 +5,6 @@ import { DatePipe } from '@angular/common';
 
 @Directive({
     selector: '[wuiDatefield]',
-    standalone: false
 })
 export class DatefieldDirective implements AfterViewInit{
 

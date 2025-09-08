@@ -1,25 +1,29 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, HostBinding, input, signal, computed } from '@angular/core';
 
 @Component({
-    selector: 'wui-modal',
-    template: `
-    <div class="wui-modal-inner" [style.max-width]="width" cdkTrapFocus>
+  selector: 'wui-modal',
+  template: `
+    <div class="wui-modal-inner" [style.max-width]="width()" cdkTrapFocus>
       <ng-content></ng-content>
     </div>
-  `,
-    standalone: false
+  `
 })
 export class ModalComponent {
+  readonly width = input<string>('300px');
 
-  @Input('width') width = '300px';
-  @HostBinding('class.show') show = false;
+  private showSignal = signal(false);
+  readonly isVisible = computed(() => this.showSignal());
+
+  @HostBinding('class.show')
+  get show() {
+    return this.isVisible();
+  }
 
   open() {
-    this.show = true;
+    this.showSignal.set(true);
   }
 
   close() {
-    this.show = false;
+    this.showSignal.set(false);
   }
-
 }

@@ -1,111 +1,114 @@
-import { Component, Directive, ElementRef, Host, HostBinding, HostListener, Input, OnInit, Optional, Renderer2, SkipSelf } from '@angular/core';
+import {
+  Directive,
+  Component,
+  Input,
+  HostListener,
+  HostBinding,
+  inject,
+  signal
+} from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
+import { IconComponent } from '../icon/icon.component';
 
 @Directive({
-    selector: '[wuiMenu]',
-    standalone: false
+  selector: '[wuiMenu]',
 })
 export class MenuDirective {
-
+  private readonly el = inject(ElementRef);
   @Input('wuiMenu') menu?: MenuComponent;
-  @HostListener('click') onClick() {
+
+  @HostListener('click')
+  onClick(): void {
     this.menu?.open(this.el.nativeElement);
   }
-
-  constructor(
-    private el: ElementRef
-  ) { }
-
 }
 
 @Component({
     selector: 'wui-menu-item',
+    imports: [IconComponent],
     template: `
-  <div class="wui-menu-item-leading">
-    <wui-icon icon="{{icon}}"></wui-icon>
-  </div>
-  <div class="wui-menu-item-content"><ng-content></ng-content></div>`,
-    standalone: false
+    <div class="wui-menu-item-leading">
+      <wui-icon [icon]="icon"></wui-icon>
+    </div>
+    <div class="wui-menu-item-content"><ng-content></ng-content></div>
+  `
 })
-export class MenuItemComponent implements OnInit {
-
+export class MenuItemComponent {
   @Input() icon = '';
-  @HostListener('click', ['$event']) onClick(e: any) {
-    this.host.close();
+  private readonly host = inject(MenuComponent, { optional: true, host: true, skipSelf: true });
+
+  @HostListener('click', ['$event'])
+  onClick(e: Event): void {
+    this.host?.close();
   }
-
-  constructor(
-    @Optional() @Host() @SkipSelf() private host: MenuComponent
-  ) { }
-
-  ngOnInit() { }
-
 }
 
 @Component({
-    selector: 'wui-menu',
-    template: `<ng-content></ng-content>`,
-    standalone: false
+  selector: 'wui-menu',
+  template: `<ng-content></ng-content>`
 })
 export class MenuComponent {
+  private readonly el = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
 
-  @HostBinding('class.show') _show = false;
-
+  private readonly _show = signal(false);
   listenDocumentClick = false;
-  @HostListener('document:click', ['$event']) onWindowClick(e: any) {
-    if(this.listenDocumentClick === true) {
-      if(this._show && !this.el.nativeElement.contains(e.target)) {
-        this.close();
-      }
+
+  @HostBinding('class.show')
+  get showClass(): boolean {
+    return this._show();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onWindowClick(e: Event): void {
+    if (this.listenDocumentClick && this._show() && !this.el.nativeElement.contains(e.target)) {
+      this.close();
     }
   }
 
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) { }
-
-  open(triggerElement: any) {
+  open(triggerElement: Element): void {
     this.close();
     setTimeout(() => {
-      let triggerRect = triggerElement.getBoundingClientRect();
-      let menuWidth = this.el.nativeElement.offsetWidth;
-      let menuHeight = this.el.nativeElement.offsetHeight;
-      let windowWidth = window.innerWidth;
-      let windowHeight = window.innerHeight;
+      const rect = (triggerElement as HTMLElement).getBoundingClientRect();
+      const el = this.el.nativeElement as HTMLElement;
+      const menuWidth = el.offsetWidth;
+      const menuHeight = el.offsetHeight;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
 
-      let possibleLeft = triggerRect.x;
-      if((windowWidth - possibleLeft) < menuWidth) {
-        let possibleRight = windowWidth - (triggerRect.x + triggerRect.width);
-        this.renderer.setStyle(this.el.nativeElement, 'right', possibleRight + 'px');
+      const possibleLeft = rect.x;
+      if (windowWidth - possibleLeft < menuWidth) {
+        const possibleRight = windowWidth - (rect.x + rect.width);
+        this.renderer.setStyle(el, 'right', `${possibleRight}px`);
       } else {
-        this.renderer.setStyle(this.el.nativeElement, 'left', possibleLeft + 'px');
+        this.renderer.setStyle(el, 'left', `${possibleLeft}px`);
       }
 
-      if(windowHeight < menuHeight) {
-        this.renderer.setStyle(this.el.nativeElement, 'top', '1rem');
-        this.renderer.setStyle(this.el.nativeElement, 'bottom', '1rem');
+      if (windowHeight < menuHeight) {
+        this.renderer.setStyle(el, 'top', '1rem');
+        this.renderer.setStyle(el, 'bottom', '1rem');
       } else {
-        let possibleTop = triggerRect.y;
-        if((windowHeight - possibleTop) > menuHeight) {
-          this.renderer.setStyle(this.el.nativeElement, 'top', possibleTop + 'px');
+        const possibleTop = rect.y;
+        if (windowHeight - possibleTop > menuHeight) {
+          this.renderer.setStyle(el, 'top', `${possibleTop}px`);
         } else {
-          let possibleBottom = windowHeight - (triggerRect.y + triggerRect.height);
-          this.renderer.setStyle(this.el.nativeElement, 'bottom', possibleBottom + 'px');
+          const possibleBottom = windowHeight - (rect.y + rect.height);
+          this.renderer.setStyle(el, 'bottom', `${possibleBottom}px`);
         }
       }
 
       this.listenDocumentClick = true;
-      this._show = true;      
+      this._show.set(true);
     }, 200);
   }
 
-  close() {
-    this._show = false;
+  close(): void {
+    this._show.set(false);
     this.listenDocumentClick = false;
-    this.renderer.removeStyle(this.el.nativeElement, 'top');
-    this.renderer.removeStyle(this.el.nativeElement, 'right');
-    this.renderer.removeStyle(this.el.nativeElement, 'bottom');
-    this.renderer.removeStyle(this.el.nativeElement, 'left');
+    const el = this.el.nativeElement as HTMLElement;
+    this.renderer.removeStyle(el, 'top');
+    this.renderer.removeStyle(el, 'right');
+    this.renderer.removeStyle(el, 'bottom');
+    this.renderer.removeStyle(el, 'left');
   }
-
 }

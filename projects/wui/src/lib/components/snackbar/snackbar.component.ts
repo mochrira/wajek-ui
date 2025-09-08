@@ -4,39 +4,35 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'wui-snackbar',
-    template: `{{label}}`,
-    standalone: false
+  selector: 'wui-snackbar',
+  template: `{{ label }}`
 })
 export class SnackbarComponent implements OnInit, OnDestroy {
 
-  actionItems: Array<any> = [];
-  label: String = '';
-  @HostBinding('class.show') show: Boolean = false;
-  private autoclose: any;
-  private unsub: Subject<any> = new Subject();
+  actionItems: any[] = [];
+  label = '';
+  @HostBinding('class.show') show = false;
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  private autocloseTimeoutId: any;
+  private readonly unsub = new Subject<void>();
 
-  open(label: string, autoclose = true, actionItems = []) {
+  constructor(private messageService: MessageService) {}
+
+  open(label: string, autoclose = true, actionItems: any[] = []) {
     this.label = label;
     this.actionItems = actionItems;
+
+    clearTimeout(this.autocloseTimeoutId);
+
     if (this.show) {
-      clearTimeout(this.autoclose);
       this.close();
-      setTimeout(() => {
-        this.show = true;
-      }, 150);
+      setTimeout(() => this.show = true, 150);
     } else {
-      clearTimeout(this.autoclose);
       this.show = true;
     }
+
     if (autoclose) {
-      this.autoclose = setTimeout(() => {
-        this.close();
-      }, 3000);
+      this.autocloseTimeoutId = setTimeout(() => this.close(), 3000);
     }
   }
 
@@ -45,17 +41,20 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.messageService.get('wui:snackbar').pipe(takeUntil(this.unsub)).subscribe(data => {
-      if (data.label === 'close') {
-        this.close();
-      } else {
-        this.open(data.label, data.autoclose || true, data.actionItems);
-      }
-    });
+    this.messageService.get('wui:snackbar')
+      .pipe(takeUntil(this.unsub))
+      .subscribe(data => {
+        if (data.label === 'close') {
+          this.close();
+        } else {
+          this.open(data.label, data.autoclose ?? true, data.actionItems);
+        }
+      });
   }
 
   ngOnDestroy() {
-    this.unsub.next(null);
+    this.unsub.next();
+    this.unsub.complete();
+    clearTimeout(this.autocloseTimeoutId);
   }
-
 }

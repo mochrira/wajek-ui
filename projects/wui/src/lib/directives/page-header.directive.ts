@@ -1,8 +1,7 @@
 import { Directive, Input, ElementRef } from '@angular/core';
 
 @Directive({
-    selector: '[wuiPageHeader]',
-    standalone: false
+  selector: '[wuiPageHeader]',
 })
 export class PageHeaderDirective {
 

@@ -1,10 +1,9 @@
-import { Component, ElementRef, inject, Renderer2 } from "@angular/core";
+import { Component, ElementRef, inject } from "@angular/core";
 import { WuiPage } from "./page-overlay";
 
 @Component({
     selector: 'wui-page-host',
-    template: ``,
-    standalone: false
+    template: `<ng-content></ng-content>`
 })
 export class PageHostComponent {
 

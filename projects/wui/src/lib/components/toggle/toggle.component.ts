@@ -1,70 +1,76 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { Component, effect, model, output, input, signal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'wui-toggle',
-    templateUrl: './toggle.component.html',
-    styleUrl: './toggle.component.scss',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            multi: true,
-            useExisting: ToggleComponent
-        }
-    ],
-    standalone: false
+  selector: 'wui-toggle',
+  templateUrl: './toggle.component.html',
+  styleUrl: './toggle.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: ToggleComponent
+    }
+  ],
+  host: {
+    '[attr.tabindex]': 'tabindex()',
+    '[class.wui-toggle-checked]': 'checked()',
+    '[attr.disabled]': 'disabled() ? "" : null',
+    '(click)': 'toggle()',
+    '(keydown)': 'onKeyDown($event)'
+  }
 })
 export class ToggleComponent implements ControlValueAccessor {
+  tabindex = input(0);
+  change = output<boolean>();
+  checked = model<boolean>(false);
+  disabled = signal<boolean>(false);
+  private isTouched = signal(false);
 
-  @Output() change: EventEmitter<any> = new EventEmitter();
-  @Input() @HostBinding('attr.tabindex') tabindex = 0;
-  @HostBinding('class.wui-toggle-checked') checked = false;
-  @HostListener('click', []) onClick() {
-    this.toggle();
+  private onChange: (value: boolean) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  constructor() {
+    effect(() => {
+      this.onChange(this.checked());
+    });
   }
 
-  @HostListener('keydown', ['$event']) onKeyDown(e: any) {
-    if(e.keyCode == 32) {
+  onKeyDown(e: KeyboardEvent) {
+    if (e.key === ' ') {
+      e.preventDefault();
       this.toggle();
     }
   }
 
-  onChange = (checked: any) => {};
-  onTouched = () => {};
-
-  isTouched = false;
-  @HostBinding('attr.disabled') isDisabled : boolean | null = null;
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = (isDisabled == true ? true : null);
-  }
-
   toggle() {
-    if(!this.isDisabled) {
+    if (!this.disabled()) {
       this.markAsTouched();
-      this.checked = !this.checked;
-      this.onChange(this.checked);
-      this.change.next(this.checked);
+      this.checked.update(value => !value);
+      this.change.emit(this.checked());
     }
   }
 
-  writeValue(value: any): void {
-    this.checked = value;
+  writeValue(value: boolean): void {
+    this.checked.set(!!value);
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (value: boolean) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  markAsTouched() {
-    if(!this.isTouched) {
-      this.onTouched();
-      this.isTouched = true;
-    }
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 
+  private markAsTouched(): void {
+    if (!this.isTouched()) {
+      this.onTouched();
+      this.isTouched.set(true);
+    }
+  }
 }
