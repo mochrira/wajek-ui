@@ -1,5 +1,5 @@
 import { Directive, inject, HostListener } from "@angular/core";
-import { MessageService } from "../../services/message.service";
+import { MessageService } from "../services/message.service";
 
 @Directive({
     selector: '[wuiToggleDrawer]',

@@ -8,7 +8,7 @@ import { Component, HostBinding, input, signal, computed } from '@angular/core';
     </div>
   `
 })
-export class ModalComponent {
+export class WuiModalComponent {
   readonly width = input<string>('300px');
 
   private showSignal = signal(false);

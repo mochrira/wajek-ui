@@ -4,7 +4,7 @@ import { Component, HostBinding, input as inputSignal } from '@angular/core';
   selector: 'wui-icon',
   template: ``,
 })
-export class IconComponent {
+export class WuiIconComponent {
   readonly icon = inputSignal<string>('');
 
   @HostBinding('class')

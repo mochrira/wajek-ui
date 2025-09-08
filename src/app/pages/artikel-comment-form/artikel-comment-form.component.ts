@@ -1,14 +1,14 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, OnDestroy, OnInit, TemplateRef, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageService } from '@wajek/wui';
+import { PageService, WuiAppBarComponent, WuiIconComponent, WuiPageComponent } from '@wajek/wui';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-artikel-comment-form',
     templateUrl: './artikel-comment-form.component.html',
     styleUrl: './artikel-comment-form.component.scss',
-    standalone: false
+    imports: [WuiPageComponent, WuiAppBarComponent, WuiIconComponent]
 })
 export class ArtikelCommentFormComponent implements OnInit, OnDestroy {
 

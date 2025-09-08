@@ -5,7 +5,7 @@ import { WuiModal } from "./modal-overlay";
     selector: 'wui-modal-host',
     template: ``
 })
-export class ModalHostComponent {
+export class WuiModalHostComponent {
 
     modalDialog = inject(WuiModal);
     elementRef = inject(ElementRef);

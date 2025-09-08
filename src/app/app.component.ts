@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { mdiAbTesting, mdiPlayCircle } from '@mdi/js';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { WuiAppComponent, WuiDrawerComponent, WuiDrawerItemComponent } from '@wajek/wui';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    standalone: false
+    imports : [WuiDrawerComponent, WuiDrawerItemComponent, RouterOutlet, WuiAppComponent]
 })
-export class AppComponent  implements OnInit {
-
-    icons: any = {
-        "play-circle": mdiPlayCircle
-    };
-
-    ngOnInit(): void {}
+export class AppComponent {
 
 }

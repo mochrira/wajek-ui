@@ -1,9 +1,9 @@
 import { Component, HostBinding, signal, computed } from '@angular/core';
-import { LoadingComponent } from '../loading/loading.component';
+import { WuiLoadingComponent } from '../loading/loading.component';
 
 @Component({
     selector: 'wui-loading-dialog',
-    imports: [LoadingComponent],
+    imports: [WuiLoadingComponent],
     template: `
     <wui-loading mode="circular" />
   `,
@@ -23,7 +23,7 @@ import { LoadingComponent } from '../loading/loading.component';
     }
   `]
 })
-export class LoadingDialogComponent {
+export class WuiLoadingDialogComponent {
   readonly loading = signal(true);
 
   readonly dialogClass = computed(() =>

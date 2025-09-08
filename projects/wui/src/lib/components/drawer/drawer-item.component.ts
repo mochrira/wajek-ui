@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject, input, HostListener } from "@angular/core";
-import { IconComponent } from "../icon/icon.component";
+import { WuiIconComponent } from "../icon/icon.component";
 import { MessageService } from "../../services/message.service";
 
 @Component({
     selector: 'wui-drawer-item',
-    imports: [IconComponent, CommonModule],
+    imports: [WuiIconComponent, CommonModule],
     template: `
     @if (icon()) {
       <wui-icon [icon]="icon()"></wui-icon>
@@ -15,7 +15,7 @@ import { MessageService } from "../../services/message.service";
     </div>
   `
 })
-export class DrawerItemComponent {
+export class WuiDrawerItemComponent {
   private messageService = inject(MessageService);
   icon = input('');
 

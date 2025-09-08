@@ -1,7 +1,7 @@
 import { Directive, ElementRef, AfterViewInit, Input, ContentChild, Renderer2 } from '@angular/core';
 import { DatepickerComponent } from '../components/datepicker/datepicker.component';
-import { FormFieldComponent } from '../components/form-field/form-field.component';
 import { DatePipe } from '@angular/common';
+import { WuiFormFieldComponent } from '../components/form-field/wui-form-field.component';
 
 @Directive({
     selector: '[wuiDatefield]',
@@ -13,7 +13,7 @@ export class DatefieldDirective implements AfterViewInit{
 
   constructor(
     private el: ElementRef,
-    private host: FormFieldComponent,
+    private host: WuiFormFieldComponent,
     private datePipe: DatePipe
   ) { }
 

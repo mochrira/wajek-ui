@@ -1,11 +1,11 @@
 import { Component, OnInit, TemplateRef, inject, viewChild } from '@angular/core';
-import { PageService } from '@wajek/wui';
+import { DrawerTogglerDirective, PageService, WuiAppBarComponent, WuiIconComponent, WuiPageComponent } from '@wajek/wui';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.scss',
-    standalone: false
+    imports: [WuiPageComponent, WuiAppBarComponent, WuiIconComponent, DrawerTogglerDirective]
 })
 export class LayoutComponent implements OnInit {
 

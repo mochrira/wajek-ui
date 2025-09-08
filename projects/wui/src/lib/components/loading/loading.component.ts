@@ -26,7 +26,7 @@ import {
     </div>
   `
 })
-export class LoadingComponent {
+export class WuiLoadingComponent {
   mode = input<'indeterminate' | 'linear' | 'circular'>('indeterminate');
   pos = input<number>(0);
   size = input<number>(32);

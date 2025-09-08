@@ -23,7 +23,7 @@ import { Component, inject } from '@angular/core';
   `
 })
 
-export class DialogComponent {
+export class WuiDialogComponent {
   data = inject(DIALOG_DATA);
   ref = inject(DialogRef);
 

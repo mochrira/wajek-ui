@@ -5,7 +5,7 @@ import {
 } from "@angular/core";
 import { MessageService } from "../../services/message.service";
 import { Subject, takeUntil } from "rxjs";
-import { AvatarComponent } from "../avatar/avatar.component";
+import { WuiAvatarComponent } from "../avatar/avatar.component";
 
 @Component({
   selector: 'wui-drawer',
@@ -19,7 +19,7 @@ import { AvatarComponent } from "../avatar/avatar.component";
     </div>
   `
 })
-export class DrawerComponent implements OnInit, AfterContentInit, OnDestroy {
+export class WuiDrawerComponent implements OnInit, AfterContentInit, OnDestroy {
   _showInput = input(false, { 
     transform: (value: boolean | string) => value != null && `${value}` !== 'false' 
   });
@@ -32,7 +32,7 @@ export class DrawerComponent implements OnInit, AfterContentInit, OnDestroy {
   private messageService = inject(MessageService);
   private unsub = new Subject<void>();
 
-  @ContentChild(AvatarComponent) avatar?: AvatarComponent;
+  @ContentChild(WuiAvatarComponent) avatar?: WuiAvatarComponent;
 
   constructor() {
     effect(() => {

@@ -9,7 +9,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: ToggleComponent
+      useExisting: WuiToggleComponent
     }
   ],
   host: {
@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     '(keydown)': 'onKeyDown($event)'
   }
 })
-export class ToggleComponent implements ControlValueAccessor {
+export class WuiToggleComponent implements ControlValueAccessor {
   tabindex = input(0);
   change = output<boolean>();
   checked = model<boolean>(false);

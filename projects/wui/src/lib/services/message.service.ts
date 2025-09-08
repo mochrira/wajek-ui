@@ -8,18 +8,20 @@ import { toObservable } from '@angular/core/rxjs-interop';
 export class MessageService {
 
   private handler = signal<{ name: string; payload: any } | null>(null);
+  private handler$ = toObservable(this.handler);
 
   set(name: string, payload: any) {
     this.handler.set({ name, payload });
   }
 
   get(name: string): Observable<any> {
-    return toObservable(
-      computed(() => {
-        const msg = this.handler();
-        return msg && msg.name === name ? msg.payload : null;
-      })
-    );
+    return new Observable(observer => {
+      this.handler$.subscribe(msg => {
+        if (msg && msg.name === name) {
+          observer.next(msg.payload);
+        }
+      });
+    });
   }
 
 }

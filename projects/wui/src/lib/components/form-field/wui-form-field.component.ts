@@ -9,7 +9,7 @@ import {
   Injector,
   runInInjectionContext
 } from '@angular/core';
-import { WuiInputDirective } from './wui-input.directive';
+import { WuiInputDirective } from '../../directives/wui-input.directive';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -27,7 +27,7 @@ import { Subject } from 'rxjs';
     <ng-content select=".wui-form-field-hint"></ng-content>
   `
 })
-export class FormFieldComponent implements AfterContentInit, OnDestroy {
+export class WuiFormFieldComponent implements AfterContentInit, OnDestroy {
 
   @ContentChild(WuiInputDirective) input?: WuiInputDirective;
   @HostBinding('class.has-content') hasContent = false;

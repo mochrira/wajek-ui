@@ -1,21 +1,21 @@
 import { inject, Injectable } from '@angular/core';
 import { MessageService } from './message.service';
 import { Dialog} from '@angular/cdk/dialog';
-import { DialogComponent } from '../components/dialog/dialog.component';
-import { LoadingDialogComponent } from '../components/loading-dialog/loading-dialog.component';
+import { WuiLoadingDialogComponent } from '../components/loading-dialog/loading-dialog.component';
+import { WuiDialogComponent } from '../components/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WuiService {
 
- messageService = inject(MessageService);
+  messageService = inject(MessageService);
   rootDialog = inject(Dialog);
   loadingRef: any;
 
   dialog(params: any) {
     return new Promise((resolve) => {
-      let ref = this.rootDialog.open(DialogComponent, {disableClose: true, width: '350px', data: params});
+      let ref = this.rootDialog.open(WuiDialogComponent, {disableClose: true, width: '350px', data: params});
       ref.closed.subscribe(result => {
         resolve(result);
       });
@@ -31,7 +31,7 @@ export class WuiService {
   }
 
   openLoading() {
-    this.loadingRef = this.rootDialog.open(LoadingDialogComponent, {disableClose: true});
+    this.loadingRef = this.rootDialog.open(WuiLoadingDialogComponent, {disableClose: true});
   }
 
   closeLoading() {

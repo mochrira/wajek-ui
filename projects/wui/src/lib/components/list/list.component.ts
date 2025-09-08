@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
     <ng-content></ng-content>
   `
 })
-export class ListTileComponent { }
+export class WuiListTileComponent { }
 
 @Component({
   selector: 'wui-list',
   template: `<ng-content></ng-content>`
 })
-export class ListComponent { }
+export class WuiListComponent { }

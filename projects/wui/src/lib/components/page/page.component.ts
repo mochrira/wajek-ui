@@ -8,4 +8,4 @@ import { Component } from '@angular/core';
     <ng-content select=".wui-page-footer"></ng-content>
   `
 })
-export class PageComponent {}
+export class WuiPageComponent {}

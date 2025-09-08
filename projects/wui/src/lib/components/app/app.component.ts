@@ -3,13 +3,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { WuiModal } from '../modal/modal-overlay';
 import { MessageService } from '../../services/message.service';
-import { ModalHostComponent } from '../modal/modal-host.component';
-import { PageHostComponent } from '../page/page-host.component';
-import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { WuiModalHostComponent } from '../modal/modal-host.component';
+import { WuiPageHostComponent } from '../page/page-host.component';
+import { WuiSnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'wui-app',
-  imports : [PageHostComponent, ModalHostComponent, SnackbarComponent],
+  imports : [WuiPageHostComponent, WuiModalHostComponent, WuiSnackbarComponent],
   template: `
   <ng-content select="wui-drawer"></ng-content>
   <div class="wui-app-main" #appMain>
@@ -20,7 +20,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
   <wui-snackbar/>
   `
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class WuiAppComponent implements OnInit, OnDestroy {
 
   messageService = inject(MessageService);
   wuiModal = inject(WuiModal);

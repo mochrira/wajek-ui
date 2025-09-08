@@ -1,28 +1,26 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, signal, TemplateRef, viewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalService, WuiService } from '@wajek/wui';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ModalService, WuiIconComponent, WuiService } from '@wajek/wui';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-artikel-share',
     templateUrl: './artikel-share.component.html',
     styleUrl: './artikel-share.component.scss',
-    standalone: false
+    imports: [WuiIconComponent, RouterOutlet]
 })
 export class ArtikelShareComponent {
-
-  @ViewChild('dialogTpl', {static: true, read: TemplateRef}) dialogTpl: TemplateRef<any>;
-
   wuiService = inject(WuiService);
   modalService = inject(ModalService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
 
   rows = signal<Array<number>>([]);
-
-  modalRef: DialogRef;
+  dialogTpl = viewChild('dialogTpl', {read: TemplateRef});
+  
+  modalRef!: DialogRef;
   private unsub = new Subject<any>();
 
   formShare = new FormGroup({
@@ -43,7 +41,7 @@ export class ArtikelShareComponent {
 
   ngOnInit() {
     this.rows.set(Array(20).fill(0).map((v, i) => i + 1));
-    this.modalRef = this.modalService.open(this.dialogTpl, { width: '400px'});
+    this.modalRef = this.modalService.open(this.dialogTpl()!, { width: '400px'});
     this.modalRef?.closed.pipe(takeUntil(this.unsub)).subscribe(closed => {
       this.router.navigate(['../'], { relativeTo: this.activatedRoute});
     });

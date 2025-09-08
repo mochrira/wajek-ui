@@ -5,7 +5,7 @@ import { WuiPage } from "./page-overlay";
     selector: 'wui-page-host',
     template: `<ng-content></ng-content>`
 })
-export class PageHostComponent {
+export class WuiPageHostComponent {
 
     pageDialog = inject(WuiPage);
     elementRef = inject(ElementRef);

@@ -20,19 +20,22 @@ export * from './directives/page-header.directive';
 export * from './directives/num-input.directive';
 export * from './directives/sortable.directive';
 export * from './directives/menu.directive';
+export * from './directives/drawer.directive';
+export * from './directives/wui-input.directive';
+
 
 // component
 export * from './components/modal/modal.component';
 export * from './components/loading/loading.component';
 export * from './components/app/app.component';
 export * from './components/form-field/wui-form-field.component';
-export * from './components/form-field/wui-input.directive';
+export * from './directives/wui-input.directive';
 export * from './components/snackbar/snackbar.component';
 export * from './components/page/page.component';
 export * from './components/modal/modal.component';
 export * from './components/drawer/drawer.component';
 export * from './components/drawer/drawer-item.component';
-export * from './components/drawer/drawer.directive';
+export * from './directives/drawer.directive';
 export * from './components/app-bar/app-bar.component';
 export * from './components/list/list.component';
 export * from './components/icon/icon.component';

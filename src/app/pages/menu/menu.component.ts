@@ -1,11 +1,11 @@
 import { Component, TemplateRef, inject, viewChild } from '@angular/core';
-import { PageService } from '@wajek/wui';
+import { ContextMenuDirective, ContextMenuItemDirective, ContextMenuTriggerDirective, PageService, WuiAppBarComponent, WuiIconComponent, WuiPageComponent } from '@wajek/wui';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
-    standalone: false
+    imports : [WuiPageComponent, WuiAppBarComponent, WuiIconComponent, ContextMenuDirective, ContextMenuItemDirective, ContextMenuTriggerDirective]
 })
 export class MenuComponent {
 

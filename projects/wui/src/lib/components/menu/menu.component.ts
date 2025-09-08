@@ -8,14 +8,14 @@ import {
   signal
 } from '@angular/core';
 import { ElementRef, Renderer2 } from '@angular/core';
-import { IconComponent } from '../icon/icon.component';
+import { WuiIconComponent } from '../icon/icon.component';
 
 @Directive({
   selector: '[wuiMenu]',
 })
 export class MenuDirective {
   private readonly el = inject(ElementRef);
-  @Input('wuiMenu') menu?: MenuComponent;
+  @Input('wuiMenu') menu?: WuiMenuComponent;
 
   @HostListener('click')
   onClick(): void {
@@ -25,7 +25,7 @@ export class MenuDirective {
 
 @Component({
     selector: 'wui-menu-item',
-    imports: [IconComponent],
+    imports: [WuiIconComponent],
     template: `
     <div class="wui-menu-item-leading">
       <wui-icon [icon]="icon"></wui-icon>
@@ -33,9 +33,9 @@ export class MenuDirective {
     <div class="wui-menu-item-content"><ng-content></ng-content></div>
   `
 })
-export class MenuItemComponent {
+export class WuiMenuItemComponent {
   @Input() icon = '';
-  private readonly host = inject(MenuComponent, { optional: true, host: true, skipSelf: true });
+  private readonly host = inject(WuiMenuComponent, { optional: true, host: true, skipSelf: true });
 
   @HostListener('click', ['$event'])
   onClick(e: Event): void {
@@ -47,7 +47,7 @@ export class MenuItemComponent {
   selector: 'wui-menu',
   template: `<ng-content></ng-content>`
 })
-export class MenuComponent {
+export class WuiMenuComponent {
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
 

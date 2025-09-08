@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-drawer',
     templateUrl: './drawer.component.html',
     styleUrls: ['./drawer.component.scss'],
-    standalone: false
+    imports: []
 })
 export class DrawerComponent implements OnInit {
 

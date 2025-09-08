@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   selector: 'wui-app-bar',
   template: `<ng-content></ng-content>`
 })
-export class AppBarComponent {}
+export class WuiAppBarComponent {}

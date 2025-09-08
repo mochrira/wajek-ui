@@ -10,7 +10,7 @@ import { Component, effect, HostBinding, input  } from '@angular/core';
     }
     `
 })
-export class AvatarComponent  {
+export class WuiAvatarComponent  {
 
   src = input('');
   size = input<number>(40);

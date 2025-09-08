@@ -1,12 +1,11 @@
-import { Component, inject, OnInit, TemplateRef, viewChild, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { DatepickerComponent, PageService, WuiService } from '@wajek/wui';
+import { Component, inject, OnInit, TemplateRef, viewChild } from '@angular/core';
+import { PageService, WuiAppBarComponent, WuiIconComponent, WuiPageComponent } from '@wajek/wui';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
-    standalone: false
+    imports: [WuiPageComponent, WuiAppBarComponent, WuiIconComponent]
 })
 export class HomeComponent implements OnInit {
 

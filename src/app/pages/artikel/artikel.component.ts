@@ -1,13 +1,13 @@
-import { Component, inject, OnDestroy, OnInit, TemplateRef, viewChild, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { PageService, WuiService } from '@wajek/wui';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, inject, OnDestroy, OnInit, TemplateRef, viewChild } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ContextMenuDirective, ContextMenuItemDirective, ContextMenuTriggerDirective, DrawerTogglerDirective, PageService, WuiAppBarComponent, WuiFormFieldComponent, WuiIconComponent, WuiInputDirective, WuiMenuComponent, WuiMenuItemComponent, WuiPageComponent, WuiService } from '@wajek/wui';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-artikel',
     templateUrl: './artikel.component.html',
     styleUrl: './artikel.component.scss',
-    standalone: false
+    imports : [RouterLink, DrawerTogglerDirective, WuiPageComponent, WuiAppBarComponent, WuiIconComponent, WuiMenuComponent, WuiMenuItemComponent, RouterOutlet, WuiFormFieldComponent, ContextMenuTriggerDirective, ContextMenuDirective, ContextMenuItemDirective, WuiInputDirective]
 })
 export class ArtikelComponent implements OnInit, OnDestroy {
 

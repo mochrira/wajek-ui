@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'wui-snackbar',
   template: `{{ label }}`
 })
-export class SnackbarComponent implements OnInit, OnDestroy {
+export class WuiSnackbarComponent implements OnInit, OnDestroy {
 
   actionItems: any[] = [];
   label = '';
