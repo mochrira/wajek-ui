@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { WuiModule } from '@wajek/wui';
+import { WUI_SVG_ICONS, WuiModule } from '@wajek/wui';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
 import { ControlComponent } from './pages/control/control.component';
@@ -22,6 +22,10 @@ import { TableComponent } from './pages/table/table.component';
 import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.component';
 import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comments.component';
 import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artikel-comment-form.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { mdiFire, mdiFireCircle, mdiPlayCircle } from '@mdi/js';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { MenuComponent } from './pages/menu/menu.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +44,9 @@ import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artike
         TableComponent,
         ArtikelShareComponent,
         ArtikelCommentsComponent,
-        ArtikelCommentFormComponent
+        ArtikelCommentFormComponent,
+        LayoutComponent,
+        MenuComponent
     ],
     imports: [
         CommonModule,
@@ -49,11 +55,14 @@ import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artike
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
-        WuiModule.forRoot()
+        WuiModule.forRoot(),
+        MarkdownModule.forRoot({loader: HttpClient})
+        // HighlightModule
     ],
-    providers: [
-
-    ],
+    providers: [{
+        provide: WUI_SVG_ICONS,
+        useValue: {mdiPlayCircle, mdiFire}
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

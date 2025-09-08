@@ -9,37 +9,41 @@
     --theme-border: #e5e5e5;
 }
 
-.draggable {
-    padding: 3rem 1.5rem;
-    margin-bottom: 2.5rem;
-
-    wui-list-tile {
-        background-color: white;
-
-        &.dragging {
-            opacity: 0;
-        }
-    }
-}
-
-@import "./node_modules/bootstrap/scss/functions";
-@import "./node_modules/bootstrap/scss/variables";
-@import "./node_modules/bootstrap/scss/maps";
-@import "./node_modules/bootstrap/scss/mixins";
-@import "./node_modules/bootstrap/scss/root";
-@import "./node_modules/bootstrap/scss/utilities";
-
-$utilities: map-merge(
-  $utilities,
-  (
-    "cursor": (
-      property: cursor,
-      class: cursor,
-      responsive: true,
-      values: auto pointer grab,
-    )
-  )
-);
-
-@import "./node_modules/bootstrap/scss/utilities/api";
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/@mdi/font/scss/materialdesignicons.scss';
 @import '../projects/wui/scss/wui.scss';
+
+
+// .draggable {
+//   padding: 3rem 1.5rem;
+//   margin-bottom: 2.5rem;
+
+//   wui-list-tile {
+//       background-color: white;
+
+//       &.dragging {
+//           opacity: 0;
+//       }
+//   }
+// }
+
+// @import "./node_modules/bootstrap/scss/functions";
+// @import "./node_modules/bootstrap/scss/variables";
+// @import "./node_modules/bootstrap/scss/maps";
+// @import "./node_modules/bootstrap/scss/mixins";
+// @import "./node_modules/bootstrap/scss/root";
+// @import "./node_modules/bootstrap/scss/utilities";
+
+// $utilities: map-merge(
+// $utilities,
+// (
+//   "cursor": (
+//     property: cursor,
+//     class: cursor,
+//     responsive: true,
+//     values: auto pointer grab,
+//   )
+// )
+// );
+
+// @import "node_modules/bootstrap/scss/utilities/api";
