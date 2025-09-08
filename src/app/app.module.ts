@@ -5,7 +5,7 @@ import { WUI_SVG_ICONS, WuiModule } from '@wajek/wui';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
 import { ControlComponent } from './pages/control/control.component';
@@ -22,13 +22,11 @@ import { TableComponent } from './pages/table/table.component';
 import { ArtikelShareComponent } from './pages/artikel-share/artikel-share.component';
 import { ArtikelCommentsComponent } from './pages/artikel-comments/artikel-comments.component';
 import { ArtikelCommentFormComponent } from './pages/artikel-comment-form/artikel-comment-form.component';
-import { MarkdownModule } from 'ngx-markdown';
 import { mdiFire, mdiFireCircle, mdiPlayCircle } from '@mdi/js';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { MenuComponent } from './pages/menu/menu.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         HomeComponent,
         UserComponent,
@@ -48,23 +46,16 @@ import { MenuComponent } from './pages/menu/menu.component';
         LayoutComponent,
         MenuComponent
     ],
-    imports: [
-        CommonModule,
+    bootstrap: [AppComponent], imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserModule,
-        HttpClientModule,
         AppRoutingModule,
         WuiModule.forRoot(),
-        MarkdownModule.forRoot({loader: HttpClient})
-        // HighlightModule
-    ],
-    providers: [{
-        provide: WUI_SVG_ICONS,
-        useValue: {mdiPlayCircle, mdiFire}
-    }],
-    bootstrap: [AppComponent]
-})
+    ], providers: [{
+            provide: WUI_SVG_ICONS,
+            useValue: { mdiPlayCircle, mdiFire }
+        }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 
 }
