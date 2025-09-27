@@ -1,2 +1,6 @@
-@import '@angular/cdk/overlay-prebuilt.css';
-@import "screen/core.scss";
+@use './base/reset';
+@use './base/typography';
+
+@use './layouts/container';
+
+@use './utils/spacing';

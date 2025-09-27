@@ -1,0 +1,59 @@
+@use '../abstracts/variables' as var;
+
+$shortnames: (
+    "top": "t",
+    "left": "s",
+    "right": "e",
+    "bottom": "b",
+
+    "vertical": "y",
+    "horizontal": "x"
+);
+
+@each $spacing-name, $spacing-value in var.$spacing {
+    .m-#{$spacing-name} {
+        margin: $spacing-value;
+    }
+
+    .p-#{$spacing-name} {
+        padding: $spacing-value;
+    }
+}
+
+@each $side, $side-short in $shortnames {
+
+    @each $spacing-name, $spacing-value in var.$spacing {
+        
+        @if($side == "horizontal") {
+            .m#{$side-short}-#{$spacing-name} {
+                margin-left: $spacing-value;
+                margin-right: $spacing-value;
+            }
+
+            .p#{$side-short}-#{$spacing-name} {
+                padding-left: $spacing-value;
+                padding-right: $spacing-value;
+            }
+        } @else if($side == "vertical") {
+            .m#{$side-short}-#{$spacing-name} {
+                margin-top: $spacing-value;
+                margin-bottom: $spacing-value;
+            }
+
+            .p#{$side-short}-#{$spacing-name} {
+                padding-top: $spacing-value;
+                padding-bottom: $spacing-value;
+            }
+        } @else {
+            .m#{$side-short}-#{$spacing-name} {
+                margin-#{$side}: $spacing-value;
+            }
+    
+            .p#{$side-short}-#{$spacing-name} {
+                padding-#{$side}: $spacing-value;
+            }
+        }
+
+    }
+
+}

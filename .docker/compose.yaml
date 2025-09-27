@@ -4,12 +4,12 @@ services:
     container_name: wui_container
     image: mochrira/dev:latest
     volumes:
-      - ./:/workspace
+      - ../:/workspace
     networks:
       - environment
     environment:
       - NG_INSTALL=YES
-      - NG_VERSION=17
+      - NG_VERSION=20
 
 networks:
   environment:
