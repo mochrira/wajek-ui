@@ -1,3 +1,9 @@
+@use '../abstracts/variables' as var;
+
+:root {
+    @include var.spacing_variables();
+}
+
 html, body {
     margin: 0;
     padding: 0;

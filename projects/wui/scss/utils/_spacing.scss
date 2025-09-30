@@ -1,6 +1,8 @@
+@use 'sass:map';
 @use '../abstracts/variables' as var;
+@use '../utils/breakpoints' as bp;
 
-$shortnames: (
+$sides: (
     "top": "t",
     "left": "s",
     "right": "e",
@@ -10,50 +12,36 @@ $shortnames: (
     "horizontal": "x"
 );
 
-@each $spacing-name, $spacing-value in var.$spacing {
-    .m-#{$spacing-name} {
-        margin: $spacing-value;
-    }
+@mixin spacing($property: "margin", $side: "none", $breakpoint: "xs", $size: "0") {
 
-    .p-#{$spacing-name} {
-        padding: $spacing-value;
+    $is-side-none: $side == "none";
+    $is-bp-none: $breakpoint == "xs";
+
+    .#{map.get($spacing-property, $property)}#{if($is-side-none, "", map.get($sides, $side))}#{if($is-bp-none, "", "-" + $breakpoint)}-#{$size} {
+        @if($side == "vertical") {
+            #{$property}-top: var(--wui-spacing-#{$size});
+            #{$property}-bottom: var(--wui-spacing-#{$size});
+        } @else if($side == "horizontal") {
+            #{$property}-left: var(--wui-spacing-#{$size});
+            #{$property}-right: var(--wui-spacing-#{$size});
+        } @else {
+            #{$property}#{if($side=="none", "", "-" + $side)}: var(--wui-spacing-#{$size});
+        }
     }
 }
 
-@each $side, $side-short in $shortnames {
+$spacing-property: ("margin": "m", "padding": "p");
 
-    @each $spacing-name, $spacing-value in var.$spacing {
-        
-        @if($side == "horizontal") {
-            .m#{$side-short}-#{$spacing-name} {
-                margin-left: $spacing-value;
-                margin-right: $spacing-value;
-            }
-
-            .p#{$side-short}-#{$spacing-name} {
-                padding-left: $spacing-value;
-                padding-right: $spacing-value;
-            }
-        } @else if($side == "vertical") {
-            .m#{$side-short}-#{$spacing-name} {
-                margin-top: $spacing-value;
-                margin-bottom: $spacing-value;
-            }
-
-            .p#{$side-short}-#{$spacing-name} {
-                padding-top: $spacing-value;
-                padding-bottom: $spacing-value;
-            }
-        } @else {
-            .m#{$side-short}-#{$spacing-name} {
-                margin-#{$side}: $spacing-value;
-            }
+@each $breakpoint-name, $breakpoint-width in var.$breakpoints {
+    @include bp.media_breakpoints($breakpoint-name) {
+        @each $property, $shortname in $spacing-property {
+            @include spacing($property, "none", $breakpoint-name);
     
-            .p#{$side-short}-#{$spacing-name} {
-                padding-#{$side}: $spacing-value;
+            @each $side-name, $side-selector in $sides {    
+                @each $size, $value in var.$spacing {
+                    @include spacing($property, $side-name, $breakpoint-name, $size);
+                }
             }
         }
-
     }
-
 }
