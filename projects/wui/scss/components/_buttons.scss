@@ -1,13 +1,125 @@
+@use "sass:map";
 $button_colors: ("default", "primary", "danger");
+$button_sizes: (
+"xsmall": (
+"padding": .5rem .75rem ,
+"radius": 1rem
+), 
+"small": (
+"padding": .625rem .75rem,
+"radius": 1.813rem
+), 
+"medium": (
+"padding": 1rem 1.5rem,
+"radius": 2.5rem
+), 
+"large": (
+"padding": 2rem 3rem,
+"radius": 3rem
+), 
+"xlarge": (
+"padding": 3rem 4rem,
+"radius": 4.25rem
+), 
+); 
 
-@mixin filled_base() {
-
+@mixin apply_variables() {
+    @each $name, $value in $button_sizes {
+        --wui-button-#{$name}-padding: #{map.get($value, "padding")};
+        --wui-button-#{$name}-radius: #{map.get($value, "radius")};
+    }
 }
 
-@mixin text_base() {
-
+@mixin button_size($size) {
+    padding: var(--wui-button-#{$size}-padding);
+    border-radius: var(--wui-button-#{$size}-radius);
 }
 
-@mixin outline_base() {
+
+
+@mixin base() {
+    padding: .75rem 1.25rem;
+    // color: var(--wui-color-on-surface);
+    // background-color: var(--wui-color-surface-container);
+    border: none;
+    border-radius: 16px;
+    &:hover {
+        
+    }
+    
+    &:focus {
+        
+    }
+}
+
+@mixin base_filled() {
+    color: var(--wui-color-on-surface);
+    background-color: var(--wui-color-surface-container);
+    
+    &.wui-button {
+        &-primary {
+            color: var(--wui-color-on-primary);
+            background-color: var(--wui-color-primary);
+            
+            &:hover {
+                color: var(--wui-color-on-primary-08);
+                background-color: var(--wui-color-primary);
+            }
+            
+            &:focus {
+                color: var(--wui-color-on-primary-08);
+                background-color: var(--wui-color-primary);
+            }
+        }
+        
+        &-danger {
+            color: var(--wui-color-on-danger);
+            background-color: var(--wui-color-danger);
+            
+        }
+    }
+    
+    
     
 }
+
+@mixin base_text() {
+    color: var(--wui-color-on-surface);
+    background-color: transparent;
+    &-primary {
+        
+    }
+}
+
+@mixin base_outline() {
+    color: var(--wui-color-on-surface);
+    background-color: var(--wui-color-surface-container-low);
+    outline: 1px solid var(--wui-color-on-surface-10);
+}
+
+@mixin apply() {
+    .wui-button {
+        @include base();
+        
+        @each $size, $size-map in $button_sizes {
+            @debug $size;
+            &-#{$size} {
+                @include button_size($size);
+            }
+        }
+        
+        &-filled {
+            @include base_filled();
+        }
+        
+        &-text {
+            @include base_text();
+        }
+        
+        &-outline {
+            @include base_outline();
+        }
+    }
+}
+
+@include apply();

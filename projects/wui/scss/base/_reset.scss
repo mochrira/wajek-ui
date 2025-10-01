@@ -1,7 +1,12 @@
 @use '../abstracts/variables' as var;
+@use '../abstracts/colors' as color;
+@use '../components/buttons';
+
 
 :root {
     @include var.spacing_variables();
+    @include color.include_color_variables();
+    @include buttons.apply_variables();
 }
 
 html, body {
@@ -11,4 +16,7 @@ html, body {
 
 body {
     font-family: 'Inter', 'Roboto', sans-serif;
+    background-color: var(--wui-color-surface);
+    color: var(--wui-color-on-surface);
+    font-size: var.$body-font-size;
 }

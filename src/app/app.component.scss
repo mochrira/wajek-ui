@@ -5,15 +5,9 @@ body{
     font-style: normal;
 }
 .container{
-    h1{
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 40px;
-    }
     .heading {
         .title-heading{
             font-size: 32px;
-            color: #302E38;
             margin: 0 0 12px 0;
             font-weight: 500;
             line-height: 40px;
@@ -21,68 +15,17 @@ body{
         p{
             font-size: 16px;
             margin: 0;
-            color: #63616B;
-            font-weight: 500;
+            font-weight: 400;
             line-height: 24px;
-        }
-        h1{
-            font-size: 32px;
-            color: #302E38;
-            margin: 30px 0 25px 0;
-            line-height: 40px;
-            font-weight: 500;
-        }
-        h2{
-            font-size: 28px;
-            color: #302E38;
-            margin: 0 0 25px 0;
-            line-height: 36px;
-            font-weight: 500;
-        }
-        h3{
-            font-size: 24px;
-            color: #302E38;
-            margin: 0 0 25px 0;
-            line-height: 32px;
-            font-weight: 500;
-        }
-        h4{
-            font-size: 20px;
-            color: #302E38;
-            margin: 0 0 25px 0;
-            line-height: 28px;
-            font-weight: 500;
-        }
-        h5{
-            font-size: 16px;
-            color: #302E38;
-            margin: 0 0 25px 0;
-            line-height: 24px;
-            font-weight: 500;
-        }
-        h6{
-            font-size: 14px;
-            color: #302E38;
-            margin: 0 0 43px 0;
-            line-height: 20px;
-            font-weight: 500;
         }
     }
     .paragraph-header{
         margin: 0 0 25px 0;
-        h2{
-            font-size: 32px;
-            margin: 0 0 12px 0;
-            color: #302E38;
-            line-height: 40px;
-            font-weight: 500;
-        }
         p{
             font-size: 16px;
             margin: 0;
-            color: #63616B;
             line-height: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
     }
     .paragraph{
@@ -93,9 +36,8 @@ body{
         p{
             font-size: 16px;
             margin: 0;
-            color: #302E38;
             line-height: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
     }
     .list-header{   
@@ -103,19 +45,11 @@ body{
         flex-direction: column;
         gap: 12px;
         margin: 56px 0 12px 0;
-        h2{
-            font-size: 32px;
-            color: #302E38;
-            margin: 0;
-            font-weight: 500;
-            line-height: 40px;
-        }
         p{
             font-size: 16px;
             margin: 0;
-            color: #63616B;
             line-height: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
     }
     .list-container{
@@ -126,7 +60,6 @@ body{
         .unlist{
             font-size: 16px;
             margin: 0;
-            color: #302E38;
             line-height: 24px;
             font-weight: 500;
             
@@ -137,19 +70,11 @@ body{
         flex-direction: column;
         gap: 12px;
         margin: 0 0 56px 0;
-        h2{
-            font-size: 32px;
-            color: #302E38;
-            margin: 0;
-            font-weight: 500;
-            line-height: 40px;
-        }
         blockquote{
             font-size: 16px;
             margin: 0;
-            color: #63616B;
             line-height: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
     }
 }

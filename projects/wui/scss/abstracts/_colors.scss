@@ -1,24 +1,73 @@
-$primary: #4628A4;
-$on-primary: #F1F0F5;
-$primary-container: #CDC2F0;
-$on-primary-container: #4728A4;
-$secondary: #63616B;
-$on-secondary: #F2F2F3;
-$secondary-container: #D8D7DB;
-$on-secondary-container: #63616B;
-$danger: #A42828;
-$on-danger: #F5F0F0;
-$danger-container: #F0C2C2;
-$on-danger-container: #A32929;
-$surface-dim: #E4E3E8;
-$surface: #FFFFFF;
-$surface-bright: #F2F1F4;
-$surface-container: #EAEAEC;
-$surface-container-lowest: #FFFFFF;
-$surface-container-low: #F2F2F3;
-$surface-container-highest: #D8D7DB;
-$surface-container-high: #E0DFE2;
-$on-surface: #302E38;
-$on-surface-variant: #63616B;
-$outline: #898792;
-$outline-variant: #CBC9CF;
+@use 'sass:color';
+
+$primary: #4628A4 !default;
+$on-primary: #F1F0F5 !default;
+$primary-container: #CDC2F0 !default;
+$on-primary-container: #4728A4 !default;
+$secondary: #63616B !default;
+$on-secondary: #F2F2F3 !default;
+$secondary-container: #D8D7DB !default;
+$on-secondary-container: #63616B !default;
+$danger: #A42828 !default;
+$on-danger: #F5F0F0 !default;
+$danger-container: #F0C2C2 !default;
+$on-danger-container: #A32929 !default;
+$surface-dim: #E4E3E8 !default;
+$surface: #FFFFFF !default;
+$surface-bright: #F2F1F4 !default;
+$surface-container: #EAEAEC !default;
+$surface-container-lowest: #FFFFFF !default;
+$surface-container-low: #F2F2F3 !default;
+$surface-container-highest: #D8D7DB !default;
+$surface-container-high: #E0DFE2 !default;
+$on-surface: #302E38 !default;
+$on-surface-variant: #63616B !default;
+$outline: #898792 !default;
+$outline-variant: #CBC9CF !default;
+
+$colors: (
+    "primary": $primary,
+    "on-primary": $on-primary,
+    "primary-container": $primary-container,
+    "on-primary-container": $on-primary-container,
+    "secondary": $secondary,
+    "on-secondary": $on-secondary,
+    "secondary-container": $secondary-container,
+    "on-secondary-container": $on-secondary-container,
+    "danger": $danger,
+    "on-danger": $on-danger,
+    "danger-container": $danger-container,
+    "on-danger-container": $on-danger-container,
+    "surface-dim": $surface-dim,
+    "surface": $surface,
+    "surface-bright": $surface-bright,
+    "surface-container": $surface-container,
+    "surface-container-lowest": $surface-container-lowest,
+    "surface-container-low": $surface-container-low,
+    "surface-container-highest": $surface-container-highest,
+    "surface-container-high": $surface-container-high,
+    "on-surface": $on-surface,
+    "on-surface-variant": $on-surface-variant,
+    "outline": $outline,
+    "outline-variant": $outline-variant
+);
+
+$opacity: (
+    "08": .08,
+    "10": .10,
+    "16": .16
+);
+
+@mixin include_color_variables() {
+    @each $name, $color in $colors {
+        --wui-color-#{$name}: #{$color};
+        @each $opacity-name, $opacity-value in $opacity {
+            --wui-color-#{$name}-#{$opacity-name}: rgba(    
+                #{color.channel($color, "red", $space: rgb)}, 
+                #{color.channel($color, "green", $space: rgb)}, 
+                #{color.channel($color, "blue", $space: rgb)}, 
+                #{$opacity-value}
+            );
+        }
+    }
+}
