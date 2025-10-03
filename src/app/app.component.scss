@@ -77,4 +77,14 @@ body{
             font-weight: 400;
         }
     }
+    .container-button{
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        .card-button{
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+    }
 }
