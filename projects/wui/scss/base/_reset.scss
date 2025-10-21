@@ -5,8 +5,8 @@
 
 :root {
     @include var.spacing_variables();
-    @include color.include_color_variables();
-    @include buttons.apply_variables();
+    // @include color.include_color_variables();
+    @include buttons.variables;
 }
 
 html, body {
@@ -19,4 +19,5 @@ body {
     background-color: var(--wui-color-surface);
     color: var(--wui-color-on-surface);
     font-size: var.$body-font-size;
+    line-height: 1.5;
 }

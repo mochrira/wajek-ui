@@ -88,3 +88,9 @@ body{
         }
     }
 }
+
+.button-container {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+}

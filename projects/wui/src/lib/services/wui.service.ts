@@ -13,6 +13,37 @@ export class WuiService {
   rootDialog = inject(Dialog);
   loadingRef: any;
 
+  private darkMode = false;
+
+  constructor() {
+    // Cek preferensi tersimpan atau sistem
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }
+
+  toggleTheme(): void {
+    this.setDarkMode(!this.darkMode);
+  }
+
+  setDarkMode(enable: boolean): void {
+    this.darkMode = enable;
+    if (enable) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  isDarkMode(): boolean {
+    return this.darkMode;
+  }
+
   dialog(params: any) {
     return new Promise((resolve) => {
       let ref = this.rootDialog.open(WuiDialogComponent, {disableClose: true, width: '350px', data: params});
