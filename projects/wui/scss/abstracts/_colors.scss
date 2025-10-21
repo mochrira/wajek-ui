@@ -1,56 +1,113 @@
 @use 'sass:color';
 
-$primary: #4628A4 !default;
-$on-primary: #F1F0F5 !default;
-$primary-container: #CDC2F0 !default;
-$on-primary-container: #4728A4 !default;
-$secondary: #63616B !default;
-$on-secondary: #F2F2F3 !default;
-$secondary-container: #D8D7DB !default;
-$on-secondary-container: #63616B !default;
-$danger: #A42828 !default;
-$on-danger: #F5F0F0 !default;
-$danger-container: #F0C2C2 !default;
-$on-danger-container: #A32929 !default;
-$surface-dim: #E4E3E8 !default;
-$surface: #FFFFFF !default;
-$surface-bright: #F2F1F4 !default;
-$surface-container: #EAEAEC !default;
-$surface-container-lowest: #FFFFFF !default;
-$surface-container-low: #F2F2F3 !default;
-$surface-container-highest: #D8D7DB !default;
-$surface-container-high: #E0DFE2 !default;
-$on-surface: #302E38 !default;
-$on-surface-variant: #63616B !default;
-$outline: #898792 !default;
-$outline-variant: #CBC9CF !default;
+// Light theme colors
+$light-primary: #4628A4 !default;
+$light-on-primary: #F1F0F5 !default;
+$light-primary-container: #CDC2F0 !default;
+$light-on-primary-container: #4728A4 !default;
+$light-secondary: #63616B !default;
+$light-on-secondary: #F2F2F3 !default;
+$light-secondary-container: #D8D7DB !default;
+$light-on-secondary-container: #63616B !default;
+$light-danger: #A42828 !default;
+$light-on-danger: #F5F0F0 !default;
+$light-danger-container: #F0C2C2 !default;
+$light-on-danger-container: #A32929 !default;
+$light-surface-dim: #E4E3E8 !default;
+$light-surface: #FFFFFF !default;
+$light-surface-bright: #F2F1F4 !default;
+$light-surface-container: #EAEAEC !default;
+$light-surface-container-lowest: #FFFFFF !default;
+$light-surface-container-low: #F2F2F3 !default;
+$light-surface-container-highest: #D8D7DB !default;
+$light-surface-container-high: #E0DFE2 !default;
+$light-on-surface: #302E38 !default;
+$light-on-surface-variant: #63616B !default;
+$light-outline: #898792 !default;
+$light-outline-variant: #CBC9CF !default;
 
-$colors: (
-    "primary": $primary,
-    "on-primary": $on-primary,
-    "primary-container": $primary-container,
-    "on-primary-container": $on-primary-container,
-    "secondary": $secondary,
-    "on-secondary": $on-secondary,
-    "secondary-container": $secondary-container,
-    "on-secondary-container": $on-secondary-container,
-    "danger": $danger,
-    "on-danger": $on-danger,
-    "danger-container": $danger-container,
-    "on-danger-container": $on-danger-container,
-    "surface-dim": $surface-dim,
-    "surface": $surface,
-    "surface-bright": $surface-bright,
-    "surface-container": $surface-container,
-    "surface-container-lowest": $surface-container-lowest,
-    "surface-container-low": $surface-container-low,
-    "surface-container-highest": $surface-container-highest,
-    "surface-container-high": $surface-container-high,
-    "on-surface": $on-surface,
-    "on-surface-variant": $on-surface-variant,
-    "outline": $outline,
-    "outline-variant": $outline-variant
+// Dark theme colors
+$dark-primary: #B89EFF !default;
+$dark-on-primary: #2F1B6B !default;
+$dark-primary-container: #412A85 !default;
+$dark-on-primary-container: #DCC7FF !default;
+$dark-secondary: #C7C5D0 !default;
+$dark-on-secondary: #302F37 !default;
+$dark-secondary-container: #47454E !default;
+$dark-on-secondary-container: #E3E1EC !default;
+$dark-danger: #FFB3B3 !default;
+$dark-on-danger: #680E0E !default;
+$dark-danger-container: #8A1E1E !default;
+$dark-on-danger-container: #FFDAD6 !default;
+$dark-surface-dim: #131218 !default;
+$dark-surface: #131218 !default;
+$dark-surface-bright: #39373E !default;
+$dark-surface-container: #1F1E25 !default;
+$dark-surface-container-lowest: #0E0D13 !default;
+$dark-surface-container-low: #1B1A20 !default;
+$dark-surface-container-highest: #2B2930 !default;
+$dark-surface-container-high: #252328 !default;
+$dark-on-surface: #E6E1E5 !default;
+$dark-on-surface-variant: #C7C5D0 !default;
+$dark-outline: #918F9A !default;
+$dark-outline-variant: #47454E !default;
+
+$light-colors: (
+    "primary": $light-primary,
+    "on-primary": $light-on-primary,
+    "primary-container": $light-primary-container,
+    "on-primary-container": $light-on-primary-container,
+    "secondary": $light-secondary,
+    "on-secondary": $light-on-secondary,
+    "secondary-container": $light-secondary-container,
+    "on-secondary-container": $light-on-secondary-container,
+    "danger": $light-danger,
+    "on-danger": $light-on-danger,
+    "danger-container": $light-danger-container,
+    "on-danger-container": $light-on-danger-container,
+    "surface-dim": $light-surface-dim,
+    "surface": $light-surface,
+    "surface-bright": $light-surface-bright,
+    "surface-container": $light-surface-container,
+    "surface-container-lowest": $light-surface-container-lowest,
+    "surface-container-low": $light-surface-container-low,
+    "surface-container-highest": $light-surface-container-highest,
+    "surface-container-high": $light-surface-container-high,
+    "on-surface": $light-on-surface,
+    "on-surface-variant": $light-on-surface-variant,
+    "outline": $light-outline,
+    "outline-variant": $light-outline-variant
 );
+
+$dark-colors: (
+    "primary": $dark-primary,
+    "on-primary": $dark-on-primary,
+    "primary-container": $dark-primary-container,
+    "on-primary-container": $dark-on-primary-container,
+    "secondary": $dark-secondary,
+    "on-secondary": $dark-on-secondary,
+    "secondary-container": $dark-secondary-container,
+    "on-secondary-container": $dark-on-secondary-container,
+    "danger": $dark-danger,
+    "on-danger": $dark-on-danger,
+    "danger-container": $dark-danger-container,
+    "on-danger-container": $dark-on-danger-container,
+    "surface-dim": $dark-surface-dim,
+    "surface": $dark-surface,
+    "surface-bright": $dark-surface-bright,
+    "surface-container": $dark-surface-container,
+    "surface-container-lowest": $dark-surface-container-lowest,
+    "surface-container-low": $dark-surface-container-low,
+    "surface-container-highest": $dark-surface-container-highest,
+    "surface-container-high": $dark-surface-container-high,
+    "on-surface": $dark-on-surface,
+    "on-surface-variant": $dark-on-surface-variant,
+    "outline": $dark-outline,
+    "outline-variant": $dark-outline-variant
+);
+
+// Backward compatibility - defaults to light theme
+$colors: $light-colors;
 
 $opacity: (
     "08": .08,
@@ -58,16 +115,36 @@ $opacity: (
     "16": .16
 );
 
-@mixin include_color_variables() {
-    @each $name, $color in $colors {
+@mixin generate_color_variables($color-map) {
+    @each $name, $color in $color-map {
         --wui-color-#{$name}: #{$color};
         @each $opacity-name, $opacity-value in $opacity {
-            --wui-color-#{$name}-#{$opacity-name}: rgba(    
+            --wui-color-#{$name}-#{$opacity-name}: rgba(
                 #{color.channel($color, "red", $space: rgb)}, 
                 #{color.channel($color, "green", $space: rgb)}, 
                 #{color.channel($color, "blue", $space: rgb)}, 
                 #{$opacity-value}
             );
         }
+    }
+}
+
+@mixin generate {
+    // Light theme (default)
+    @include generate_color_variables($light-colors);
+    
+    // Dark theme with media query
+    @media (prefers-color-scheme: dark) {
+        @include generate_color_variables($dark-colors);
+    }
+    
+    // Manual dark mode with data attribute
+    &[data-theme="dark"] {
+        @include generate_color_variables($dark-colors);
+    }
+    
+    // Manual light mode with data attribute (override media query)
+    &[data-theme="light"] {
+        @include generate_color_variables($light-colors);
     }
 }

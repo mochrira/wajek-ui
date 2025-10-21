@@ -1,8 +1,17 @@
-@use './base/reset';
-@use './base/typography';
+// @use './base/reset';
+// @use './base/typography';
 
-@use './layouts/container';
+// @use './layouts/container';
 
-@use './components/buttons';
+// @use './components/buttons';
 
-@use './utils/spacing';
+// @use './utils/spacing';
+
+@use './abstracts/colors';
+@use './components/page';
+
+:root {
+    @include colors.generate;
+}
+
+@include page.generate;

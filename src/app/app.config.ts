@@ -2,11 +2,12 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { providerWui } from '@wajek/wui';
+import { provideWui } from '@wajek/wui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    ...providerWui(),
+    provideWui(),
     provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes)]
+    provideRouter(routes)
+  ]
 };

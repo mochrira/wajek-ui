@@ -1,21 +1,22 @@
 import { DatePipe, DecimalPipe } from "@angular/common";
-import { Provider } from "@angular/core";
-import { MessageService } from "./services/message.service";
-import { WuiService } from "./services/wui.service";
+import { makeEnvironmentProviders, EnvironmentProviders } from "@angular/core";
 import { WuiModalOverlayContainer, WuiModalOverlay, WuiModal } from "./components/modal/modal-overlay";
 import { WuiPageOverlayContainer, WuiPageOverlay, WuiPage } from "./components/page/page-overlay";
 
-export function providerWui(): Provider[] {
-    return [
-      DatePipe,
-      DecimalPipe,
-      WuiModalOverlayContainer,
-      WuiModalOverlay,
-      WuiModal,
-      WuiPageOverlayContainer,
-      WuiPageOverlay,
-      WuiPage,
-      WuiService,
-      MessageService
-    ] as Provider[];
-  }
+export function provideWui(): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    // Pipes
+    DatePipe,
+    DecimalPipe,
+
+    // Modal overlay
+    WuiModalOverlayContainer,
+    WuiModalOverlay,
+    WuiModal,
+
+    // Page overlay
+    WuiPageOverlayContainer,
+    WuiPageOverlay,
+    WuiPage,
+  ]);
+}
