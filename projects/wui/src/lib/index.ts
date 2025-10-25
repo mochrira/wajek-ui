@@ -2,6 +2,9 @@
  * Public API Surface of wui
  */
 
+// modules
+export * from './components/app-bar/app-bar.module';
+
 export * from './wui.component';
 
 // provider

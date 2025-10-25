@@ -1,23 +1,26 @@
 @use '../abstracts/variables' as var;
-@use '../abstracts/colors' as color;
+@use '../abstracts/colors';
 @use '../components/buttons';
 
+@mixin generate {
+    :root {
+        @include var.spacing_variables();
+        @include colors.generate;
+        @include buttons.variables;
+    }
 
-:root {
-    @include var.spacing_variables();
-    // @include color.include_color_variables();
-    @include buttons.variables;
-}
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Inter', 'Roboto', sans-serif;
-    background-color: var(--wui-color-surface);
-    color: var(--wui-color-on-surface);
-    font-size: var.$body-font-size;
-    line-height: 1.5;
+    body {
+        font-family: 'Inter', 'Roboto', sans-serif;
+        background-color: var(--wui-color-surface);
+        color: var(--wui-color-on-surface);
+        font-size: var.$body-font-size;
+        line-height: 1.5;
+    }
 }

@@ -1,17 +1,12 @@
-// @use './base/reset';
-// @use './base/typography';
-
-// @use './layouts/container';
-
-// @use './components/buttons';
-
-// @use './utils/spacing';
-
 @use './abstracts/colors';
+
+@use './base/reset';
+
+@use './components/app';
+@use './components/appbar';
 @use './components/page';
 
-:root {
-    @include colors.generate;
-}
-
+@include reset.generate;
+@include app.generate;
+@include appbar.generate;
 @include page.generate;
