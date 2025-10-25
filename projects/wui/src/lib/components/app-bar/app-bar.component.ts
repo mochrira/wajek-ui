@@ -19,4 +19,26 @@ export class WuiAppBarComponent { }
     'class': 'wui-app-bar-title'
   }
 })
+
 export class WuiAppBarTitleComponent { }
+
+@Component({
+  imports: [],
+  selector: 'div[wuiAppBarTrailing]',
+  template: '<ng-content></ng-content>',
+  host: {
+    'class': 'wui-app-bar-trailing'
+  }
+})
+export class WuiAppBarTrailingComponent { }
+
+@Component({
+  imports: [],
+  selector: 'div[wuiAppBarLeading]',
+  template: '<ng-content></ng-content>',
+  host: {
+    'class': 'wui-app-bar-leading'
+  }
+})
+export class WuiAppBarLeadingComponent { }
+

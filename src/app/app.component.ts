@@ -6,11 +6,10 @@ import { WuiAppBarComponent, WuiAppBarModule, WuiAppComponent, WuiAppStageCompon
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports : [
-        WuiAppComponent,
-        WuiAppStageComponent,
-
-        WuiAppBarModule
-    ]
+    imports: [
+    WuiAppComponent,
+    WuiAppStageComponent,
+    WuiAppBarModule,
+]
 })
 export class AppComponent { }
