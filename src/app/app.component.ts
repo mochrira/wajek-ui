@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { WuiAppBarComponent, WuiAppBarModule, WuiAppComponent, WuiAppStageComponent } from '@wajek/wui';
+import { WuiAppBarComponent, WuiAppBarModule, WuiAppComponent, WuiAppStageComponent, WuiToggleComponent } from '@wajek/wui';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +10,7 @@ import { WuiAppBarComponent, WuiAppBarModule, WuiAppComponent, WuiAppStageCompon
     WuiAppComponent,
     WuiAppStageComponent,
     WuiAppBarModule,
+    WuiToggleComponent
 ]
 })
 export class AppComponent { }

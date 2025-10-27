@@ -1,0 +1,55 @@
+.wui-toggle-switch-outer {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wui-toggle-checkbox {
+  display: none;
+}
+
+.wui-toggle-switch-track {
+  width: 3.25rem;
+  height: 2rem;
+  border-radius: 3.125rem;
+  border: 0.188rem solid var(--wui-color-outline);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.25rem;
+  transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+}
+
+.wui-toggle-switch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--wui-color-on-surface-variant);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wui-toggle-checkbox:checked + .wui-toggle-switch-track {
+  background-color: var(--wui-color-primary);
+  box-shadow: none;
+  border: 0.188rem solid var(--wui-color-primary);
+}
+
+.wui-toggle-checkbox:checked + .wui-toggle-switch-track .wui-toggle-switch {
+  transform: translateX(1.563rem);
+  background-color: color-mix(in srgb, var(--wui-color-surface), var(--wui-color-on-surface-16) 16%);
+  animation: wui-toggle-glow 0.6s ease; 
+}
+
+@keyframes wui-toggle-glow {
+  0% {
+    box-shadow: 0 0 0 0.8rem var(--wui-color-primary-16);
+  }
+  50% {
+    box-shadow: 0 0 0 1.063rem var(--wui-color-primary-16);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
