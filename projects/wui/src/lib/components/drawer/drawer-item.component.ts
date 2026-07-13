@@ -5,11 +5,11 @@ import { MessageService } from "../../services/message.service";
 
 @Component({
     selector: 'wui-drawer-item',
-    imports: [WuiIconComponent, CommonModule],
+    imports: [CommonModule],
     template: `
-    @if (icon()) {
+    <!-- @if (icon()) {
       <wui-icon [icon]="icon()"></wui-icon>
-    }
+    } -->
     <div class="content">
       <ng-content></ng-content>
     </div>

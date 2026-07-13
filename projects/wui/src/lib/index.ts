@@ -15,6 +15,7 @@ export * from './services/message.service'
 export * from './services/wui.service';
 export * from './services/page.service';
 export * from './services/modal.service';
+export * from './services/icon.service';
 
 // directives
 export * from './directives/ripple.directive';
@@ -45,3 +46,4 @@ export * from './components/icon/icon.component';
 export * from './components/menu/menu.component';
 export * from './components/dialog/dialog.component';
 export * from './components/toggle/toggle.component';
+export * from './components/button/button.component';

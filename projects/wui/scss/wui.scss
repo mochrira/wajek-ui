@@ -5,8 +5,12 @@
 @use './components/app';
 @use './components/appbar';
 @use './components/page';
+@use './components/icon';
+@use './components/button';
 
 @include reset.generate;
 @include app.generate;
 @include appbar.generate;
 @include page.generate;
+@include icon.generate;
+// @include button.generate;

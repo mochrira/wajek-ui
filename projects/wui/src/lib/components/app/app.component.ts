@@ -39,7 +39,7 @@ export class WuiAppComponent {
 
 @Component({
   selector: 'div[wuiAppStage]',
-  template: ``,
+  template: `<ng-content></ng-content>`,
   host: {
     'class': 'wui-app-stage'
   }

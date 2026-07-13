@@ -1,0 +1,14 @@
+@use "sass:map";
+
+@mixin base {
+    height: 3.5rem;
+    padding: 0 1.5rem;
+    border: none;
+    outline: none;
+}
+
+@mixin generate {
+    .wui-button {
+        @include base;
+    }
+}

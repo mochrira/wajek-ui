@@ -1,6 +1,8 @@
 <div wuiApp>
     <div wuiAppBar>
-        <div wuiAppBarLeading>Leading</div>
+        <div wuiAppBarLeading>
+            <wui-icon icon="menu"></wui-icon>
+        </div>
         <div wuiAppBarTitle>Page Title</div>
         <div wuiAppBarTrailing>Trailing</div>
         <wui-toggle >
@@ -8,6 +10,6 @@
         </wui-toggle>
     </div>
     <div wuiAppStage>
+        <button wuiButton (click)="switchTheme()" variant="danger">Switch Theme</button>
     </div>
-
 </div>

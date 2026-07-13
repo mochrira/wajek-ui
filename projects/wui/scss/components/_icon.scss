@@ -1,0 +1,13 @@
+@mixin base() {
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: block;
+    }
+}
+
+@mixin generate {
+    .wui-icon {
+        @include base();
+    }
+}

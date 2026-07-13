@@ -1,12 +1,12 @@
 @use '../abstracts/variables' as var;
 @use '../abstracts/colors';
-@use '../components/buttons';
+// @use '../components/button';
 
 @mixin generate {
     :root {
         @include var.spacing_variables();
         @include colors.generate;
-        @include buttons.variables;
+        // @include buttons.variables;
     }
 
     html, body {

@@ -1,7 +1,8 @@
 import { DatePipe, DecimalPipe } from "@angular/common";
-import { makeEnvironmentProviders, EnvironmentProviders } from "@angular/core";
+import { makeEnvironmentProviders, EnvironmentProviders, InjectionToken } from "@angular/core";
 import { WuiModalOverlayContainer, WuiModalOverlay, WuiModal } from "./components/modal/modal-overlay";
 import { WuiPageOverlayContainer, WuiPageOverlay, WuiPage } from "./components/page/page-overlay";
+import { WuiService } from "./services/wui.service";
 
 export function provideWui(): EnvironmentProviders {
   return makeEnvironmentProviders([
@@ -17,6 +18,6 @@ export function provideWui(): EnvironmentProviders {
     // Page overlay
     WuiPageOverlayContainer,
     WuiPageOverlay,
-    WuiPage,
+    WuiPage
   ]);
 }

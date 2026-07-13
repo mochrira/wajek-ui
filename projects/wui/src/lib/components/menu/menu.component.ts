@@ -25,10 +25,10 @@ export class MenuDirective {
 
 @Component({
     selector: 'wui-menu-item',
-    imports: [WuiIconComponent],
+    imports: [],
     template: `
     <div class="wui-menu-item-leading">
-      <wui-icon [icon]="icon"></wui-icon>
+      
     </div>
     <div class="wui-menu-item-content"><ng-content></ng-content></div>
   `

@@ -1,0 +1,186 @@
+@use 'sass:map';
+
+@mixin label-base {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+}
+
+@mixin bg-base {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    z-index: 0;
+    border-radius: inherit;
+    transition: background-color 0.2s ease;
+}
+
+@mixin base {
+    border: none;
+    outline: none;
+    border-radius: 1.75rem;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    .wui-button {
+        &-label {
+            @include label-base;   
+        }
+
+        &-bg {
+            @include bg-base;
+        }
+    }
+}
+
+$variants: (
+    default: (
+        color: var(--wui-color-on-surface),
+        background-color: var(--wui-color-surface-container),
+    ),
+    primary: (
+        color: var(--wui-color-on-primary),
+        background-color: var(--wui-color-primary),
+    ),
+    danger: (
+        color: var(--wui-color-on-danger),
+        background-color: var(--wui-color-danger),
+    ),
+);
+
+@mixin variant($variant: 'default') {
+    $variant-props: map.get($variants, $variant);
+    color: map.get($variant-props, color);
+
+    .wui-button-bg {
+        background-color: map.get($variant-props, background-color);
+    }
+
+    &:hover:not(:disabled) {
+        .wui-button-bg {
+            // Background color change on hover
+        }
+    }
+
+    &:active:not(:disabled) {
+        .wui-button-bg {
+            // Background color change on pressed
+        }
+    }
+
+    &:focus-visible:not(:disabled) {
+        outline: 2px solid map.get($variant-props, background-color);
+        outline-offset: 2px;
+        
+        .wui-button-bg {
+            // Background color change on focus
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+@mixin default {
+    @include variant('default');
+}
+
+@mixin primary {
+    @include variant('primary');
+}
+
+@mixin danger {
+    @include variant('danger');
+}
+
+$sizes: (
+    xsmall: (
+        font-size: .75rem,
+        height: 2rem,
+        padding: 0 .75rem,
+    ),
+    small: (
+        font-size: .875rem,
+        height: 2.5rem,
+        padding: 0 1rem,
+    ),
+    medium: (
+        font-size: 1rem,
+        height: 3.5rem,
+        padding: 0 1.5rem,
+    ),
+    large: (
+        font-size: 1.5rem,
+        height: 6rem,
+        padding: 0 3rem,
+    ),
+    xlarge: (
+        font-size: 2rem,
+        height: 8.5rem,
+        padding: 0 4rem,
+    ),
+);
+
+@mixin size($size: 'small') {
+    $size-props: map.get($sizes, $size);
+    font-size: map.get($size-props, font-size);
+    height: map.get($size-props, height);
+    padding: map.get($size-props, padding);
+}
+
+$radius: (
+    square: (
+        xsmall: .75rem,
+        small: .75rem,
+        medium: 1rem,
+        large: 1.75rem,
+        xlarge: 1.75rem,
+    ),
+    round: (
+        xsmall: 1rem,
+        small: 1.25rem,
+        medium: 1.75rem,
+        large: 3rem,
+        xlarge: 4.25rem,
+    )
+);
+
+@mixin radius($mode: 'round', $size: 'small') {
+    border-radius: map.get(map.get($radius, $mode), $size);
+}
+
+.wui-button {
+    @include base;
+    @include size;
+    @include radius;
+    @include default;
+
+    @each $size, $props in $sizes {
+        &--#{$size} {
+            @include size($size);
+        }
+    }
+
+    @each $mode, $sizes-map in $radius {
+        &--#{$mode} {
+            @each $size, $props in $sizes {
+                &.wui-button--#{$size} {
+                    @include radius($mode, $size);
+                }
+            }
+        }
+    }
+
+    @each $variant, $props in $variants {
+        &--#{$variant} {
+            @include variant($variant);
+        }
+    }
+}
